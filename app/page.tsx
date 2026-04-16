@@ -1,7 +1,9 @@
+import MainHero from "@/components/main-hero/main-hero";
+
 export default function Home() {
   return (
     <main>
-      <h1>Welcome</h1>
+      <MainHero />
     </main>
   );
 }
