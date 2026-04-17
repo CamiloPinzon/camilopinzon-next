@@ -49,6 +49,20 @@
 .nav__links a:hover {
   color: var(--color-text);
 }
+.nav__link-active {
+  color: var(--color-accent) !important;
+  position: relative;
+}
+.nav__link-active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-accent);
+}
 .nav__cta {
   background: var(--color-accent) !important;
   color: #0d1117 !important;
@@ -61,7 +75,9 @@
     box-shadow 0.25s,
     transform 0.2s !important;
 }
-.nav__cta:hover {
+
+.nav__cta:hover,
+.nav__cta-active {
   box-shadow: 0 0 20px rgba(88, 166, 255, 0.4) !important;
   transform: translateY(-1px) !important;
 }
@@ -128,6 +144,9 @@
 .nav__drawer-link:hover {
   color: var(--color-text);
   letter-spacing: 0.18em;
+}
+.nav__drawer-link--active {
+  color: var(--color-accent) !important;
 }
 .nav__drawer-divider {
   width: 40px;

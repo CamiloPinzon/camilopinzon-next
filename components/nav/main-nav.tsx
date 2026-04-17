@@ -1,13 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 import HamburgerIcon from "../hamburger-icon/hamburger-icon";
 import "./main-nav.css";
 
+const toSlug = (label: string) =>
+  label.toLowerCase().replace(/\s+/g, "-");
+
 export default function MainNav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("inicio");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -15,10 +20,29 @@ export default function MainNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const sections = NAV_LINKS.concat("Contacto").map((label) =>
+      document.getElementById(toSlug(label))
+    ).filter(Boolean) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((e) => e.isIntersecting);
+        if (visible?.target?.id) setActiveSection(visible.target.id);
+      },
+      { threshold: 0.35 }
+    );
+
+    sections.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const NAV_LINKS = [
     "Inicio",
     "Experiencia",
     "Servicios",
+    "Portafolio",
     "Blogs",
     "Descargar CV",
   ];
@@ -28,24 +52,29 @@ export default function MainNav() {
         className={`site-nav${scrolled ? " site-nav--scrolled" : ""}${menuOpen ? " site-nav--open" : ""}`}
         aria-label="Navegación principal"
       >
-        <a
+        <Link
           href="#inicio"
           className="nav__logo"
           onClick={() => setMenuOpen(false)}
         >
           Camilo Pinzón
-        </a>
+        </Link>
 
         <ul className="nav__links">
           {NAV_LINKS.map((link) => (
             <li key={link}>
-              <a href={`#${link.toLowerCase().replace(" ", "-")}`}>{link}</a>
+              <Link
+                href={`#${toSlug(link)}`}
+                className={`nav__link${activeSection === toSlug(link) ? " nav__link-active" : ""}`}
+              >
+                {link}
+              </Link>
             </li>
           ))}
           <li>
-            <a href="#contacto" className="nav__cta">
+            <Link href="#contacto" className="nav__cta">
               Contacto
-            </a>
+            </Link>
           </li>
         </ul>
 
@@ -69,15 +98,15 @@ export default function MainNav() {
         aria-label="Menú de navegación"
       >
         {NAV_LINKS.map((link, i) => (
-          <a
+          <Link
             key={link}
-            href={`#${link.toLowerCase().replace(" ", "-")}`}
-            className="nav__drawer-link"
+            href={`#${toSlug(link)}`}
+            className={`nav__drawer-link${activeSection === toSlug(link) ? " nav__drawer-link--active" : ""}`}
             onClick={() => setMenuOpen(false)}
             style={{ animationDelay: `${i * 50}ms` }}
           >
             {link}
-          </a>
+          </Link>
         ))}
         <div className="nav__drawer-divider" />
         <button className="nav__drawer-cta" onClick={() => setMenuOpen(false)}>

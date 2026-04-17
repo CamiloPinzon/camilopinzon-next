@@ -22,7 +22,7 @@ const SOCIALS = [
   {
     key: "github",
     label: "GitHub",
-    href: "https://github.com/camilo-pinzon",
+    href: "https://github.com/CamiloPinzon",
     icon: <GitHubIcon />,
   },
   {
@@ -34,13 +34,13 @@ const SOCIALS = [
   {
     key: "instagram",
     label: "Instagram",
-    href: "https://instagram.com/camilo.pinzon",
+    href: "https://www.instagram.com/camilopinzon_developer",
     icon: <InstagramIcon />,
   },
   {
     key: "x",
     label: "X (Twitter)",
-    href: "https://x.com/camilo_pinzon",
+    href: "https://x.com/CamiloPinzonDev",
     icon: <XIcon />,
   },
 ] as const;
