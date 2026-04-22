@@ -1,5 +1,5 @@
 /* ════════ FEATURED CARD ════════ */
-.blog-card--featured {
+.cardFeatured {
   position: relative;
   background: var(--color-surface);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -9,41 +9,46 @@
   transition:
     border-color 0.3s,
     box-shadow 0.3s;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.07) 0%,
+      rgba(255, 255, 255, 0.02) 40%,
+      transparent 65%
+    );
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+
+  &:hover::after {
+    opacity: 0.85;
+  }
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+    box-shadow: 0 0 60px color-mix(in srgb, var(--accent) 8%, transparent);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--accent);
+    opacity: 0.8;
+  }
 }
-.blog-card--featured::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.07) 0%,
-    rgba(255, 255, 255, 0.02) 40%,
-    transparent 65%
-  );
-  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.08);
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.3s;
-}
-.blog-card--featured:hover::after {
-  opacity: 0.85;
-}
-.blog-card--featured:hover {
-  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
-  box-shadow: 0 0 60px color-mix(in srgb, var(--accent) 8%, transparent);
-}
-.blog-card--featured::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--accent);
-  opacity: 0.8;
-}
-.blog-card__featured-bg {
+
+.featuredBg {
   position: absolute;
   inset: 0;
   background:
@@ -52,22 +57,19 @@
       color-mix(in srgb, var(--accent) 6%, transparent) 0%,
       transparent 60%
     ),
-    linear-gradient(
-      135deg,
-      var(--color-surface) 0%,
-      var(--color-surface-2) 100%
-    );
+    linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-2) 100%);
   pointer-events: none;
 }
-.blog-card__featured-inner {
+
+.featuredInner {
   position: relative;
-  padding: var(--space-lg) var(--space-lg) var(--space-lg)
-    calc(var(--space-lg) + 4px);
+  padding: var(--space-lg) var(--space-lg) var(--space-lg) calc(var(--space-lg) + 4px);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
 }
-.blog-card__featured-badge {
+
+.featuredBadge {
   position: absolute;
   top: var(--space-md);
   right: var(--space-md);
@@ -82,7 +84,8 @@
   padding: 0.25rem 0.75rem;
   border-radius: 100px;
 }
-.blog-card__title--featured {
+
+.titleFeatured {
   font-family: var(--font-primary);
   font-size: clamp(1.2rem, 2.5vw, 1.65rem);
   font-weight: 900;
@@ -93,7 +96,7 @@
 }
 
 /* ════════ GRID CARD ════════ */
-.blog-card {
+.card {
   position: relative;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -108,34 +111,42 @@
     box-shadow 0.3s,
     border-color 0.3s;
   animation: fadeSlideUp 0.7s var(--ease) both;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-md);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.015) 40%,
+      transparent 65%
+    );
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+
+  &:hover::after {
+    opacity: 0.9;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 0 1px color-mix(in srgb, var(--accent) 15%, transparent);
+
+    .stripe {
+      opacity: 1;
+    }
+  }
 }
-.blog-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-md);
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.015) 40%,
-    transparent 65%
-  );
-  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.06);
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.3s;
-}
-.blog-card:hover::after {
-  opacity: 0.9;
-}
-.blog-card:hover {
-  transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 0 0 1px color-mix(in srgb, var(--accent) 15%, transparent);
-}
-.blog-card__stripe {
+
+.stripe {
   position: absolute;
   top: 0;
   left: 0;
@@ -145,17 +156,16 @@
   opacity: 0;
   transition: opacity 0.3s;
 }
-.blog-card:hover .blog-card__stripe {
-  opacity: 1;
-}
-.blog-card__header {
+
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
   flex-wrap: wrap;
 }
-.blog-card__tag {
+
+.tag {
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -167,27 +177,32 @@
   border-radius: 100px;
   white-space: nowrap;
 }
-.blog-card__meta {
+
+.meta {
   display: flex;
   align-items: center;
   gap: 0.4rem;
 }
-.blog-card__date {
+
+.date {
   font-size: 0.7rem;
   color: var(--color-muted);
 }
-.blog-card__dot {
+
+.dot {
   width: 3px;
   height: 3px;
   border-radius: 50%;
   background: var(--color-muted);
   display: inline-block;
 }
-.blog-card__read-time {
+
+.readTime {
   font-size: 0.7rem;
   color: var(--color-muted);
 }
-.blog-card__title {
+
+.title {
   font-family: var(--font-primary);
   font-size: 1rem;
   font-weight: 700;
@@ -195,13 +210,15 @@
   color: var(--color-text);
   letter-spacing: 0.01em;
 }
-.blog-card__excerpt {
+
+.excerpt {
   font-size: 0.82rem;
   color: var(--color-muted);
   line-height: 1.65;
   flex: 1;
 }
-.blog-card__cta {
+
+.cta {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -217,7 +234,8 @@
   padding: 0;
   margin-top: var(--space-xs);
   transition: gap 0.2s;
-}
-.blog-card__cta:hover {
-  gap: 0.7rem;
+
+  &:hover {
+    gap: 0.7rem;
+  }
 }

@@ -1,4 +1,4 @@
-.site-nav {
+.nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,14 +11,16 @@
   transition:
     background 0.4s var(--ease),
     backdrop-filter 0.4s;
+
+  &.scrolled,
+  &.open {
+    background: rgba(13, 17, 23, 0.92);
+    backdrop-filter: blur(20px) saturate(1.6);
+    border-bottom: 1px solid var(--color-border);
+  }
 }
-.site-nav--scrolled,
-.site-nav--open {
-  background: rgba(13, 17, 23, 0.92);
-  backdrop-filter: blur(20px) saturate(1.6);
-  border-bottom: 1px solid var(--color-border);
-}
-.nav__logo {
+
+.logo {
   font-family: var(--font-primary);
   font-weight: 900;
   font-size: 1.05rem;
@@ -30,40 +32,45 @@
   z-index: 201;
 }
 
-/* Desktop links */
-.nav__links {
+/* ── Desktop links ── */
+.links {
   display: flex;
   align-items: center;
   gap: var(--space-md);
   list-style: none;
+
+  a {
+    font-family: var(--font-secondary);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
 }
-.nav__links a {
-  font-family: var(--font-secondary);
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--color-muted);
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  transition: color 0.2s;
-}
-.nav__links a:hover {
-  color: var(--color-text);
-}
-.nav__link-active {
+
+.linkActive {
   color: var(--color-accent) !important;
   position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-accent);
+  }
 }
-.nav__link-active::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--color-accent);
-}
-.nav__cta {
+
+.cta {
   background: var(--color-accent) !important;
   color: #0d1117 !important;
   padding: 0.45rem 1.1rem !important;
@@ -74,16 +81,16 @@
   transition:
     box-shadow 0.25s,
     transform 0.2s !important;
+
+  &:hover,
+  &.ctaActive {
+    box-shadow: 0 0 20px rgba(88, 166, 255, 0.4) !important;
+    transform: translateY(-1px) !important;
+  }
 }
 
-.nav__cta:hover,
-.nav__cta-active {
-  box-shadow: 0 0 20px rgba(88, 166, 255, 0.4) !important;
-  transform: translateY(-1px) !important;
-}
-
-/* Hamburger */
-.nav__hamburger {
+/* ── Hamburger ── */
+.hamburger {
   display: none;
   align-items: center;
   justify-content: center;
@@ -99,14 +106,15 @@
   transition:
     border-color 0.2s,
     background 0.2s;
-}
-.nav__hamburger:hover {
-  border-color: var(--color-accent);
-  background: var(--color-surface-2);
+
+  &:hover {
+    border-color: var(--color-accent);
+    background: var(--color-surface-2);
+  }
 }
 
-/* Mobile drawer */
-.nav__drawer {
+/* ── Mobile drawer ── */
+.drawer {
   position: fixed;
   inset: 0;
   z-index: 199;
@@ -123,13 +131,15 @@
   transition:
     opacity 0.3s var(--ease),
     transform 0.3s var(--ease);
+
+  &.drawerOpen {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 }
-.nav__drawer--open {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.nav__drawer-link {
+
+.drawerLink {
   font-family: var(--font-primary);
   font-size: 1.6rem;
   font-weight: 900;
@@ -140,21 +150,25 @@
   transition:
     color 0.2s,
     letter-spacing 0.25s;
+
+  &:hover {
+    color: var(--color-text);
+    letter-spacing: 0.18em;
+  }
+
+  &.drawerLinkActive {
+    color: var(--color-accent) !important;
+  }
 }
-.nav__drawer-link:hover {
-  color: var(--color-text);
-  letter-spacing: 0.18em;
-}
-.nav__drawer-link--active {
-  color: var(--color-accent) !important;
-}
-.nav__drawer-divider {
+
+.drawerDivider {
   width: 40px;
   height: 1px;
   background: var(--color-border);
   margin: var(--space-xs) 0;
 }
-.nav__drawer-cta {
+
+.drawerCta {
   margin-top: var(--space-sm);
   padding: 0.8rem 2.5rem;
   border: none;
@@ -168,16 +182,17 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: box-shadow 0.25s;
-}
-.nav__drawer-cta:hover {
-  box-shadow: 0 0 28px rgba(88, 166, 255, 0.5);
+
+  &:hover {
+    box-shadow: 0 0 28px rgba(88, 166, 255, 0.5);
+  }
 }
 
 @media (max-width: 860px) {
-  .nav__links {
+  .links {
     display: none;
   }
-  .nav__hamburger {
+  .hamburger {
     display: flex;
   }
 }

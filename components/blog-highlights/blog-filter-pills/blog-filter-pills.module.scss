@@ -1,10 +1,11 @@
-.blog-filter-pills {
+.pills {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
   list-style: none;
 }
-.blog-filter-pill {
+
+.pill {
   padding: 0.35rem 1rem;
   border-radius: 100px;
   font-family: var(--font-secondary);
@@ -19,17 +20,20 @@
     border-color 0.2s,
     color 0.2s,
     background 0.2s;
-}
-.blog-filter-pill:hover {
-  border-color: var(--color-accent);
-  color: var(--color-text);
-}
-.blog-filter-pill--active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: #0d1117;
-  font-weight: 700;
-}
-.blog-filter-pill--active:hover {
-  color: #0d1117;
+
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  &.pillActive {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #0d1117;
+    font-weight: 700;
+
+    &:hover {
+      color: #0d1117;
+    }
+  }
 }

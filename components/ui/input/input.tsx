@@ -1,4 +1,4 @@
-import "./input.css";
+import styles from "./input.module.scss";
 
 interface InputProps {
   type?: "text" | "email" | "password" | "tel" | "url" | "search";
@@ -42,7 +42,7 @@ export default function Input({
       disabled={disabled}
       autoComplete={autoComplete}
       onChange={onChange}
-      className={`input${className ? ` ${className}` : ""}`}
+      className={[styles.input, className].filter(Boolean).join(" ")}
     />
   );
 }

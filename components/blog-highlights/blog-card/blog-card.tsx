@@ -1,6 +1,5 @@
 import React from "react";
-import "./blog-card.css";
-
+import styles from "./blog-card.module.scss";
 
 interface CardStyle extends React.CSSProperties {
   "--accent"?: string;
@@ -31,7 +30,7 @@ export default function BlogCard({
   if (variant === "featured") {
     return (
       <article
-        className="blog-card blog-card--featured"
+        className={styles.cardFeatured}
         style={
           {
             "--accent": post.color,
@@ -39,54 +38,40 @@ export default function BlogCard({
           } as CardStyle
         }
       >
-        <div className="blog-card__featured-bg" aria-hidden="true" />
-        <div className="blog-card__featured-inner">
-          <header className="blog-card__header">
-            <span className="blog-card__tag">{post.tag}</span>
-            <div className="blog-card__meta">
-              <time className="blog-card__date" dateTime={post.date}>
+        <div className={styles.featuredBg} aria-hidden="true" />
+        <div className={styles.featuredInner}>
+          <header className={styles.header}>
+            <span className={styles.tag}>{post.tag}</span>
+            <div className={styles.meta}>
+              <time className={styles.date} dateTime={post.date}>
                 {post.date}
               </time>
-              <span className="blog-card__dot" aria-hidden="true" />
-              <span className="blog-card__read-time">
+              <span className={styles.dot} aria-hidden="true" />
+              <span className={styles.readTime}>
                 {post.readTime} lectura
               </span>
             </div>
           </header>
-          <h3 className="blog-card__title blog-card__title--featured">
-            {post.title}
-          </h3>
-          <p className="blog-card__excerpt">{post.excerpt}</p>
+          <h3 className={styles.titleFeatured}>{post.title}</h3>
+          <p className={styles.excerpt}>{post.excerpt}</p>
           <button
-            className="blog-card__cta"
+            className={styles.cta}
             aria-label={`Leer más sobre ${post.title}`}
           >
             Leer artículo completo
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M1 7h12M8 2l5 5-5 5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </div>
-        <span className="blog-card__featured-badge">⭐ Destacado</span>
+        <span className={styles.featuredBadge}>⭐ Destacado</span>
       </article>
     );
   }
 
   return (
     <article
-      className="blog-card"
+      className={styles.card}
       style={
         {
           "--accent": post.color,
@@ -94,38 +79,26 @@ export default function BlogCard({
         } as CardStyle
       }
     >
-      <div className="blog-card__stripe" aria-hidden="true" />
-      <header className="blog-card__header">
-        <span className="blog-card__tag">{post.tag}</span>
-        <div className="blog-card__meta">
-          <time className="blog-card__date" dateTime={post.date}>
+      <div className={styles.stripe} aria-hidden="true" />
+      <header className={styles.header}>
+        <span className={styles.tag}>{post.tag}</span>
+        <div className={styles.meta}>
+          <time className={styles.date} dateTime={post.date}>
             {post.date}
           </time>
-          <span className="blog-card__dot" aria-hidden="true" />
-          <span className="blog-card__read-time">{post.readTime} lectura</span>
+          <span className={styles.dot} aria-hidden="true" />
+          <span className={styles.readTime}>{post.readTime} lectura</span>
         </div>
       </header>
-      <h3 className="blog-card__title">{post.title}</h3>
-      <p className="blog-card__excerpt">{post.excerpt}</p>
+      <h3 className={styles.title}>{post.title}</h3>
+      <p className={styles.excerpt}>{post.excerpt}</p>
       <button
-        className="blog-card__cta"
+        className={styles.cta}
         aria-label={`Leer más sobre ${post.title}`}
       >
         Leer artículo completo
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M1 7h12M8 2l5 5-5 5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
     </article>

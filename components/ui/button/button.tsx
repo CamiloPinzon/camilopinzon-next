@@ -1,4 +1,4 @@
-import "./button.css";
+import styles from "./button.module.scss";
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ export default function Button({
   className = "",
   ariaLabel,
 }: ButtonProps) {
-  const classes = `btn btn--${variant}${className ? ` ${className}` : ""}`;
+  const classes = [styles.btn, styles[variant], className].filter(Boolean).join(" ");
 
   if (href) {
     return (

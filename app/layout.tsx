@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 
 import MainNav from "@/components/nav/main-nav";
+import Footer from "@/components/footer/footer";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,10 +28,15 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
       <body suppressHydrationWarning>
         <MainNav />
         {children}
+        <Footer />
       </body>
     </html>
   );

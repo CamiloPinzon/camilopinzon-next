@@ -1,4 +1,4 @@
-import "./blog-filter-pills.css";
+import styles from "./blog-filter-pills.module.scss";
 
 interface BlogFilterPillsProps {
   tags: string[];
@@ -13,11 +13,11 @@ export default function BlogFilterPills({
 }: BlogFilterPillsProps) {
   return (
     <nav aria-label="Filtrar por categoría">
-      <ul className="blog-filter-pills">
+      <ul className={styles.pills}>
         {tags.map((tag) => (
           <li key={tag}>
             <button
-              className={`blog-filter-pill${activeTag === tag ? " blog-filter-pill--active" : ""}`}
+              className={`${styles.pill}${activeTag === tag ? ` ${styles.pillActive}` : ""}`}
               onClick={() => onTagChange(tag)}
               aria-pressed={activeTag === tag}
             >

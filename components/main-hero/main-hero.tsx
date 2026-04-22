@@ -4,7 +4,7 @@ import { useRef } from "react";
 
 import Image from "next/image";
 
-import "./main-hero.css";
+import styles from "./main-hero.module.scss";
 
 import SocialLinks from "@/components/social-links/social-links";
 
@@ -13,35 +13,35 @@ export default function MainHero() {
   return (
     <section
       id="inicio"
-      className="site-hero"
+      className={styles.hero}
       ref={heroRef}
       aria-label="Presentación"
     >
-      <aside className="hero__profile-card" aria-label="Información de perfil">
-        <div className="hero__avatar-ring">
+      <aside className={styles.profileCard} aria-label="Información de perfil">
+        <div className={styles.avatarRing}>
           <div
-            className="hero__avatar-placeholder"
+            className={styles.avatarPlaceholder}
             role="img"
             aria-label="Foto de Camilo Pinzón"
           >
             <Image src="/profile.webp" alt="Avatar" width={120} height={120} />
           </div>
         </div>
-        <h1 className="hero__name">Camilo Pinzón</h1>
-        <p className="hero__role">Web Developer</p>
-        <div className="hero__socials-wrapper">
+        <h1 className={styles.name}>Camilo Pinzón</h1>
+        <p className={styles.role}>Web Developer</p>
+        <div className={styles.socialsWrapper}>
           <SocialLinks />
         </div>
-        <div className="hero__divider" />
-        <p className="hero__section-label">Sobre mí</p>
-        <p className="hero__bio">
+        <div className={styles.divider} />
+        <p className={styles.sectionLabel}>Sobre mí</p>
+        <p className={styles.bio}>
           Autodidacta y dedicado. Desarrollador web con capacidad para asimilar
           el trabajo bajo presión y gran facilidad para el trabajo en equipo, ya
           sea de forma local o remota.
         </p>
-        <div className="hero__divider" />
-        <p className="hero__section-label">Contacto</p>
-        <ul className="hero__contact-list">
+        <div className={styles.divider} />
+        <p className={styles.sectionLabel}>Contacto</p>
+        <ul className={styles.contactList}>
           <li>
             ✉{" "}
             <a href="mailto:camilopinzondeveloper@gmail.com">
@@ -52,41 +52,41 @@ export default function MainHero() {
             📞 <a href="tel:+573176844185">57 317 684 4185</a>
           </li>
         </ul>
-        <button className="hero__contact-cta">Contáctame</button>
+        <button className={styles.contactCta}>Contáctame</button>
       </aside>
 
-      <div className="hero__content">
-        <p className="hero__eyebrow">
-          Disponible para proyectos · Colombia & Remoto
+      <div className={styles.content}>
+        <p className={styles.eyebrow}>
+          Disponible para proyectos · Colombia &amp; Remoto
         </p>
-        <h2 className="hero__headline">
+        <h2 className={styles.headline}>
           Construyo
           <br />
           <em>Experiencias</em>
           <br />
           Digitales
         </h2>
-        <p className="hero__subtext">
+        <p className={styles.subtext}>
           Desarrollo web front-end con enfoque en performance, accesibilidad y
           código limpio. Transformo ideas en productos digitales de alto
           impacto.
         </p>
-        <div className="hero__actions">
-          <button className="btn-primary">Ver proyectos</button>
-          <button className="btn-ghost">Descargar CV</button>
+        <div className={styles.actions}>
+          <button className={styles.btnPrimary}>Ver proyectos</button>
+          <button className={styles.btnGhost}>Descargar CV</button>
         </div>
-        <div className="hero__stats" aria-label="Estadísticas">
+        <div className={styles.stats} aria-label="Estadísticas">
           <div>
-            <span className="hero__stat-value">5+</span>
-            <span className="hero__stat-label">Años de experiencia</span>
+            <span className={styles.statValue}>5+</span>
+            <span className={styles.statLabel}>Años de experiencia</span>
           </div>
           <div>
-            <span className="hero__stat-value">30+</span>
-            <span className="hero__stat-label">Proyectos entregados</span>
+            <span className={styles.statValue}>30+</span>
+            <span className={styles.statLabel}>Proyectos entregados</span>
           </div>
           <div>
-            <span className="hero__stat-value">11</span>
-            <span className="hero__stat-label">Tecnologías dominadas</span>
+            <span className={styles.statValue}>11</span>
+            <span className={styles.statLabel}>Tecnologías dominadas</span>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import HamburgerIcon from "../hamburger-icon/hamburger-icon";
-import "./main-nav.css";
+import styles from "./main-nav.module.scss";
 
 const toSlug = (label: string) =>
   label.toLowerCase().replace(/\s+/g, "-");
@@ -46,40 +46,45 @@ export default function MainNav() {
     "Blogs",
     "Descargar CV",
   ];
+
   return (
     <>
       <nav
-        className={`site-nav${scrolled ? " site-nav--scrolled" : ""}${menuOpen ? " site-nav--open" : ""}`}
+        className={[
+          styles.nav,
+          scrolled ? styles.scrolled : "",
+          menuOpen ? styles.open : "",
+        ].filter(Boolean).join(" ")}
         aria-label="Navegación principal"
       >
         <Link
           href="#inicio"
-          className="nav__logo"
+          className={styles.logo}
           onClick={() => setMenuOpen(false)}
         >
           Camilo Pinzón
         </Link>
 
-        <ul className="nav__links">
+        <ul className={styles.links}>
           {NAV_LINKS.map((link) => (
             <li key={link}>
               <Link
                 href={`#${toSlug(link)}`}
-                className={`nav__link${activeSection === toSlug(link) ? " nav__link-active" : ""}`}
+                className={activeSection === toSlug(link) ? styles.linkActive : undefined}
               >
                 {link}
               </Link>
             </li>
           ))}
           <li>
-            <Link href="#contacto" className="nav__cta">
+            <Link href="#contacto" className={styles.cta}>
               Contacto
             </Link>
           </li>
         </ul>
 
         <button
-          className="nav__hamburger"
+          className={styles.hamburger}
           onClick={() => setMenuOpen((v) => !v)}
           aria-expanded={menuOpen ? "true" : "false"}
           aria-controls="mobile-drawer"
@@ -92,7 +97,7 @@ export default function MainNav() {
       {/* Mobile drawer */}
       <div
         id="mobile-drawer"
-        className={`nav__drawer${menuOpen ? " nav__drawer--open" : ""}`}
+        className={[styles.drawer, menuOpen ? styles.drawerOpen : ""].filter(Boolean).join(" ")}
         role="dialog"
         aria-modal="true"
         aria-label="Menú de navegación"
@@ -101,15 +106,18 @@ export default function MainNav() {
           <Link
             key={link}
             href={`#${toSlug(link)}`}
-            className={`nav__drawer-link${activeSection === toSlug(link) ? " nav__drawer-link--active" : ""}`}
+            className={[
+              styles.drawerLink,
+              activeSection === toSlug(link) ? styles.drawerLinkActive : "",
+            ].filter(Boolean).join(" ")}
             onClick={() => setMenuOpen(false)}
             style={{ animationDelay: `${i * 50}ms` }}
           >
             {link}
           </Link>
         ))}
-        <div className="nav__drawer-divider" />
-        <button className="nav__drawer-cta" onClick={() => setMenuOpen(false)}>
+        <div className={styles.drawerDivider} />
+        <button className={styles.drawerCta} onClick={() => setMenuOpen(false)}>
           Contacto
         </button>
       </div>

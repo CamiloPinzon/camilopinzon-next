@@ -1,6 +1,6 @@
 "use client";
 
-import "./blog-highlights.css";
+import styles from "./blog-highlights.module.scss";
 import { useState } from "react";
 
 import BlogCard from "./blog-card/blog-card";
@@ -98,11 +98,11 @@ export default function BlogHighlights() {
   return (
     <section
       id="blogs"
-      className="blog-section"
+      className={styles.section}
       aria-labelledby="blog-title"
     >
       <div className="section-wrapper">
-        <div className="blog-header-row">
+        <div className={styles.headerRow}>
           <header style={{ marginBottom: 0 }}>
             <span className="section-label">Contenido &amp; Aprendizaje</span>
             <h2 className="section-title" id="blog-title">
@@ -119,30 +119,30 @@ export default function BlogHighlights() {
 
         {/* Featured — visible only when "Todos" */}
         {activeTag === "Todos" && featuredPost && (
-          <div className="blog-featured-wrapper">
+          <div className={styles.featuredWrapper}>
             <BlogCard post={featuredPost} index={0} variant="featured" />
           </div>
         )}
 
         {/* Grid */}
         {gridPosts.length > 0 ? (
-          <div className="blog-grid">
+          <div className={styles.grid}>
             {gridPosts.map((post, i) => (
               <BlogCard key={post.id} post={post} index={i} />
             ))}
           </div>
         ) : (
-          <div className="blog-empty" aria-live="polite">
-            <span className="blog-empty-icon" aria-hidden="true">
+          <div className={styles.empty} aria-live="polite">
+            <span className={styles.emptyIcon} aria-hidden="true">
               📭
             </span>
-            <p className="blog-empty-text">
+            <p className={styles.emptyText}>
               No hay artículos en esta categoría aún
             </p>
           </div>
         )}
 
-        <div className="blog-cta-row">
+        <div className={styles.ctaRow}>
           <Button href="/blog" variant="ghost">
             Ver todos
           </Button>
