@@ -18,7 +18,7 @@ export default function Brands() {
         <div className={styles.marqueeWrapper} aria-label="Marcas clientes">
           <div className={styles.marquee} aria-hidden="true">
             {[...BRANDS, ...BRANDS].map((brand, i) => (
-              <div key={i} className={styles.chip}>
+              <div key={i} className={`badge badge--filled ${styles.chip}`}>
                 {brand}
               </div>
             ))}

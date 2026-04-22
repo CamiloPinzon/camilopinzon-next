@@ -52,6 +52,7 @@ export default function MainNav() {
       <nav
         className={[
           styles.nav,
+          scrolled || menuOpen ? "glass-panel" : "",
           scrolled ? styles.scrolled : "",
           menuOpen ? styles.open : "",
         ].filter(Boolean).join(" ")}

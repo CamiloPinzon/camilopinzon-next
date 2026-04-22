@@ -12,12 +12,9 @@
 }
 
 .profileCard {
-  background: rgba(22, 27, 34, 0.6);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-lg) var(--space-md);
   text-align: center;
-  backdrop-filter: blur(24px) saturate(1.4);
   position: relative;
   overflow: hidden;
   box-shadow:
@@ -193,10 +190,6 @@
 
   em {
     font-style: normal;
-    background: linear-gradient(90deg, var(--color-accent), #a78bfa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 }
 

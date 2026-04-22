@@ -97,12 +97,7 @@
 
 /* ════════ GRID CARD ════════ */
 .card {
-  position: relative;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
   padding: var(--space-md);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
@@ -112,22 +107,6 @@
     border-color 0.3s;
   animation: fadeSlideUp 0.7s var(--ease) both;
 
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: var(--radius-md);
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.06) 0%,
-      rgba(255, 255, 255, 0.015) 40%,
-      transparent 65%
-    );
-    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.06);
-    pointer-events: none;
-    opacity: 1;
-    transition: opacity 0.3s;
-  }
 
   &:hover::after {
     opacity: 0.9;
@@ -167,15 +146,7 @@
 
 .tag {
   font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
   padding: 0.2rem 0.6rem;
-  border-radius: 100px;
-  white-space: nowrap;
 }
 
 .meta {

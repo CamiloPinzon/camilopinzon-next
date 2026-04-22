@@ -17,7 +17,7 @@ export default function BlogFilterPills({
         {tags.map((tag) => (
           <li key={tag}>
             <button
-              className={`${styles.pill}${activeTag === tag ? ` ${styles.pillActive}` : ""}`}
+              className={`badge badge--outline ${styles.pill}${activeTag === tag ? ` ${styles.pillActive}` : ""}`}
               onClick={() => onTagChange(tag)}
               aria-pressed={activeTag === tag}
             >

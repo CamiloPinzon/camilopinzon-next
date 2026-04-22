@@ -41,7 +41,7 @@ export default function BlogCard({
         <div className={styles.featuredBg} aria-hidden="true" />
         <div className={styles.featuredInner}>
           <header className={styles.header}>
-            <span className={styles.tag}>{post.tag}</span>
+            <span className={`badge badge--accent ${styles.tag}`}>{post.tag}</span>
             <div className={styles.meta}>
               <time className={styles.date} dateTime={post.date}>
                 {post.date}
@@ -71,7 +71,7 @@ export default function BlogCard({
 
   return (
     <article
-      className={styles.card}
+      className={`surface-card ${styles.card}`}
       style={
         {
           "--accent": post.color,
@@ -81,7 +81,7 @@ export default function BlogCard({
     >
       <div className={styles.stripe} aria-hidden="true" />
       <header className={styles.header}>
-        <span className={styles.tag}>{post.tag}</span>
+        <span className={`badge badge--accent ${styles.tag}`}>{post.tag}</span>
         <div className={styles.meta}>
           <time className={styles.date} dateTime={post.date}>
             {post.date}

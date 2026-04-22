@@ -17,7 +17,7 @@ export default function MainHero() {
       ref={heroRef}
       aria-label="Presentación"
     >
-      <aside className={styles.profileCard} aria-label="Información de perfil">
+      <aside className={`glass-panel ${styles.profileCard}`} aria-label="Información de perfil">
         <div className={styles.avatarRing}>
           <div
             className={styles.avatarPlaceholder}
@@ -62,7 +62,7 @@ export default function MainHero() {
         <h2 className={styles.headline}>
           Construyo
           <br />
-          <em>Experiencias</em>
+          <em className="text-gradient">Experiencias</em>
           <br />
           Digitales
         </h2>
