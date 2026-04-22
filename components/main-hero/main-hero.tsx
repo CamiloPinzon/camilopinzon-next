@@ -6,44 +6,7 @@ import Image from "next/image";
 
 import "./main-hero.css";
 
-import CodeIcon from "@/assets/icons/code-icon";
-import GitHubIcon from "@/assets/icons/github-icon";
-import InstagramIcon from "@/assets/icons/instagram-icon";
-import LinkedInIcon from "@/assets/icons/linkedin-icon";
-import XIcon from "@/assets/icons/x-icon";
-
-const SOCIALS = [
-  {
-    key: "linkedin",
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/camilo-pinzon",
-    icon: <LinkedInIcon />,
-  },
-  {
-    key: "github",
-    label: "GitHub",
-    href: "https://github.com/CamiloPinzon",
-    icon: <GitHubIcon />,
-  },
-  {
-    key: "portfolio",
-    label: "Portfolio",
-    href: "#proyectos",
-    icon: <CodeIcon />,
-  },
-  {
-    key: "instagram",
-    label: "Instagram",
-    href: "https://www.instagram.com/camilopinzon_developer",
-    icon: <InstagramIcon />,
-  },
-  {
-    key: "x",
-    label: "X (Twitter)",
-    href: "https://x.com/CamiloPinzonDev",
-    icon: <XIcon />,
-  },
-] as const;
+import SocialLinks from "@/components/social-links/social-links";
 
 export default function MainHero() {
   const heroRef = useRef(null);
@@ -66,19 +29,8 @@ export default function MainHero() {
         </div>
         <h1 className="hero__name">Camilo Pinzón</h1>
         <p className="hero__role">Web Developer</p>
-        <div className="hero__socials" aria-label="Redes sociales">
-          {SOCIALS.map(({ key, label, href, icon }) => (
-            <a
-              key={key}
-              href={href}
-              className="hero__social-btn"
-              aria-label={label}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {icon}
-            </a>
-          ))}
+        <div className="hero__socials-wrapper">
+          <SocialLinks />
         </div>
         <div className="hero__divider" />
         <p className="hero__section-label">Sobre mí</p>
