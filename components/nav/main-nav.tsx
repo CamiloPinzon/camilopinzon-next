@@ -21,9 +21,10 @@ export default function MainNav() {
   }, []);
 
   useEffect(() => {
-    const sections = NAV_LINKS.concat("Contacto").map((label) =>
-      document.getElementById(toSlug(label))
-    ).filter(Boolean) as HTMLElement[];
+    const sections = NAV_LINKS.map((link) => link.href.startsWith('/#') ? link.href.substring(2) : null)
+      .concat("contacto")
+      .map((id) => id ? document.getElementById(id) : null)
+      .filter(Boolean) as HTMLElement[];
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -39,12 +40,12 @@ export default function MainNav() {
   }, []);
 
   const NAV_LINKS = [
-    "Inicio",
-    "Experiencia",
-    "Servicios",
-    "Portafolio",
-    "Blogs",
-    "Descargar CV",
+    { label: "Inicio", href: "/#inicio" },
+    { label: "Experiencia", href: "/#experiencia" },
+    { label: "Servicios", href: "/#servicios" },
+    { label: "Portafolio", href: "/#portafolio" },
+    { label: "Blogs", href: "/blog" },
+    { label: "Descargar CV", href: "/#descargar-cv" },
   ];
 
   return (
@@ -59,7 +60,7 @@ export default function MainNav() {
         aria-label="Navegación principal"
       >
         <Link
-          href="#inicio"
+          href="/#inicio"
           className={styles.logo}
           onClick={() => setMenuOpen(false)}
         >
@@ -67,18 +68,24 @@ export default function MainNav() {
         </Link>
 
         <ul className={styles.links}>
-          {NAV_LINKS.map((link) => (
-            <li key={link}>
-              <Link
-                href={`#${toSlug(link)}`}
-                className={activeSection === toSlug(link) ? styles.linkActive : undefined}
-              >
-                {link}
-              </Link>
-            </li>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isAnchor = link.href.startsWith('/#');
+            const sectionId = isAnchor ? link.href.substring(2) : null;
+            const isActive = isAnchor ? activeSection === sectionId : false; // For /blog page, we could check pathname, but keep it simple for now
+
+            return (
+              <li key={link.label}>
+                <Link
+                  href={link.href}
+                  className={isActive ? styles.linkActive : undefined}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
           <li>
-            <Link href="#contacto" className={styles.cta}>
+            <Link href="/#contacto" className={styles.cta}>
               Contacto
             </Link>
           </li>
@@ -103,20 +110,26 @@ export default function MainNav() {
         aria-modal="true"
         aria-label="Menú de navegación"
       >
-        {NAV_LINKS.map((link, i) => (
-          <Link
-            key={link}
-            href={`#${toSlug(link)}`}
-            className={[
-              styles.drawerLink,
-              activeSection === toSlug(link) ? styles.drawerLinkActive : "",
-            ].filter(Boolean).join(" ")}
-            onClick={() => setMenuOpen(false)}
-            style={{ animationDelay: `${i * 50}ms` }}
-          >
-            {link}
-          </Link>
-        ))}
+        {NAV_LINKS.map((link, i) => {
+          const isAnchor = link.href.startsWith('/#');
+          const sectionId = isAnchor ? link.href.substring(2) : null;
+          const isActive = isAnchor ? activeSection === sectionId : false;
+
+          return (
+            <Link
+              key={link.label}
+              href={link.href}
+              className={[
+                styles.drawerLink,
+                isActive ? styles.drawerLinkActive : "",
+              ].filter(Boolean).join(" ")}
+              onClick={() => setMenuOpen(false)}
+              style={{ animationDelay: `${i * 50}ms` }}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
         <div className={styles.drawerDivider} />
         <button className={styles.drawerCta} onClick={() => setMenuOpen(false)}>
           Contacto

@@ -8,89 +8,34 @@ import BlogFilterPills from "./blog-filter-pills/blog-filter-pills";
 import BlogNewsletter from "./blog-newsletter/blog-newsletter";
 import Button from "@/components/ui/button/button";
 
-const BLOG_POSTS = [
-  {
-    id: 1,
-    tag: "Ecosistema Open-Source",
-    title:
-      "Por qué el traslado de React a la Linux Foundation es importante para los desarrolladores front-end",
-    date: "11/4/2025",
-    excerpt:
-      "React, la librería que impulsa millones de interfaces modernas, entra en una nueva era. Meta transfirió React a la Linux Foundation, creando la React Foundation, un movimiento que podría redefinir cómo evoluciona la librería más popular del front-end.",
-    color: "#61DAFB",
-    readTime: "5 min",
-    featured: true,
-  },
-  {
-    id: 2,
-    tag: "Filosofía Dev",
-    title: "KISS: El principio que todo dev debería tatuarse (mentalmente)",
-    date: "4/9/2025",
-    excerpt:
-      "KISS no es sólo una banda de rock. Es una filosofía de desarrollo que te ayuda a mantener tu código limpio, fácil de entender y libre de complicaciones innecesarias.",
-    color: "#A78BFA",
-    readTime: "4 min",
-    featured: false,
-  },
-  {
-    id: 3,
-    tag: "IA & Futuro",
-    title: "Vibe Coding y el Futuro de los Desarrolladores",
-    date: "4/1/2025",
-    excerpt:
-      "Esta reflexión sobre el vibe coding explora cómo la inteligencia artificial está transformando el rol del desarrollador, los riesgos de depender demasiado de ella.",
-    color: "#F472B6",
-    readTime: "7 min",
-    featured: false,
-  },
-  {
-    id: 4,
-    tag: "Performance Web",
-    title: "Core Web Vitals en 2025: Lo que realmente importa para tu score",
-    date: "3/18/2025",
-    excerpt:
-      "Google sigue actualizando sus métricas de rendimiento. Aprende cuáles son las nuevas señales que impactan tu posicionamiento y cómo optimizarlas sin sacrificar la experiencia de usuario.",
-    color: "#34D399",
-    readTime: "6 min",
-    featured: false,
-  },
-  {
-    id: 5,
-    tag: "CSS Moderno",
-    title: "@layer, @scope y container queries: el CSS que nadie te enseñó",
-    date: "2/28/2025",
-    excerpt:
-      "Las nuevas características de CSS están cambiando la forma en que estructuramos los estilos. Descubre cómo estas herramientas nativas pueden reemplazar librerías enteras.",
-    color: "#FB923C",
-    readTime: "8 min",
-    featured: false,
-  },
-  {
-    id: 6,
-    tag: "Carrera Dev",
-    title: "De freelancer a agencia: lecciones del camino",
-    date: "2/10/2025",
-    excerpt:
-      "Escalar de proyectos individuales a manejar múltiples clientes simultáneamente requiere más que habilidades técnicas. Aquí comparto las lecciones más difíciles del proceso.",
-    color: "#FBBF24",
-    readTime: "9 min",
-    featured: false,
-  },
-];
+import { BlogPost } from "@/lib/firebase/queries";
 
-const ALL_TAGS = [
-  "Todos",
-  ...Array.from(new Set(BLOG_POSTS.map((p) => p.tag))),
-];
+interface BlogHighlightsProps {
+  posts: BlogPost[];
+}
 
-export default function BlogHighlights() {
+export default function BlogHighlights({ posts }: BlogHighlightsProps) {
   const [activeTag, setActiveTag] = useState("Todos");
+
+  // Format dates locally so it doesn't break hydration if they are ISO strings
+  const formattedPosts = posts.map(p => ({
+    ...p,
+    date: new Date(p.publishedAt).toLocaleDateString('es-ES', { month: 'short', day: 'numeric', year: 'numeric' }),
+    // Determine if it's featured (e.g. the very first one, or add a 'featured' boolean to your DB)
+    featured: p === posts[0] 
+  }));
+
+  const ALL_TAGS = [
+    "Todos",
+    ...Array.from(new Set(formattedPosts.map((p) => p.tag).filter(Boolean))),
+  ] as string[];
 
   const filteredPosts =
     activeTag === "Todos"
-      ? BLOG_POSTS
-      : BLOG_POSTS.filter((p) => p.tag === activeTag);
-  const featuredPost = BLOG_POSTS.find((p) => p.featured);
+      ? formattedPosts
+      : formattedPosts.filter((p) => p.tag === activeTag);
+      
+  const featuredPost = formattedPosts.find((p) => p.featured);
   const gridPosts = filteredPosts.filter(
     (p) => !(p.featured && activeTag === "Todos"),
   );

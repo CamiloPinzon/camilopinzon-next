@@ -2,13 +2,18 @@ import MainHero from "@/components/main-hero/main-hero";
 import TechStack from "@/components/tech-stack/tech-stack";
 import BlogHighlights from "@/components/blog-highlights/blog-highlights";
 import Brands from "@/components/brands/brands";
+import { getRecentPosts } from "@/lib/firebase/queries";
 
-export default function Home() {
+export const revalidate = 3600; // Revalidate every hour, or remove for dynamic
+
+export default async function Home() {
+  const posts = await getRecentPosts('en', 7);
+
   return (
     <main>
       <MainHero />
       <TechStack />
-      <BlogHighlights />
+      <BlogHighlights posts={posts} />
       <Brands />
     </main>
   );

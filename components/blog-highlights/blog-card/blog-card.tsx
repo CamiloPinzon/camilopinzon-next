@@ -5,15 +5,14 @@ interface CardStyle extends React.CSSProperties {
   "--accent"?: string;
 }
 
-export interface BlogPost {
-  id: number;
-  tag: string;
-  title: string;
-  date: string;
-  excerpt: string;
-  color: string;
-  readTime: string;
-  featured: boolean;
+import Link from "next/link";
+import { BlogPost as QueryBlogPost } from "@/lib/firebase/queries";
+
+// We extend the backend BlogPost to include the formatted fields for UI
+export interface BlogPost extends Omit<QueryBlogPost, 'id'> {
+  id: string | number; // Support legacy numbers or new strings
+  date: string; // Formatted date string
+  featured?: boolean;
 }
 
 interface BlogCardProps {
@@ -54,15 +53,12 @@ export default function BlogCard({
           </header>
           <h3 className={styles.titleFeatured}>{post.title}</h3>
           <p className={styles.excerpt}>{post.excerpt}</p>
-          <button
-            className={styles.cta}
-            aria-label={`Leer más sobre ${post.title}`}
-          >
+          <Link href={`/blog/${post.slug}`} className={styles.cta} aria-label={`Leer más sobre ${post.title}`}>
             Leer artículo completo
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </button>
+          </Link>
         </div>
         <span className={styles.featuredBadge}>⭐ Destacado</span>
       </article>
@@ -92,15 +88,12 @@ export default function BlogCard({
       </header>
       <h3 className={styles.title}>{post.title}</h3>
       <p className={styles.excerpt}>{post.excerpt}</p>
-      <button
-        className={styles.cta}
-        aria-label={`Leer más sobre ${post.title}`}
-      >
+      <Link href={`/blog/${post.slug}`} className={styles.cta} aria-label={`Leer más sobre ${post.title}`}>
         Leer artículo completo
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-      </button>
+      </Link>
     </article>
   );
 }
