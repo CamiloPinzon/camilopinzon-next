@@ -45,6 +45,7 @@ export const cmsConfig: CMSConfig = {
         { name: 'title', label: 'Title', type: 'string', required: true, localized: true },
         { name: 'slug', label: 'URL Slug', type: 'string', required: true }, // Not localized so URLs remain consistent if you want, or you can localize it.
         { name: 'coverImage', label: 'Cover Image', type: 'image' },
+        { name: 'coverImageAlt', label: 'Cover Image Alt Text (Accessibility)', type: 'string', localized: true },
         { name: 'excerpt', label: 'Short Excerpt (TL;DR)', type: 'text', localized: true },
         { name: 'content', label: 'Content', type: 'richtext', localized: true },
         { name: 'publishedAt', label: 'Publish Date', type: 'date' },
@@ -64,6 +65,7 @@ export const cmsConfig: CMSConfig = {
         { name: 'liveUrl', label: 'Live URL', type: 'string' },
         { name: 'githubUrl', label: 'GitHub Repository', type: 'string' },
         { name: 'coverImage', label: 'Cover Image', type: 'image' },
+        { name: 'coverImageAlt', label: 'Cover Image Alt Text (Accessibility)', type: 'string', localized: true },
       ],
     },
     {
@@ -91,6 +93,32 @@ export const cmsConfig: CMSConfig = {
         { name: 'tags', label: 'Tech Stack / Tags (comma separated)', type: 'string' },
         { name: 'website', label: 'Company Website URL', type: 'string' },
         { name: 'order', label: 'Display Order (higher = first)', type: 'number' },
+      ],
+    },
+    {
+      id: 'site_settings',
+      name: 'Site Settings',
+      singularName: 'Setting',
+      description: 'Manage global UI text, hero content, and translations.',
+      fields: [
+        { name: 'settingId', label: 'Setting ID (e.g. "global")', type: 'string', required: true },
+        { name: 'heroTitle', label: 'Hero Title', type: 'string', localized: true },
+        { name: 'heroSubtitle', label: 'Hero Subtitle', type: 'text', localized: true },
+        { name: 'heroButtonText', label: 'Hero Button Text', type: 'string', localized: true },
+        { name: 'footerCopyright', label: 'Footer Copyright Text', type: 'string', localized: true },
+        { name: 'newsletterTitle', label: 'Newsletter Title', type: 'string', localized: true },
+        { name: 'newsletterSubtitle', label: 'Newsletter Subtitle', type: 'string', localized: true },
+      ],
+    },
+    {
+      id: 'subscribers',
+      name: 'Newsletter Subscribers',
+      singularName: 'Subscriber',
+      description: 'View users who have subscribed to your newsletter. (Read-only for Admin)',
+      fields: [
+        { name: 'email', label: 'Email Address', type: 'string', required: true },
+        { name: 'languagePref', label: 'Language Preference', type: 'string' },
+        { name: 'subscribedAt', label: 'Date Subscribed', type: 'date' },
       ],
     }
   ],

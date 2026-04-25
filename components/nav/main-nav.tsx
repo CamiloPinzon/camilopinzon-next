@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import LanguageSwitcher from "./language-switcher";
 import HamburgerIcon from "../hamburger-icon/hamburger-icon";
 import styles from "./main-nav.module.scss";
 
@@ -20,7 +21,10 @@ export default function MainNav() {
   }, []);
 
   useEffect(() => {
-    const sections = NAV_LINKS.map((link) => link.href.startsWith('/#') ? link.href.substring(2) : null)
+    const sections = NAV_LINKS.map((link) => {
+      const hashIndex = link.href.indexOf('#');
+      return hashIndex !== -1 ? link.href.substring(hashIndex + 1) : null;
+    })
       .concat("contacto")
       .map((id) => id ? document.getElementById(id) : null)
       .filter(Boolean) as HTMLElement[];
@@ -38,13 +42,16 @@ export default function MainNav() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Extract current language from pathname
+  const currentLang = pathname.split('/')[1] || 'en';
+
   const NAV_LINKS = [
-    { label: "Inicio", href: "/#inicio" },
-    { label: "Experiencia", href: "/experience" },
-    { label: "Servicios", href: "/#servicios" },
-    { label: "Portafolio", href: "/#portafolio" },
-    { label: "Blogs", href: "/blog" },
-    { label: "Descargar CV", href: "/#descargar-cv" },
+    { label: "Inicio", href: `/${currentLang}#inicio` },
+    { label: "Experiencia", href: `/${currentLang}/experience` },
+    { label: "Servicios", href: `/${currentLang}#servicios` },
+    { label: "Portafolio", href: `/${currentLang}#portafolio` },
+    { label: "Blogs", href: `/${currentLang}/blog` },
+    { label: "Descargar CV", href: `/${currentLang}#descargar-cv` },
   ];
 
   return (
@@ -68,14 +75,15 @@ export default function MainNav() {
 
         <ul className={styles.links}>
           {NAV_LINKS.map((link) => {
-            const isAnchor = link.href.startsWith('/#');
-            const sectionId = isAnchor ? link.href.substring(2) : null;
+            const hashIndex = link.href.indexOf('#');
+            const isAnchor = hashIndex !== -1;
+            const sectionId = isAnchor ? link.href.substring(hashIndex + 1) : null;
             
             // Logic for active state:
             // 1. If it's an anchor on the homepage, check activeSection (from IntersectionObserver)
             // 2. If it's a dedicated page (like /experience or /blog), check if pathname starts with it.
             const isActive = isAnchor 
-              ? (pathname === '/' && activeSection === sectionId) 
+              ? (pathname === `/${currentLang}` || pathname === '/' ? activeSection === sectionId : false) 
               : pathname.startsWith(link.href);
 
             return (
@@ -89,6 +97,9 @@ export default function MainNav() {
               </li>
             );
           })}
+          <li>
+            <LanguageSwitcher />
+          </li>
           <li>
             <Link href="/#contacto" className={styles.cta}>
               Contacto
@@ -116,10 +127,11 @@ export default function MainNav() {
         aria-label="Menú de navegación"
       >
         {NAV_LINKS.map((link, i) => {
-          const isAnchor = link.href.startsWith('/#');
-          const sectionId = isAnchor ? link.href.substring(2) : null;
+          const hashIndex = link.href.indexOf('#');
+          const isAnchor = hashIndex !== -1;
+          const sectionId = isAnchor ? link.href.substring(hashIndex + 1) : null;
           const isActive = isAnchor 
-            ? (pathname === '/' && activeSection === sectionId) 
+            ? (pathname === `/${currentLang}` || pathname === '/' ? activeSection === sectionId : false) 
             : pathname.startsWith(link.href);
 
           return (
