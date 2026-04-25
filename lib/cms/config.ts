@@ -76,6 +76,22 @@ export const cmsConfig: CMSConfig = {
         { name: 'description', label: 'Description', type: 'text', localized: true },
         { name: 'basePrice', label: 'Base Price', type: 'number' },
       ],
+    },
+    {
+      id: 'experience',
+      name: 'Work Experience',
+      singularName: 'Experience',
+      description: 'Manage your professional work history and roles.',
+      fields: [
+        { name: 'company', label: 'Company Name', type: 'string', required: true },
+        { name: 'jobTitle', label: 'Job Title', type: 'string', required: true, localized: true },
+        { name: 'startDate', label: 'Start Year/Month', type: 'string', required: true },
+        { name: 'endDate', label: 'End Year/Month (or Present)', type: 'string', required: true },
+        { name: 'description', label: 'Detailed Description', type: 'text', localized: true },
+        { name: 'tags', label: 'Tech Stack / Tags (comma separated)', type: 'string' },
+        { name: 'website', label: 'Company Website URL', type: 'string' },
+        { name: 'order', label: 'Display Order (higher = first)', type: 'number' },
+      ],
     }
   ],
 };

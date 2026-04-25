@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import HamburgerIcon from "../hamburger-icon/hamburger-icon";
 import styles from "./main-nav.module.scss";
 
-const toSlug = (label: string) =>
-  label.toLowerCase().replace(/\s+/g, "-");
-
 export default function MainNav() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("inicio");
@@ -41,7 +40,7 @@ export default function MainNav() {
 
   const NAV_LINKS = [
     { label: "Inicio", href: "/#inicio" },
-    { label: "Experiencia", href: "/#experiencia" },
+    { label: "Experiencia", href: "/experience" },
     { label: "Servicios", href: "/#servicios" },
     { label: "Portafolio", href: "/#portafolio" },
     { label: "Blogs", href: "/blog" },
@@ -71,7 +70,13 @@ export default function MainNav() {
           {NAV_LINKS.map((link) => {
             const isAnchor = link.href.startsWith('/#');
             const sectionId = isAnchor ? link.href.substring(2) : null;
-            const isActive = isAnchor ? activeSection === sectionId : false; // For /blog page, we could check pathname, but keep it simple for now
+            
+            // Logic for active state:
+            // 1. If it's an anchor on the homepage, check activeSection (from IntersectionObserver)
+            // 2. If it's a dedicated page (like /experience or /blog), check if pathname starts with it.
+            const isActive = isAnchor 
+              ? (pathname === '/' && activeSection === sectionId) 
+              : pathname.startsWith(link.href);
 
             return (
               <li key={link.label}>
@@ -113,7 +118,9 @@ export default function MainNav() {
         {NAV_LINKS.map((link, i) => {
           const isAnchor = link.href.startsWith('/#');
           const sectionId = isAnchor ? link.href.substring(2) : null;
-          const isActive = isAnchor ? activeSection === sectionId : false;
+          const isActive = isAnchor 
+            ? (pathname === '/' && activeSection === sectionId) 
+            : pathname.startsWith(link.href);
 
           return (
             <Link

@@ -99,3 +99,52 @@ export async function getPostBySlug(slug: string, lang: string = 'en'): Promise<
     return null;
   }
 }
+export interface ExperienceItem {
+  id: string;
+  company: string;
+  jobTitle: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  tags: string[];
+  website?: string;
+  order: number;
+}
+
+export async function getExperience(lang: string = 'en'): Promise<ExperienceItem[]> {
+  try {
+    const snapshot = await getDocs(collection(db, 'experience'));
+    
+    const items = snapshot.docs.map(docSnap => {
+      const data = docSnap.data();
+      const localized = data.translations?.[lang] || data.translations?.['en'] || {};
+      
+      // Parse tags if they are a comma-separated string or already an array
+      let tags: string[] = [];
+      if (Array.isArray(data.tags)) {
+        tags = data.tags;
+      } else if (typeof data.tags === 'string') {
+        tags = data.tags.split(',').map(t => t.trim()).filter(Boolean);
+      }
+
+      return {
+        id: docSnap.id,
+        company: data.company || 'Unknown',
+        jobTitle: localized.jobTitle || data.jobTitle || '',
+        startDate: data.startDate || '',
+        endDate: data.endDate || '',
+        description: localized.description || data.description || '',
+        tags,
+        website: data.website,
+        order: data.order || 0,
+      };
+    });
+
+    // Sort by order descending (higher order first)
+    return items.sort((a, b) => b.order - a.order);
+
+  } catch (error) {
+    console.error("Error fetching experience:", error);
+    return [];
+  }
+}

@@ -1,12 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { cmsConfig } from '@/lib/cms/config';
-import '../admin.scss'; // We'll create this later
+import '../admin.scss';
 import LogoutButton from './logout-button';
+import AuthGuard from '@/components/auth-guard';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="admin-layout">
+    <AuthGuard>
+      <div className="admin-layout">
       <aside className="admin-sidebar">
         <div className="admin-sidebar-header">
           <h2>CMS Admin</h2>
@@ -41,5 +43,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </main>
     </div>
+    </AuthGuard>
   );
 }

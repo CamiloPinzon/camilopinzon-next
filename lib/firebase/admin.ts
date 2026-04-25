@@ -6,7 +6,13 @@ import { getAuth } from "firebase-admin/auth";
 // Parse the service account JSON string from the environment variable
 const getServiceAccount = () => {
   try {
-    return JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string);
+    const key = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+    if (!key || key === '{}') return null;
+    
+    const parsed = JSON.parse(key);
+    if (!parsed.project_id) return null;
+    
+    return parsed;
   } catch (error) {
     console.error("Error parsing FIREBASE_SERVICE_ACCOUNT_KEY:", error);
     return null;

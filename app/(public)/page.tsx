@@ -4,7 +4,7 @@ import BlogHighlights from "@/components/blog-highlights/blog-highlights";
 import Brands from "@/components/brands/brands";
 import { getRecentPosts } from "@/lib/firebase/queries";
 
-export const revalidate = 3600; // Revalidate every hour, or remove for dynamic
+export const revalidate = 3600;
 
 export default async function Home() {
   const posts = await getRecentPosts('en', 7);

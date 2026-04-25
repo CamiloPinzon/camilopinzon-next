@@ -36,8 +36,19 @@
 .marquee {
   display: flex;
   gap: var(--space-xl);
-  animation: marquee 18s linear infinite;
+  padding-right: var(--space-xl);
+  animation: marquee 40s linear infinite;
   width: max-content;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .chip {
