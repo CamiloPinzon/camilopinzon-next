@@ -2,22 +2,30 @@
 
 import { useRef } from "react";
 
+import { usePathname } from "next/navigation";
+import { getTranslations } from "@/lib/i18n/translations";
 import Image from "next/image";
+import SocialLinks from "@/components/social-links/social-links";
 
 import styles from "./main-hero.module.scss";
 
-import SocialLinks from "@/components/social-links/social-links";
-
 export default function MainHero() {
   const heroRef = useRef(null);
+
+  const pathname = usePathname();
+  const lang = pathname.split("/")[1] || "en";
+  const t = getTranslations(lang);
   return (
     <section
       id="inicio"
       className={styles.hero}
       ref={heroRef}
-      aria-label="Presentación"
+      aria-label={t.hero.profileLabel}
     >
-      <aside className={`glass-panel ${styles.profileCard}`} aria-label="Información de perfil">
+      <aside
+        className={`glass-panel ${styles.profileCard}`}
+        aria-label={t.hero.profileLabel}
+      >
         <div className={styles.avatarRing}>
           <div
             className={styles.avatarPlaceholder}
@@ -33,60 +41,50 @@ export default function MainHero() {
           <SocialLinks />
         </div>
         <div className={styles.divider} />
-        <p className={styles.sectionLabel}>Sobre mí</p>
-        <p className={styles.bio}>
-          Autodidacta y dedicado. Desarrollador web con capacidad para asimilar
-          el trabajo bajo presión y gran facilidad para el trabajo en equipo, ya
-          sea de forma local o remota.
-        </p>
+        <p className={styles.sectionLabel}>{t.hero.aboutLabel}</p>
+        <p className={styles.bio}>{t.hero.bio}</p>
         <div className={styles.divider} />
-        <p className={styles.sectionLabel}>Contacto</p>
+        <p className={styles.sectionLabel}>{t.hero.contactLabel}</p>
         <ul className={styles.contactList}>
           <li>
             ✉{" "}
             <a href="mailto:camilopinzondeveloper@gmail.com">
-              Envíame un correo
+              {t.hero.emailLink}
             </a>
           </li>
           <li>
             📞 <a href="tel:+573176844185">57 317 684 4185</a>
           </li>
         </ul>
-        <button className={styles.contactCta}>Contáctame</button>
+        <button className={styles.contactCta}>{t.hero.contactBtn}</button>
       </aside>
 
       <div className={styles.content}>
-        <p className={styles.eyebrow}>
-          Disponible para proyectos · Colombia &amp; Remoto
-        </p>
+        <p className={styles.eyebrow}>{t.hero.eyebrow}</p>
         <h2 className={styles.headline}>
-          Construyo
+          {t.hero.headline1}
           <br />
-          <em className="text-gradient">Experiencias</em>
+          <em className="text-gradient">{t.hero.headlineEm}</em>
           <br />
-          Digitales
+          {t.hero.headline2}
         </h2>
-        <p className={styles.subtext}>
-          Desarrollo web front-end con enfoque en performance, accesibilidad y
-          código limpio. Transformo ideas en productos digitales de alto
-          impacto.
-        </p>
+        <p className={styles.subtext}>{t.hero.subtext}</p>
         <div className={styles.actions}>
-          <button className={styles.btnPrimary}>Ver proyectos</button>
-          <button className={styles.btnGhost}>Descargar CV</button>
+          <button className={styles.btnPrimary}>{t.hero.btnProjects}</button>
+          <button className={styles.btnGhost}>{t.hero.btnCv}</button>
         </div>
-        <div className={styles.stats} aria-label="Estadísticas">
+        <div className={styles.stats} aria-label={t.hero.profileLabel}>
           <div>
             <span className={styles.statValue}>5+</span>
-            <span className={styles.statLabel}>Años de experiencia</span>
+            <span className={styles.statLabel}>{t.hero.statYears}</span>
           </div>
           <div>
             <span className={styles.statValue}>30+</span>
-            <span className={styles.statLabel}>Proyectos entregados</span>
+            <span className={styles.statLabel}>{t.hero.statProjects}</span>
           </div>
           <div>
             <span className={styles.statValue}>11</span>
-            <span className={styles.statLabel}>Tecnologías dominadas</span>
+            <span className={styles.statLabel}>{t.hero.statTechs}</span>
           </div>
         </div>
       </div>

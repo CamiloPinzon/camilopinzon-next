@@ -60,7 +60,7 @@ export default async function Home({
   return (
     <main>
       <MainHero />
-      <TechStack />
+      <TechStack lang={lang} />
       <BlogHighlights posts={posts} />
       <Brands />
     </main>

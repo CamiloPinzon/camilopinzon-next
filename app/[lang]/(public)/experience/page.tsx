@@ -1,6 +1,7 @@
 import { getExperience } from "@/lib/firebase/queries";
 import Experience from "@/components/experience/experience";
 import { Metadata } from "next";
+import { getTranslations } from "@/lib/i18n/translations";
 
 export const revalidate = 3600;
 
@@ -35,13 +36,14 @@ export default async function ExperiencePage({
 }) {
   const { lang } = await params;
   const experiences = await getExperience(lang);
+  const t = getTranslations(lang);
 
   return (
     <div style={{ paddingTop: "100px", minHeight: "100vh" }}>
       <Experience
         items={experiences}
-        title="Experiencia"
-        subtitle="Un vistazo detallado a mi trayectoria profesional, los retos que he superado y las empresas con las que he colaborado."
+        title={t.experience.pageTitle}
+        subtitle={t.experience.pageSubtitle}
       />
     </div>
   );
