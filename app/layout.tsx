@@ -15,8 +15,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Camilo Pinzon",
-  description: "Developer",
+  title: {
+    default: "Camilo Pinzon — Frontend Developer",
+    template: "%s — Camilo Pinzon",
+  },
+  description:
+    "Frontend developer especializado en React, Next.js y experiencias digitales de alto impacto. Portfolio, blog y contacto.",
+  metadataBase: new URL("https://camilopinzon.netlify.app"),
+  openGraph: {
+    type: "website",
+    siteName: "Camilo Pinzón",
+    locale: "es-CO",
+    alternateLocale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@CamiloPinzonDev",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
