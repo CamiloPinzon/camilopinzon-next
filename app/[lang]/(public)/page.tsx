@@ -6,8 +6,13 @@ import { getRecentPosts } from "@/lib/firebase/queries";
 
 export const revalidate = 3600;
 
-export default async function Home() {
-  const posts = await getRecentPosts('en', 7);
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const posts = await getRecentPosts(lang, 7);
 
   return (
     <main>
