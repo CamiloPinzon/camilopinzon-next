@@ -21,10 +21,10 @@ export async function generateMetadata({
     title: post.title,
     description: post.excerpt,
     alternates: {
-      canonical: `https://camilopinzon.netlify.app/${lang}/blog/${slug}`,
+      canonical: `https://camilopinzon.dev/${lang}/blog/${slug}`,
       languages: {
-        en: `https://camilopinzon.netlify.app/en/blog/${slug}`,
-        es: `https://camilopinzon.netlify.app/es/blog/${slug}`,
+        en: `https://camilopinzon.dev/en/blog/${slug}`,
+        es: `https://camilopinzon.dev/es/blog/${slug}`,
       },
     },
     openGraph: {

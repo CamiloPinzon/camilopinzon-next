@@ -24,10 +24,10 @@ export async function generateMetadata({
         ? "Portfolio y blog de Camilo Pinzón, desarrollador frontend especializado en React y Next.js."
         : "Portfolio and blog of Camilo Pinzón, frontend developer specialized in React and Next.js.",
     alternates: {
-      canonical: `https://camilopinzon.netlify.app/${lang}`,
+      canonical: `https://camilopinzon.dev/${lang}`,
       languages: {
-        en: "https://camilopinzon.netlify.app/en",
-        es: "https://camilopinzon.netlify.app/es",
+        en: "https://camilopinzon.dev/en",
+        es: "https://camilopinzon.dev/es",
       },
     },
     openGraph: {
@@ -36,7 +36,7 @@ export async function generateMetadata({
         lang === "es"
           ? "Portfolio y blog de Camilo Pinzón, desarrollador frontend."
           : "Portfolio and blog of Camilo Pinzón, frontend developer.",
-      url: `https://camilopinzon.netlify.app/${lang}`,
+      url: `https://camilopinzon.dev/${lang}`,
       images: [
         {
           url: "/og-image.jpg", // ← Crearemos esta imagen después

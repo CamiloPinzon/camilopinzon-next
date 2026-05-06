@@ -20,10 +20,10 @@ export async function generateMetadata({
         ? "Trayectoria profesional de Camilo Pinzón: empresas, roles y tecnologías a lo largo de su carrera."
         : "Professional journey of Camilo Pinzón: companies, roles and technologies throughout his career.",
     alternates: {
-      canonical: `https://camilopinzon.netlify.app/${lang}/experience`,
+      canonical: `https://camilopinzon.dev/${lang}/experience`,
       languages: {
-        en: "https://camilopinzon.netlify.app/en/experience",
-        es: "https://camilopinzon.netlify.app/es/experience",
+        en: "https://camilopinzon.dev/en/experience",
+        es: "https://camilopinzon.dev/es/experience",
       },
     },
   };

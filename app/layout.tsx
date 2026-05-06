@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   description:
     "Frontend developer especializado en React, Next.js y experiencias digitales de alto impacto. Portfolio, blog y contacto.",
-  metadataBase: new URL("https://camilopinzon.netlify.app"),
+  metadataBase: new URL("https://camilopinzon.dev"),
   openGraph: {
     type: "website",
     siteName: "Camilo Pinzón",
