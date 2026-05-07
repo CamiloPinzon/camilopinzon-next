@@ -64,11 +64,21 @@ const translations = {
     },
     brands: {
       title: "Brands that trust my work",
-      subtitle: "I have helped companies create powerful digital experiences. Yours could be next.",
+      subtitle:
+        "I have helped companies create powerful digital experiences. Yours could be next.",
       ariaLabel: "Client brands",
     },
     blogPost: {
       backLink: "← Back to Home",
+    },
+    cv: {
+      sectionLabel: "Curriculum Vitae",
+      title: "My",
+      titleEm: "Resume",
+      description:
+        "Download my complete resume to see my detailed experience, education, and technical skills.",
+      downloadBtn: "Download PDF",
+      ariaLabel: "Download my complete resume",
     },
   },
   es: {
@@ -140,6 +150,15 @@ const translations = {
     },
     blogPost: {
       backLink: "← Volver al Inicio",
+    },
+    cv: {
+      sectionLabel: "Curriculum Vitae",
+      title: "Mi Hoja",
+      titleEm: "de Vida",
+      description:
+        "Descarga mi hoja de vida completa para ver mi experiencia detallada, educación y habilidades técnicas.",
+      downloadBtn: "Descargar PDF",
+      ariaLabel: "Descargar mi hoja de vida completa",
     },
   },
 };
