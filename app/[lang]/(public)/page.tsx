@@ -62,7 +62,7 @@ export default async function Home({
       <MainHero />
       <TechStack lang={lang} />
       <BlogHighlights posts={posts} />
-      <Brands />
+      <Brands lang={lang} />
     </main>
   );
 }

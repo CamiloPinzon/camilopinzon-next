@@ -62,6 +62,14 @@ const translations = {
       newsletterBtn: "Subscribe",
       newsletterPlaceholder: "your@email.com",
     },
+    brands: {
+      title: "Brands that trust my work",
+      subtitle: "I have helped companies create powerful digital experiences. Yours could be next.",
+      ariaLabel: "Client brands",
+    },
+    blogPost: {
+      backLink: "← Back to Home",
+    },
   },
   es: {
     nav: {
@@ -123,6 +131,15 @@ const translations = {
       newsletterSub: "Manténte actualizado con los últimos blogs.",
       newsletterBtn: "Suscribir",
       newsletterPlaceholder: "tu@correo.com",
+    },
+    brands: {
+      title: "Marcas que confían en mi trabajo",
+      subtitle:
+        "He ayudado a empresas a crear experiencias digitales poderosas. La tuya podría ser la siguiente.",
+      ariaLabel: "Marcas clientes",
+    },
+    blogPost: {
+      backLink: "← Volver al Inicio",
     },
   },
 };

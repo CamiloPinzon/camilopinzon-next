@@ -1,21 +1,23 @@
 import { BRANDS } from "@/lib/constants";
+import { getTranslations } from "@/lib/i18n/translations";
 
 import styles from "./brands.module.scss";
 
-export default function Brands() {
+export default function Brands({ lang = "en" }: { lang?: string }) {
+  const t = getTranslations(lang);
+
   return (
     <section className={styles.section} aria-labelledby="brands-title">
       <div className="section-wrapper">
         <header className="section-header">
           <h2 className="section-title" id="brands-title">
-            Marcas que confían en mi trabajo
+            {t.brands.title}
           </h2>
           <p className={styles.subtext}>
-            He ayudado a empresas a crear experiencias digitales poderosas. La
-            tuya podría ser la siguiente.
+            {t.brands.subtitle}
           </p>
         </header>
-        <div className={styles.marqueeWrapper} aria-label="Marcas clientes">
+        <div className={styles.marqueeWrapper} aria-label={t.brands.ariaLabel}>
           <div className={styles.marquee} aria-hidden="true">
             {[...BRANDS, ...BRANDS].map((brand, i) => (
               <div key={i} className={`badge badge--filled ${styles.chip}`}>

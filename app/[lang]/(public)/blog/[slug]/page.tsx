@@ -2,6 +2,7 @@ import { getPostBySlug } from "@/lib/firebase/queries";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { getTranslations } from "@/lib/i18n/translations";
 import styles from "./blog-post.module.scss"; // Optional, or use global utilities
 import { Metadata } from "next";
 
@@ -54,11 +55,16 @@ export default async function BlogPostPage({
     notFound();
   }
 
-  const formattedDate = new Date(post.publishedAt).toLocaleDateString("es-ES", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+  const t = getTranslations(lang);
+
+  const formattedDate = new Date(post.publishedAt).toLocaleDateString(
+    lang === "es" ? "es-ES" : "en-US",
+    {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }
+  );
 
   return (
     <article
@@ -71,7 +77,7 @@ export default async function BlogPostPage({
       }}
     >
       <Link
-        href="/"
+        href={`/${lang}/blog`}
         style={{
           color: "#a3aed1",
           textDecoration: "none",
@@ -80,7 +86,7 @@ export default async function BlogPostPage({
           display: "inline-block",
         }}
       >
-        ← Volver al Inicio
+        {t.blogPost.backLink}
       </Link>
 
       <header style={{ marginBottom: "40px" }}>
