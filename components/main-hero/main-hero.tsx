@@ -15,6 +15,7 @@ export default function MainHero() {
   const pathname = usePathname();
   const lang = pathname.split("/")[1] || "en";
   const t = getTranslations(lang);
+  console.log("lng: " + lang);
   return (
     <section
       id="inicio"
@@ -71,7 +72,14 @@ export default function MainHero() {
         <p className={styles.subtext}>{t.hero.subtext}</p>
         <div className={styles.actions}>
           <button className={styles.btnPrimary}>{t.hero.btnProjects}</button>
-          <button className={styles.btnGhost}>{t.hero.btnCv}</button>
+          <a
+            href={`/${lang}-cv-camilo-pinzon.pdf`}
+            download={`Camilo-Pinzon-CV-${lang.toUpperCase()}.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className={styles.btnGhost}>{t.hero.btnCv}</button>
+          </a>
         </div>
         <div className={styles.stats} aria-label={t.hero.profileLabel}>
           <div>
