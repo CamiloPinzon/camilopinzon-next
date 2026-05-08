@@ -80,6 +80,35 @@ const translations = {
       downloadBtn: "Download PDF",
       ariaLabel: "Download my complete resume",
     },
+    services: {
+      ariaLabel: "Services offered",
+      sectionLabel: "My Services",
+      title: "What I",
+      titleEm: "Can Do",
+      learnMore: "Learn more →",
+      items: [
+        {
+          title: "Web Applications (SaaS)",
+          description:
+            "Development of robust and scalable platforms with React and Next.js. Focused on high performance and complex logic.",
+        },
+        {
+          title: "WordPress Development",
+          description:
+            "Creation of corporate sites and self-manageable stores. Custom themes, fast and optimized for conversion.",
+        },
+        {
+          title: "Frontend & UI Development",
+          description:
+            "I transform static designs into interactive, pixel-perfect code. Fluid and responsive interfaces on any device.",
+        },
+        {
+          title: "Performance & Technical SEO",
+          description:
+            "Audit and optimization of Core Web Vitals. I improve load speed and accessibility to climb positions in search engines.",
+        },
+      ],
+    },
   },
   es: {
     nav: {
@@ -159,6 +188,35 @@ const translations = {
         "Descarga mi hoja de vida completa para ver mi experiencia detallada, educación y habilidades técnicas.",
       downloadBtn: "Descargar PDF",
       ariaLabel: "Descargar mi hoja de vida completa",
+    },
+    services: {
+      ariaLabel: "Servicios ofrecidos",
+      sectionLabel: "Mis Servicios",
+      title: "Lo que",
+      titleEm: "Ofrezco",
+      learnMore: "Ver detalles →",
+      items: [
+        {
+          title: "Aplicaciones Web (SaaS)",
+          description:
+            "Desarrollo de plataformas robustas y escalables con React y Next.js. Enfocado en alto rendimiento y lógica compleja.",
+        },
+        {
+          title: "Desarrollo WordPress",
+          description:
+            "Creación de sitios corporativos y tiendas autogestionables. Temas a medida, rápidos y optimizados para conversión.",
+        },
+        {
+          title: "Frontend & UI Development",
+          description:
+            "Transformo diseños estáticos en código interactivo y pixel-perfect. Interfaces fluidas y responsivas en cualquier dispositivo.",
+        },
+        {
+          title: "Performance & SEO Técnico",
+          description:
+            "Auditoría y optimización de Core Web Vitals. Mejoro la velocidad de carga y accesibilidad para escalar posiciones en Google.",
+        },
+      ],
     },
   },
 };

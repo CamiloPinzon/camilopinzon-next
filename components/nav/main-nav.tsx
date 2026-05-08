@@ -72,7 +72,7 @@ export default function MainNav() {
         aria-label="Navegación principal"
       >
         <Link
-          href="/#inicio"
+          href={`/${currentLang}/`}
           className={styles.logo}
           onClick={() => setMenuOpen(false)}
         >

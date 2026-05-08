@@ -5,6 +5,7 @@ import BlogHighlights from "@/components/blog-highlights/blog-highlights";
 import Brands from "@/components/brands/brands";
 import { getRecentPosts } from "@/lib/firebase/queries";
 import DownloadCv from "@/components/download-cv/download-cv";
+import Services from "@/components/services/services";
 
 export const revalidate = 3600;
 
@@ -61,6 +62,7 @@ export default async function Home({
   return (
     <main>
       <MainHero />
+      <Services lang={lang} />
       <TechStack lang={lang} />
       <DownloadCv lang={lang} />
       <BlogHighlights posts={posts} />
