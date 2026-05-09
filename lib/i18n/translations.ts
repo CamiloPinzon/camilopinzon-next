@@ -109,6 +109,33 @@ const translations = {
         },
       ],
     },
+    portfolio: {
+      ariaLabel: "My Portfolio",
+      sectionLabel: "Featured Work",
+      title: "Selected",
+      titleEm: "Projects",
+      viewProject: "View Project",
+      items: [
+        {
+          title: "Planeta Sorprendente — Chocolates Jet",
+          description:
+            "Digitized Colombia's most iconic sticker album into an interactive web experience. Engineered gamification mechanics, virtual transactions, and user engagement loops.",
+          tags: ["PHP", "JavaScript", "Gamification", "MySQL"],
+        },
+        {
+          title: "Disney Cruise Line",
+          description:
+            "Developed critical UI components for the official cruise booking platform. Led the migration of legacy JavaScript codebases into a modern, robust React and TypeScript architecture.",
+          tags: ["React", "TypeScript", "UI Components", "Migration"],
+        },
+        {
+          title: "Google Wallet / Pay",
+          description:
+            "Engineered frontend forms and managed CMS content for the global Google Wallet platform. Overcame complex architectural challenges like full RTL (Right-to-Left) and LTR layout support.",
+          tags: ["TypeScript", "Frontend Forms", "RTL/LTR", "CMS"],
+        },
+      ],
+    },
   },
   es: {
     nav: {
@@ -215,6 +242,33 @@ const translations = {
           title: "Performance & SEO Técnico",
           description:
             "Auditoría y optimización de Core Web Vitals. Mejoro la velocidad de carga y accesibilidad para escalar posiciones en Google.",
+        },
+      ],
+    },
+    portfolio: {
+      ariaLabel: "Mi Portafolio",
+      sectionLabel: "Trabajo Destacado",
+      title: "Proyectos",
+      titleEm: "Seleccionados",
+      viewProject: "Ver Proyecto",
+      items: [
+        {
+          title: "Planeta Sorprendente — Chocolates Jet",
+          description:
+            "Migración del icónico álbum de cromos a una experiencia web interactiva. Implementación de mecánicas de gamificación, ludificación y un sistema de transacciones virtuales.",
+          tags: ["PHP", "JavaScript", "Gamificación", "MySQL"],
+        },
+        {
+          title: "Disney Cruise Line",
+          description:
+            "Desarrollo de componentes UI críticos para la plataforma oficial de reservas. Participación en la migración de bases de código JavaScript legacy hacia una arquitectura moderna con React y TypeScript.",
+          tags: ["React", "TypeScript", "Componentes UI", "Migración"],
+        },
+        {
+          title: "Google Wallet / Pay",
+          description:
+            "Maquetación de formularios frontend y administración en CMS propio. Resolución de retos complejos de accesibilidad y diseño como el soporte integral para layouts RTL y LTR.",
+          tags: ["TypeScript", "Formularios UI", "RTL/LTR", "CMS"],
         },
       ],
     },

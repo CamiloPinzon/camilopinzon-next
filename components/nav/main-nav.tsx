@@ -36,7 +36,7 @@ export default function MainNav() {
         const visible = entries.find((e) => e.isIntersecting);
         if (visible?.target?.id) setActiveSection(visible.target.id);
       },
-      { threshold: 0.35 },
+      { threshold: 0.1, rootMargin: "-20% 0px -40% 0px" },
     );
 
     sections.forEach((el) => observer.observe(el));

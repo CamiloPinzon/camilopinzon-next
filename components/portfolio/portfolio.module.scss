@@ -1,0 +1,77 @@
+.section {
+  padding: 80px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-6px);
+    border-color: rgba(88, 166, 255, 0.4);
+
+    .image {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+
+.content {
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.title {
+  font-family: var(--font-primary);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+}
+
+.desc {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+  flex-grow: 1;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Modificador para que los badges del portafolio sean un poco más pequeños */
+.tagBadge {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+}
