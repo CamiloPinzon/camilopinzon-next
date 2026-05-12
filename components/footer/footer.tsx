@@ -33,6 +33,8 @@ export default function Footer({ lang = "en" }: { lang?: string }) {
           placeholder={t.footer.newsletterPlaceholder}
           btnLabel={t.footer.newsletterBtn}
           label={t.footer.newsletterLabel}
+          successMsg={t.footer.newsletterSuccess}
+          errorMsg={t.footer.newsletterError}
         />
       </div>
       <p className={styles.copyright}>

@@ -10,9 +10,11 @@ interface Props {
   placeholder: string;
   btnLabel: string;
   label: string;
+  successMsg: string;
+  errorMsg: string;
 }
 
-export default function FooterNewsletterForm({ placeholder, btnLabel, label }: Props) {
+export default function FooterNewsletterForm({ placeholder, btnLabel, label, successMsg, errorMsg }: Props) {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
@@ -43,7 +45,7 @@ export default function FooterNewsletterForm({ placeholder, btnLabel, label }: P
   };
 
   if (status === "success") {
-    return <p style={{ fontSize: "0.82rem", color: "var(--color-accent)" }}>¡Suscrito!</p>;
+    return <p style={{ fontSize: "0.82rem", color: "var(--color-accent)" }}>{successMsg}</p>;
   }
 
   return (
@@ -62,7 +64,7 @@ export default function FooterNewsletterForm({ placeholder, btnLabel, label }: P
       </Button>
       {status === "error" && (
         <p style={{ fontSize: "0.72rem", color: "red", marginTop: "4px", gridColumn: "1/-1" }}>
-          Error al suscribirse. Intenta de nuevo.
+          {errorMsg}
         </p>
       )}
     </form>

@@ -61,6 +61,8 @@ const translations = {
       newsletterSub: "Stay updated with the latest blog posts.",
       newsletterBtn: "Subscribe",
       newsletterPlaceholder: "your@email.com",
+      newsletterSuccess: "Subscribed!",
+      newsletterError: "Error subscribing. Please try again.",
     },
     brands: {
       title: "Brands that trust my work",
@@ -212,6 +214,8 @@ const translations = {
       newsletterSub: "Manténte actualizado con los últimos blogs.",
       newsletterBtn: "Suscribir",
       newsletterPlaceholder: "tu@correo.com",
+      newsletterSuccess: "¡Suscrito!",
+      newsletterError: "Error al suscribirse. Intenta de nuevo.",
     },
     brands: {
       title: "Marcas que confían en mi trabajo",

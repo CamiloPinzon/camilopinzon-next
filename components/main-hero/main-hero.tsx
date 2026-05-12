@@ -41,11 +41,11 @@ export default function MainHero({ lang }: { lang: string }) {
         <ul className={styles.manifestoList}>
           <li>
             <span>{t.hero.statYears}</span>
-            <strong>14+</strong>
+            <strong>10+</strong>
           </li>
           <li>
             <span>{t.hero.statProjects}</span>
-            <strong>200+</strong>
+            <strong>100+</strong>
           </li>
           <li>
             <span>{t.hero.statTechs}</span>
