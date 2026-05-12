@@ -2,8 +2,6 @@
 
 import { useRef } from "react";
 import { getTranslations } from "@/lib/i18n/translations";
-import Image from "next/image";
-import SocialLinks from "@/components/social-links/social-links";
 
 import styles from "./main-hero.module.scss";
 
@@ -20,10 +18,12 @@ export default function MainHero({ lang }: { lang: string }) {
       <div className={styles.manifesto}>
         <p className={styles.eyebrow}>{t.hero.eyebrow}</p>
         <h1 className={styles.headline}>
-          {t.hero.headline1} <em className="text-gradient">{t.hero.headlineEm}</em> {t.hero.headline2}
+          {t.hero.headline1}{" "}
+          <em className="text-gradient">{t.hero.headlineEm}</em>{" "}
+          {t.hero.headline2}
         </h1>
         <p className={styles.subtext}>{t.hero.subtext}</p>
-        
+
         <div className={styles.actions}>
           <button className={styles.btnPrimary}>{t.hero.btnProjects}</button>
           <a
