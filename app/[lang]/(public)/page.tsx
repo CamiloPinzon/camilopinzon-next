@@ -69,7 +69,7 @@ export default async function Home({
     image: "https://camilopinzon.dev/profile.webp",
     sameAs: [
       "https://github.com/CamiloPinzon",
-      "https://www.linkedin.com/in/camilopinzon",
+      "https://www.linkedin.com/in/camilo-pinzon/",
     ],
     jobTitle: "Frontend Developer",
     worksFor: {
