@@ -1,9 +1,6 @@
 import { getTranslations } from "@/lib/i18n/translations";
 import styles from "./services.module.scss";
 
-// Íconos temporales (emojis) que luego reemplazaremos por SVGs o Imágenes
-const ICONS = ["🚀", "🛍️", "🎨", "⚡"];
-
 export default function Services({ lang = "en" }: { lang?: string }) {
   const t = getTranslations(lang);
 
@@ -15,23 +12,21 @@ export default function Services({ lang = "en" }: { lang?: string }) {
     >
       <div className="section-wrapper">
         <header className="section-header">
-          <span className="section-label">{t.services.sectionLabel}</span>
           <h2 className="section-title">
             {t.services.title} <em>{t.services.titleEm}</em>
           </h2>
         </header>
 
-        <div className={styles.grid}>
+        <div className={styles.list}>
           {t.services.items.map((service, i) => (
-            <article key={i} className={`glass-panel ${styles.card}`}>
-              <div className={styles.iconWrapper} aria-hidden="true">
-                {ICONS[i]}
-              </div>
-
-              <h3 className={styles.cardTitle}>{service.title}</h3>
-              <p className={styles.cardDesc}>{service.description}</p>
-
-              <span className={styles.link}>{t.services.learnMore}</span>
+            <article key={i} className={styles.item}>
+              <h3 className={styles.itemTitle}>
+                <span className={styles.itemNumber}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {service.title}
+              </h3>
+              <p className={styles.itemDesc}>{service.description}</p>
             </article>
           ))}
         </div>

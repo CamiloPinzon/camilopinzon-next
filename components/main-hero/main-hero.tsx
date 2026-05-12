@@ -23,53 +23,13 @@ export default function MainHero() {
       ref={heroRef}
       aria-label={t.hero.profileLabel}
     >
-      <aside
-        className={`glass-panel ${styles.profileCard}`}
-        aria-label={t.hero.profileLabel}
-      >
-        <div className={styles.avatarRing}>
-          <div
-            className={styles.avatarPlaceholder}
-            role="img"
-            aria-label="Foto de Camilo Pinzón"
-          >
-            <Image src="/profile.webp" alt="Avatar" width={120} height={120} />
-          </div>
-        </div>
-        <h1 className={styles.name}>Camilo Pinzón</h1>
-        <p className={styles.role}>Web Developer</p>
-        <div className={styles.socialsWrapper}>
-          <SocialLinks />
-        </div>
-        <div className={styles.divider} />
-        <p className={styles.sectionLabel}>{t.hero.aboutLabel}</p>
-        <p className={styles.bio}>{t.hero.bio}</p>
-        <div className={styles.divider} />
-        <p className={styles.sectionLabel}>{t.hero.contactLabel}</p>
-        <ul className={styles.contactList}>
-          <li>
-            ✉{" "}
-            <a href="mailto:camilopinzondeveloper@gmail.com">
-              {t.hero.emailLink}
-            </a>
-          </li>
-          <li>
-            📞 <a href="tel:+573176844185">57 317 684 4185</a>
-          </li>
-        </ul>
-        <button className={styles.contactCta}>{t.hero.contactBtn}</button>
-      </aside>
-
-      <div className={styles.content}>
+      <div className={styles.manifesto}>
         <p className={styles.eyebrow}>{t.hero.eyebrow}</p>
-        <h2 className={styles.headline}>
-          {t.hero.headline1}
-          <br />
-          <em className="text-gradient">{t.hero.headlineEm}</em>
-          <br />
-          {t.hero.headline2}
-        </h2>
+        <h1 className={styles.headline}>
+          {t.hero.headline1} <em className="text-gradient">{t.hero.headlineEm}</em> {t.hero.headline2}
+        </h1>
         <p className={styles.subtext}>{t.hero.subtext}</p>
+        
         <div className={styles.actions}>
           <button className={styles.btnPrimary}>{t.hero.btnProjects}</button>
           <a
@@ -81,20 +41,23 @@ export default function MainHero() {
             <button className={styles.btnGhost}>{t.hero.btnCv}</button>
           </a>
         </div>
-        <div className={styles.stats} aria-label={t.hero.profileLabel}>
-          <div>
-            <span className={styles.statValue}>5+</span>
-            <span className={styles.statLabel}>{t.hero.statYears}</span>
-          </div>
-          <div>
-            <span className={styles.statValue}>30+</span>
-            <span className={styles.statLabel}>{t.hero.statProjects}</span>
-          </div>
-          <div>
-            <span className={styles.statValue}>11</span>
-            <span className={styles.statLabel}>{t.hero.statTechs}</span>
-          </div>
-        </div>
+
+        <div className={styles.divider} />
+
+        <ul className={styles.manifestoList}>
+          <li>
+            <span>{t.hero.statYears}</span>
+            <strong>14+</strong>
+          </li>
+          <li>
+            <span>{t.hero.statProjects}</span>
+            <strong>200+</strong>
+          </li>
+          <li>
+            <span>{t.hero.statTechs}</span>
+            <strong>11</strong>
+          </li>
+        </ul>
       </div>
     </section>
   );

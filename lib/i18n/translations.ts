@@ -136,6 +136,21 @@ const translations = {
         },
       ],
     },
+    contact: {
+      ariaLabel: "Contact form",
+      sectionLabel: "Get In Touch",
+      title: "Let's",
+      titleEm: "Work Together",
+      description:
+        "I'm currently available for freelance work or full-time roles. If you have a project that needs some creative magic, I'd love to hear about it.",
+      nameLabel: "Your Name",
+      namePlaceholder: "John Doe",
+      emailLabel: "Your Email",
+      emailPlaceholder: "john@example.com",
+      messageLabel: "Message",
+      messagePlaceholder: "Tell me about your project...",
+      submitBtn: "Send Message",
+    },
   },
   es: {
     nav: {
@@ -271,6 +286,21 @@ const translations = {
           tags: ["TypeScript", "Formularios UI", "RTL/LTR", "CMS"],
         },
       ],
+    },
+    contact: {
+      ariaLabel: "Formulario de contacto",
+      sectionLabel: "Contáctame",
+      title: "Trabajemos",
+      titleEm: "Juntos",
+      description:
+        "Actualmente estoy disponible para proyectos freelance o roles full-time. Si tienes un proyecto que necesita un toque mágico, me encantaría escucharlo.",
+      nameLabel: "Tu Nombre",
+      namePlaceholder: "Juan Pérez",
+      emailLabel: "Tu Correo",
+      emailPlaceholder: "juan@ejemplo.com",
+      messageLabel: "Mensaje",
+      messagePlaceholder: "Cuéntame sobre tu proyecto...",
+      submitBtn: "Enviar Mensaje",
     },
   },
 };

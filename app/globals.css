@@ -7,25 +7,54 @@
 }
 
 :root {
-  --font-primary: "Montserrat", "Oswald", sans-serif;
-  --font-secondary: "DM Sans", "Roboto", sans-serif;
-  --color-bg: #0d1117;
-  --color-surface: #161b22;
-  --color-surface-2: #1c2128;
-  --color-border: rgba(255, 255, 255, 0.07);
-  --color-text: #e6edf3;
-  --color-muted: #7d8590;
-  --color-accent: #58a6ff;
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2.5rem;
-  --space-xl: 4rem;
-  --space-2xl: 6rem;
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
+  /* Augen Pro Colors */
+  --color-midnight-ink: #0f1012;
+  --color-ghost-white: #f2f2f4;
+  --color-canvas: #fdfdfd;
+  --color-skyline-gray: #868788;
+  --color-slate-comment: #8f8f8f;
+  --color-deep-graphite: #020201;
+  --color-future-blue: #0071e3;
+
+  /* Legacy mapping for existing components */
+  --color-bg: var(--color-ghost-white);
+  --color-surface: var(--color-canvas);
+  --color-border: rgba(15, 16, 18, 0.08); /* Subtle dark border */
+  --color-text: var(--color-midnight-ink);
+  --color-text-muted: var(--color-slate-comment);
+  --color-muted: var(--color-slate-comment);
+  --color-accent: var(--color-future-blue);
+
+  /* Typography */
+  --font-primary: 'PP Neue Montreal', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-secondary: var(--font-primary);
+
+  /* Spacing */
+  --space-xs: 6px;
+  --space-sm: 10px;
+  --space-md: 22px;
+  --space-lg: 34px;
+  --space-xl: 50px;
+  --space-2xl: 94px;
+
+  /* Border Radius */
+  --radius-sm: 1.8px;
+  --radius-md: 10px;
+  --radius-lg: 26px;
+  --radius-full: 54px;
+  
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-dark {
+  --color-midnight-ink: #fdfdfd;
+  --color-ghost-white: #0a0a0b;
+  --color-canvas: #0f1012;
+  --color-slate-comment: #868788;
+  --color-border: rgba(255, 255, 255, 0.08);
+  
+  background-color: var(--color-canvas);
+  color: var(--color-midnight-ink);
 }
 
 html {
@@ -35,150 +64,111 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-secondary);
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 400;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(88, 166, 255, 0.02) 2px,
-      rgba(88, 166, 255, 0.02) 4px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 40px,
-      rgba(88, 166, 255, 0.015) 40px,
-      rgba(88, 166, 255, 0.015) 41px
-    );
-}
-body::after {
-  content: "const dev = new CamiloPinzon();\\Adev.build({ passion: true });\\Aif (problem) dev.solve();\\Areturn dev.deliver();";
-  white-space: pre;
-  position: fixed;
-  top: 12%;
-  left: 50%;
-  transform: translateX(-50%) rotate(-8deg);
-  font-family: "Courier New", monospace;
-  font-size: clamp(1.6rem, 3vw, 2.8rem);
-  line-height: 1.9;
-  color: rgba(88, 166, 255, 0.03);
-  pointer-events: none;
-  z-index: 0;
-  width: 90%;
-  text-align: center;
-  letter-spacing: 0.02em;
-}
 .section-wrapper {
   position: relative;
   z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--space-2xl) var(--space-xl);
+  padding: var(--space-2xl) var(--space-lg);
 }
+
 .section-header {
   margin-bottom: var(--space-xl);
 }
+
 .section-label {
   font-family: var(--font-secondary);
-  font-size: 0.72rem;
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-accent);
+  letter-spacing: 0em;
+  color: var(--color-slate-comment);
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 10px;
 }
+
 .section-title {
   font-family: var(--font-primary);
-  font-weight: 900;
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  color: var(--color-text);
+  font-weight: 350;
+  font-size: 27px;
+  letter-spacing: -0.02em;
+  color: var(--color-midnight-ink);
 }
+
 .section-title em {
   font-style: normal;
-  color: var(--color-muted);
-  font-weight: 400;
+  color: var(--color-slate-comment);
+  font-weight: 350;
 }
 
 @media (max-width: 860px) {
   .section-wrapper {
-    padding: var(--space-xl) var(--space-md);
+    padding: 69px var(--space-md);
   }
 }
 @media (max-width: 540px) {
   :root {
-    --space-xl: 2rem;
-    --space-2xl: 3.5rem;
+    --space-xl: 34px;
+    --space-2xl: 69px;
   }
 }
 
 /* ════════ GLOBAL UTILITIES ════════ */
 
 .glass-panel {
-  background: rgba(13, 17, 23, 0.92);
-  backdrop-filter: blur(24px) saturate(1.4);
+  /* Augen Pro requests no heavy shadows/glassmorphism, using flat Canvas instead */
+  background: var(--color-canvas);
   border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, var(--color-accent), #a78bfa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  /* Design strictly prohibits visual noise, solid Future Blue or Ink */
+  color: var(--color-midnight-ink);
+  background: none;
+  -webkit-text-fill-color: initial;
 }
 
 .surface-card {
   position: relative;
-  background: var(--color-surface);
+  background: var(--color-canvas);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
 }
+
 .surface-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.015) 40%,
-    transparent 65%
-  );
-  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.06);
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.3s;
+  content: none; /* Remove legacy gradient borders */
+}
+
+.surface-card:hover {
+  border-color: rgba(15, 16, 18, 0.15);
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 100px;
-  font-family: var(--font-primary);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
+  padding: 4px 10px;
+  background: rgba(117, 117, 117, 0.1);
+  color: rgba(0, 0, 0, 0.5);
+  font-family: var(--font-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  border-radius: var(--radius-md);
 }
+
 .badge--outline {
-  border: 1px solid var(--color-border);
   background: transparent;
-  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  color: var(--color-slate-comment);
 }
 .badge--accent {
   color: var(--color-accent);
@@ -211,4 +201,92 @@ body::after {
   to {
     transform: translateX(-50%);
   }
+}
+
+/* ════════ PROSE (BLOG CONTENT) ════════ */
+
+.prose {
+  color: var(--color-midnight-ink);
+  font-family: var(--font-secondary);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  font-family: var(--font-primary);
+  font-weight: 350;
+  letter-spacing: -0.02em;
+  color: var(--color-midnight-ink);
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.prose p {
+  margin-bottom: 1.5em;
+  color: var(--color-slate-comment);
+}
+
+.prose a {
+  color: var(--color-future-blue);
+  text-decoration: underline;
+}
+
+.prose img {
+  border-radius: var(--radius-md);
+  max-width: 100%;
+  margin: 2em 0;
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1.5em;
+  padding-left: 1.5em;
+  color: var(--color-slate-comment);
+}
+
+.prose li {
+  margin-bottom: 0.5em;
+}
+
+.prose pre,
+.prose .ql-code-block-container {
+  background: #0f1012; /* Midnight Ink for strong contrast */
+  color: #e5e7eb; /* Light text for readability */
+  padding: 24px;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: 1.5em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, monospace;
+}
+
+.prose .ql-code-block {
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+/* For inline code snippets (not wrapped in pre) */
+.prose :not(pre) > code,
+.prose p > code {
+  background: var(--color-ghost-white);
+  color: var(--color-future-blue);
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, monospace;
+  font-size: 13px;
+  border: 1px solid var(--color-border);
+}
+
+.prose pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: 14px;
+  border: none;
+  font-family: inherit;
+  line-height: 1.6;
 }

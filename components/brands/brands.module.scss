@@ -1,75 +1,100 @@
 .section {
+  padding-top: 120px;
+  padding-bottom: 60px; /* Reduced bottom padding as requested */
   border-top: 1px solid var(--color-border);
+  overflow: hidden; /* Vital para el marquee */
 }
 
 .subtext {
-  font-size: 0.88rem;
-  color: var(--color-muted);
-  margin-top: 0.4rem;
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  color: var(--color-slate-comment);
+  letter-spacing: -0.02em;
+  margin-top: 8px;
 }
 
-.marqueeWrapper {
-  overflow: hidden;
+/* ════════ INFINITE MARQUEE ════════ */
+
+.marqueeContainer {
+  margin-top: var(--space-xl);
+  width: 100vw;
   position: relative;
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 120px;
-    z-index: 2;
-  }
-
-  &::before {
-    left: 0;
-    background: linear-gradient(90deg, var(--color-bg), transparent);
-  }
-
-  &::after {
-    right: 0;
-    background: linear-gradient(-90deg, var(--color-bg), transparent);
-  }
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  
+  /* Fade effect on the edges */
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
 }
 
-.marquee {
+.marqueeTrack {
   display: flex;
-  gap: var(--space-xl);
-  padding-right: var(--space-xl);
-  animation: marquee 40s linear infinite;
   width: max-content;
-  will-change: transform;
+  align-items: center;
+  gap: 80px;
+  padding: 0 40px;
+  animation: marqueeScroll 40s linear infinite;
+  
+  /* Pausa cuando el mouse pasa por encima (opcional) */
+  &:hover {
+    animation-play-state: paused;
+  }
 }
 
-@keyframes marquee {
+.brandLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* El estilo visual grisáceo que hace que los logos se vean limpios y unificados */
+  filter: grayscale(100%) opacity(0.5);
+  transition: filter 0.3s ease;
+  min-width: 150px;
+  
+  &:hover {
+    filter: grayscale(0%) opacity(1);
+  }
+}
+
+/* Fallback de texto si aún no hay imagen SVG */
+.logoPlaceholder {
+  font-family: var(--font-primary);
+  font-size: 28px;
+  font-weight: 350;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+@keyframes marqueeScroll {
   0% {
     transform: translateX(0);
   }
   100% {
+    /* Mueve la pista exactamente la mitad de su tamaño original */
     transform: translateX(-50%);
   }
 }
 
-.chip {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.7rem 1.5rem;
-  font-size: 0.85rem;
-  transition:
-    color 0.2s,
-    border-color 0.2s;
-
-  &::before {
-    content: "◆";
-    color: var(--color-accent);
-    font-size: 0.5rem;
+@media (max-width: 768px) {
+  .logoPlaceholder {
+    font-size: 20px;
   }
-
-  &:hover {
-    color: var(--color-text);
-    border-color: var(--color-accent);
+  .marqueeTrack {
+    gap: 40px;
   }
 }
 

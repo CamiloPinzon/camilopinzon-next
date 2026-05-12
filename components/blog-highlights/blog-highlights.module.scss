@@ -1,17 +1,6 @@
 .section {
   position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 800px;
-    height: 400px;
-    background: radial-gradient(ellipse, rgba(88, 166, 255, 0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
+  background: var(--color-canvas);
 }
 
 .headerRow {
@@ -46,12 +35,11 @@
 }
 
 .emptyText {
-  font-family: var(--font-primary);
-  font-size: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-muted);
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--color-slate-comment);
 }
 
 .ctaRow {

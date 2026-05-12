@@ -7,6 +7,7 @@ import { getRecentPosts } from "@/lib/firebase/queries";
 import DownloadCv from "@/components/download-cv/download-cv";
 import Services from "@/components/services/services";
 import Portfolio from "@/components/portfolio/portfolio";
+import Contact from "@/components/contact/contact";
 
 export const revalidate = 3600;
 
@@ -63,12 +64,17 @@ export default async function Home({
   return (
     <main>
       <MainHero />
-      <Services lang={lang} />
-      <TechStack lang={lang} />
+      <div className="theme-dark">
+        <Services lang={lang} />
+        <TechStack lang={lang} />
+      </div>
       <Portfolio lang={lang} />
-      <DownloadCv lang={lang} />
-      <BlogHighlights posts={posts} />
+      <div className="theme-dark">
+        <DownloadCv lang={lang} />
+        <BlogHighlights posts={posts} />
+      </div>
       <Brands lang={lang} />
+      <Contact lang={lang} />
     </main>
   );
 }

@@ -90,19 +90,19 @@ export default function TechStack({ lang = "en" }: { lang?: string }) {
     <section className={styles.section} aria-labelledby="stack-title">
       <div className="section-wrapper">
         <header className="section-header">
-          <span className="section-label">{t.techStack.sectionLabel}</span>
           <h2 className="section-title" id="stack-title">
             Stack <em>{t.techStack.sectionTitleEm}</em>
           </h2>
         </header>
         <div
-          className={styles.bento}
+          className={styles.techList}
           role="list"
           aria-label={t.techStack.ariaLabel}
         >
           {STACK.map((tech, i) => (
-            <div key={tech.name} role="listitem">
-              <TechCard tech={tech} index={i} styles={styles} />
+            <div key={tech.name} className={styles.techItem} role="listitem">
+              <span className={styles.techName}>{tech.name}</span>
+              {i < STACK.length - 1 && <span className={styles.separator}>/</span>}
             </div>
           ))}
         </div>

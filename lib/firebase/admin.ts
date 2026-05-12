@@ -23,9 +23,11 @@ const serviceAccount = getServiceAccount();
 
 export const adminApp =
   getApps().length === 0
-    ? initializeApp({
-        credential: serviceAccount ? cert(serviceAccount) : undefined,
-      })
+    ? initializeApp(
+        serviceAccount
+          ? { credential: cert(serviceAccount) }
+          : undefined // Si es undefined, Firebase intentará usar Application Default Credentials
+      )
     : getApps()[0];
 
 export const adminDb = getFirestore(adminApp);

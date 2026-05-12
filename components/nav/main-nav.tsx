@@ -22,6 +22,19 @@ export default function MainNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Extract current language from pathname
+  const currentLang = pathname.split("/")[1] || "en";
+  const t = getTranslations(currentLang);
+
+  const NAV_LINKS = [
+    { label: t.nav.home, href: `/${currentLang}/#inicio` },
+    { label: t.nav.experience, href: `/${currentLang}/experience` },
+    { label: t.nav.services, href: `/${currentLang}/#servicios` },
+    { label: t.nav.portfolio, href: `/${currentLang}/#portafolio` },
+    { label: t.nav.blog, href: `/${currentLang}/#blogs` },
+    { label: t.nav.downloadCv, href: `/${currentLang}/#descargar-cv` },
+  ];
+
   useEffect(() => {
     const sections = NAV_LINKS.map((link) => {
       const hashIndex = link.href.indexOf("#");
@@ -41,22 +54,7 @@ export default function MainNav() {
 
     sections.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Extract current language from pathname
-  const currentLang = pathname.split("/")[1] || "en";
-
-  const t = getTranslations(currentLang);
-
-  const NAV_LINKS = [
-    { label: t.nav.home, href: `/${currentLang}/` },
-    { label: t.nav.experience, href: `/${currentLang}/experience` },
-    { label: t.nav.services, href: `/${currentLang}/#servicios` },
-    { label: t.nav.portfolio, href: `/${currentLang}/#portafolio` },
-    { label: t.nav.blog, href: `/${currentLang}/blog` },
-    { label: t.nav.downloadCv, href: `/${currentLang}/#descargar-cv` },
-  ];
+  }, [pathname, currentLang]);
 
   return (
     <>
@@ -111,8 +109,8 @@ export default function MainNav() {
             <LanguageSwitcher />
           </li>
           <li>
-            <Link href="/#contacto" className={styles.cta}>
-              Contacto
+            <Link href={`/${currentLang}/#contacto`} className={styles.cta}>
+              {t.nav.contact}
             </Link>
           </li>
         </ul>
@@ -168,9 +166,13 @@ export default function MainNav() {
           );
         })}
         <div className={styles.drawerDivider} />
-        <button className={styles.drawerCta} onClick={() => setMenuOpen(false)}>
+        <Link 
+          href={`/${currentLang}/#contacto`} 
+          className={styles.drawerCta} 
+          onClick={() => setMenuOpen(false)}
+        >
           {t.nav.contact}
-        </button>
+        </Link>
       </div>
     </>
   );

@@ -8,6 +8,8 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   className?: string;
   ariaLabel?: string;
+  style?: React.CSSProperties;
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -18,12 +20,16 @@ export default function Button({
   type = "button",
   className = "",
   ariaLabel,
+  style,
+  disabled,
 }: ButtonProps) {
-  const classes = [styles.btn, styles[variant], className].filter(Boolean).join(" ");
+  const classes = [styles.btn, styles[variant], className]
+    .filter(Boolean)
+    .join(" ");
 
   if (href) {
     return (
-      <a href={href} className={classes} aria-label={ariaLabel}>
+      <a href={href} className={classes} aria-label={ariaLabel} style={style}>
         {children}
       </a>
     );
@@ -35,6 +41,8 @@ export default function Button({
       className={classes}
       onClick={onClick}
       aria-label={ariaLabel}
+      style={style}
+      disabled={disabled}
     >
       {children}
     </button>

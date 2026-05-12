@@ -71,7 +71,7 @@ export default async function BlogPostPage({
       className="section-wrapper"
       style={{
         paddingTop: "120px",
-        paddingBottom: "80px",
+        paddingBottom: "120px",
         maxWidth: "800px",
         margin: "0 auto",
       }}
@@ -79,49 +79,55 @@ export default async function BlogPostPage({
       <Link
         href={`/${lang}/blog`}
         style={{
-          color: "#a3aed1",
+          color: "var(--color-slate-comment)",
+          fontFamily: "var(--font-secondary)",
           textDecoration: "none",
-          fontSize: "0.875rem",
-          marginBottom: "24px",
+          fontSize: "14px",
+          letterSpacing: "-0.02em",
+          marginBottom: "32px",
           display: "inline-block",
         }}
       >
         {t.blogPost.backLink}
       </Link>
 
-      <header style={{ marginBottom: "40px" }}>
+      <header style={{ marginBottom: "50px" }}>
         <div
           style={{
             display: "flex",
-            gap: "8px",
+            gap: "12px",
             alignItems: "center",
-            marginBottom: "16px",
+            marginBottom: "20px",
           }}
         >
           <span
             style={{
-              backgroundColor: post.color || "#4318ff",
-              color: "white",
-              padding: "4px 12px",
-              borderRadius: "20px",
-              fontSize: "0.75rem",
-              fontWeight: 600,
+              backgroundColor: "rgba(0, 113, 227, 0.1)",
+              color: "var(--color-future-blue)",
+              padding: "4px 10px",
+              borderRadius: "var(--radius-sm)",
+              fontFamily: "var(--font-secondary)",
+              fontSize: "11px",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
             }}
           >
             {post.tag}
           </span>
-          <span style={{ color: "#a3aed1", fontSize: "0.875rem" }}>
+          <span style={{ color: "var(--color-slate-comment)", fontFamily: "var(--font-secondary)", fontSize: "12px" }}>
             {post.readTime}
           </span>
         </div>
 
         <h1
           style={{
-            fontSize: "3rem",
-            fontWeight: 800,
-            color: "#2b3674",
-            lineHeight: 1.2,
-            marginBottom: "24px",
+            fontFamily: "var(--font-primary)",
+            fontSize: "clamp(34px, 5vw, 64px)",
+            fontWeight: 350,
+            color: "var(--color-midnight-ink)",
+            lineHeight: 1.1,
+            letterSpacing: "-0.03em",
+            marginBottom: "32px",
           }}
         >
           {post.title}
@@ -133,12 +139,14 @@ export default async function BlogPostPage({
               width: "40px",
               height: "40px",
               borderRadius: "50%",
-              backgroundColor: "#e0e5f2",
+              backgroundColor: "var(--color-ghost-white)",
+              border: "1px solid var(--color-border)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontWeight: "bold",
-              color: "#4318ff",
+              fontFamily: "var(--font-primary)",
+              fontSize: "16px",
+              color: "var(--color-midnight-ink)",
             }}
           >
             {post.author?.name?.charAt(0) || "C"}
@@ -146,14 +154,16 @@ export default async function BlogPostPage({
           <div>
             <div
               style={{
-                fontWeight: 600,
-                color: "#2b3674",
-                fontSize: "0.875rem",
+                fontFamily: "var(--font-secondary)",
+                fontWeight: 500,
+                color: "var(--color-midnight-ink)",
+                fontSize: "14px",
+                letterSpacing: "-0.02em",
               }}
             >
-              {post.author?.name || "Camilo Pinzon"}
+              {post.author?.name || "Camilo Pinzón"}
             </div>
-            <div style={{ color: "#a3aed1", fontSize: "0.75rem" }}>
+            <div style={{ color: "var(--color-slate-comment)", fontFamily: "var(--font-secondary)", fontSize: "12px" }}>
               {formattedDate}
             </div>
           </div>
@@ -165,10 +175,11 @@ export default async function BlogPostPage({
           style={{
             position: "relative",
             width: "100%",
-            height: "400px",
-            borderRadius: "24px",
+            height: "450px",
+            borderRadius: "var(--radius-md)",
             overflow: "hidden",
-            marginBottom: "40px",
+            marginBottom: "60px",
+            border: "1px solid var(--color-border)",
           }}
         >
           <Image
@@ -185,7 +196,6 @@ export default async function BlogPostPage({
       {/* Render the raw HTML from the legacy 'blogs' collection safely */}
       <div
         className="prose"
-        style={{ fontSize: "1.125rem", lineHeight: 1.8, color: "#4a5568" }}
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
     </article>

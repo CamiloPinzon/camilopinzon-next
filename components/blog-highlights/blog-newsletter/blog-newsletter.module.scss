@@ -1,9 +1,9 @@
 .newsletter {
   margin-top: var(--space-xl);
-  padding: var(--space-lg);
-  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-xl);
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  background: linear-gradient(135deg, var(--color-surface) 0%, rgba(88, 166, 255, 0.04) 100%);
+  background: var(--color-ghost-white);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14,17 +14,18 @@
 .text {
   h3 {
     font-family: var(--font-primary);
-    font-weight: 900;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-text);
-    margin-bottom: 0.3rem;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    color: var(--color-midnight-ink);
+    margin-bottom: 8px;
   }
 
   p {
-    font-size: 0.84rem;
-    color: var(--color-muted);
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    letter-spacing: -0.01em;
+    color: var(--color-slate-comment);
   }
 }
 

@@ -34,12 +34,14 @@ export default async function BlogIndexPage({
         padding: "120px 24px",
       }}
     >
-      <header style={{ marginBottom: "64px", textAlign: "center" }}>
+      <header style={{ marginBottom: "64px", textAlign: "left" }}>
         <h1
           style={{
-            fontSize: "3.5rem",
-            fontWeight: 800,
-            color: "#2b3674",
+            fontFamily: "var(--font-primary)",
+            fontSize: "clamp(34px, 5vw, 69px)",
+            fontWeight: 350,
+            letterSpacing: "-0.03em",
+            color: "var(--color-midnight-ink)",
             marginBottom: "16px",
           }}
         >
@@ -47,10 +49,13 @@ export default async function BlogIndexPage({
         </h1>
         <p
           style={{
-            fontSize: "1.125rem",
-            color: "#a3aed1",
+            fontFamily: "var(--font-secondary)",
+            fontSize: "14px",
+            color: "var(--color-slate-comment)",
+            letterSpacing: "-0.02em",
             maxWidth: "600px",
-            margin: "0 auto",
+            margin: "0",
+            lineHeight: 1.5,
           }}
         >
           {t.blog.pageSubtitle}
@@ -74,8 +79,9 @@ export default async function BlogIndexPage({
           style={{
             textAlign: "center",
             padding: "64px",
-            backgroundColor: "#f4f7fe",
-            borderRadius: "24px",
+            backgroundColor: "var(--color-canvas)",
+            border: "1px solid var(--color-border)",
+            borderRadius: "var(--radius-md)",
           }}
         >
           <span
@@ -83,7 +89,13 @@ export default async function BlogIndexPage({
           >
             📭
           </span>
-          <p style={{ color: "#2b3674", fontSize: "1.25rem", fontWeight: 600 }}>
+          <p style={{ 
+            color: "var(--color-midnight-ink)", 
+            fontFamily: "var(--font-secondary)",
+            fontSize: "14px", 
+            fontWeight: 400,
+            letterSpacing: "-0.02em"
+          }}>
             {t.blog.noArticles}
           </p>
         </div>
