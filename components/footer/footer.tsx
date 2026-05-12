@@ -1,6 +1,5 @@
-import Button from "@/components/ui/button/button";
-import Input from "@/components/ui/input/input";
 import SocialLinks from "../social-links/social-links";
+import FooterNewsletterForm from "./footer-newsletter-form";
 import styles from "./footer.module.scss";
 import { getTranslations } from "@/lib/i18n/translations";
 
@@ -30,15 +29,11 @@ export default function Footer({ lang = "en" }: { lang?: string }) {
       <div>
         <span className={styles.newsletterLabel}>{t.footer.newsletterLabel}</span>
         <span className={styles.newsletterSub}>{t.footer.newsletterSub}</span>
-        <div className={styles.newsletterForm}>
-          <Input
-            type="email"
-            className={styles.newsletterInput}
-            placeholder={t.footer.newsletterPlaceholder}
-            ariaLabel={t.footer.newsletterLabel}
-          />
-          <Button className={styles.newsletterBtn}>{t.footer.newsletterBtn}</Button>
-        </div>
+        <FooterNewsletterForm
+          placeholder={t.footer.newsletterPlaceholder}
+          btnLabel={t.footer.newsletterBtn}
+          label={t.footer.newsletterLabel}
+        />
       </div>
       <p className={styles.copyright}>
         {` © Copyright ${CURRENT_YEAR} Camilo Pinzón. All Rights Reserved. · Privacy Policy · Terms of Service`}
