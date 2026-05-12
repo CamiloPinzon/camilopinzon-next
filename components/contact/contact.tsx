@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import { getTranslations } from "@/lib/i18n/translations";
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { submitContact } from "@/app/actions/contact";
@@ -37,8 +36,6 @@ function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
       if (recaptchaToken) {
         formData.append("recaptchaToken", recaptchaToken);
       }
-      
-      console.log("Datos capturados en el cliente:", Object.fromEntries(formData.entries()));
 
       // 3. Enviar a la Server Action
       const result = await submitContact(formData);
@@ -132,9 +129,7 @@ function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
   );
 }
 
-export default function Contact({ lang: propLang }: { lang?: string }) {
-  const pathname = usePathname();
-  const lang = propLang || pathname.split("/")[1] || "en";
+export default function Contact({ lang = "en" }: { lang?: string }) {
   const t = getTranslations(lang);
   
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "dummy_key_for_build";
