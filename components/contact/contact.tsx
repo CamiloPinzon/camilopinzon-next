@@ -14,29 +14,26 @@ function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus({ type: null, message: "" });
-    
-    // IMPORTANTE: Guardar la referencia al formulario antes de cualquier await
-    // porque React pierde el e.currentTarget después de operaciones asíncronas.
-    const formElement = e.currentTarget;
+
+    // Capturar FormData ANTES de setLoading — los inputs disabled no se incluyen en FormData
+    const formData = new FormData(e.currentTarget);
+    const formEl = e.currentTarget;
 
     setLoading(true);
 
     try {
       // 1. Obtener el token de ReCAPTCHA
       const recaptchaToken = await executeRecaptcha("contact_form");
-
-      // 2. Preparar los datos
-      const formData = new FormData(formElement);
       if (recaptchaToken) {
         formData.append("recaptchaToken", recaptchaToken);
       }
 
-      // 3. Enviar a la Server Action
+      // 2. Enviar a la Server Action
       const result = await submitContact(formData);
 
       if (result.success) {
         setStatus({ type: "success", message: "¡Mensaje enviado con éxito! Te contactaremos pronto." });
-        formElement.reset();
+        formEl.reset();
       } else {
         setStatus({ type: "error", message: result.error || "Error al enviar el mensaje." });
       }
@@ -53,7 +50,7 @@ function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
       <header className="section-header" style={{ marginBottom: "24px" }}>
         <span className="section-label">{t.contact.sectionLabel}</span>
         <h2 className="section-title">
-          {t.contact.title} <em>{t.contact.titleEm}</em>
+          {t.contact.title}
         </h2>
       </header>
 
@@ -69,7 +66,7 @@ function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
           {status.type === "error" && (
             <div style={{ color: "red", fontSize: "14px", marginBottom: "16px" }}>{status.message}</div>
           )}
-          
+
           <div className={styles.inputGroup}>
             <label htmlFor="name" className={styles.label}>
               {t.contact.nameLabel}
