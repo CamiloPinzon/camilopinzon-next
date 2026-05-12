@@ -15,18 +15,17 @@ export async function submitContact(formData: FormData) {
     
     const isDevelopment = process.env.NODE_ENV === "development";
 
-    if (!name || !email || !message || (!recaptchaToken && !isDevelopment)) {
-      console.error("Faltan campos obligatorios. Recibido:", { name, email, message, recaptchaToken });
-      return { success: false, error: "Faltan campos obligatorios" };
+    // Validar campos obligatorios del formulario
+    if (!name || !email || !message) {
+      return { success: false, error: "Por favor completa todos los campos." };
     }
 
-    // 1. Validar ReCAPTCHA con Google (Solo en Producción)
+    // 1. Validar ReCAPTCHA (Solo en Producción)
     const secretKey = process.env.RECAPTCHA_SECRET_KEY;
 
     if (!isDevelopment) {
-      if (!secretKey) {
-        console.warn("Falta RECAPTCHA_SECRET_KEY en el entorno.");
-        return { success: false, error: "Error de configuración de ReCAPTCHA." };
+      if (!recaptchaToken || !secretKey) {
+        return { success: false, error: "Validación de seguridad no disponible. Recarga la página e intenta de nuevo." };
       }
 
       const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
@@ -37,8 +36,6 @@ export async function submitContact(formData: FormData) {
         console.error("ReCAPTCHA falló:", recaptchaData);
         return { success: false, error: "Validación de seguridad fallida. Intenta nuevamente." };
       }
-    } else {
-      console.log("Desarrollo: Saltando validación de ReCAPTCHA");
     }
 
     // 2. Guardar en Firestore

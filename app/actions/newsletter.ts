@@ -9,7 +9,7 @@ export async function subscribeNewsletter(formData: FormData) {
   try {
     const email = formData.get("email") as string;
     const recaptchaToken = formData.get("recaptchaToken") as string;
-    
+
     const isDevelopment = process.env.NODE_ENV === "development";
 
     if (!email || (!recaptchaToken && !isDevelopment)) {
@@ -30,7 +30,10 @@ export async function subscribeNewsletter(formData: FormData) {
       const recaptchaData = await recaptchaRes.json();
 
       if (!recaptchaData.success || recaptchaData.score < 0.5) {
-        return { success: false, error: "Validación de seguridad fallida. Intenta de nuevo." };
+        return {
+          success: false,
+          error: "Validación de seguridad fallida. Intenta de nuevo.",
+        };
       }
     }
 
@@ -50,7 +53,8 @@ export async function subscribeNewsletter(formData: FormData) {
     });
 
     // 4. Enviar correo de bienvenida (Opcional)
-    const senderEmail = process.env.RESEND_SENDER_EMAIL || "hola@camilopinzon.com";
+    const senderEmail =
+      process.env.RESEND_SENDER_EMAIL || "hola@camilopinzon.com";
 
     if (process.env.RESEND_API_KEY) {
       await resend.emails.send({
