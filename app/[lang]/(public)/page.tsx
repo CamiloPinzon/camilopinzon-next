@@ -89,7 +89,7 @@ export default async function Home({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <MainHero />
+      <MainHero lang={lang} />
       <div className="theme-dark">
         <Services lang={lang} />
         <TechStack lang={lang} />

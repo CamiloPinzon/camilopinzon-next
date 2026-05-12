@@ -1,21 +1,15 @@
 "use client";
 
 import { useRef } from "react";
-
-import { usePathname } from "next/navigation";
 import { getTranslations } from "@/lib/i18n/translations";
 import Image from "next/image";
 import SocialLinks from "@/components/social-links/social-links";
 
 import styles from "./main-hero.module.scss";
 
-export default function MainHero() {
+export default function MainHero({ lang }: { lang: string }) {
   const heroRef = useRef(null);
-
-  const pathname = usePathname();
-  const lang = pathname.split("/")[1] || "en";
   const t = getTranslations(lang);
-  console.log("lng: " + lang);
   return (
     <section
       id="inicio"
