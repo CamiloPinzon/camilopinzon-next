@@ -32,7 +32,7 @@ export default function BlogNewsletter() {
 
       if (result.success) {
         setStatus({ type: "success", message: "¡Suscripción exitosa!" });
-        formElement.reset();
+        formEl.reset();
       } else {
         setStatus({ type: "error", message: result.error || "Error al suscribirte." });
       }
