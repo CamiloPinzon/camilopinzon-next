@@ -4,6 +4,8 @@ import SocialLinks from "../social-links/social-links";
 import styles from "./footer.module.scss";
 import { getTranslations } from "@/lib/i18n/translations";
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export default function Footer({ lang = "en" }: { lang?: string }) {
   const t = getTranslations(lang);
 
@@ -39,7 +41,7 @@ export default function Footer({ lang = "en" }: { lang?: string }) {
         </div>
       </div>
       <p className={styles.copyright}>
-        {` © Copyright ${new Date().getFullYear()} Camilo Pinzón. All Rights Reserved. · Privacy Policy · Terms of Service`}
+        {` © Copyright ${CURRENT_YEAR} Camilo Pinzón. All Rights Reserved. · Privacy Policy · Terms of Service`}
       </p>
     </footer>
   );
