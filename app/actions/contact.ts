@@ -2,38 +2,38 @@
 
 import { adminDb } from "@/lib/firebase/admin";
 import { Resend } from "resend";
+import { contactSchema } from "@/lib/validation/schemas";
 
-// Inicializa Resend. Si RESEND_API_KEY no existe, no fallará hasta que intente enviar.
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function submitContact(formData: FormData) {
   try {
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const message = formData.get("message") as string;
-    const recaptchaToken = formData.get("recaptchaToken") as string;
+    const raw = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+    const recaptchaToken = formData.get("recaptchaToken") as string | null;
 
     const isDevelopment = process.env.NODE_ENV === "development";
 
-    if (!name || !email || !message || (!recaptchaToken && !isDevelopment)) {
-      console.error("Faltan campos obligatorios. Recibido:", {
-        name,
-        email,
-        message,
-        recaptchaToken,
-      });
-      return { success: false, error: "Faltan campos obligatorios" };
+    // 1. Validar con Zod
+    const parsed = contactSchema.safeParse(raw);
+    if (!parsed.success) {
+      const firstError = parsed.error.errors[0]?.message ?? "Datos inválidos.";
+      return { success: false, error: firstError };
     }
 
-    // 1. Validar ReCAPTCHA con Google (Solo en Producción)
+    const { name, email, message } = parsed.data;
+
+    // 2. Validar reCAPTCHA (Solo en Producción)
     const secretKey = process.env.RECAPTCHA_SECRET_KEY;
 
     if (!isDevelopment) {
-      if (!secretKey) {
-        console.warn("Falta RECAPTCHA_SECRET_KEY en el entorno.");
+      if (!recaptchaToken || !secretKey) {
         return {
           success: false,
-          error: "Error de configuración de ReCAPTCHA.",
+          error: "Validación de seguridad no disponible. Recarga la página e intenta de nuevo.",
         };
       }
 
@@ -42,17 +42,15 @@ export async function submitContact(formData: FormData) {
       const recaptchaData = await recaptchaRes.json();
 
       if (!recaptchaData.success || recaptchaData.score < 0.5) {
-        console.error("ReCAPTCHA falló:", recaptchaData);
+        console.error("reCAPTCHA falló:", recaptchaData);
         return {
           success: false,
           error: "Validación de seguridad fallida. Intenta nuevamente.",
         };
       }
-    } else {
-      console.log("Desarrollo: Saltando validación de ReCAPTCHA");
     }
 
-    // 2. Guardar en Firestore
+    // 3. Guardar en Firestore
     const contactRef = adminDb.collection("contacts").doc();
     await contactRef.set({
       name,
@@ -62,15 +60,12 @@ export async function submitContact(formData: FormData) {
       status: "new",
     });
 
-    // 3. Enviar Correos
-    // Define el correo remitente verificado en Resend (por defecto usamos una variable o un estático temporal)
-    const senderEmail =
-      process.env.RESEND_SENDER_EMAIL || "hola@camilopinzon.com";
-    // Define tu correo para recibir notificaciones
+    // 4. Enviar Correos
+    const senderEmail = process.env.RESEND_SENDER_EMAIL || "hola@camilopinzon.com";
     const myEmail = process.env.CONTACT_EMAIL || "hola@camilopinzon.com";
 
     if (process.env.RESEND_API_KEY) {
-      // a) Notificación para ti (Admin)
+      // a) Notificación al admin
       await resend.emails.send({
         from: `Website <${senderEmail}>`,
         to: myEmail,
@@ -84,7 +79,7 @@ export async function submitContact(formData: FormData) {
         `,
       });
 
-      // b) Auto-respuesta genérica para el usuario
+      // b) Auto-respuesta al usuario
       await resend.emails.send({
         from: `Camilo Pinzón <${senderEmail}>`,
         to: email,
@@ -101,9 +96,7 @@ export async function submitContact(formData: FormData) {
         `,
       });
     } else {
-      console.warn(
-        "Falta RESEND_API_KEY. Los correos no se enviaron, pero el contacto se guardó en Firestore.",
-      );
+      console.warn("Falta RESEND_API_KEY. Contacto guardado en Firestore sin enviar correos.");
     }
 
     return { success: true };

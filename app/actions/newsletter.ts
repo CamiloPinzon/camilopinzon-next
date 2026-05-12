@@ -2,27 +2,32 @@
 
 import { adminDb } from "@/lib/firebase/admin";
 import { Resend } from "resend";
+import { newsletterSchema } from "@/lib/validation/schemas";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function subscribeNewsletter(formData: FormData) {
   try {
-    const email = formData.get("email") as string;
-    const recaptchaToken = formData.get("recaptchaToken") as string;
+    const raw = { email: formData.get("email") };
+    const recaptchaToken = formData.get("recaptchaToken") as string | null;
 
     const isDevelopment = process.env.NODE_ENV === "development";
 
-    if (!email || (!recaptchaToken && !isDevelopment)) {
-      console.error("Faltan campos. Recibido:", { email, recaptchaToken });
-      return { success: false, error: "El correo es obligatorio." };
+    // 1. Validar con Zod
+    const parsed = newsletterSchema.safeParse(raw);
+    if (!parsed.success) {
+      const firstError = parsed.error.errors[0]?.message ?? "Correo inválido.";
+      return { success: false, error: firstError };
     }
 
-    // 1. Validar ReCAPTCHA con Google (Solo en Producción)
+    const { email } = parsed.data;
+
+    // 2. Validar reCAPTCHA (Solo en Producción)
     const secretKey = process.env.RECAPTCHA_SECRET_KEY;
 
     if (!isDevelopment) {
-      if (!secretKey) {
-        return { success: false, error: "Error de configuración." };
+      if (!recaptchaToken || !secretKey) {
+        return { success: false, error: "Validación de seguridad no disponible. Recarga la página." };
       }
 
       const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
@@ -30,14 +35,11 @@ export async function subscribeNewsletter(formData: FormData) {
       const recaptchaData = await recaptchaRes.json();
 
       if (!recaptchaData.success || recaptchaData.score < 0.5) {
-        return {
-          success: false,
-          error: "Validación de seguridad fallida. Intenta de nuevo.",
-        };
+        return { success: false, error: "Validación de seguridad fallida. Intenta de nuevo." };
       }
     }
 
-    // 2. Comprobar si el email ya existe
+    // 3. Comprobar si el email ya existe
     const subscribersRef = adminDb.collection("subscribers");
     const existing = await subscribersRef.where("email", "==", email).get();
 
@@ -45,16 +47,15 @@ export async function subscribeNewsletter(formData: FormData) {
       return { success: false, error: "Este correo ya está suscrito." };
     }
 
-    // 3. Guardar en Firestore
+    // 4. Guardar en Firestore
     await subscribersRef.add({
       email,
       createdAt: new Date(),
       status: "active",
     });
 
-    // 4. Enviar correo de bienvenida (Opcional)
-    const senderEmail =
-      process.env.RESEND_SENDER_EMAIL || "hola@camilopinzon.com";
+    // 5. Enviar correo de bienvenida
+    const senderEmail = process.env.RESEND_SENDER_EMAIL || "hola@camilopinzon.com";
 
     if (process.env.RESEND_API_KEY) {
       await resend.emails.send({
