@@ -97,7 +97,7 @@ export default async function Home({
       <Portfolio lang={lang} />
       <div className="theme-dark">
         <DownloadCv lang={lang} />
-        <BlogHighlights posts={posts} />
+        <BlogHighlights posts={posts} lang={lang} />
       </div>
       <Brands lang={lang} />
       <Contact lang={lang} />

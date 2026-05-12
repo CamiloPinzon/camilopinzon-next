@@ -2,7 +2,6 @@
 
 import styles from "./blog-highlights.module.scss";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 
 import BlogCard from "./blog-card/blog-card";
 import BlogFilterPills from "./blog-filter-pills/blog-filter-pills";
@@ -14,25 +13,25 @@ import { getTranslations } from "@/lib/i18n/translations";
 
 interface BlogHighlightsProps {
   posts: BlogPost[];
+  lang: string;
 }
 
-export default function BlogHighlights({ posts }: BlogHighlightsProps) {
-  const pathname = usePathname();
-  const lang = pathname.split("/")[1] || "en";
+export default function BlogHighlights({ posts, lang }: BlogHighlightsProps) {
   const t = getTranslations(lang);
 
   const [activeTag, setActiveTag] = useState(t.blog.filterAll);
 
-  // Format dates locally so it doesn't break hydration if they are ISO strings
-  const formattedPosts = posts.map((p) => ({
-    ...p,
-    date: new Date(p.publishedAt).toLocaleDateString(
-      lang === "es" ? "es-ES" : "en-US",
-      { month: "short", day: "numeric", year: "numeric" }
-    ),
-    // Determine if it's featured (e.g. the very first one, or add a 'featured' boolean to your DB)
-    featured: p === posts[0],
-  }));
+  // Format dates using UTC to prevent server/client timezone mismatch (hydration)
+  const formattedPosts = posts.map((p) => {
+    const d = new Date(p.publishedAt);
+    const date = d.toLocaleDateString(lang === "es" ? "es-ES" : "en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "UTC",
+    });
+    return { ...p, date, featured: p === posts[0] };
+  });
 
   const ALL_TAGS = [
     t.blog.filterAll,
