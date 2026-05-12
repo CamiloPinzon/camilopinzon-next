@@ -12,20 +12,29 @@ export async function submitContact(formData: FormData) {
     const email = formData.get("email") as string;
     const message = formData.get("message") as string;
     const recaptchaToken = formData.get("recaptchaToken") as string;
-    
+
     const isDevelopment = process.env.NODE_ENV === "development";
 
-    // Validar campos obligatorios del formulario
-    if (!name || !email || !message) {
-      return { success: false, error: "Por favor completa todos los campos." };
+    if (!name || !email || !message || (!recaptchaToken && !isDevelopment)) {
+      console.error("Faltan campos obligatorios. Recibido:", {
+        name,
+        email,
+        message,
+        recaptchaToken,
+      });
+      return { success: false, error: "Faltan campos obligatorios" };
     }
 
-    // 1. Validar ReCAPTCHA (Solo en Producción)
+    // 1. Validar ReCAPTCHA con Google (Solo en Producción)
     const secretKey = process.env.RECAPTCHA_SECRET_KEY;
 
     if (!isDevelopment) {
-      if (!recaptchaToken || !secretKey) {
-        return { success: false, error: "Validación de seguridad no disponible. Recarga la página e intenta de nuevo." };
+      if (!secretKey) {
+        console.warn("Falta RECAPTCHA_SECRET_KEY en el entorno.");
+        return {
+          success: false,
+          error: "Error de configuración de ReCAPTCHA.",
+        };
       }
 
       const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
@@ -34,8 +43,13 @@ export async function submitContact(formData: FormData) {
 
       if (!recaptchaData.success || recaptchaData.score < 0.5) {
         console.error("ReCAPTCHA falló:", recaptchaData);
-        return { success: false, error: "Validación de seguridad fallida. Intenta nuevamente." };
+        return {
+          success: false,
+          error: "Validación de seguridad fallida. Intenta nuevamente.",
+        };
       }
+    } else {
+      console.log("Desarrollo: Saltando validación de ReCAPTCHA");
     }
 
     // 2. Guardar en Firestore
@@ -50,7 +64,8 @@ export async function submitContact(formData: FormData) {
 
     // 3. Enviar Correos
     // Define el correo remitente verificado en Resend (por defecto usamos una variable o un estático temporal)
-    const senderEmail = process.env.RESEND_SENDER_EMAIL || "hola@camilopinzon.com"; 
+    const senderEmail =
+      process.env.RESEND_SENDER_EMAIL || "hola@camilopinzon.com";
     // Define tu correo para recibir notificaciones
     const myEmail = process.env.CONTACT_EMAIL || "hola@camilopinzon.com";
 
@@ -86,12 +101,17 @@ export async function submitContact(formData: FormData) {
         `,
       });
     } else {
-      console.warn("Falta RESEND_API_KEY. Los correos no se enviaron, pero el contacto se guardó en Firestore.");
+      console.warn(
+        "Falta RESEND_API_KEY. Los correos no se enviaron, pero el contacto se guardó en Firestore.",
+      );
     }
 
     return { success: true };
   } catch (error) {
     console.error("Error submitting contact:", error);
-    return { success: false, error: "Ocurrió un error inesperado procesando tu solicitud." };
+    return {
+      success: false,
+      error: "Ocurrió un error inesperado procesando tu solicitud.",
+    };
   }
 }
