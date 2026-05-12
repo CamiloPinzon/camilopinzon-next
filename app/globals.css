@@ -120,6 +120,15 @@ body {
     --space-2xl: 69px;
   }
 }
+@media (max-width: 480px) {
+  .section-wrapper {
+    padding: 50px var(--space-sm);
+  }
+  :root {
+    --space-xl: 24px;
+    --space-2xl: 50px;
+  }
+}
 
 /* ════════ GLOBAL UTILITIES ════════ */
 

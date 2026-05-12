@@ -143,3 +143,37 @@
     align-items: center;
   }
 }
+
+@media (max-width: 480px) {
+  .hero {
+    padding: calc(72px + var(--space-md)) var(--space-sm) var(--space-md);
+  }
+
+  .headline {
+    font-size: clamp(28px, 8vw, 48px);
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .btnPrimary,
+  .btnGhost {
+    width: 100%;
+    text-align: center;
+  }
+
+  .manifestoList {
+    flex-direction: row;
+    gap: var(--space-lg);
+
+    li {
+      flex: 1;
+    }
+  }
+}

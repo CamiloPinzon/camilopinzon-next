@@ -59,3 +59,17 @@
     padding: var(--space-lg) 0;
   }
 }
+
+@media (max-width: 480px) {
+  .section {
+    padding: 80px 0;
+  }
+
+  .itemTitle {
+    font-size: 20px;
+  }
+
+  .item {
+    padding: var(--space-md) 0;
+  }
+}
