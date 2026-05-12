@@ -2,13 +2,12 @@
 
 import { useState } from "react";
 import { getTranslations } from "@/lib/i18n/translations";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { executeRecaptcha } from "@/lib/recaptcha";
 import { submitContact } from "@/app/actions/contact";
 import Button from "@/components/ui/button/button";
 import styles from "./contact.module.scss";
 
 function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
-  const { executeRecaptcha } = useGoogleReCaptcha();
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error" | null; message: string }>({ type: null, message: "" });
 
@@ -20,17 +19,12 @@ function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
     // porque React pierde el e.currentTarget después de operaciones asíncronas.
     const formElement = e.currentTarget;
 
-    if (!executeRecaptcha) {
-      setStatus({ type: "error", message: "ReCAPTCHA no está listo. Refresca la página e intenta de nuevo." });
-      return;
-    }
-
     setLoading(true);
 
     try {
       // 1. Obtener el token de ReCAPTCHA
       const recaptchaToken = await executeRecaptcha("contact_form");
-      
+
       // 2. Preparar los datos
       const formData = new FormData(formElement);
       if (recaptchaToken) {

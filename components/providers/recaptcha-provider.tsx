@@ -1,16 +1,16 @@
 "use client";
 
-import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
-import type { ReactNode } from "react";
+import Script from "next/script";
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
 
-export default function RecaptchaProvider({ children }: { children: ReactNode }) {
-  if (!siteKey) return <>{children}</>;
+export default function RecaptchaProvider() {
+  if (!siteKey) return null;
 
   return (
-    <GoogleReCaptchaProvider reCaptchaKey={siteKey}>
-      {children}
-    </GoogleReCaptchaProvider>
+    <Script
+      src={`https://www.google.com/recaptcha/api.js?render=${siteKey}`}
+      strategy="afterInteractive"
+    />
   );
 }

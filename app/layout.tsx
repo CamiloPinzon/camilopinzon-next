@@ -58,7 +58,8 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
-        <RecaptchaProvider>{children}</RecaptchaProvider>
+        <RecaptchaProvider />
+        {children}
       </body>
     </html>
   );

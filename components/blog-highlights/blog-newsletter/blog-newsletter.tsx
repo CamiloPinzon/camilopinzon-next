@@ -1,33 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { executeRecaptcha } from "@/lib/recaptcha";
 import { subscribeNewsletter } from "@/app/actions/newsletter";
 import styles from "./blog-newsletter.module.scss";
 import Button from "@/components/ui/button/button";
 import Input from "@/components/ui/input/input";
 
-function NewsletterForm() {
-  const { executeRecaptcha } = useGoogleReCaptcha();
+export default function BlogNewsletter() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error" | null; message: string }>({ type: null, message: "" });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus({ type: null, message: "" });
-
     const formElement = e.currentTarget;
-
-    if (!executeRecaptcha) {
-      setStatus({ type: "error", message: "ReCAPTCHA no está listo." });
-      return;
-    }
 
     setLoading(true);
 
     try {
       const recaptchaToken = await executeRecaptcha("newsletter_form");
-      
+
       const formData = new FormData(formElement);
       if (recaptchaToken) {
         formData.append("recaptchaToken", recaptchaToken);
@@ -89,15 +82,5 @@ function NewsletterForm() {
         </Button>
       </form>
     </div>
-  );
-}
-
-export default function BlogNewsletter() {
-  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "dummy_key_for_build";
-
-  return (
-    <GoogleReCaptchaProvider reCaptchaKey={siteKey}>
-      <NewsletterForm />
-    </GoogleReCaptchaProvider>
   );
 }
