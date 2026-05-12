@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { executeRecaptcha } from "@/lib/recaptcha";
 import { subscribeNewsletter } from "@/app/actions/newsletter";
-import styles from "../footer.module.scss";
+import styles from "./footer.module.scss";
 import Button from "@/components/ui/button/button";
 
 interface Props {
