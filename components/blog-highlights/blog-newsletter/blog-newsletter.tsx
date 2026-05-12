@@ -14,14 +14,16 @@ export default function BlogNewsletter() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus({ type: null, message: "" });
-    const formElement = e.currentTarget;
+    const formEl = e.currentTarget;
+
+    // Capturar FormData ANTES de setLoading — inputs disabled no se incluyen
+    const formData = new FormData(formEl);
 
     setLoading(true);
 
     try {
       const recaptchaToken = await executeRecaptcha("newsletter_form");
 
-      const formData = new FormData(formElement);
       if (recaptchaToken) {
         formData.append("recaptchaToken", recaptchaToken);
       }
