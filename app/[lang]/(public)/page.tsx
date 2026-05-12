@@ -43,7 +43,7 @@ export async function generateMetadata({
       url: `https://camilopinzon.dev/${lang}`,
       images: [
         {
-          url: "/og-image.jpg", // ← Crearemos esta imagen después
+          url: "/og-image.jpg",
           width: 1200,
           height: 630,
           alt: "Camilo Pinzón — Frontend Developer",
@@ -89,6 +89,11 @@ export default async function Home({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {/*
+        Hero — animación propia (fadeSlideUp CSS), no necesita data-reveal.
+        Las demás secciones usan data-reveal (sección entera) y
+        data-stagger (items individuales) observados por GlobalAnimations.
+      */}
       <MainHero lang={lang} />
       <div className="theme-dark">
         <Services lang={lang} />

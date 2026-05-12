@@ -87,7 +87,7 @@ const STACK: Tech[] = [
 export default function TechStack({ lang = "en" }: { lang?: string }) {
   const t = getTranslations(lang);
   return (
-    <section className={styles.section} aria-labelledby="stack-title">
+    <section className={styles.section} aria-labelledby="stack-title" data-reveal>
       <div className="section-wrapper">
         <header className="section-header">
           <h2 className="section-title" id="stack-title">
@@ -98,6 +98,7 @@ export default function TechStack({ lang = "en" }: { lang?: string }) {
           className={styles.techList}
           role="list"
           aria-label={t.techStack.ariaLabel}
+          data-stagger
         >
           {STACK.map((tech, i) => (
             <div key={tech.name} className={styles.techItem} role="listitem">

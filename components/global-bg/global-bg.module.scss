@@ -1,0 +1,73 @@
+/* Background fijo para TODA la página — nunca se recorta */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* Sin overflow:hidden — los blobs se desvanecen de forma natural por el blur */
+}
+
+.blob1,
+.blob2,
+.blob3 {
+  position: absolute;
+  border-radius: 50%;
+  /* Blur muy alto = bordes 100% suaves, sin corte visible */
+  filter: blur(130px);
+}
+
+/* Blob azul — esquina superior izquierda */
+.blob1 {
+  width: 900px;
+  height: 900px;
+  top: -250px;
+  left: -200px;
+  background: radial-gradient(circle at center, #0066ff 0%, transparent 65%);
+  opacity: 0.13;
+  animation: driftA 22s ease-in-out infinite;
+}
+
+/* Blob violeta — parte baja derecha */
+.blob2 {
+  width: 700px;
+  height: 700px;
+  bottom: -100px;
+  right: -180px;
+  background: radial-gradient(circle at center, #6d28d9 0%, transparent 65%);
+  opacity: 0.11;
+  animation: driftB 28s ease-in-out infinite;
+}
+
+/* Blob celeste — centro, casi invisible */
+.blob3 {
+  width: 600px;
+  height: 600px;
+  top: 45%;
+  left: 35%;
+  background: radial-gradient(circle at center, #0ea5e9 0%, transparent 60%);
+  opacity: 0.07;
+  animation: driftA 18s ease-in-out infinite reverse;
+}
+
+@keyframes driftA {
+  0%,
+  100% { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(28px, -36px) scale(1.04); }
+  50%  { transform: translate(-18px, 24px) scale(0.97); }
+  75%  { transform: translate(36px, 18px) scale(1.02); }
+}
+
+@keyframes driftB {
+  0%,
+  100% { transform: translate(0, 0) scale(1); }
+  35%  { transform: translate(-24px, 32px) scale(1.06); }
+  65%  { transform: translate(18px, -18px) scale(0.96); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob1,
+  .blob2,
+  .blob3 {
+    animation: none;
+  }
+}

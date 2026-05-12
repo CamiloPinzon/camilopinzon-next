@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 import RecaptchaProvider from "@/components/providers/recaptcha-provider";
+import GlobalBg from "@/components/global-bg/global-bg";
+import GlobalAnimations from "@/components/global-animations/global-animations";
 
 import "./globals.css";
 
@@ -58,6 +60,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
+        {/* Background atmosférico global — position:fixed, z-index:-1, sin clipping */}
+        <GlobalBg />
+        {/* Observer único para todas las animaciones de scroll */}
+        <GlobalAnimations />
         <RecaptchaProvider />
         {children}
       </body>

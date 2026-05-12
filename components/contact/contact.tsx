@@ -128,6 +128,7 @@ export default function Contact({ lang = "en" }: { lang?: string }) {
       id="contacto"
       className={styles.section}
       aria-label={t.contact.ariaLabel}
+      data-reveal
     >
       <div className="section-wrapper">
         <ContactFormInner t={t} />

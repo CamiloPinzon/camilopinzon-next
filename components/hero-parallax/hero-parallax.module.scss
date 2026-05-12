@@ -1,0 +1,71 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  will-change: transform;
+}
+
+/* Orb base */
+.orb1,
+.orb2,
+.orb3 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+}
+
+/* Orb azul grande — arriba izquierda */
+.orb1 {
+  width: 520px;
+  height: 520px;
+  top: -120px;
+  left: -80px;
+  background: radial-gradient(circle, #0080ff 0%, transparent 70%);
+  animation: floatA 12s ease-in-out infinite;
+}
+
+/* Orb violeta — abajo derecha */
+.orb2 {
+  width: 400px;
+  height: 400px;
+  bottom: -80px;
+  right: -60px;
+  background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+  animation: floatB 15s ease-in-out infinite;
+}
+
+/* Orb accent pequeño — centro */
+.orb3 {
+  width: 240px;
+  height: 240px;
+  top: 40%;
+  left: 55%;
+  background: radial-gradient(circle, #00c9ff 0%, transparent 70%);
+  opacity: 0.18;
+  animation: floatA 9s ease-in-out infinite reverse;
+}
+
+@keyframes floatA {
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(18px, -22px); }
+  66%       { transform: translate(-12px, 14px); }
+}
+
+@keyframes floatB {
+  0%, 100% { transform: translate(0, 0); }
+  40%       { transform: translate(-20px, 16px); }
+  70%       { transform: translate(14px, -10px); }
+}
+
+@media (max-width: 640px) {
+  .orb1 { width: 280px; height: 280px; }
+  .orb2 { width: 220px; height: 220px; }
+  .orb3 { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb1, .orb2, .orb3 { animation: none; }
+}

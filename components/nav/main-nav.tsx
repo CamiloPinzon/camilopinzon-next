@@ -56,6 +56,16 @@ export default function MainNav() {
     return () => observer.disconnect();
   }, [pathname, currentLang]);
 
+  /** Smooth scroll a un anchor — usa scrollIntoView + scroll-margin-top del CSS */
+  const handleAnchorClick = (e: React.MouseEvent, sectionId: string) => {
+    const target = document.getElementById(sectionId);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setMenuOpen(false);
+  };
+
   return (
     <>
       <nav
@@ -85,9 +95,6 @@ export default function MainNav() {
               ? link.href.substring(hashIndex + 1)
               : null;
 
-            // Logic for active state:
-            // 1. If it's an anchor on the homepage, check activeSection (from IntersectionObserver)
-            // 2. If it's a dedicated page (like /experience or /blog), check if pathname starts with it.
             const isActive = isAnchor
               ? pathname === `/${currentLang}` || pathname === "/"
                 ? activeSection === sectionId
@@ -99,6 +106,11 @@ export default function MainNav() {
                 <Link
                   href={link.href}
                   className={isActive ? styles.linkActive : undefined}
+                  onClick={
+                    isAnchor && sectionId
+                      ? (e) => handleAnchorClick(e, sectionId)
+                      : undefined
+                  }
                 >
                   {link.label}
                 </Link>
@@ -109,7 +121,11 @@ export default function MainNav() {
             <LanguageSwitcher />
           </li>
           <li>
-            <Link href={`/${currentLang}/#contacto`} className={styles.cta}>
+            <Link
+              href={`/${currentLang}/#contacto`}
+              className={styles.cta}
+              onClick={(e) => handleAnchorClick(e, "contacto")}
+            >
               {t.nav.contact}
             </Link>
           </li>
@@ -158,7 +174,11 @@ export default function MainNav() {
               ]
                 .filter(Boolean)
                 .join(" ")}
-              onClick={() => setMenuOpen(false)}
+              onClick={
+                isAnchor && sectionId
+                  ? (e) => handleAnchorClick(e, sectionId)
+                  : () => setMenuOpen(false)
+              }
               style={{ animationDelay: `${i * 50}ms` }}
             >
               {link.label}
@@ -166,10 +186,10 @@ export default function MainNav() {
           );
         })}
         <div className={styles.drawerDivider} />
-        <Link 
-          href={`/${currentLang}/#contacto`} 
-          className={styles.drawerCta} 
-          onClick={() => setMenuOpen(false)}
+        <Link
+          href={`/${currentLang}/#contacto`}
+          className={styles.drawerCta}
+          onClick={(e) => handleAnchorClick(e, "contacto")}
         >
           {t.nav.contact}
         </Link>

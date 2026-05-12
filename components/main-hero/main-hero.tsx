@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { getTranslations } from "@/lib/i18n/translations";
-
 import styles from "./main-hero.module.scss";
 
 export default function MainHero({ lang }: { lang: string }) {
