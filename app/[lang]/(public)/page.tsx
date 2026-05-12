@@ -61,8 +61,34 @@ export default async function Home({
   const { lang } = await params;
   const posts = await getRecentPosts(lang, 7);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Camilo Pinzón",
+    url: "https://camilopinzon.dev",
+    image: "https://camilopinzon.dev/profile.webp",
+    sameAs: [
+      "https://github.com/CamiloPinzon",
+      "https://www.linkedin.com/in/camilopinzon",
+    ],
+    jobTitle: "Frontend Developer",
+    worksFor: {
+      "@type": "Organization",
+      name: "Freelance",
+    },
+    knowsAbout: ["React", "Next.js", "TypeScript", "Firebase", "CSS"],
+    description:
+      lang === "es"
+        ? "Desarrollador frontend especializado en React y Next.js con experiencia en experiencias digitales de alto impacto."
+        : "Frontend developer specialized in React and Next.js with experience in high-impact digital experiences.",
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <MainHero />
       <div className="theme-dark">
         <Services lang={lang} />

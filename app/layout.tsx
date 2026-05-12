@@ -1,17 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Fuente principal para cuerpo y UI — moderna, legible, parecida a PP Neue Montreal
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Fuente para títulos y headings — geométrica, personalidad fuerte
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -46,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${inter.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>{children}</body>
