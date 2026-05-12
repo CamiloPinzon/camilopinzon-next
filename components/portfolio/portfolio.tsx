@@ -17,7 +17,6 @@ export default function Portfolio({ lang = "en" }: { lang?: string }) {
       id="portafolio"
       className={styles.section}
       aria-label={t.portfolio.ariaLabel}
-      data-reveal
     >
       <div className="section-wrapper">
         <header className="section-header">
@@ -27,7 +26,7 @@ export default function Portfolio({ lang = "en" }: { lang?: string }) {
           </h2>
         </header>
 
-        <div className={styles.grid} data-stagger>
+        <div className={styles.grid}>
           {t.portfolio.items.map((project, i) => (
             <article key={i} className={`surface-card ${styles.card}`}>
               <div className={styles.imageWrapper}>

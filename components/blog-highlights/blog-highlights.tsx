@@ -49,7 +49,7 @@ export default function BlogHighlights({ posts, lang }: BlogHighlightsProps) {
   );
 
   return (
-    <section id="blogs" className={styles.section} aria-labelledby="blog-title" data-reveal>
+    <section id="blogs" className={styles.section} aria-labelledby="blog-title">
       <div className="section-wrapper">
         <div className={styles.headerRow}>
           <header style={{ marginBottom: 0 }}>

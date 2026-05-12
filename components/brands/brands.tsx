@@ -14,7 +14,7 @@ export default function Brands({ lang = "en" }: { lang?: string }) {
   const marqueeItems = [...BRANDS, ...BRANDS, ...BRANDS, ...BRANDS];
 
   return (
-    <section className={styles.section} aria-labelledby="brands-title" data-reveal>
+    <section className={styles.section} aria-labelledby="brands-title">
       <div className="section-wrapper">
         <header className="section-header">
           <h2 className="section-title" id="brands-title">

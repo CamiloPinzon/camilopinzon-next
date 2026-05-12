@@ -9,7 +9,6 @@ export default function Services({ lang = "en" }: { lang?: string }) {
       id="servicios"
       className={styles.section}
       aria-label={t.services.ariaLabel}
-      data-reveal
     >
       <div className="section-wrapper">
         <header className="section-header">
@@ -18,7 +17,7 @@ export default function Services({ lang = "en" }: { lang?: string }) {
           </h2>
         </header>
 
-        <div className={styles.list} data-stagger>
+        <div className={styles.list}>
           {t.services.items.map((service, i) => (
             <article key={i} className={styles.item}>
               <h3 className={styles.itemTitle}>

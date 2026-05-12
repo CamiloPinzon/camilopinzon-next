@@ -10,7 +10,6 @@ export default function DownloadCv({ lang = "en" }: { lang?: string }) {
       id="descargar-cv"
       className={styles.section}
       aria-label={t.cv.ariaLabel}
-      data-reveal
     >
       <div className="section-wrapper">
         <header className="section-header">
