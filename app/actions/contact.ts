@@ -20,7 +20,7 @@ export async function submitContact(formData: FormData) {
     // 1. Validar con Zod
     const parsed = contactSchema.safeParse(raw);
     if (!parsed.success) {
-      const firstError = parsed.error.errors[0]?.message ?? "Datos inválidos.";
+      const firstError = parsed.error.issues[0]?.message ?? "Datos inválidos.";
       return { success: false, error: firstError };
     }
 

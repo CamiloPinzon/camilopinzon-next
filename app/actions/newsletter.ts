@@ -16,7 +16,7 @@ export async function subscribeNewsletter(formData: FormData) {
     // 1. Validar con Zod
     const parsed = newsletterSchema.safeParse(raw);
     if (!parsed.success) {
-      const firstError = parsed.error.errors[0]?.message ?? "Correo inválido.";
+      const firstError = parsed.error.issues[0]?.message ?? "Correo inválido.";
       return { success: false, error: firstError };
     }
 
