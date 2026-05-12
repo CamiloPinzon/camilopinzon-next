@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
+import RecaptchaProvider from "@/components/providers/recaptcha-provider";
 
 import "./globals.css";
 
@@ -56,7 +57,9 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <RecaptchaProvider>{children}</RecaptchaProvider>
+      </body>
     </html>
   );
 }

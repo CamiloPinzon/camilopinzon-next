@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { getTranslations } from "@/lib/i18n/translations";
-import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { submitContact } from "@/app/actions/contact";
 import Button from "@/components/ui/button/button";
 import styles from "./contact.module.scss";
@@ -131,8 +131,6 @@ function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
 
 export default function Contact({ lang = "en" }: { lang?: string }) {
   const t = getTranslations(lang);
-  
-  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "dummy_key_for_build";
 
   return (
     <section
@@ -141,9 +139,7 @@ export default function Contact({ lang = "en" }: { lang?: string }) {
       aria-label={t.contact.ariaLabel}
     >
       <div className="section-wrapper">
-        <GoogleReCaptchaProvider reCaptchaKey={siteKey}>
-          <ContactFormInner t={t} />
-        </GoogleReCaptchaProvider>
+        <ContactFormInner t={t} />
       </div>
     </section>
   );
