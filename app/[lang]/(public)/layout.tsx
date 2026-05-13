@@ -18,7 +18,7 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       locale: lang === "es" ? "es_CO" : "en_US",
-      url: `https://camilopinzon.com/${lang}`,
+      url: `https://camilopinzon.dev/${lang}`,
       title: t.seo.ogTitle,
       description: t.seo.ogDescription,
       siteName: "Camilo Pinzón",
