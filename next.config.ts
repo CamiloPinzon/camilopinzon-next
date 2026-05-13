@@ -4,12 +4,12 @@ import path from "path";
 // Definición de Content Security Policy (CSP) robusta y compatible con reCAPTCHA v3
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://www.googletagmanager.com;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com/recaptcha/ https://www.recaptcha.net/ https://www.gstatic.com/recaptcha/ https://www.googletagmanager.com;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src 'self' blob: data: https://res.cloudinary.com https://images.unsplash.com https://cdn.jsdelivr.net https://www.google.com;
   font-src 'self' data: https://fonts.gstatic.com;
-  connect-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/ https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
-  frame-src 'self' https://www.google.com/recaptcha/ https://recaptcha.google.com/;
+  connect-src 'self' https://www.google.com/recaptcha/ https://www.recaptcha.net/ https://www.gstatic.com/ https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
+  frame-src 'self' https://www.google.com/recaptcha/ https://www.recaptcha.net/ https://recaptcha.google.com/;
   worker-src 'self' blob:;
   object-src 'none';
   base-uri 'self';
