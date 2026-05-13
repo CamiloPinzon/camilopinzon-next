@@ -9,6 +9,8 @@ import Services from "@/components/services/services";
 import Portfolio from "@/components/portfolio/portfolio";
 import Contact from "@/components/contact/contact";
 
+import { getTranslations } from "@/lib/i18n/translations";
+
 export const revalidate = 3600;
 
 export async function generateMetadata({
@@ -17,16 +19,12 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang } = await params;
+  const t = getTranslations(lang);
 
   return {
-    title:
-      lang === "es"
-        ? "Camilo Pinzón — Frontend Developer"
-        : "Camilo Pinzón — Frontend Developer",
-    description:
-      lang === "es"
-        ? "Portfolio y blog de Camilo Pinzón, desarrollador frontend especializado en React y Next.js."
-        : "Portfolio and blog of Camilo Pinzón, frontend developer specialized in React and Next.js.",
+    title: t.seo.title,
+    description: t.seo.description,
+    keywords: t.seo.keywords,
     alternates: {
       canonical: `https://camilopinzon.dev/${lang}`,
       languages: {
@@ -35,20 +33,27 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: "Camilo Pinzón — Frontend Developer",
-      description:
-        lang === "es"
-          ? "Portfolio y blog de Camilo Pinzón, desarrollador frontend."
-          : "Portfolio and blog of Camilo Pinzón, frontend developer.",
+      type: "website",
+      title: t.seo.ogTitle,
+      description: t.seo.ogDescription,
       url: `https://camilopinzon.dev/${lang}`,
+      siteName: "Camilo Pinzón",
+      locale: lang === "es" ? "es_CO" : "en_US",
       images: [
         {
-          url: "/og-image.jpg",
+          url: "/social/og-image.png",
           width: 1200,
           height: 630,
-          alt: "Camilo Pinzón — Frontend Developer",
+          alt: t.seo.title,
         },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t.seo.ogTitle,
+      description: t.seo.ogDescription,
+      images: ["/social/twitter-card.png"],
+      creator: "@CamiloPinzonDev",
     },
   };
 }
