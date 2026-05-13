@@ -32,7 +32,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt,
       type: "article",
-      url: `https://www.camilopinzon.com/${lang}/blog/${slug}`,
+      url: `https://camilopinzon.dev/${lang}/blog/${slug}`,
       images: post.coverImage
         ? [{ url: post.coverImage, width: 1200, height: 630, alt: post.title }]
         : [],
@@ -66,6 +66,27 @@ export default async function BlogPostPage({
     }
   );
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    image: post.coverImage ? [post.coverImage] : [],
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    author: [
+      {
+        "@type": "Person",
+        name: post.author?.name || "Camilo Pinzón",
+        url: "https://camilopinzon.dev",
+      },
+    ],
+    description: post.excerpt,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://camilopinzon.dev/${lang}/blog/${slug}`,
+    },
+  };
+
   return (
     <article
       className="section-wrapper"
@@ -76,6 +97,10 @@ export default async function BlogPostPage({
         margin: "0 auto",
       }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Link
         href={`/${lang}/blog`}
         style={{
