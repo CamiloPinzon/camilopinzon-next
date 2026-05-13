@@ -16,12 +16,6 @@
 
 .cardWrapper {
   display: flex;
-  
-  /* Celdas destacadas más anchas para romper la monotonía del grid */
-  &:nth-child(1),
-  &:nth-child(4) {
-    grid-column: span 2;
-  }
 }
 
 .card {
@@ -100,11 +94,5 @@
   .bento {
     grid-template-columns: repeat(2, 1fr);
   }
-  
-  .cardWrapper {
-    &:nth-child(1),
-    &:nth-child(4) {
-      grid-column: span 1; /* En móviles pequeños mantenemos 2 columnas uniformes */
-    }
-  }
 }
+
