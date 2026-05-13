@@ -96,7 +96,7 @@ export default function BlogHighlights({ posts, lang }: BlogHighlightsProps) {
         </div>
 
         {/* Newsletter CTA */}
-        <BlogNewsletter />
+        <BlogNewsletter lang={lang} />
       </div>
     </section>
   );

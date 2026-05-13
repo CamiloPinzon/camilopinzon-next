@@ -7,9 +7,18 @@ import { submitContact } from "@/app/actions/contact";
 import Button from "@/components/ui/button/button";
 import styles from "./contact.module.scss";
 
-function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
+function ContactFormInner({
+  t,
+  lang,
+}: {
+  t: ReturnType<typeof getTranslations>;
+  lang: string;
+}) {
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<{ type: "success" | "error" | null; message: string }>({ type: null, message: "" });
+  const [status, setStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,6 +27,9 @@ function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
     // Capturar FormData ANTES de setLoading — los inputs disabled no se incluyen en FormData
     const formData = new FormData(e.currentTarget);
     const formEl = e.currentTarget;
+
+    // Adjuntar el idioma de navegación actual para la respuesta localizada
+    formData.append("lang", lang);
 
     setLoading(true);
 
@@ -32,14 +44,23 @@ function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
       const result = await submitContact(formData);
 
       if (result.success) {
-        setStatus({ type: "success", message: "¡Mensaje enviado con éxito! Te contactaremos pronto." });
+        setStatus({
+          type: "success",
+          message: t.contact.successMsg || "Message sent successfully!",
+        });
         formEl.reset();
       } else {
-        setStatus({ type: "error", message: result.error || "Error al enviar el mensaje." });
+        setStatus({
+          type: "error",
+          message: result.error || t.contact.errorDefault,
+        });
       }
     } catch (error) {
       console.error(error);
-      setStatus({ type: "error", message: "Error inesperado al enviar el mensaje." });
+      setStatus({
+        type: "error",
+        message: t.contact.errorUnexpected || "Unexpected error.",
+      });
     } finally {
       setLoading(false);
     }
@@ -49,22 +70,39 @@ function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
     <div className={`glass-panel ${styles.card}`}>
       <header className="section-header" style={{ marginBottom: "24px" }}>
         <span className="section-label">{t.contact.sectionLabel}</span>
-        <h2 className="section-title">
-          {t.contact.title}
-        </h2>
+        <h2 className="section-title">{t.contact.title}</h2>
       </header>
 
       <p className={styles.description}>{t.contact.description}</p>
 
       {status.type === "success" ? (
-        <div className={styles.successMessage} style={{ padding: "20px", background: "rgba(0, 200, 100, 0.1)", borderRadius: "8px", border: "1px solid rgba(0, 200, 100, 0.2)", color: "var(--color-text)", textAlign: "center", marginTop: "20px" }}>
-          <h3 style={{ marginBottom: "8px", fontWeight: 500 }}>{status.message}</h3>
-          <p style={{ fontSize: "14px", color: "var(--color-slate-comment)" }}>Revisa tu bandeja de entrada para el correo de confirmación.</p>
+        <div
+          className={styles.successMessage}
+          style={{
+            padding: "20px",
+            background: "rgba(0, 200, 100, 0.1)",
+            borderRadius: "8px",
+            border: "1px solid rgba(0, 200, 100, 0.2)",
+            color: "var(--color-text)",
+            textAlign: "center",
+            marginTop: "20px",
+          }}
+        >
+          <h3 style={{ marginBottom: "8px", fontWeight: 500 }}>
+            {status.message}
+          </h3>
+          <p style={{ fontSize: "14px", color: "var(--color-slate-comment)" }}>
+            {t.contact.successSub}
+          </p>
         </div>
       ) : (
         <form className={styles.form} onSubmit={handleSubmit}>
           {status.type === "error" && (
-            <div style={{ color: "red", fontSize: "14px", marginBottom: "16px" }}>{status.message}</div>
+            <div
+              style={{ color: "red", fontSize: "14px", marginBottom: "16px" }}
+            >
+              {status.message}
+            </div>
           )}
 
           <div className={styles.inputGroup}>
@@ -112,7 +150,7 @@ function ContactFormInner({ t }: { t: ReturnType<typeof getTranslations> }) {
           </div>
 
           <Button type="submit" style={{ marginTop: "8px" }} disabled={loading}>
-            {loading ? "Enviando..." : t.contact.submitBtn}
+            {loading ? t.contact.sending || "..." : t.contact.submitBtn}
           </Button>
         </form>
       )}
@@ -128,10 +166,9 @@ export default function Contact({ lang = "en" }: { lang?: string }) {
       id="contacto"
       className={styles.section}
       aria-label={t.contact.ariaLabel}
-      data-reveal
     >
       <div className="section-wrapper">
-        <ContactFormInner t={t} />
+        <ContactFormInner t={t} lang={lang} />
       </div>
     </section>
   );

@@ -3,6 +3,7 @@
 import { adminDb } from "@/lib/firebase/admin";
 import { Resend } from "resend";
 import { contactSchema } from "@/lib/validation/schemas";
+import { getTranslations } from "@/lib/i18n/translations";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -14,13 +15,15 @@ export async function submitContact(formData: FormData) {
       message: formData.get("message"),
     };
     const recaptchaToken = formData.get("recaptchaToken") as string | null;
+    const lang = (formData.get("lang") as string) || "en";
 
+    const t = getTranslations(lang);
     const isDevelopment = process.env.NODE_ENV === "development";
 
     // 1. Validar con Zod
     const parsed = contactSchema.safeParse(raw);
     if (!parsed.success) {
-      const firstError = parsed.error.issues[0]?.message ?? "Datos inválidos.";
+      const firstError = parsed.error.issues[0]?.message ?? t.contact.errorDefault;
       return { success: false, error: firstError };
     }
 
@@ -33,7 +36,7 @@ export async function submitContact(formData: FormData) {
       if (!recaptchaToken || !secretKey) {
         return {
           success: false,
-          error: "Validación de seguridad no disponible. Recarga la página e intenta de nuevo.",
+          error: "Security validation unavailable. Please reload the page.",
         };
       }
 
@@ -45,7 +48,7 @@ export async function submitContact(formData: FormData) {
         console.error("reCAPTCHA falló:", recaptchaData);
         return {
           success: false,
-          error: "Validación de seguridad fallida. Intenta nuevamente.",
+          error: "Security validation failed. Please try again.",
         };
       }
     }
@@ -56,6 +59,7 @@ export async function submitContact(formData: FormData) {
       name,
       email,
       message,
+      lang,
       createdAt: new Date(),
       status: "new",
     });
@@ -69,28 +73,31 @@ export async function submitContact(formData: FormData) {
       await resend.emails.send({
         from: `Website <${senderEmail}>`,
         to: myEmail,
-        subject: `Nuevo contacto en la web: ${name}`,
+        subject: `Nuevo contacto en la web (${lang.toUpperCase()}): ${name}`,
         html: `
           <h2>Nuevo mensaje de contacto</h2>
           <p><strong>Nombre:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Idioma:</strong> ${lang.toUpperCase()}</p>
           <p><strong>Mensaje:</strong></p>
           <p>${message.replace(/\n/g, "<br/>")}</p>
         `,
       });
 
-      // b) Auto-respuesta al usuario
+      // b) Auto-respuesta al usuario localizada desde el diccionario
+      const greeting = t.emails.contactGreeting.replace("{name}", name);
+      
       await resend.emails.send({
         from: `Camilo Pinzón <${senderEmail}>`,
         to: email,
-        subject: "He recibido tu mensaje",
+        subject: t.emails.contactSubject,
         html: `
           <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
-            <h2 style="color: #0f1012;">¡Hola, ${name}!</h2>
-            <p>Gracias por escribirme. Este correo es para confirmarte que he recibido tu mensaje correctamente.</p>
-            <p>Estaré revisando tu consulta y me pondré en contacto contigo lo más pronto posible.</p>
+            <h2 style="color: #0f1012;">${greeting}</h2>
+            <p>${t.emails.contactThanks}</p>
+            <p>${t.emails.contactFollowUp}</p>
             <br/>
-            <p>Un saludo,</p>
+            <p>${t.emails.contactSignOff}</p>
             <p><strong>Camilo Pinzón</strong></p>
           </div>
         `,
@@ -104,7 +111,7 @@ export async function submitContact(formData: FormData) {
     console.error("Error submitting contact:", error);
     return {
       success: false,
-      error: "Ocurrió un error inesperado procesando tu solicitud.",
+      error: "Unexpected error processing your request.",
     };
   }
 }

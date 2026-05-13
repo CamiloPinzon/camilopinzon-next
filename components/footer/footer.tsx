@@ -35,6 +35,7 @@ export default function Footer({ lang = "en" }: { lang?: string }) {
           label={t.footer.newsletterLabel}
           successMsg={t.footer.newsletterSuccess}
           errorMsg={t.footer.newsletterError}
+          lang={lang || "en"}
         />
       </div>
       <p className={styles.copyright}>

@@ -12,9 +12,17 @@ interface Props {
   label: string;
   successMsg: string;
   errorMsg: string;
+  lang: string;
 }
 
-export default function FooterNewsletterForm({ placeholder, btnLabel, label, successMsg, errorMsg }: Props) {
+export default function FooterNewsletterForm({
+  placeholder,
+  btnLabel,
+  label,
+  successMsg,
+  errorMsg,
+  lang,
+}: Props) {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
@@ -22,6 +30,9 @@ export default function FooterNewsletterForm({ placeholder, btnLabel, label, suc
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formEl = e.currentTarget;
+
+    // Pasar el idioma de navegación actual para la respuesta del servidor
+    formData.append("lang", lang);
 
     setLoading(true);
 
@@ -45,7 +56,11 @@ export default function FooterNewsletterForm({ placeholder, btnLabel, label, suc
   };
 
   if (status === "success") {
-    return <p style={{ fontSize: "0.82rem", color: "var(--color-accent)" }}>{successMsg}</p>;
+    return (
+      <p style={{ fontSize: "0.82rem", color: "var(--color-accent)" }}>
+        {successMsg}
+      </p>
+    );
   }
 
   return (
@@ -63,7 +78,14 @@ export default function FooterNewsletterForm({ placeholder, btnLabel, label, suc
         {loading ? "..." : btnLabel}
       </Button>
       {status === "error" && (
-        <p style={{ fontSize: "0.72rem", color: "red", marginTop: "4px", gridColumn: "1/-1" }}>
+        <p
+          style={{
+            fontSize: "0.72rem",
+            color: "red",
+            marginTop: "4px",
+            gridColumn: "1/-1",
+          }}
+        >
           {errorMsg}
         </p>
       )}

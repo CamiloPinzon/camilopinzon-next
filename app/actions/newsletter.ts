@@ -3,6 +3,7 @@
 import { adminDb } from "@/lib/firebase/admin";
 import { Resend } from "resend";
 import { newsletterSchema } from "@/lib/validation/schemas";
+import { getTranslations } from "@/lib/i18n/translations";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -10,13 +11,15 @@ export async function subscribeNewsletter(formData: FormData) {
   try {
     const raw = { email: formData.get("email") };
     const recaptchaToken = formData.get("recaptchaToken") as string | null;
+    const lang = (formData.get("lang") as string) || "en";
 
+    const t = getTranslations(lang);
     const isDevelopment = process.env.NODE_ENV === "development";
 
     // 1. Validar con Zod
     const parsed = newsletterSchema.safeParse(raw);
     if (!parsed.success) {
-      const firstError = parsed.error.issues[0]?.message ?? "Correo inválido.";
+      const firstError = parsed.error.issues[0]?.message ?? "Invalid email.";
       return { success: false, error: firstError };
     }
 
@@ -27,7 +30,7 @@ export async function subscribeNewsletter(formData: FormData) {
 
     if (!isDevelopment) {
       if (!recaptchaToken || !secretKey) {
-        return { success: false, error: "Validación de seguridad no disponible. Recarga la página." };
+        return { success: false, error: "Security validation unavailable. Please reload." };
       }
 
       const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
@@ -35,7 +38,7 @@ export async function subscribeNewsletter(formData: FormData) {
       const recaptchaData = await recaptchaRes.json();
 
       if (!recaptchaData.success || recaptchaData.score < 0.5) {
-        return { success: false, error: "Validación de seguridad fallida. Intenta de nuevo." };
+        return { success: false, error: "Security validation failed. Please try again." };
       }
     }
 
@@ -44,31 +47,32 @@ export async function subscribeNewsletter(formData: FormData) {
     const existing = await subscribersRef.where("email", "==", email).get();
 
     if (!existing.empty) {
-      return { success: false, error: "Este correo ya está suscrito." };
+      return { success: false, error: lang === "es" ? "Este correo ya está suscrito." : "This email is already subscribed." };
     }
 
     // 4. Guardar en Firestore
     await subscribersRef.add({
       email,
+      lang,
       createdAt: new Date(),
       status: "active",
     });
 
-    // 5. Enviar correo de bienvenida
+    // 5. Enviar correo de bienvenida localizado desde el diccionario
     const senderEmail = process.env.RESEND_SENDER_EMAIL || "hola@camilopinzon.com";
 
     if (process.env.RESEND_API_KEY) {
       await resend.emails.send({
         from: `Camilo Pinzón <${senderEmail}>`,
         to: email,
-        subject: "¡Bienvenido a mi Newsletter!",
+        subject: t.emails.newsletterSubject,
         html: `
           <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
-            <h2 style="color: #0f1012;">¡Hola!</h2>
-            <p>Gracias por suscribirte a mi Newsletter.</p>
-            <p>De ahora en adelante, recibirás mis nuevos artículos y contenido exclusivo directamente en tu bandeja de entrada.</p>
+            <h2 style="color: #0f1012;">${t.emails.newsletterGreeting}</h2>
+            <p>${t.emails.newsletterThanks}</p>
+            <p>${t.emails.newsletterFollowUp}</p>
             <br/>
-            <p>Un saludo,</p>
+            <p>${t.emails.newsletterSignOff}</p>
             <p><strong>Camilo Pinzón</strong></p>
           </div>
         `,
@@ -78,6 +82,6 @@ export async function subscribeNewsletter(formData: FormData) {
     return { success: true };
   } catch (error) {
     console.error("Error subscribing to newsletter:", error);
-    return { success: false, error: "Ocurrió un error inesperado." };
+    return { success: false, error: "Unexpected error occurred." };
   }
 }
