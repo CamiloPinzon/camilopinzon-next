@@ -1,45 +1,110 @@
 .section {
   padding-bottom: 120px;
+  position: relative;
 }
 
-.techList {
+.bento {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 1px;
+  /* El color del borde fino de 1px entre tarjetas */
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.cardWrapper {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  row-gap: var(--space-lg);
-  justify-content: flex-start;
-  max-width: 800px;
-}
-
-.techItem {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-sm);
-}
-
-.techName {
-  font-family: var(--font-primary);
-  font-size: 24px;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  color: var(--color-midnight-ink);
-  transition: color 0.3s;
-
-  &:hover {
-    color: var(--color-future-blue);
+  
+  /* Celdas destacadas más anchas para romper la monotonía del grid */
+  &:nth-child(1),
+  &:nth-child(4) {
+    grid-column: span 2;
   }
 }
 
-.separator {
-  font-family: var(--font-secondary);
-  font-size: 16px;
-  color: var(--color-slate-comment);
-  opacity: 0.5;
-  margin: 0 4px;
+.card {
+  position: relative;
+  /* Fondo de cada tarjeta un poco más profundo para contrastar con los bordes finos */
+  background: #0a0a0b;
+  width: 100%;
+  padding: var(--space-md) var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  cursor: default;
+  overflow: hidden;
+  transition:
+    background 0.3s,
+    transform 0.3s var(--ease);
+
+  &:hover {
+    background: #121316;
+    transform: scale(1.03);
+    z-index: 2;
+    border-radius: var(--radius-md);
+
+    .glow {
+      opacity: 1;
+    }
+
+    .icon {
+      transform: scale(1.15) translateY(-2px);
+    }
+  }
 }
 
-@media (max-width: 768px) {
-  .techName {
-    font-size: 20px;
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    color-mix(in srgb, var(--accent) 15%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 45%, transparent));
+  transition: transform 0.3s var(--ease);
+}
+
+.name {
+  font-family: var(--font-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-midnight-ink);
+}
+
+.tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent, var(--color-slate-comment));
+  opacity: 0.7;
+}
+
+@media (max-width: 540px) {
+  .bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .cardWrapper {
+    &:nth-child(1),
+    &:nth-child(4) {
+      grid-column: span 1; /* En móviles pequeños mantenemos 2 columnas uniformes */
+    }
   }
 }
