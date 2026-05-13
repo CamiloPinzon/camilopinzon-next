@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Augen Pro — Brand Assets</title>
+  <link rel="stylesheet" href="../../colors_and_type.css">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #e9e9ec; color: var(--fg-primary); font-family: var(--font-body); }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      padding: 14px 28px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(140%) blur(14px);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      border-bottom: 1px solid rgba(15,16,18,0.08);
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
+    }
+    .topbar .dot { width: 8px; height: 8px; background: #0071e3; border-radius: 50%; }
+    .topbar .sep { width: 1px; height: 14px; background: rgba(15,16,18,0.15); }
+    .topbar .sub { font-weight: 400; color: var(--fg-tertiary); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+
+    main { max-width: 1240px; margin: 0 auto; padding: 36px 28px 80px; display: flex; flex-direction: column; gap: 48px; }
+
+    section h2 {
+      margin: 0 0 4px 0;
+      font-size: 20px; font-weight: 600; letter-spacing: -0.02em;
+    }
+    section .sub { margin: 0 0 18px 0; font-size: 13px; color: var(--fg-tertiary); line-height: 1.5; max-width: 60ch; }
+
+    .card-grid {
+      display: grid; gap: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    .card {
+      background: #fff; border: 1px solid rgba(15,16,18,0.08); border-radius: 12px;
+      padding: 14px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .card .stage {
+      height: 140px; display: flex; align-items: center; justify-content: center;
+      background: repeating-conic-gradient(#f7f7f9 0% 25%, #ffffff 0% 50%) 50% / 12px 12px;
+      border-radius: 8px; border: 1px solid rgba(15,16,18,0.04);
+      overflow: hidden;
+    }
+    .card .stage.dark {
+      background: repeating-conic-gradient(#15161a 0% 25%, #0a0b0d 0% 50%) 50% / 12px 12px;
+    }
+    .card .stage img { display: block; image-rendering: -webkit-optimize-contrast; }
+    .meta { font-size: 11px; color: var(--fg-tertiary); letter-spacing: 0.04em; }
+    .meta .name { color: var(--fg-primary); font-weight: 600; font-size: 12px; letter-spacing: -0.01em; margin-bottom: 2px; display: block; }
+    .meta code { font-family: ui-monospace, Menlo, monospace; font-size: 10px; color: #0071e3; background: rgba(0,113,227,0.06); padding: 1px 5px; border-radius: 3px; }
+
+    .browser-mock {
+      background: #fff; border-radius: 14px; border: 1px solid rgba(15,16,18,0.08); overflow: hidden;
+      box-shadow: 0 1px 2px rgba(15,16,18,0.04);
+    }
+    .browser-mock .bar {
+      background: #fafafa; padding: 10px 14px; display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid rgba(15,16,18,0.06);
+    }
+    .browser-mock .lights { display: inline-flex; gap: 6px; }
+    .browser-mock .lights span { width: 10px; height: 10px; border-radius: 50%; background: rgba(15,16,18,0.12); }
+    .browser-mock .tab {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; border: 1px solid rgba(15,16,18,0.08); border-bottom: 0;
+      border-radius: 8px 8px 0 0; padding: 6px 12px;
+      font-size: 12px; color: var(--fg-primary);
+      margin-left: 10px;
+    }
+    .browser-mock .tab img { width: 14px; height: 14px; display: block; }
+    .browser-mock .tab .x { color: var(--fg-tertiary); margin-left: 4px; }
+    .browser-mock .body { padding: 28px; min-height: 60px; }
+
+    .og-preview {
+      display: grid; gap: 16px; grid-template-columns: 1fr;
+    }
+    @media (min-width: 1000px) { .og-preview { grid-template-columns: 1fr 1fr; } }
+    .og-card {
+      background: #fff; border: 1px solid rgba(15,16,18,0.08); border-radius: 12px; overflow: hidden;
+    }
+    .og-card .head {
+      padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid rgba(15,16,18,0.06); background: #fafafa;
+    }
+    .og-card .head .label { font-size: 12px; font-weight: 600; letter-spacing: -0.01em; }
+    .og-card .head .meta-pill { font-size: 10px; color: var(--fg-tertiary); letter-spacing: 0.06em; text-transform: uppercase; }
+    .og-card img { display: block; width: 100%; height: auto; }
+
+    .device-mock {
+      background: #fff; border-radius: 14px; border: 1px solid rgba(15,16,18,0.08); overflow: hidden; max-width: 280px;
+    }
+    .device-mock .ios-bar {
+      height: 28px; background: #f0f0f2; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--fg-tertiary); border-bottom: 1px solid rgba(15,16,18,0.06);
+    }
+    .device-mock .home {
+      background: linear-gradient(180deg, #c7d2e0, #aebac8);
+      padding: 20px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; row-gap: 18px;
+    }
+    .device-mock .icon { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .device-mock .icon img, .device-mock .icon .ph {
+      width: 44px; height: 44px; border-radius: 10px; display: block;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.18);
+    }
+    .device-mock .icon .ph { background: rgba(255,255,255,0.55); }
+    .device-mock .icon span { font-size: 8.5px; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+
+    .legend { display: flex; flex-wrap: wrap; gap: 14px; }
+    .legend > div {
+      flex: 1 1 220px; background: #fff; border: 1px solid rgba(15,16,18,0.08); border-radius: 10px;
+      padding: 14px 16px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .legend strong { font-size: 12px; letter-spacing: -0.01em; }
+    .legend .desc { font-size: 12px; color: var(--fg-tertiary); line-height: 1.5; }
+
+    code.full { display: block; padding: 10px 12px; background: #0f1012; color: #f2f2f4; font-size: 11px; line-height: 1.5; border-radius: 8px; font-family: ui-monospace, Menlo, monospace; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <span class="dot"></span>
+    <span>Augen Pro</span>
+    <span class="sep"></span>
+    <span class="sub">Brand assets — camilopinzon.dev</span>
+  </header>
+
+  <main>
+
+    <!-- 1. Mark in context -->
+    <section>
+      <h2>Brand mark — in context</h2>
+      <p class="sub">The same CP monogram across the contexts that consume each size. Tab favicon, iOS home screen, search results.</p>
+
+      <div style="display: grid; gap: 18px; grid-template-columns: 1fr; align-items: start;">
+        <div class="browser-mock">
+          <div class="bar">
+            <span class="lights"><span></span><span></span><span></span></span>
+            <span class="tab">
+              <img src="favicon-32x32.png" alt="">
+              Camilo Pinzón — Diseño & Producto
+              <span class="x">×</span>
+            </span>
+            <span class="tab" style="opacity:0.5;">
+              <span style="width:14px; height:14px; background:#ddd; border-radius:3px; display:inline-block;"></span>
+              Otra pestaña
+              <span class="x">×</span>
+            </span>
+          </div>
+          <div class="body" style="font-size: 12px; color: var(--fg-tertiary);">
+            Vista típica del navegador: el favicon 32×32 aparece en la pestaña activa.
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 22px; align-items: flex-start; flex-wrap: wrap;">
+          <div class="device-mock">
+            <div class="ios-bar">9:41 — camilopinzon.dev en la pantalla de inicio</div>
+            <div class="home">
+              <div class="icon"><div class="ph"></div><span>Mail</span></div>
+              <div class="icon"><div class="ph"></div><span>Notas</span></div>
+              <div class="icon"><div class="ph"></div><span>Música</span></div>
+              <div class="icon"><div class="ph"></div><span>Mapas</span></div>
+              <div class="icon"><img src="apple-touch-icon.png" alt="Camilo Pinzón"><span style="color:#fff;">Camilo Pinzón</span></div>
+              <div class="icon"><div class="ph"></div><span>Cámara</span></div>
+              <div class="icon"><div class="ph"></div><span>Reloj</span></div>
+              <div class="icon"><div class="ph"></div><span>Bolsa</span></div>
+            </div>
+          </div>
+
+          <div style="background:#fff; border:1px solid rgba(15,16,18,0.08); border-radius:14px; padding: 18px 20px; flex: 1 1 320px; min-width: 280px;">
+            <div style="font-size:11px; color:var(--fg-tertiary); letter-spacing:.08em; text-transform:uppercase; font-weight:500; margin-bottom:10px;">Resultado de búsqueda</div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom: 6px;">
+              <img src="favicon-32x32.png" width="20" height="20" alt="" style="border-radius:4px;">
+              <span style="font-size: 13px; color: var(--fg-tertiary);">camilopinzon.dev</span>
+            </div>
+            <h3 style="margin:0 0 4px 0; font-size:18px; color:#1a0dab; font-weight:400; letter-spacing:-0.01em;">Camilo Pinzón — Diseño & Producto</h3>
+            <p style="margin:0; font-size:13px; line-height:1.5; color:#4a4a4d;">Estudio independiente de diseño y producto. Portafolio, casos de estudio y notas sobre dirección de arte e interfaces.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Favicon scale -->
+    <section>
+      <h2>Favicons — every size renders cleanly</h2>
+      <p class="sub">Same mark drawn fresh at each pixel size: heavier weights for 16/32 to survive sub-pixel rendering, the accent dot disabled at &lt; 48 px where it would just look like noise.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="stage"><img src="favicon-16x16.png" width="64" height="64" alt="" style="image-rendering:pixelated;"></div>
+          <div class="meta"><span class="name">16 × 16</span><code>favicon-16x16</code> · tab</div>
+        </div>
+        <div class="card">
+          <div class="stage"><img src="favicon-32x32.png" width="96" height="96" alt="" style="image-rendering:pixelated;"></div>
+          <div class="meta"><span class="name">32 × 32</span><code>favicon-32x32</code> · standard</div>
+        </div>
+        <div class="card">
+          <div class="stage"><img src="favicon-48x48.png" width="96" height="96" alt=""></div>
+          <div class="meta"><span class="name">48 × 48</span><code>favicon-48x48</code> · taskbar</div>
+        </div>
+        <div class="card">
+          <div class="stage"><img src="favicon-96x96.png" width="128" height="128" alt=""></div>
+          <div class="meta"><span class="name">96 × 96</span><code>favicon-96x96</code> · search</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. App icons -->
+    <section>
+      <h2>App icons — iOS, Android, Windows</h2>
+      <p class="sub">iOS overlays a rounded mask automatically; Android adaptive icons use a separate "maskable" variant with a 26 % safe-area.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="stage"><img src="apple-touch-icon.png" width="120" height="120" alt="" style="border-radius:22%;"></div>
+          <div class="meta"><span class="name">Apple Touch · 180×180</span><code>apple-touch-icon</code></div>
+        </div>
+        <div class="card">
+          <div class="stage"><img src="android-chrome-192x192.png" width="120" height="120" alt=""></div>
+          <div class="meta"><span class="name">Android · 192×192</span><code>android-chrome-192x192</code></div>
+        </div>
+        <div class="card">
+          <div class="stage"><img src="android-chrome-512x512.png" width="160" height="160" alt=""></div>
+          <div class="meta"><span class="name">Android · 512×512</span><code>android-chrome-512x512</code></div>
+        </div>
+        <div class="card">
+          <div class="stage"><img src="android-chrome-maskable-512x512.png" width="160" height="160" alt="" style="clip-path: circle(40% at 50% 50%);"></div>
+          <div class="meta"><span class="name">Maskable · adaptive</span><code>android-chrome-maskable-512x512</code></div>
+        </div>
+        <div class="card">
+          <div class="stage"><img src="mstile-150x150.png" width="100" height="100" alt=""></div>
+          <div class="meta"><span class="name">Windows tile · 150×150</span><code>mstile-150x150</code></div>
+        </div>
+        <div class="card">
+          <div class="stage" style="background: #fff;"><img src="favicon.svg" width="64" height="64" alt=""></div>
+          <div class="meta"><span class="name">Vector · SVG</span><code>favicon.svg</code> · modern</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Social cards -->
+    <section>
+      <h2>Open Graph & Twitter — 1200 × 630</h2>
+      <p class="sub">A single, calm composition: hairline accent at the top, big restrained wordmark, blue under-rule, tagline and URL. The dark variant uses the dark-mode palette for sharers on dark UIs.</p>
+
+      <div class="og-preview">
+        <div class="og-card">
+          <div class="head"><span class="label">Open Graph · light</span><span class="meta-pill">og-image.png · webp</span></div>
+          <img src="og-image.png" alt="OG image — Camilo Pinzón">
+        </div>
+        <div class="og-card">
+          <div class="head"><span class="label">Open Graph · dark</span><span class="meta-pill">og-image-dark.png · webp</span></div>
+          <img src="og-image-dark.png" alt="OG image — dark">
+        </div>
+        <div class="og-card">
+          <div class="head"><span class="label">Twitter · summary_large_image</span><span class="meta-pill">twitter-card.png · webp</span></div>
+          <img src="twitter-card.png" alt="Twitter card">
+        </div>
+        <div class="og-card">
+          <div class="head"><span class="label">Square · LinkedIn / chat preview</span><span class="meta-pill">og-image-square.png · webp · 1200×1200</span></div>
+          <img src="og-image-square.png" alt="Square OG card" style="max-height: 480px; object-fit: contain; width: 100%; background: #f7f7f9;">
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Format guide -->
+    <section>
+      <h2>Format choice — what to use where</h2>
+      <div class="legend">
+        <div>
+          <strong>WebP</strong>
+          <span class="desc">Smallest payload (~30 % less than PNG). Use anywhere except where the platform requires PNG. Safe in &lt;link rel="icon"&gt;, &lt;img&gt;, CSS.</span>
+        </div>
+        <div>
+          <strong>PNG</strong>
+          <span class="desc">Always shipped as the safe default. Required by iOS apple-touch-icon, by Facebook/Twitter for OG cards (their crawlers don't reliably support WebP), and by older Windows tiles.</span>
+        </div>
+        <div>
+          <strong>SVG</strong>
+          <span class="desc">Modern browsers prefer the vector favicon (one file, every DPI). Safari uses safari-pinned-tab.svg for the pinned tab strip.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Snippet -->
+    <section>
+      <h2>How to wire it up</h2>
+      <p class="sub">Copy the block in <code>head-snippet.html</code> into your site's <code>&lt;head&gt;</code>. Replace <code>https://www.camilopinzon.dev</code> with your absolute origin so social crawlers can fetch the OG image.</p>
+      <code class="full">&lt;link rel="icon" type="image/svg+xml" href="/assets/social/favicon.svg" /&gt;<br>&lt;link rel="icon" type="image/png" sizes="32x32" href="/assets/social/favicon-32x32.png" /&gt;<br>&lt;link rel="apple-touch-icon" sizes="180x180" href="/assets/social/apple-touch-icon.png" /&gt;<br>&lt;link rel="manifest" href="/assets/social/site.webmanifest" /&gt;<br>&lt;meta property="og:image" content="https://www.camilopinzon.dev/assets/social/og-image.png" /&gt;<br>&lt;meta name="twitter:card" content="summary_large_image" /&gt;<br>&lt;meta name="twitter:image" content="https://www.camilopinzon.dev/assets/social/twitter-card.png" /&gt;</code>
+    </section>
+
+  </main>
+</body>
+</html>

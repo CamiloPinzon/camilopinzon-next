@@ -181,6 +181,13 @@ const translations = {
       errorUnexpected: "Unexpected error.",
       ariaLabel: "Blog subscription",
     },
+    seo: {
+      title: "Camilo Pinzón — Frontend & Web Developer",
+      description: "Frontend developer specializing in React, Next.js, and high-impact digital experiences. Explore my professional portfolio, interactive projects, and personal blog.",
+      keywords: ["Camilo Pinzon", "Frontend Developer", "Web Development", "React", "Next.js", "JavaScript", "TypeScript", "Colombia", "Remote"],
+      ogTitle: "Camilo Pinzón — Premium Web Experiences",
+      ogDescription: "Creating robust software architectures and stunning visual interfaces. Available for remote web development projects worldwide.",
+    },
   },
   es: {
     nav: {
@@ -361,6 +368,13 @@ const translations = {
       errorDefault: "Error al suscribirte.",
       errorUnexpected: "Error inesperado.",
       ariaLabel: "Suscripción al blog",
+    },
+    seo: {
+      title: "Camilo Pinzón — Desarrollador Web & Frontend",
+      description: "Desarrollador frontend especializado en React, Next.js y experiencias digitales de alto impacto. Explora mi portafolio profesional, proyectos interactivos y blog personal.",
+      keywords: ["Camilo Pinzon", "Desarrollador Frontend", "Desarrollo Web", "React", "Next.js", "JavaScript", "TypeScript", "Colombia", "Remoto"],
+      ogTitle: "Camilo Pinzón — Experiencias Web Premium",
+      ogDescription: "Creando arquitecturas de software robustas e interfaces visuales deslumbrantes. Disponible para proyectos de desarrollo web remoto a nivel global.",
     },
   },
 };

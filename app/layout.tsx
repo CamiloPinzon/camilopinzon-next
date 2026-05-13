@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   description:
     "Frontend developer especializado en React, Next.js y experiencias digitales de alto impacto. Portfolio, blog y contacto.",
-  metadataBase: new URL("https://camilopinzon.dev"),
+  metadataBase: new URL("https://camilopinzon.com"),
   openGraph: {
     type: "website",
     siteName: "Camilo Pinzón",
