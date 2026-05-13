@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "@/lib/i18n/translations";
-import styles from "./blog-post.module.scss"; // Optional, or use global utilities
 import { Metadata } from "next";
 
 export const revalidate = 3600;
