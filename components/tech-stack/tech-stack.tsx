@@ -79,7 +79,7 @@ const STACK: Tech[] = [
   {
     name: "Next.js",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
-    color: "#000000",
+    color: "#ffffff",
     category: "framework",
   },
 ];
