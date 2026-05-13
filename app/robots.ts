@@ -4,9 +4,14 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
+        // Regla permisiva explícita para scrapers de redes sociales y mensajería
+        userAgent: ["facebookexternalhit", "Twitterbot", "LinkedInBot", "WhatsApp", "TelegramBot"],
+        allow: "/",
+      },
+      {
+        // Regla general para todos los motores de búsqueda
         userAgent: "*",
-        allow: ["/en/", "/es/"],
-        // Bloquear rutas de admin y utilidades internas
+        allow: "/",
         disallow: ["/admin/", "/api/"],
       },
     ],
