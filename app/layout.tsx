@@ -33,14 +33,37 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://camilopinzon.com"),
   openGraph: {
     type: "website",
+    title: "Camilo Pinzón — Frontend Developer",
+    description: "Frontend developer especializado en React, Next.js y experiencias digitales de alto impacto. Portfolio, blog y contacto.",
     siteName: "Camilo Pinzón",
-    locale: "es-CO",
+    locale: "es_CO",
     alternateLocale: "en_US",
+    images: [
+      {
+        url: "/social/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Camilo Pinzón — Frontend Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    title: "Camilo Pinzón — Frontend Developer",
+    description: "Frontend developer especializado en React, Next.js y experiencias digitales de alto impacto.",
+    images: ["/social/twitter-card.png"],
     creator: "@CamiloPinzonDev",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/social/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/social/site.webmanifest",
   robots: {
     index: true,
     follow: true,
