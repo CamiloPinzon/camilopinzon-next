@@ -74,6 +74,9 @@
   letter-spacing: -0.02em;
   cursor: pointer;
   transition: background 0.2s;
+  text-decoration: none;
+  display: inline-block;
+  box-sizing: border-box;
 
   &:hover {
     background: #0062c3;
@@ -92,6 +95,9 @@
   letter-spacing: -0.02em;
   cursor: pointer;
   transition: background 0.2s;
+  text-decoration: none;
+  display: inline-block;
+  box-sizing: border-box;
 
   &:hover {
     background: rgba(12, 13, 15, 0.05);
@@ -159,7 +165,7 @@
     flex-direction: column;
     width: 100%;
 
-    button {
+    button, a {
       width: 100%;
     }
   }

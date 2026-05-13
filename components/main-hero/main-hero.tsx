@@ -30,8 +30,9 @@ export default function MainHero({ lang }: { lang: string }) {
             download={`Camilo-Pinzon-CV-${lang.toUpperCase()}.pdf`}
             target="_blank"
             rel="noopener noreferrer"
+            className={styles.btnGhost}
           >
-            <button className={styles.btnGhost}>{t.hero.btnCv}</button>
+            {t.hero.btnCv}
           </a>
         </div>
 
