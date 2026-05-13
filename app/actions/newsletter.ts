@@ -4,6 +4,7 @@ import { adminDb } from "@/lib/firebase/admin";
 import { Resend } from "resend";
 import { newsletterSchema } from "@/lib/validation/schemas";
 import { getTranslations } from "@/lib/i18n/translations";
+import { renderNewsletterWelcomeHtml } from "@/lib/emails/templates";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -58,7 +59,7 @@ export async function subscribeNewsletter(formData: FormData) {
       status: "active",
     });
 
-    // 5. Enviar correo de bienvenida localizado desde el diccionario
+    // 5. Enviar correo de bienvenida usando el template HTML independiente y los textos localizados
     const senderEmail = process.env.RESEND_SENDER_EMAIL || "hola@camilopinzon.com";
 
     if (process.env.RESEND_API_KEY) {
@@ -66,16 +67,12 @@ export async function subscribeNewsletter(formData: FormData) {
         from: `Camilo Pinzón <${senderEmail}>`,
         to: email,
         subject: t.emails.newsletterSubject,
-        html: `
-          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
-            <h2 style="color: #0f1012;">${t.emails.newsletterGreeting}</h2>
-            <p>${t.emails.newsletterThanks}</p>
-            <p>${t.emails.newsletterFollowUp}</p>
-            <br/>
-            <p>${t.emails.newsletterSignOff}</p>
-            <p><strong>Camilo Pinzón</strong></p>
-          </div>
-        `,
+        html: renderNewsletterWelcomeHtml({
+          greeting: t.emails.newsletterGreeting,
+          thanks: t.emails.newsletterThanks,
+          followUp: t.emails.newsletterFollowUp,
+          signOff: t.emails.newsletterSignOff,
+        }),
       });
     }
 

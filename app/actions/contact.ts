@@ -4,6 +4,10 @@ import { adminDb } from "@/lib/firebase/admin";
 import { Resend } from "resend";
 import { contactSchema } from "@/lib/validation/schemas";
 import { getTranslations } from "@/lib/i18n/translations";
+import {
+  renderContactAutoReplyHtml,
+  renderAdminContactNotificationHtml,
+} from "@/lib/emails/templates";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -74,33 +78,27 @@ export async function submitContact(formData: FormData) {
         from: `Website <${senderEmail}>`,
         to: myEmail,
         subject: `Nuevo contacto en la web (${lang.toUpperCase()}): ${name}`,
-        html: `
-          <h2>Nuevo mensaje de contacto</h2>
-          <p><strong>Nombre:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Idioma:</strong> ${lang.toUpperCase()}</p>
-          <p><strong>Mensaje:</strong></p>
-          <p>${message.replace(/\n/g, "<br/>")}</p>
-        `,
+        html: renderAdminContactNotificationHtml({
+          name,
+          email,
+          lang,
+          message,
+        }),
       });
 
-      // b) Auto-respuesta al usuario localizada desde el diccionario
+      // b) Auto-respuesta al usuario usando el template HTML independiente y los textos del diccionario
       const greeting = t.emails.contactGreeting.replace("{name}", name);
-      
+
       await resend.emails.send({
         from: `Camilo Pinzón <${senderEmail}>`,
         to: email,
         subject: t.emails.contactSubject,
-        html: `
-          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
-            <h2 style="color: #0f1012;">${greeting}</h2>
-            <p>${t.emails.contactThanks}</p>
-            <p>${t.emails.contactFollowUp}</p>
-            <br/>
-            <p>${t.emails.contactSignOff}</p>
-            <p><strong>Camilo Pinzón</strong></p>
-          </div>
-        `,
+        html: renderContactAutoReplyHtml({
+          greeting,
+          thanks: t.emails.contactThanks,
+          followUp: t.emails.contactFollowUp,
+          signOff: t.emails.contactSignOff,
+        }),
       });
     } else {
       console.warn("Falta RESEND_API_KEY. Contacto guardado en Firestore sin enviar correos.");
