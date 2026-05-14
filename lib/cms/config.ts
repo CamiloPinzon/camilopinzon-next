@@ -66,6 +66,7 @@ export const cmsConfig: CMSConfig = {
         { name: 'githubUrl', label: 'GitHub Repository', type: 'string' },
         { name: 'coverImage', label: 'Cover Image', type: 'image' },
         { name: 'coverImageAlt', label: 'Cover Image Alt Text (Accessibility)', type: 'string', localized: true },
+        { name: 'order', label: 'Display Order (higher = first)', type: 'number' },
       ],
     },
     {

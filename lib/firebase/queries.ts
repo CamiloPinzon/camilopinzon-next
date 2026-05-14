@@ -169,3 +169,57 @@ export async function getExperience(
     return [];
   }
 }
+
+export interface ProjectItem {
+  id: string;
+  title: string;
+  client?: string;
+  description: string;
+  tags: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  coverImage?: string;
+  coverImageAlt?: string;
+  order: number;
+}
+
+export async function getProjects(lang: string = "en"): Promise<ProjectItem[]> {
+  try {
+    const snapshot = await getDocs(collection(db, "projects"));
+
+    const items = snapshot.docs.map((docSnap) => {
+      const data = docSnap.data();
+      const localized =
+        data.translations?.[lang] || data.translations?.["en"] || {};
+
+      let tags: string[] = [];
+      if (Array.isArray(data.techStack)) {
+        tags = data.techStack;
+      } else if (typeof data.techStack === "string") {
+        tags = data.techStack
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean);
+      }
+
+      return {
+        id: docSnap.id,
+        title: localized.title || data.title || "Untitled Project",
+        client: data.client || "",
+        description: localized.description || data.description || "",
+        tags,
+        liveUrl: data.liveUrl || "",
+        githubUrl: data.githubUrl || "",
+        coverImage: data.coverImage || "",
+        coverImageAlt: localized.coverImageAlt || data.coverImageAlt || "",
+        order: typeof data.order === "number" ? data.order : 0,
+      };
+    });
+
+    // Sort by order descending (higher order first)
+    return items.sort((a, b) => b.order - a.order);
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return [];
+  }
+}
