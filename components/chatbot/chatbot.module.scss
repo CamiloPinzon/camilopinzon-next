@@ -1,7 +1,7 @@
 .floatingButton {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 80px;
+  right: 10px;
   width: 56px;
   height: 56px;
   border-radius: var(--radius-full);
@@ -13,7 +13,9 @@
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  transition:
+    transform 0.3s var(--ease),
+    opacity 0.3s var(--ease);
   z-index: 1000;
 
   &:hover {
@@ -45,7 +47,9 @@
   pointer-events: none;
   transform: translateY(20px) scale(0.95);
   transform-origin: bottom right;
-  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  transition:
+    transform 0.3s var(--ease),
+    opacity 0.3s var(--ease);
 
   &.open {
     opacity: 1;
@@ -194,7 +198,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.2s, opacity 0.2s;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
   flex-shrink: 0;
 
   &:hover:not(:disabled) {
@@ -218,8 +224,9 @@
   animation-delay: 0.5s;
   margin: 0 12px;
 
-  &::before, &::after {
-    content: '';
+  &::before,
+  &::after {
+    content: "";
     display: inline-block;
     position: absolute;
     top: 0;
@@ -246,7 +253,8 @@
   0% {
     background-color: var(--color-slate-comment);
   }
-  50%, 100% {
+  50%,
+  100% {
     background-color: rgba(134, 135, 136, 0.2);
   }
 }
@@ -257,7 +265,7 @@
     right: 20px;
     bottom: 20px;
   }
-  
+
   .floatingButton {
     right: 20px;
     bottom: 20px;
