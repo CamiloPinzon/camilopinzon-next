@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import MainNav from "@/components/nav/main-nav";
 import Footer from "@/components/footer/footer";
+import Chatbot from "@/components/chatbot/chatbot";
 import { getTranslations } from "@/lib/i18n/translations";
 
 export async function generateMetadata({
@@ -65,6 +66,7 @@ export default async function PublicLayout({
       <MainNav />
       {children}
       <Footer lang={lang} />
+      <Chatbot lang={lang} />
     </>
   );
 }

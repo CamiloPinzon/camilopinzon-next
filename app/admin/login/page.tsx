@@ -18,6 +18,7 @@ export default function AdminLogin() {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       router.push("/admin"); // Redirect to dashboard
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error("Firebase Login Error:", err);
 
