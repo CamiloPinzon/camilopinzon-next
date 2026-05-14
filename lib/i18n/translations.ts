@@ -47,6 +47,9 @@ const translations = {
       pageSubtitle:
         "Explore my thoughts, tutorials, and experiences on frontend development, UI/UX design, and professional growth.",
       noArticles: "No published articles yet.",
+      readTime: "{time} read",
+      readArticle: "Read full article",
+      featuredBadge: "⭐ Featured",
     },
     experience: {
       pageTitle: "Professional Experience",
@@ -240,6 +243,9 @@ const translations = {
       pageSubtitle:
         "Explora mis pensamientos, tutoriales y experiencias sobre desarrollo frontend, diseño UI/UX y crecimiento profesional.",
       noArticles: "No hay artículos publicados aún.",
+      readTime: "{time} lectura",
+      readArticle: "Leer artículo completo",
+      featuredBadge: "⭐ Destacado",
     },
     experience: {
       pageTitle: "Experiencia Profesional",

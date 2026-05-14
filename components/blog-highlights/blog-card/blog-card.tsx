@@ -7,6 +7,7 @@ interface CardStyle extends React.CSSProperties {
 
 import Link from "next/link";
 import { BlogPost as QueryBlogPost } from "@/lib/firebase/queries";
+import { getTranslations } from "@/lib/i18n/translations";
 
 // We extend the backend BlogPost to include the formatted fields for UI
 export interface BlogPost extends Omit<QueryBlogPost, 'id'> {
@@ -19,13 +20,23 @@ interface BlogCardProps {
   post: BlogPost;
   index: number;
   variant?: "default" | "featured";
+  lang?: string;
 }
 
 export default function BlogCard({
   post,
   index,
   variant = "default",
+  lang = "en",
 }: BlogCardProps) {
+  const t = getTranslations(lang);
+  const readTimeText = t.blog.readTime
+    ? t.blog.readTime.replace("{time}", String(post.readTime))
+    : `${post.readTime} lectura`;
+  const readArticleText = t.blog.readArticle || "Leer artículo completo";
+  const featuredBadgeText = t.blog.featuredBadge || "⭐ Destacado";
+  const postUrl = `/${lang}/blog/${post.slug}`;
+
   if (variant === "featured") {
     return (
       <article
@@ -46,21 +57,19 @@ export default function BlogCard({
                 {post.date}
               </time>
               <span className={styles.dot} aria-hidden="true" />
-              <span className={styles.readTime}>
-                {post.readTime} lectura
-              </span>
+              <span className={styles.readTime}>{readTimeText}</span>
             </div>
           </header>
           <h3 className={styles.titleFeatured}>{post.title}</h3>
           <p className={styles.excerpt}>{post.excerpt}</p>
-          <Link href={`/blog/${post.slug}`} className={styles.cta} aria-label={`Leer más sobre ${post.title}`}>
-            Leer artículo completo
+          <Link href={postUrl} className={styles.cta} aria-label={`${readArticleText}: ${post.title}`}>
+            {readArticleText}
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
         </div>
-        <span className={styles.featuredBadge}>⭐ Destacado</span>
+        <span className={styles.featuredBadge}>{featuredBadgeText}</span>
       </article>
     );
   }
@@ -83,13 +92,13 @@ export default function BlogCard({
             {post.date}
           </time>
           <span className={styles.dot} aria-hidden="true" />
-          <span className={styles.readTime}>{post.readTime} lectura</span>
+          <span className={styles.readTime}>{readTimeText}</span>
         </div>
       </header>
       <h3 className={styles.title}>{post.title}</h3>
       <p className={styles.excerpt}>{post.excerpt}</p>
-      <Link href={`/blog/${post.slug}`} className={styles.cta} aria-label={`Leer más sobre ${post.title}`}>
-        Leer artículo completo
+      <Link href={postUrl} className={styles.cta} aria-label={`${readArticleText}: ${post.title}`}>
+        {readArticleText}
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>

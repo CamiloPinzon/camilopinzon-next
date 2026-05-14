@@ -26,14 +26,14 @@ export default function DownloadCv({ lang = "en" }: { lang?: string }) {
             📄
           </span>
           <p className={styles.description}>{t.cv.description}</p>
-          <a
+          <Button
             href={`/${lang}-cv-camilo-pinzon.pdf`}
             download="Camilo-Pinzon-CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button>{t.cv.downloadBtn}</Button>
-          </a>
+            {t.cv.downloadBtn}
+          </Button>
         </div>
       </div>
     </section>

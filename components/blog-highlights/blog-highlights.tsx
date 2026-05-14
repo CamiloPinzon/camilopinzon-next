@@ -69,7 +69,7 @@ export default function BlogHighlights({ posts, lang }: BlogHighlightsProps) {
         {/* Featured — visible only when showing all */}
         {activeTag === t.blog.filterAll && featuredPost && (
           <div className={styles.featuredWrapper}>
-            <BlogCard post={featuredPost} index={0} variant="featured" />
+            <BlogCard post={featuredPost} index={0} variant="featured" lang={lang} />
           </div>
         )}
 
@@ -77,7 +77,7 @@ export default function BlogHighlights({ posts, lang }: BlogHighlightsProps) {
         {gridPosts.length > 0 ? (
           <div className={styles.grid}>
             {gridPosts.map((post, i) => (
-              <BlogCard key={post.id} post={post} index={i} />
+              <BlogCard key={post.id} post={post} index={i} lang={lang} />
             ))}
           </div>
         ) : (
@@ -90,7 +90,7 @@ export default function BlogHighlights({ posts, lang }: BlogHighlightsProps) {
         )}
 
         <div className={styles.ctaRow}>
-          <Button href="/blog" variant="ghost">
+          <Button href={`/${lang}/blog`} variant="ghost">
             {t.blog.viewAll}
           </Button>
         </div>

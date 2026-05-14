@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SocialLinks from "../social-links/social-links";
 import FooterNewsletterForm from "./footer-newsletter-form";
 import styles from "./footer.module.scss";
@@ -7,6 +8,14 @@ const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Footer({ lang = "en" }: { lang?: string }) {
   const t = getTranslations(lang);
+
+  const FOOTER_LINKS = [
+    { label: t.nav.home, href: `/${lang}/#inicio` },
+    { label: t.nav.experience, href: `/${lang}/experience` },
+    { label: t.nav.services, href: `/${lang}/#servicios` },
+    { label: t.nav.blog, href: `/${lang}/#blogs` },
+    { label: t.nav.contact, href: `/${lang}/#contacto` },
+  ];
 
   return (
     <footer className={styles.footer} role="contentinfo">
@@ -19,9 +28,9 @@ export default function Footer({ lang = "en" }: { lang?: string }) {
       </div>
       <nav aria-label={t.footer.navLabel}>
         <ul className={styles.nav}>
-          {t.footer.links.map((link) => (
-            <li key={link}>
-              <a href={`#${link.toLowerCase()}`}>{link}</a>
+          {FOOTER_LINKS.map((link) => (
+            <li key={link.label}>
+              <Link href={link.href}>{link.label}</Link>
             </li>
           ))}
         </ul>

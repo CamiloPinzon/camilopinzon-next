@@ -24,7 +24,16 @@ export default function MainHero({ lang }: { lang: string }) {
         <p className={styles.subtext}>{t.hero.subtext}</p>
 
         <div className={styles.actions}>
-          <button className={styles.btnPrimary}>{t.hero.btnProjects}</button>
+          <button
+            className={styles.btnPrimary}
+            onClick={() => {
+              document
+                .getElementById("portafolio")
+                ?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+          >
+            {t.hero.btnProjects}
+          </button>
           <a
             href={`/${lang}-cv-camilo-pinzon.pdf`}
             download={`Camilo-Pinzon-CV-${lang.toUpperCase()}.pdf`}

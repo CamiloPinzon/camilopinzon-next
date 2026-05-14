@@ -71,7 +71,7 @@ export default async function BlogIndexPage({
           }}
         >
           {formattedPosts.map((post, i) => (
-            <BlogCard key={post.id} post={post} index={i} />
+            <BlogCard key={post.id} post={post} index={i} lang={lang} />
           ))}
         </div>
       ) : (
