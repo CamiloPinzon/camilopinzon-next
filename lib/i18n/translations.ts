@@ -122,10 +122,16 @@ const translations = {
       viewProject: "View Project",
       items: [
         {
-          title: "Planeta Sorprendente — Chocolates Jet",
+          title: "AI-Powered Portfolio & CMS",
           description:
-            "Digitized Colombia's most iconic sticker album into an interactive web experience. Engineered gamification mechanics, virtual transactions, and user engagement loops.",
-          tags: ["PHP", "JavaScript", "Gamification", "MySQL"],
+            "Designed and engineered a high-performance personal web application using Next.js, React 19, and TypeScript. Implemented an autonomous recruitment assistant powered by Google Gemini Flash and live RAG context.",
+          tags: ["Next.js", "React 19", "Gemini AI", "TypeScript", "SCSS"],
+        },
+        {
+          title: "Google Wallet / Pay",
+          description:
+            "Engineered frontend forms and managed CMS content for the global Google Wallet platform. Overcame complex architectural challenges like full RTL (Right-to-Left) and LTR layout support.",
+          tags: ["TypeScript", "Frontend Forms", "RTL/LTR", "CMS"],
         },
         {
           title: "Disney Cruise Line",
@@ -134,10 +140,10 @@ const translations = {
           tags: ["React", "TypeScript", "UI Components", "Migration"],
         },
         {
-          title: "Google Wallet / Pay",
+          title: "Planeta Sorprendente — Chocolates Jet",
           description:
-            "Engineered frontend forms and managed CMS content for the global Google Wallet platform. Overcame complex architectural challenges like full RTL (Right-to-Left) and LTR layout support.",
-          tags: ["TypeScript", "Frontend Forms", "RTL/LTR", "CMS"],
+            "Digitized Colombia's most iconic sticker album into an interactive web experience. Engineered gamification mechanics, virtual transactions, and user engagement loops.",
+          tags: ["PHP", "JavaScript", "Gamification", "MySQL"],
         },
       ],
     },
@@ -318,10 +324,16 @@ const translations = {
       viewProject: "Ver Proyecto",
       items: [
         {
-          title: "Planeta Sorprendente — Chocolates Jet",
+          title: "Portafolio Personal & Asistente IA",
           description:
-            "Migración del icónico álbum de cromos a una experiencia web interactiva. Implementación de mecánicas de gamificación, ludificación y un sistema de transacciones virtuales.",
-          tags: ["PHP", "JavaScript", "Gamificación", "MySQL"],
+            "Diseño y desarrollo full-stack de esta plataforma web personal de alto rendimiento con Next.js, React 19 y TypeScript. Integración de un asistente virtual autónomo de reclutamiento basado en Google Gemini Flash y contexto RAG.",
+          tags: ["Next.js", "React 19", "Gemini AI", "TypeScript", "SCSS"],
+        },
+        {
+          title: "Google Wallet / Pay",
+          description:
+            "Maquetación de formularios frontend y administración en CMS propio. Resolución de retos complejos de accesibilidad y diseño como el soporte integral para layouts RTL y LTR.",
+          tags: ["TypeScript", "Formularios UI", "RTL/LTR", "CMS"],
         },
         {
           title: "Disney Cruise Line",
@@ -330,10 +342,10 @@ const translations = {
           tags: ["React", "TypeScript", "Componentes UI", "Migración"],
         },
         {
-          title: "Google Wallet / Pay",
+          title: "Planeta Sorprendente — Chocolates Jet",
           description:
-            "Maquetación de formularios frontend y administración en CMS propio. Resolución de retos complejos de accesibilidad y diseño como el soporte integral para layouts RTL y LTR.",
-          tags: ["TypeScript", "Formularios UI", "RTL/LTR", "CMS"],
+            "Migración del icónico álbum de cromos a una experiencia web interactiva. Implementación de mecánicas de gamificación, ludificación y un sistema de transacciones virtuales.",
+          tags: ["PHP", "JavaScript", "Gamificación", "MySQL"],
         },
       ],
     },

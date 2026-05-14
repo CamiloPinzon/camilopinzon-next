@@ -4,9 +4,10 @@ import styles from "./portfolio.module.scss";
 
 // Imágenes de stock premium (Unsplash) representativas
 const IMAGES = [
-  "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=800&q=80", // Bosque/Naturaleza (Jet)
-  "https://images.unsplash.com/photo-1599640842225-85d111c60e6b?auto=format&fit=crop&w=800&q=80", // Crucero (Disney)
-  "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80", // Pago Digital (Google Wallet)
+  "/social/og-image.png", // Pantallazo real / OG Preview del proyecto (Portafolio IA)
+  "/portfolio/google-pay.png", // Interfaz de formulario / Stickers Google Pay
+  "/portfolio/disney-cruise.png", // Plataforma web / Itinerarios Disney Cruise Line
+  "/portfolio/chocolates-jet.png", // Portada gráfica oficial del álbum Chocolates Jet
 ];
 
 export default function Portfolio({ lang = "en" }: { lang?: string }) {
