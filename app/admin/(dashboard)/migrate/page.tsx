@@ -58,9 +58,10 @@ export default function MigratePage() {
       }
 
       log('✅ Migration completed successfully!');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      log(`❌ Error during migration: ${error.message}`);
+      const msg = error instanceof Error ? error.message : String(error);
+      log(`❌ Error during migration: ${msg}`);
     } finally {
       setLoading(false);
     }

@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://camilopinzon.dev";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://camilopinzon.com";
   const langs = ["en", "es"];
   const now = new Date();
 

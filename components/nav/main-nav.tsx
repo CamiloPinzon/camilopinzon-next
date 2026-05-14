@@ -54,6 +54,7 @@ export default function MainNav() {
 
     sections.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, currentLang]);
 
   /** Smooth scroll a un anchor — usa scrollIntoView + scroll-margin-top del CSS */

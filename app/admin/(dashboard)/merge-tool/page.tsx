@@ -111,9 +111,10 @@ export default function MergeToolPage() {
       setSecondaryPostId('');
       await fetchPosts();
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      log(`❌ Error during merge: ${error.message}`);
+      const msg = error instanceof Error ? error.message : String(error);
+      log(`❌ Error during merge: ${msg}`);
     } finally {
       setMerging(false);
     }

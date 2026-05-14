@@ -1,20 +1,25 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '@/lib/firebase/config';
 import { cmsConfig } from '@/lib/cms/config';
 import Link from 'next/link';
 
+interface DocumentItem {
+  id: string;
+  translations?: Record<string, Record<string, string>>;
+  [key: string]: unknown;
+}
+
 export default function CollectionList() {
   const params = useParams();
-  const router = useRouter();
   const collectionId = params.collectionId as string;
   
   const schema = cmsConfig.collections.find(c => c.id === collectionId);
   
-  const [documents, setDocuments] = useState<any[]>([]);
+  const [documents, setDocuments] = useState<DocumentItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -97,7 +102,7 @@ export default function CollectionList() {
                 // Handle localized primary field display
                 const displayValue = primaryField.localized && doc.translations 
                   ? doc.translations[cmsConfig.defaultLanguage]?.[primaryField.name] 
-                  : doc[primaryField.name];
+                  : (doc[primaryField.name] as string);
 
                 return (
                   <tr key={doc.id} style={{ borderBottom: '1px solid #f4f7fe' }}>

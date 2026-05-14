@@ -44,9 +44,10 @@ export default function MigrateSubscribersPage() {
       
       setCount(migrated);
       setStatus('success');
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      setError(err.message);
+      const msg = err instanceof Error ? err.message : String(err);
+      setError(msg);
       setStatus('error');
     }
   };
