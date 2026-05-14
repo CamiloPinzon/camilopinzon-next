@@ -4,7 +4,7 @@ import { adminDb } from "@/lib/firebase/admin";
 import { Resend } from "resend";
 import { newsletterSchema } from "@/lib/validation/schemas";
 import { getTranslations } from "@/lib/i18n/translations";
-import { renderNewsletterWelcomeHtml } from "@/lib/emails/templates";
+import { renderNewsletterWelcomeHtml, renderNewPostHtml } from "@/lib/emails/templates";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -79,6 +79,77 @@ export async function subscribeNewsletter(formData: FormData) {
     return { success: true };
   } catch (error) {
     console.error("Error subscribing to newsletter:", error);
+    return { success: false, error: "Unexpected error occurred." };
+  }
+}
+
+interface PostFormData {
+  title?: string;
+  slug?: string;
+  translations?: Record<string, {
+    title?: string;
+    [key: string]: unknown;
+  }>;
+  [key: string]: unknown;
+}
+
+export async function notifySubscribersAboutNewPostAction(formData: PostFormData) {
+  try {
+    const subscribersRef = adminDb.collection("subscribers");
+    const snapshot = await subscribersRef.where("status", "==", "active").get();
+    
+    const senderEmail = process.env.RESEND_SENDER_EMAIL || "hola@camilopinzon.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://camilopinzon.com";
+
+    const emailsToSend: { to: string; lang: string }[] = [];
+
+    // Add test email if it's not already in the list
+    emailsToSend.push({
+      to: "pinzonac@gmail.com",
+      lang: "es" 
+    });
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      if (data.email && data.email !== "pinzonac@gmail.com") {
+        emailsToSend.push({
+          to: data.email,
+          lang: data.lang || "es"
+        });
+      }
+    });
+
+    if (process.env.RESEND_API_KEY) {
+      // resend.batch.send could be used, but loop is simple and allows localization per user
+      for (const sub of emailsToSend) {
+        const t = getTranslations(sub.lang);
+        const localizedTitle = formData.translations?.[sub.lang]?.title || formData.title || "Nuevo Artículo";
+        const subject = t.emails.newPostSubject ? t.emails.newPostSubject.replace("{title}", localizedTitle) : `Nuevo Artículo: ${localizedTitle}`;
+        const message = t.emails.newPostMessage ? t.emails.newPostMessage.replace("{title}", localizedTitle) : `Acabo de publicar un nuevo artículo: ${localizedTitle}`;
+        
+        const postUrl = `${siteUrl}/${sub.lang}/blog/${formData.slug || ''}`;
+        const unsubscribeUrl = `${siteUrl}/api/unsubscribe?email=${encodeURIComponent(sub.to)}`;
+
+        await resend.emails.send({
+          from: `Camilo Pinzón <${senderEmail}>`,
+          to: sub.to,
+          subject: subject,
+          html: renderNewPostHtml({
+            greeting: t.emails.newPostGreeting || "¡Hola!",
+            message: message,
+            ctaText: t.emails.newPostCta || "Leer el artículo",
+            postUrl: postUrl,
+            signOff: t.emails.newsletterSignOff || "Un saludo,",
+            unsubscribeText: t.emails.unsubscribe || "Darse de baja",
+            unsubscribeUrl: unsubscribeUrl,
+          }),
+        });
+      }
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error notifying subscribers:", error);
     return { success: false, error: "Unexpected error occurred." };
   }
 }

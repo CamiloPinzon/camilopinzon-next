@@ -8,6 +8,12 @@ import { cmsConfig } from '@/lib/cms/config';
 import Link from 'next/link';
 import { uploadImageToCloudinary } from '@/lib/actions/uploadImage';
 import Image from 'next/image';
+import { notifySubscribersAboutNewPostAction } from '@/app/actions/newsletter';
+
+interface DocumentData {
+  translations?: Record<string, Record<string, unknown>>;
+  [key: string]: unknown;
+}
 
 // --- Cloudinary Uploader Component ---
 function CloudinaryUploader({ value, onChange }: { value: string; onChange: (url: string) => void }) {
@@ -41,7 +47,7 @@ function CloudinaryUploader({ value, onChange }: { value: string; onChange: (url
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
       {value ? (
         <div style={{ position: 'relative', width: '200px', height: '120px', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e0e5f2' }}>
-          <img src={value} alt="Uploaded" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <Image src={value} alt="Uploaded" fill style={{ objectFit: 'cover' }} />
           <button
             onClick={() => onChange('')}
             style={{ position: 'absolute', top: '8px', right: '8px', background: 'rgba(255,59,48,0.9)', color: 'white', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}
@@ -83,7 +89,7 @@ export default function DocumentEditor() {
   
   const schema = cmsConfig.collections.find(c => c.id === collectionId);
   const [activeLang, setActiveLang] = useState(cmsConfig.defaultLanguage);
-  const [formData, setFormData] = useState<Record<string, any>>({ translations: {} });
+  const [formData, setFormData] = useState<DocumentData>({ translations: {} });
   const [loading, setLoading] = useState(!isNew);
   const [saving, setSaving] = useState(false);
 
@@ -94,7 +100,7 @@ export default function DocumentEditor() {
       try {
         const docSnap = await getDoc(doc(db, schema.id, docId));
         if (docSnap.exists()) {
-          const data = docSnap.data() as Record<string, any>;
+          const data = docSnap.data() as DocumentData;
           if (!data.translations) data.translations = {};
           setFormData(data);
         } else {
@@ -114,7 +120,7 @@ export default function DocumentEditor() {
   if (!schema) return <div>Collection not found</div>;
 
   const handleFieldChange = (name: string, value: unknown, localized: boolean) => {
-    setFormData((prev: Record<string, any>) => {
+    setFormData((prev: DocumentData) => {
       const newData = { ...prev };
       if (localized) {
         if (!newData.translations) newData.translations = {};
@@ -129,7 +135,7 @@ export default function DocumentEditor() {
 
   const getFieldValue = (name: string, localized: boolean) => {
     if (localized) {
-      return (formData.translations as Record<string, any>)?.[activeLang]?.[name] || '';
+      return formData.translations?.[activeLang]?.[name] || '';
     }
     return formData[name] || '';
   };
@@ -139,6 +145,9 @@ export default function DocumentEditor() {
     try {
       if (isNew) {
         await addDoc(collection(db, schema.id), formData);
+        if (schema.id === 'posts' && formData.isPublished) {
+          await notifySubscribersAboutNewPostAction(formData);
+        }
       } else {
         await setDoc(doc(db, schema.id, docId), formData, { merge: true });
       }

@@ -169,6 +169,11 @@ const translations = {
       newsletterThanks: "Thank you for subscribing to my Newsletter.",
       newsletterFollowUp: "From now on, you will receive my latest articles and exclusive content directly in your inbox.",
       newsletterSignOff: "Best regards,",
+      newPostSubject: "New Post: {title}",
+      newPostGreeting: "Hello!",
+      newPostMessage: "I just published a new article on my blog: '{title}'.",
+      newPostCta: "Read the full article",
+      unsubscribe: "Unsubscribe from these emails",
     },
     blogNewsletter: {
       title: "Did you like the content?",
@@ -357,6 +362,11 @@ const translations = {
       newsletterThanks: "Gracias por suscribirte a mi Newsletter.",
       newsletterFollowUp: "De ahora en adelante, recibirás mis nuevos artículos y contenido exclusivo directamente en tu bandeja de entrada.",
       newsletterSignOff: "Un saludo,",
+      newPostSubject: "Nuevo Artículo: {title}",
+      newPostGreeting: "¡Hola!",
+      newPostMessage: "Acabo de publicar un nuevo artículo en mi blog: '{title}'.",
+      newPostCta: "Leer el artículo completo",
+      unsubscribe: "Darse de baja de estos correos",
     },
     blogNewsletter: {
       title: "¿Te gustó el contenido?",

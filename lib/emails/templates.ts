@@ -405,3 +405,106 @@ export function renderNewsletterWelcomeHtml({
     </html>
   `;
 }
+
+interface NewPostProps {
+  greeting: string;
+  message: string;
+  ctaText: string;
+  postUrl: string;
+  signOff: string;
+  unsubscribeText: string;
+  unsubscribeUrl: string;
+}
+
+export function renderNewPostHtml({
+  greeting,
+  message,
+  ctaText,
+  postUrl,
+  signOff,
+  unsubscribeText,
+  unsubscribeUrl,
+}: NewPostProps): string {
+  return `
+    <!DOCTYPE html>
+    <html lang="es" dir="ltr" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="color-scheme" content="light dark">
+      <meta name="supported-color-schemes" content="light dark">
+      <title>Nuevo Artículo</title>
+      <style>
+        body, table, td, p, a, h1 { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; }
+        body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+        a { text-decoration: none; }
+        .btn { display: inline-block; padding: 12px 24px; background-color: #0071e3; color: #ffffff !important; border-radius: 8px; font-weight: 600; text-align: center; }
+        @media only screen and (max-width: 620px) {
+          .container { width: 100% !important; max-width: 100% !important; border-radius: 0 !important; }
+          .px-outer { padding-left: 20px !important; padding-right: 20px !important; }
+        }
+        @media (prefers-color-scheme: dark) {
+          .bg-page   { background-color: #0a0b0d !important; }
+          .bg-card   { background-color: #141518 !important; border-color: rgba(255,255,255,0.08) !important; }
+          .fg-primary   { color: #f2f2f4 !important; }
+          .fg-secondary { color: #c4c4c7 !important; }
+          .fg-tertiary  { color: #8a8a8d !important; }
+        }
+      </style>
+    </head>
+    <body class="bg-page" style="margin:0; padding:0; background-color:#f2f2f4; color:#0f1012; font-family:'PP Neue Montreal','Inter',Arial,sans-serif; -webkit-font-smoothing:antialiased;">
+      <table role="presentation" class="bg-page wrap-pad" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f2f2f4; padding:40px 20px;">
+        <tr>
+          <td align="center">
+            <table role="presentation" class="container bg-card" width="600" border="0" cellspacing="0" cellpadding="0" style="width:600px; max-width:600px; background-color:#ffffff; border:1px solid rgba(15,16,18,0.08); border-radius:12px; overflow:hidden;">
+              <tr>
+                <td height="6" style="height:6px; line-height:6px; font-size:0; background-color:#0071e3;">&nbsp;</td>
+              </tr>
+              <tr>
+                <td class="px-outer" style="padding:32px 40px 10px 40px;">
+                  <h1 class="fg-primary" style="margin:0; font-size:24px; font-weight:600; line-height:1.2; color:#0f1012;">
+                    ${greeting}
+                  </h1>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-outer" style="padding:10px 40px 32px 40px;">
+                  <p class="fg-secondary" style="margin:0 0 24px 0; font-size:16px; line-height:1.6; color:#4a4a4d;">${message}</p>
+                  
+                  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 32px;">
+                    <tr>
+                      <td align="center">
+                        <a href="${postUrl}" class="btn" style="background-color: #0071e3; color: #ffffff; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-block;">
+                          ${ctaText}
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td style="border-top:1px solid rgba(15,16,18,0.06); padding-top:20px; margin-top:10px;">
+                        <p class="fg-tertiary" style="margin:0 0 4px 0; font-size:14px; line-height:1.4; color:#8f8f8f;">${signOff}</p>
+                        <p class="fg-primary" style="margin:0; font-size:16px; font-weight:600; color:#0f1012;">Camilo Pinz&oacute;n</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td align="center" style="background-color:#fafafa; padding:16px 40px; border-top:1px solid rgba(15,16,18,0.04);">
+                  <p class="fg-tertiary" style="margin:0; font-size:12px; line-height:1.5; color:#8f8f8f;">
+                    <a href="${unsubscribeUrl}" style="color:#8f8f8f; text-decoration:underline;">${unsubscribeText}</a>
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `;
+}
