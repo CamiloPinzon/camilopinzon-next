@@ -103,15 +103,9 @@ export async function notifySubscribersAboutNewPostAction(formData: PostFormData
 
     const emailsToSend: { to: string; lang: string }[] = [];
 
-    // Add test email if it's not already in the list
-    emailsToSend.push({
-      to: "pinzonac@gmail.com",
-      lang: "es" 
-    });
-
     snapshot.forEach(doc => {
       const data = doc.data();
-      if (data.email && data.email !== "pinzonac@gmail.com") {
+      if (data.email) {
         emailsToSend.push({
           to: data.email,
           lang: data.lang || "es"

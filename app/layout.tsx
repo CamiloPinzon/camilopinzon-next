@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 import RecaptchaProvider from "@/components/providers/recaptcha-provider";
 import GlobalBg from "@/components/global-bg/global-bg";
+import { Analytics } from "@vercel/analytics/react";
 
 import "./globals.css";
 
@@ -91,6 +92,7 @@ export default function RootLayout({
         <GlobalBg />
         <RecaptchaProvider />
         {children}
+        <Analytics />
       </body>
     </html>
   );
