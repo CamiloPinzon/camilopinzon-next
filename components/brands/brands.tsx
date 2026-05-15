@@ -39,6 +39,8 @@ export default function Brands({ lang = "en" }: { lang?: string }) {
                 width={200}
                 height={80}
                 className={styles.logoImage}
+                priority
+                style={{ width: "auto" }}
               />
             </a>
           ))}
