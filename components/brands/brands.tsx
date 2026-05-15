@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { BRANDS } from "@/lib/constants";
 import { getTranslations } from "@/lib/i18n/translations";
 
@@ -33,15 +32,7 @@ export default function Brands({ lang = "en" }: { lang?: string }) {
               className={styles.brandLogo}
               title={brand.name}
             >
-              <Image
-                src={brand.logo}
-                alt={brand.name}
-                width={200}
-                height={80}
-                className={styles.logoImage}
-                priority
-                style={{ width: "auto" }}
-              />
+              <span className={styles.logoText}>{brand.name}</span>
             </a>
           ))}
         </div>
