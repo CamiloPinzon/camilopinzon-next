@@ -8,7 +8,6 @@ const translations = {
       services: "Services",
       portfolio: "Portfolio",
       blog: "Blog",
-      downloadCv: "Download CV",
       contact: "Contact",
     },
     hero: {
@@ -25,7 +24,6 @@ const translations = {
       subtext:
         "Front-end web development focused on performance, accessibility, and clean code. I transform ideas into high-impact digital products.",
       btnProjects: "View projects",
-      btnCv: "Download CV",
       statYears: "Years of experience",
       statProjects: "Delivered projects",
       statTechs: "Mastered technologies",
@@ -75,15 +73,6 @@ const translations = {
     },
     blogPost: {
       backLink: "← Back to Home",
-    },
-    cv: {
-      sectionLabel: "Curriculum Vitae",
-      title: "My",
-      titleEm: "Resume",
-      description:
-        "Download my complete resume to see my detailed experience, education, and technical skills.",
-      downloadBtn: "Download PDF",
-      ariaLabel: "Download my complete resume",
     },
     services: {
       ariaLabel: "Services offered",
@@ -210,7 +199,6 @@ const translations = {
       services: "Servicios",
       portfolio: "Portafolio",
       blog: "Blogs",
-      downloadCv: "Descargar CV",
       contact: "Contacto",
     },
     hero: {
@@ -227,7 +215,6 @@ const translations = {
       subtext:
         "Desarrollo web front-end con enfoque en performance, accesibilidad y código limpio. Transformo ideas en productos digitales de alto impacto.",
       btnProjects: "Ver proyectos",
-      btnCv: "Descargar CV",
       statYears: "Años de experiencia",
       statProjects: "Proyectos entregados",
       statTechs: "Tecnologías dominadas",
@@ -277,15 +264,6 @@ const translations = {
     },
     blogPost: {
       backLink: "← Volver al Inicio",
-    },
-    cv: {
-      sectionLabel: "Curriculum Vitae",
-      title: "Mi Hoja",
-      titleEm: "de Vida",
-      description:
-        "Descarga mi hoja de vida completa para ver mi experiencia detallada, educación y habilidades técnicas.",
-      downloadBtn: "Descargar PDF",
-      ariaLabel: "Descargar mi hoja de vida completa",
     },
     services: {
       ariaLabel: "Servicios ofrecidos",

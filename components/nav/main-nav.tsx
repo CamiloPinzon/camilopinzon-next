@@ -32,7 +32,6 @@ export default function MainNav() {
     { label: t.nav.services, href: `/${currentLang}/#servicios` },
     { label: t.nav.portfolio, href: `/${currentLang}/#portafolio` },
     { label: t.nav.blog, href: `/${currentLang}/#blogs` },
-    { label: t.nav.downloadCv, href: `/${currentLang}/#descargar-cv` },
   ];
 
   useEffect(() => {
@@ -187,6 +186,9 @@ export default function MainNav() {
           );
         })}
         <div className={styles.drawerDivider} />
+        <div style={{ marginBottom: '10px' }}>
+          <LanguageSwitcher />
+        </div>
         <Link
           href={`/${currentLang}/#contacto`}
           className={styles.drawerCta}

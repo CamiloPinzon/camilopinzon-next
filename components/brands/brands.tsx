@@ -1,5 +1,4 @@
-"use client";
-
+import Image from "next/image";
 import { BRANDS } from "@/lib/constants";
 import { getTranslations } from "@/lib/i18n/translations";
 
@@ -14,7 +13,7 @@ export default function Brands({ lang = "en" }: { lang?: string }) {
   return (
     <section className={styles.section} aria-labelledby="brands-title">
       <div className="section-wrapper">
-        <header className="section-header">
+        <header className={`section-header ${styles.sectionHeader}`}>
           <h2 className="section-title" id="brands-title">
             {t.brands.title}
           </h2>
@@ -26,10 +25,22 @@ export default function Brands({ lang = "en" }: { lang?: string }) {
       <div className={styles.marqueeContainer} aria-label={t.brands.ariaLabel}>
         <div className={styles.marqueeTrack}>
           {marqueeItems.map((brand, i) => (
-            <div key={i} className={styles.brandLogo}>
-              {/* Para mostrar logos reales. Si no existen, muestra el alt. */}
-              <div className={styles.logoPlaceholder}>{brand.name}</div>
-            </div>
+            <a
+              key={i}
+              href={brand.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.brandLogo}
+              title={brand.name}
+            >
+              <Image
+                src={brand.logo}
+                alt={brand.name}
+                width={200}
+                height={80}
+                className={styles.logoImage}
+              />
+            </a>
           ))}
         </div>
       </div>

@@ -34,15 +34,7 @@ export default function MainHero({ lang }: { lang: string }) {
           >
             {t.hero.btnProjects}
           </button>
-          <a
-            href={`/${lang}-cv-camilo-pinzon.pdf`}
-            download={`Camilo-Pinzon-CV-${lang.toUpperCase()}.pdf`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.btnGhost}
-          >
-            {t.hero.btnCv}
-          </a>
+
         </div>
 
         <div className={styles.divider} />

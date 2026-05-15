@@ -1,8 +1,8 @@
 .section {
-  padding-top: 120px;
-  padding-bottom: 60px; /* Reduced bottom padding as requested */
+  padding-top: 100px;
+  padding-bottom: 100px; /* Equalized for vertical centering */
   border-top: 1px solid var(--color-border);
-  overflow: hidden; /* Vital para el marquee */
+  overflow: hidden;
 }
 
 .subtext {
@@ -13,10 +13,14 @@
   margin-top: 8px;
 }
 
+.sectionHeader {
+  margin-bottom: 10px !important;
+}
+
 /* ════════ INFINITE MARQUEE ════════ */
 
 .marqueeContainer {
-  margin-top: var(--space-xl);
+  margin-top: 25px; /* Reduced by half as requested */
   width: 100vw;
   position: relative;
   left: 50%;
@@ -60,23 +64,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* El estilo visual grisáceo que hace que los logos se vean limpios y unificados */
-  filter: grayscale(100%) opacity(0.5);
-  transition: filter 0.3s ease;
+  /* Eliminados filtros para mostrar logos originales */
+  transition: all 0.3s ease;
   min-width: 150px;
+  text-decoration: none;
   
   &:hover {
-    filter: grayscale(0%) opacity(1);
+    transform: scale(1.05);
   }
 }
 
-/* Fallback de texto si aún no hay imagen SVG */
-.logoPlaceholder {
-  font-family: var(--font-primary);
-  font-size: 28px;
-  font-weight: 350;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
+.logoImage {
+  object-fit: contain;
+  width: auto;
+  height: 80px; /* Increased as requested */
 }
 
 @keyframes marqueeScroll {

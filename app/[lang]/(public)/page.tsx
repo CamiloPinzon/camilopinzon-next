@@ -4,7 +4,6 @@ import TechStack from "@/components/tech-stack/tech-stack";
 import BlogHighlights from "@/components/blog-highlights/blog-highlights";
 import Brands from "@/components/brands/brands";
 import { getRecentPosts } from "@/lib/firebase/queries";
-import DownloadCv from "@/components/download-cv/download-cv";
 import Services from "@/components/services/services";
 import Portfolio from "@/components/portfolio/portfolio";
 import Contact from "@/components/contact/contact";
@@ -94,11 +93,6 @@ export default async function Home({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/*
-        Hero — animación propia (fadeSlideUp CSS), no necesita data-reveal.
-        Las demás secciones usan data-reveal (sección entera) y
-        data-stagger (items individuales) observados por GlobalAnimations.
-      */}
       <MainHero lang={lang} />
       <div className="theme-dark">
         <Services lang={lang} />
@@ -106,11 +100,10 @@ export default async function Home({
       </div>
       <Portfolio lang={lang} />
       <div className="theme-dark">
-        <DownloadCv lang={lang} />
         <BlogHighlights posts={posts} lang={lang} />
       </div>
-      <Brands lang={lang} />
       <Contact lang={lang} />
+      <Brands lang={lang} />
     </main>
   );
 }

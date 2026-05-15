@@ -1,0 +1,42 @@
+.pillSwitcher {
+  display: flex;
+  gap: var(--element-gap);
+  padding: 4px;
+}
+
+.pillItem {
+  /* Pill Tag Button Styling */
+  background: rgba(117, 117, 117, 0.08);
+  color: var(--color-slate-comment);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 6px 14px;
+  font-family: var(--font-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+
+  &:hover {
+    background: rgba(117, 117, 117, 0.12);
+    color: var(--color-midnight-ink);
+  }
+
+  &.active {
+    background: var(--color-midnight-ink);
+    color: var(--color-ghost-white);
+    font-weight: 600;
+    pointer-events: none;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 860px) {
+  .pillItem {
+    font-size: 14px; /* Larger targets for mobile */
+    padding: 10px 20px;
+    border-radius: 12px;
+  }
+}

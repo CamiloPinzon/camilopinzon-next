@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { cmsConfig } from '@/lib/cms/config';
+import styles from './language-switcher.module.scss';
 
 export default function LanguageSwitcher() {
   const pathname = usePathname();
@@ -25,23 +26,12 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div className="language-switcher" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+    <div className={styles.pillSwitcher}>
       {cmsConfig.languages.map((lang) => (
         <button
           key={lang.code}
           onClick={() => handleLanguageChange(lang.code)}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: '4px 8px',
-            borderRadius: '6px',
-            fontSize: '0.875rem',
-            fontWeight: currentLang === lang.code ? 700 : 400,
-            color: currentLang === lang.code ? '#4318ff' : '#a3aed1',
-            backgroundColor: currentLang === lang.code ? '#eef2ff' : 'transparent',
-            transition: 'all 0.2s ease'
-          }}
+          className={`${styles.pillItem} ${currentLang === lang.code ? styles.active : ''}`}
         >
           {lang.code.toUpperCase()}
         </button>
