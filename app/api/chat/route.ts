@@ -1,8 +1,28 @@
 import { streamText, convertToModelMessages } from 'ai';
 import { google } from '@ai-sdk/google';
 import { adminDb } from '@/lib/firebase/admin';
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
 
 export const maxDuration = 30; // Max execution time
+
+// Rate limiter: 10 requests per minute per IP
+// Lazily initialized so it only runs when env vars are present (skips at build time)
+let ratelimit: Ratelimit | null = null;
+function getRateLimiter(): Ratelimit | null {
+  if (ratelimit) return ratelimit;
+  if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+    console.warn('[API Chat] Upstash env vars not set — rate limiting disabled.');
+    return null;
+  }
+  ratelimit = new Ratelimit({
+    redis: Redis.fromEnv(),
+    limiter: Ratelimit.slidingWindow(10, '1 m'),
+    analytics: true,
+    prefix: 'chat_rl',
+  });
+  return ratelimit;
+}
 
 export async function GET() {
   return new Response("API Chat Route is fully operational and reachable!", { status: 200 });
@@ -11,6 +31,38 @@ export async function GET() {
 export async function POST(req: Request) {
   console.log('>>> [API Chat] Request received');
   try {
+    // --- Rate limiting ---
+    const limiter = getRateLimiter();
+    if (limiter) {
+      // Resolve client IP from Vercel/proxy headers, fallback to '127.0.0.1'
+      const ip =
+        req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+        req.headers.get('x-real-ip') ??
+        '127.0.0.1';
+
+      const { success, remaining, reset } = await limiter.limit(ip);
+      console.log(`>>> [API Chat] Rate limit — IP: ${ip} | remaining: ${remaining}`);
+
+      if (!success) {
+        const retryAfterSecs = Math.ceil((reset - Date.now()) / 1000);
+        return new Response(
+          JSON.stringify({
+            error: 'rate_limit_exceeded',
+            message: 'Has enviado demasiadas preguntas. Por favor espera un momento e intenta de nuevo.',
+            retryAfter: retryAfterSecs,
+          }),
+          {
+            status: 429,
+            headers: {
+              'Content-Type': 'application/json',
+              'Retry-After': String(retryAfterSecs),
+              'X-RateLimit-Remaining': '0',
+            },
+          }
+        );
+      }
+    }
+
     const { messages, lang = 'es' } = await req.json();
     console.log('>>> [API Chat] Messages parsed:', messages.length);
 
