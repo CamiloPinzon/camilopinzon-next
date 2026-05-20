@@ -86,6 +86,19 @@ export default async function BlogPostPage({
     },
   };
 
+  const faqJsonLd = post.faqs && post.faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": post.faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  } : null;
+
   return (
     <article
       className="section-wrapper"
@@ -100,6 +113,12 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <Link
         href={`/${lang}/blog`}
         style={{
@@ -222,6 +241,66 @@ export default async function BlogPostPage({
         className="prose"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
+
+      {/* FAQ Section */}
+      {post.faqs && post.faqs.length > 0 && (
+        <section
+          style={{
+            marginTop: "60px",
+            borderTop: "1px solid var(--color-border)",
+            paddingTop: "40px",
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: "var(--font-primary)",
+              fontSize: "clamp(24px, 4vw, 32px)",
+              fontWeight: 400,
+              color: "var(--color-midnight-ink)",
+              marginBottom: "32px",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            {t.blogPost.faqTitle}
+          </h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+            {post.faqs.map((faq, index) => (
+              <div
+                key={index}
+                style={{
+                  padding: "24px",
+                  borderRadius: "var(--radius-md)",
+                  border: "1px solid var(--color-border)",
+                  backgroundColor: "var(--color-ghost-white)",
+                }}
+              >
+                <h3
+                  style={{
+                    fontFamily: "var(--font-primary)",
+                    fontSize: "18px",
+                    fontWeight: 500,
+                    color: "var(--color-midnight-ink)",
+                    marginBottom: "12px",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {faq.question}
+                </h3>
+                <p
+                  style={{
+                    color: "var(--color-slate-comment)",
+                    fontFamily: "var(--font-secondary)",
+                    fontSize: "15px",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {faq.answer}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </article>
   );
 }

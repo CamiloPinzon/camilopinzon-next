@@ -1,6 +1,11 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./config";
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -14,6 +19,7 @@ export interface BlogPost {
   tag?: string;
   color?: string;
   readTime?: string;
+  faqs?: FAQItem[];
 }
 
 export async function getRecentPosts(
@@ -51,6 +57,7 @@ export async function getRecentPosts(
         tag: data.tag || "Desarrollo", // Default tag if missing
         color: data.color || "#61DAFB", // Default color if missing
         readTime: data.readTime || "5 min",
+        faqs: localized.faqs || data.faqs || [],
       };
     });
 
@@ -109,6 +116,7 @@ export async function getPostBySlug(
       tag: data.tag || "Desarrollo",
       color: data.color || "#61DAFB",
       readTime: data.readTime || "5 min",
+      faqs: localized.faqs || data.faqs || [],
     };
   } catch (error) {
     console.error("Error fetching post:", error);

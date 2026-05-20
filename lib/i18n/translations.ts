@@ -73,6 +73,7 @@ const translations = {
     },
     blogPost: {
       backLink: "← Back to Home",
+      faqTitle: "Frequently Asked Questions",
     },
     services: {
       ariaLabel: "Services offered",
@@ -264,6 +265,7 @@ const translations = {
     },
     blogPost: {
       backLink: "← Volver al Inicio",
+      faqTitle: "Preguntas Frecuentes",
     },
     services: {
       ariaLabel: "Servicios ofrecidos",

@@ -38,8 +38,29 @@ export default async function ExperiencePage({
   const experiences = await getExperience(lang);
   const t = getTranslations(lang);
 
+  const aboutPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `https://camilopinzon.dev/${lang}/experience#about`,
+    url: `https://camilopinzon.dev/${lang}/experience`,
+    name: lang === "es" ? "Experiencia Profesional - Camilo Pinzón" : "Professional Experience - Camilo Pinzón",
+    description: lang === "es"
+      ? "Trayectoria profesional de Camilo Pinzón: empresas, roles y tecnologías a lo largo de su carrera."
+      : "Professional journey of Camilo Pinzón: companies, roles and technologies throughout his career.",
+    mainEntity: {
+      "@type": "Person",
+      "@id": `https://camilopinzon.dev/${lang}#person`,
+      name: "Camilo Pinzón",
+      url: `https://camilopinzon.dev/${lang}`,
+    }
+  };
+
   return (
     <div style={{ paddingTop: "100px", minHeight: "100vh" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageJsonLd) }}
+      />
       <Experience
         items={experiences}
         title={t.experience.pageTitle}
