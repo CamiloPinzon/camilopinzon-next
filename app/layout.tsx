@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import RecaptchaProvider from "@/components/providers/recaptcha-provider";
 import GlobalBg from "@/components/global-bg/global-bg";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 
@@ -93,6 +94,7 @@ export default function RootLayout({
         <RecaptchaProvider />
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
