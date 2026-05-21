@@ -69,25 +69,23 @@ export default async function Home({
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Person",
-        "@id": `https://camilopinzon.dev/${lang}#person`,
+        "@type": "Organization",
+        "@id": `https://camilopinzon.dev/${lang}#organization`,
         name: "Camilo Pinzón",
         url: `https://camilopinzon.dev/${lang}`,
-        image: "https://camilopinzon.dev/profile.webp",
+        logo: "https://camilopinzon.dev/profile.webp",
         sameAs: [
           "https://github.com/CamiloPinzon",
           "https://www.linkedin.com/in/camilo-pinzon/",
         ],
-        jobTitle: "Frontend Developer",
-        worksFor: {
-          "@type": "Organization",
-          name: "Freelance",
-        },
-        knowsAbout: ["React", "Next.js", "TypeScript", "Firebase", "CSS"],
         description:
           lang === "es"
-            ? "Desarrollador frontend especializado en React y Next.js con experiencia en experiencias digitales de alto impacto."
-            : "Frontend developer specialized in React and Next.js with experience in high-impact digital experiences.",
+            ? "Empresa de desarrollo web y soluciones de software de alto impacto. Nos especializamos en React, Next.js y experiencias digitales premium."
+            : "Custom web development agency specializing in React, Next.js, and high-impact digital solutions.",
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "CO",
+        }
       },
       {
         "@type": "WebSite",
@@ -95,7 +93,7 @@ export default async function Home({
         url: `https://camilopinzon.dev/${lang}`,
         name: "Camilo Pinzón",
         publisher: {
-          "@id": `https://camilopinzon.dev/${lang}#person`
+          "@id": `https://camilopinzon.dev/${lang}#organization`
         }
       },
       {
@@ -104,7 +102,7 @@ export default async function Home({
         url: `https://camilopinzon.dev/${lang}#contacto`,
         name: lang === "es" ? "Contacto - Camilo Pinzón" : "Contact - Camilo Pinzón",
         mainEntity: {
-          "@id": `https://camilopinzon.dev/${lang}#person`
+          "@id": `https://camilopinzon.dev/${lang}#organization`
         }
       }
     ]
@@ -119,10 +117,10 @@ export default async function Home({
       <MainHero lang={lang} />
       <div className="theme-dark">
         <Services lang={lang} />
-        <TechStack lang={lang} />
       </div>
       <Portfolio lang={lang} />
       <div className="theme-dark">
+        <TechStack lang={lang} />
         <BlogHighlights posts={posts} lang={lang} />
       </div>
       <Contact lang={lang} />

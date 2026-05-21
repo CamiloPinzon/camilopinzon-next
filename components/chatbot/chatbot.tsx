@@ -24,8 +24,8 @@ export default function Chatbot({ lang = "es" }: { lang?: string }) {
             type: "text",
             text:
               lang === "es"
-                ? "¡Hola! Soy el asistente virtual de Camilo. ¿Tienes alguna pregunta sobre su experiencia, proyectos o habilidades?"
-                : "Hello! I am Camilo's virtual assistant. Do you have any questions about his experience, projects, or skills?",
+                ? "¡Hola! Soy el asistente virtual de Camilo Pinzón. ¿Tienes alguna pregunta sobre nuestros servicios, casos de éxito o disponibilidad?"
+                : "Hello! I am Camilo Pinzón's virtual assistant. Do you have any questions about our services, success stories, or availability?",
           },
         ],
       } as UIMessage,
@@ -63,8 +63,8 @@ export default function Chatbot({ lang = "es" }: { lang?: string }) {
             <Bot size={20} className={styles.botIcon} />
             <span>
               {lang === "es"
-                ? "Asistente de Reclutamiento"
-                : "Recruitment Assistant"}
+                ? "Asistente de Servicios & Proyectos"
+                : "Services & Projects Assistant"}
             </span>
           </div>
           <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>

@@ -50,7 +50,7 @@ export default function MainHero({ lang }: { lang: string }) {
           </li>
           <li>
             <span>{t.hero.statTechs}</span>
-            <strong>11</strong>
+            <strong>4</strong>
           </li>
         </ul>
       </div>
