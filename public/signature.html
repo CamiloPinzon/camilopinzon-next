@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Firma de Correo — Camilo Pinzón</title>
+  <style>
+    :root {
+      --color-midnight-ink: #0f1012;
+      --color-future-blue: #0071e3;
+      --color-slate-comment: #8f8f8f;
+      --color-border: rgba(15, 16, 18, 0.08);
+      --color-canvas: #fdfdfd;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: #f7f7f9;
+      color: var(--color-midnight-ink);
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background: var(--color-canvas);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--color-border);
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--color-slate-comment);
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+
+    .signature-card {
+      margin-bottom: 48px;
+      padding: 24px;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background: #fafafa;
+    }
+
+    .signature-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 12px;
+    }
+
+    .signature-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-future-blue);
+    }
+
+    .btn-copy {
+      padding: 8px 16px;
+      background-color: var(--color-future-blue);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-copy:hover {
+      background-color: #0062c3;
+    }
+
+    .btn-copy:active {
+      transform: scale(0.97);
+    }
+
+    /* Wrap to avoid styling leak to copy content */
+    .signature-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      display: inline-block;
+    }
+
+    .instructions {
+      margin-top: 40px;
+      font-size: 13px;
+      color: var(--color-slate-comment);
+      line-height: 1.6;
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+    }
+
+    .instructions ol {
+      padding-left: 20px;
+    }
+  </style>
+  <script>
+    async function copyToClipboard(containerId) {
+      const container = document.getElementById(containerId);
+      const htmlContent = container.innerHTML;
+      const textContent = container.innerText;
+
+      try {
+        const blobHtml = new Blob([htmlContent], { type: "text/html" });
+        const blobText = new Blob([textContent], { type: "text/plain" });
+        const data = [new ClipboardItem({
+          "text/html": blobHtml,
+          "text/plain": blobText
+        })];
+        await navigator.clipboard.write(data);
+        alert("¡Firma copiada al portapapeles! Ya puedes ir a la configuración de tu correo (Gmail, Outlook, etc.) y pegarla (Ctrl+V / Cmd+V).");
+      } catch (err) {
+        console.error(err);
+        alert("Tu navegador no soporta el copiado directo de HTML. Por favor, selecciona la firma visualmente con el mouse, cópiala con Ctrl+C y pégala.");
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Firmas de Correo Profesionales</h1>
+    <p class="subtitle">Selecciona tu diseño preferido y haz clic en "Copiar Firma" para pegarla directamente en la configuración de Gmail, Outlook o Apple Mail.</p>
+
+    <!-- DISEÑO 1: Horizontal Premium con Foto -->
+    <div class="signature-card">
+      <div class="signature-header">
+        <span class="signature-title">Opción A: Ejecutiva Horizontal (Con Avatar)</span>
+        <button class="btn-copy" onclick="copyToClipboard('sig-a')">Copiar Firma</button>
+      </div>
+      <div id="sig-a" class="signature-content">
+        <!-- START OF HTML EMAIL SIGNATURE (SAFE FOR EMAIL CLIENTS) -->
+        <table cellpadding="0" cellspacing="0" border="0" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.4; color: #0f1012; max-width: 500px;">
+          <tr>
+            <!-- Avatar -->
+            <td valign="top" style="padding-right: 20px;">
+              <img src="https://camilopinzon.dev/profile.webp" alt="Andrés Camilo Pinzón Laverde" width="84" height="84" style="border-radius: 50%; display: block; object-fit: cover; border: 1px solid #e5e7eb;" />
+            </td>
+            <!-- Divider Line -->
+            <td valign="top" style="border-left: 2px solid #0071e3; padding-left: 18px;">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td>
+                    <div style="font-size: 15px; font-weight: 700; color: #0f1012; letter-spacing: -0.01em; margin: 0; padding: 0; line-height: 1.2;">Andrés Camilo Pinzón Laverde</div>
+                    <div style="font-size: 12px; color: #0071e3; font-weight: 600; margin-top: 3px; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.05em;">Lead Web Engineer</div>
+                    <div style="font-size: 11px; color: #8f8f8f; margin-top: 2px;">Servicios y Soluciones Web Corporativas</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-top: 10px; font-size: 12px; color: #8f8f8f; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+                    <a href="https://camilopinzon.dev" target="_blank" style="color: #0f1012; text-decoration: none; font-weight: 600;">camilopinzon.dev</a>
+                    <span style="color: #0071e3; padding: 0 6px;">|</span>
+                    <a href="https://linkedin.com/in/camilo-pinzon" target="_blank" style="color: #8f8f8f; text-decoration: none;">LinkedIn</a>
+                    <span style="color: #0071e3; padding: 0 6px;">|</span>
+                    <a href="https://github.com/CamiloPinzon" target="_blank" style="color: #8f8f8f; text-decoration: none;">GitHub</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <!-- END OF HTML EMAIL SIGNATURE -->
+      </div>
+    </div>
+
+    <!-- DISEÑO 2: Minimalista Lineal sin Foto (Ideal anti-bloqueo) -->
+    <div class="signature-card">
+      <div class="signature-header">
+        <span class="signature-title">Opción B: Tecnológica Minimalista (Sin foto)</span>
+        <button class="btn-copy" onclick="copyToClipboard('sig-b')">Copiar Firma</button>
+      </div>
+      <div id="sig-b" class="signature-content">
+        <!-- START OF HTML EMAIL SIGNATURE -->
+        <table cellpadding="0" cellspacing="0" border="0" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.4; color: #0f1012; max-width: 500px;">
+          <tr>
+            <td valign="top" style="border-left: 3px solid #0071e3; padding-left: 16px;">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td>
+                    <span style="font-size: 15px; font-weight: 700; color: #0f1012; letter-spacing: -0.01em;">Andrés Camilo Pinzón Laverde</span>
+                    <span style="color: #8f8f8f; padding: 0 6px;">/</span>
+                    <span style="font-size: 12px; color: #0071e3; font-weight: 600;">Lead Web Engineer</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-top: 4px; font-size: 11px; color: #8f8f8f;">
+                    Desarrollo de Software y Aplicaciones Web de Alto Impacto
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-top: 10px; font-size: 12px; color: #8f8f8f;">
+                    <a href="https://camilopinzon.dev" target="_blank" style="color: #0f1012; text-decoration: none; font-weight: 600;">camilopinzon.dev</a>
+                    <span style="color: #0071e3; padding: 0 6px;">•</span>
+                    <a href="https://linkedin.com/in/camilo-pinzon" target="_blank" style="color: #8f8f8f; text-decoration: none;">LinkedIn</a>
+                    <span style="color: #0071e3; padding: 0 6px;">•</span>
+                    <a href="https://github.com/CamiloPinzon" target="_blank" style="color: #8f8f8f; text-decoration: none;">GitHub</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <!-- END OF HTML EMAIL SIGNATURE -->
+      </div>
+    </div>
+
+    <!-- DISEÑO 3: Compacto Ejecutivo con Detalles Expandidos -->
+    <div class="signature-card">
+      <div class="signature-header">
+        <span class="signature-title">Opción C: Corporativa Detallada (Con Avatar)</span>
+        <button class="btn-copy" onclick="copyToClipboard('sig-c')">Copiar Firma</button>
+      </div>
+      <div id="sig-c" class="signature-content">
+        <!-- START OF HTML EMAIL SIGNATURE -->
+        <table cellpadding="0" cellspacing="0" border="0" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.4; color: #0f1012; max-width: 520px;">
+          <tr>
+            <td valign="top" style="padding-right: 18px;">
+              <img src="https://camilopinzon.dev/profile.webp" alt="Andrés Camilo Pinzón Laverde" width="76" height="76" style="border-radius: 6px; display: block; object-fit: cover; border: 1px solid #e5e7eb;" />
+            </td>
+            <td valign="top" style="border-left: 1px solid #e5e7eb; padding-left: 18px;">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td>
+                    <div style="font-size: 16px; font-weight: 700; color: #0f1012; letter-spacing: -0.01em;">Andrés Camilo Pinzón Laverde</div>
+                    <div style="font-size: 12px; color: #0071e3; font-weight: 600; margin-top: 2px;">Lead Web Engineer / Tech Consultant</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-top: 8px; font-size: 12px; color: #8f8f8f; line-height: 1.5;">
+                    <span style="color: #0f1012; font-weight: 500;">Web:</span> <a href="https://camilopinzon.dev" target="_blank" style="color: #0071e3; text-decoration: none;">camilopinzon.dev</a><br />
+                    <span style="color: #0f1012; font-weight: 500;">Connect:</span> 
+                    <a href="https://linkedin.com/in/camilo-pinzon" target="_blank" style="color: #8f8f8f; text-decoration: none;">LinkedIn</a> / 
+                    <a href="https://github.com/CamiloPinzon" target="_blank" style="color: #8f8f8f; text-decoration: none;">GitHub</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <!-- END OF HTML EMAIL SIGNATURE -->
+      </div>
+    </div>
+
+    <!-- INSTRUCCIONES DE USO -->
+    <div class="instructions">
+      <h3>¿Cómo usar tu firma?</h3>
+      <ol>
+        <li>Haz clic en el botón <strong>"Copiar Firma"</strong> en tu diseño preferido.</li>
+        <li>Abre la configuración de tu correo (por ejemplo, en Gmail: <em>Configuración > Ver todos los ajustes > General > Firma</em>).</li>
+        <li>Haz clic en el cuadro de texto de la firma y presiona <strong>Ctrl + V</strong> (o <strong>Cmd + V</strong> en Mac) para pegarla directamente con todo el diseño, foto y enlaces listos.</li>
+        <li>Guarda los cambios en tu cliente de correo.</li>
+      </ol>
+    </div>
+
+  </div>
+
+</body>
+</html>
