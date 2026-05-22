@@ -210,6 +210,51 @@ section[id] {
 }
 
 
+/* ════════ SCROLL REVEAL ANIMATIONS ════════ */
+
+/**
+ * data-reveal  → fade up (default)
+ * data-reveal="left"  → fade from left
+ * data-reveal="right" → fade from right
+ * data-reveal="scale" → scale up
+ *
+ * --reveal-delay: custom stagger (e.g. style="--reveal-delay:0.1s")
+ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+[data-reveal="left"] {
+  transform: translateX(-18px);
+}
+
+[data-reveal="right"] {
+  transform: translateX(18px);
+}
+
+[data-reveal="scale"] {
+  transform: scale(0.97) translateY(8px);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ════════ PROSE (BLOG CONTENT) ════════ */
 
 .prose {

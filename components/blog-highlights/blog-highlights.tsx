@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./blog-highlights.module.scss";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import BlogCard from "./blog-card/blog-card";
 import BlogFilterPills from "./blog-filter-pills/blog-filter-pills";
@@ -10,6 +10,7 @@ import Button from "@/components/ui/button/button";
 
 import { BlogPost } from "@/lib/firebase/queries";
 import { getTranslations } from "@/lib/i18n/translations";
+import { useReveal } from "@/lib/hooks/use-reveal";
 
 interface BlogHighlightsProps {
   posts: BlogPost[];
@@ -18,6 +19,8 @@ interface BlogHighlightsProps {
 
 export default function BlogHighlights({ posts, lang }: BlogHighlightsProps) {
   const t = getTranslations(lang);
+  const sectionRef = useRef<HTMLElement>(null);
+  useReveal(sectionRef);
 
   const [activeTag, setActiveTag] = useState(t.blog.filterAll);
 
@@ -49,9 +52,9 @@ export default function BlogHighlights({ posts, lang }: BlogHighlightsProps) {
   );
 
   return (
-    <section id="blogs" className={styles.section} aria-labelledby="blog-title">
+    <section id="blogs" className={styles.section} aria-labelledby="blog-title" ref={sectionRef}>
       <div className="section-wrapper">
-        <div className={styles.headerRow}>
+        <div className={styles.headerRow} data-reveal>
           <header style={{ marginBottom: 0 }}>
             <span className="section-label">{t.blog.sectionLabel}</span>
             <h2 className="section-title" id="blog-title">
@@ -68,7 +71,7 @@ export default function BlogHighlights({ posts, lang }: BlogHighlightsProps) {
 
         {/* Featured — visible only when showing all */}
         {activeTag === t.blog.filterAll && featuredPost && (
-          <div className={styles.featuredWrapper}>
+          <div className={styles.featuredWrapper} data-reveal style={{ "--reveal-delay": "0.1s" } as React.CSSProperties}>
             <BlogCard post={featuredPost} index={0} variant="featured" lang={lang} />
           </div>
         )}
@@ -77,7 +80,13 @@ export default function BlogHighlights({ posts, lang }: BlogHighlightsProps) {
         {gridPosts.length > 0 ? (
           <div className={styles.grid}>
             {gridPosts.map((post, i) => (
-              <BlogCard key={post.id} post={post} index={i} lang={lang} />
+              <div
+                key={post.id}
+                data-reveal
+                style={{ "--reveal-delay": `${0.15 + i * 0.1}s` } as React.CSSProperties}
+              >
+                <BlogCard post={post} index={i} lang={lang} />
+              </div>
             ))}
           </div>
         ) : (
@@ -89,7 +98,7 @@ export default function BlogHighlights({ posts, lang }: BlogHighlightsProps) {
           </div>
         )}
 
-        <div className={styles.ctaRow}>
+        <div className={styles.ctaRow} data-reveal style={{ "--reveal-delay": "0.2s" } as React.CSSProperties}>
           <Button href={`/${lang}/blog`} variant="ghost">
             {t.blog.viewAll}
           </Button>

@@ -1,6 +1,10 @@
+"use client";
+
+import { useRef } from "react";
 import { getTranslations } from "@/lib/i18n/translations";
 import TechCard from "./tech-card";
 import styles from "./tech-stack.module.scss";
+import { useReveal } from "@/lib/hooks/use-reveal";
 
 interface Tech {
   name: string;
@@ -86,10 +90,12 @@ const STACK: Tech[] = [
 
 export default function TechStack({ lang = "en" }: { lang?: string }) {
   const t = getTranslations(lang);
+  const sectionRef = useRef<HTMLElement>(null);
+  useReveal(sectionRef);
   return (
-    <section className={styles.section} aria-labelledby="stack-title">
+    <section className={styles.section} aria-labelledby="stack-title" ref={sectionRef}>
       <div className="section-wrapper">
-        <header className="section-header">
+        <header className="section-header" data-reveal>
           <span className="section-label">{t.techStack.sectionLabel}</span>
           <h2 className="section-title" id="stack-title">
             Stack <em>{t.techStack.sectionTitleEm}</em>
@@ -101,7 +107,13 @@ export default function TechStack({ lang = "en" }: { lang?: string }) {
           aria-label={t.techStack.ariaLabel}
         >
           {STACK.map((tech, i) => (
-            <div key={tech.name} role="listitem" className={styles.cardWrapper}>
+            <div
+              key={tech.name}
+              role="listitem"
+              className={styles.cardWrapper}
+              data-reveal
+              style={{ "--reveal-delay": `${i * 0.05}s` } as React.CSSProperties}
+            >
               <TechCard tech={tech} index={i} styles={styles} />
             </div>
           ))}

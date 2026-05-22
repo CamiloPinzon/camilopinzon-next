@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "@/lib/i18n/translations";
 import styles from "./portfolio.module.scss";
 import { getProjects } from "@/lib/firebase/queries";
+import PortfolioReveal from "./portfolio-reveal";
 
 // Imágenes predeterminadas asociadas al fallback estático en caso de que la BD esté vacía
 const FALLBACK_IMAGES = [
@@ -41,85 +42,96 @@ export default async function Portfolio({ lang = "en" }: { lang?: string }) {
       className={styles.section}
       aria-label={t.portfolio.ariaLabel}
     >
-      <div className="section-wrapper">
-        <header className="section-header">
-          <span className="section-label">{t.portfolio.sectionLabel}</span>
-          <h2 className="section-title">
-            {t.portfolio.title} <em>{t.portfolio.titleEm}</em>
-          </h2>
-        </header>
+      <PortfolioReveal>
+        <div className="section-wrapper">
+          <header className="section-header" data-reveal>
+            <span className="section-label">{t.portfolio.sectionLabel}</span>
+            <h2 className="section-title">
+              {t.portfolio.title} <em>{t.portfolio.titleEm}</em>
+            </h2>
+          </header>
 
-        <div className={styles.grid}>
-          {projectsToRender.map((project, i) => (
-            <article key={i} className={`surface-card ${styles.card}`}>
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className={styles.image}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  unoptimized={project.image.startsWith("http")}
-                />
-              </div>
-              <div className={styles.content}>
-                <h3 className={styles.title}>{project.title}</h3>
-                <p className={styles.desc}>{project.description}</p>
-                <div className={styles.tags}>
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className={`badge badge--outline ${styles.tagBadge}`}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+          <div className={styles.grid}>
+            {projectsToRender.map((project, i) => (
+              <article
+                key={i}
+                className={`surface-card ${styles.card}`}
+                data-reveal
+                style={
+                  {
+                    "--reveal-delay": `${i * 0.12}s`,
+                  } as React.CSSProperties
+                }
+              >
+                <div className={styles.imageWrapper}>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className={styles.image}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    unoptimized={project.image.startsWith("http")}
+                  />
                 </div>
-                {(project.liveUrl || project.githubUrl) && (
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "16px",
-                      marginTop: "20px",
-                    }}
-                  >
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          fontSize: "0.875rem",
-                          fontWeight: 700,
-                          color: "#4318ff",
-                          textDecoration: "none",
-                        }}
+                <div className={styles.content}>
+                  <h3 className={styles.title}>{project.title}</h3>
+                  <p className={styles.desc}>{project.description}</p>
+                  <div className={styles.tags}>
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className={`badge badge--outline ${styles.tagBadge}`}
                       >
-                        🌐 Live Demo
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          fontSize: "0.875rem",
-                          fontWeight: 700,
-                          color: "#2b3674",
-                          textDecoration: "none",
-                        }}
-                      >
-                        💻 GitHub
-                      </a>
-                    )}
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                )}
-              </div>
-            </article>
-          ))}
+                  {(project.liveUrl || project.githubUrl) && (
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "16px",
+                        marginTop: "20px",
+                      }}
+                    >
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            fontSize: "0.875rem",
+                            fontWeight: 700,
+                            color: "#4318ff",
+                            textDecoration: "none",
+                          }}
+                        >
+                          🌐 Live Demo
+                        </a>
+                      )}
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            fontSize: "0.875rem",
+                            fontWeight: 700,
+                            color: "#2b3674",
+                            textDecoration: "none",
+                          }}
+                        >
+                          💻 GitHub
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
+      </PortfolioReveal>
     </section>
   );
 }

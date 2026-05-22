@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { getTranslations } from "@/lib/i18n/translations";
 import { executeRecaptcha } from "@/lib/recaptcha";
 import { submitContact } from "@/app/actions/contact";
 import Button from "@/components/ui/button/button";
 import styles from "./contact.module.scss";
+import { useReveal } from "@/lib/hooks/use-reveal";
 
 function ContactFormInner({
   t,
@@ -160,15 +161,20 @@ function ContactFormInner({
 
 export default function Contact({ lang = "en" }: { lang?: string }) {
   const t = getTranslations(lang);
+  const sectionRef = useRef<HTMLElement>(null);
+  useReveal(sectionRef);
 
   return (
     <section
       id="contacto"
       className={styles.section}
       aria-label={t.contact.ariaLabel}
+      ref={sectionRef}
     >
       <div className="section-wrapper">
-        <ContactFormInner t={t} lang={lang} />
+        <div data-reveal>
+          <ContactFormInner t={t} lang={lang} />
+        </div>
       </div>
     </section>
   );
