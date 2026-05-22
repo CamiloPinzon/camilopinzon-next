@@ -12,6 +12,29 @@ interface NewsProps {
   lang?: string;
 }
 
+const renderTextWithLinks = (text: string) => {
+  if (!text) return "";
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const parts = text.split(urlRegex);
+  return parts.map((part, index) => {
+    if (part.match(urlRegex)) {
+      return (
+        <a
+          key={index}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "var(--color-future-blue, #4318ff)", textDecoration: "underline", wordBreak: "break-all" }}
+        >
+          {part}
+        </a>
+      );
+    }
+    return part;
+  });
+};
+
+
 export default function News({ newsList, lang = "en" }: NewsProps) {
   const t = getTranslations(lang);
   const sectionRef = useRef<HTMLElement>(null);
@@ -73,7 +96,7 @@ export default function News({ newsList, lang = "en" }: NewsProps) {
                     </time>
                   </header>
                   <h3 className={styles.title}>{item.title}</h3>
-                  <p className={styles.text}>{item.content}</p>
+                  <p className={styles.text}>{renderTextWithLinks(item.content)}</p>
                 </div>
               </article>
             ))}
