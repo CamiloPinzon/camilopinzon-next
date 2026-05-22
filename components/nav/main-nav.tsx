@@ -28,7 +28,6 @@ export default function MainNav() {
 
   const NAV_LINKS = [
     { label: t.nav.home, href: `/${currentLang}/#inicio` },
-    { label: t.nav.experience, href: `/${currentLang}/experience` },
     { label: t.nav.services, href: `/${currentLang}/#servicios` },
     { label: t.nav.portfolio, href: `/${currentLang}/#portafolio` },
     { label: t.nav.blog, href: `/${currentLang}/#blogs` },

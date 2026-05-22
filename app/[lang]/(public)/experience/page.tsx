@@ -19,12 +19,9 @@ export async function generateMetadata({
       lang === "es"
         ? "Trayectoria profesional de Camilo Pinzón: empresas, roles y tecnologías a lo largo de su carrera."
         : "Professional journey of Camilo Pinzón: companies, roles and technologies throughout his career.",
-    alternates: {
-      canonical: `https://camilopinzon.dev/${lang}/experience`,
-      languages: {
-        en: "https://camilopinzon.dev/en/experience",
-        es: "https://camilopinzon.dev/es/experience",
-      },
+    robots: {
+      index: false,
+      follow: false,
     },
   };
 }
