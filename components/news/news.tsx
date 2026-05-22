@@ -69,36 +69,38 @@ export default function News({ newsList, lang = "en" }: NewsProps) {
         {formattedNews.length > 0 ? (
           <div className={styles.grid}>
             {formattedNews.map((item, i) => (
-              <article
+              <div
                 key={item.id}
-                className={`surface-card ${styles.card}`}
+                className={styles.cardReveal}
                 data-reveal
                 style={{ "--reveal-delay": `${i * 0.12}s` } as React.CSSProperties}
               >
-                <div className={styles.imageWrapper}>
-                  {item.image ? (
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className={styles.image}
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      unoptimized={item.image.startsWith("http")}
-                    />
-                  ) : (
-                    <div className={styles.imagePlaceholder} />
-                  )}
-                </div>
-                <div className={styles.content}>
-                  <header className={styles.cardHeader}>
-                    <time className={styles.date} dateTime={item.publishedAt}>
-                      {item.dateStr}
-                    </time>
-                  </header>
-                  <h3 className={styles.title}>{item.title}</h3>
-                  <p className={styles.text}>{renderTextWithLinks(item.content)}</p>
-                </div>
-              </article>
+                <article className={`surface-card ${styles.card}`}>
+                  <div className={styles.imageWrapper}>
+                    {item.image ? (
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className={styles.image}
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        unoptimized={item.image.startsWith("http")}
+                      />
+                    ) : (
+                      <div className={styles.imagePlaceholder} />
+                    )}
+                  </div>
+                  <div className={styles.content}>
+                    <header className={styles.cardHeader}>
+                      <time className={styles.date} dateTime={item.publishedAt}>
+                        {item.dateStr}
+                      </time>
+                    </header>
+                    <h3 className={styles.title}>{item.title}</h3>
+                    <p className={styles.text}>{renderTextWithLinks(item.content)}</p>
+                  </div>
+                </article>
+              </div>
             ))}
           </div>
         ) : (

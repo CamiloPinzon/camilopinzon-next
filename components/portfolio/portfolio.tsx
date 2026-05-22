@@ -53,9 +53,9 @@ export default async function Portfolio({ lang = "en" }: { lang?: string }) {
 
           <div className={styles.grid}>
             {projectsToRender.map((project, i) => (
-              <article
+              <div
                 key={i}
-                className={`surface-card ${styles.card}`}
+                className={styles.cardReveal}
                 data-reveal
                 style={
                   {
@@ -63,71 +63,73 @@ export default async function Portfolio({ lang = "en" }: { lang?: string }) {
                   } as React.CSSProperties
                 }
               >
-                <div className={styles.imageWrapper}>
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className={styles.image}
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    unoptimized={project.image.startsWith("http")}
-                  />
-                </div>
-                <div className={styles.content}>
-                  <h3 className={styles.title}>{project.title}</h3>
-                  <p className={styles.desc}>{project.description}</p>
-                  <div className={styles.tags}>
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className={`badge badge--outline ${styles.tagBadge}`}
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                <article className={`surface-card ${styles.card}`}>
+                  <div className={styles.imageWrapper}>
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className={styles.image}
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      unoptimized={project.image.startsWith("http")}
+                    />
                   </div>
-                  {(project.liveUrl || project.githubUrl) && (
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: "16px",
-                        marginTop: "20px",
-                      }}
-                    >
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{
-                            fontSize: "0.875rem",
-                            fontWeight: 700,
-                            color: "#4318ff",
-                            textDecoration: "none",
-                          }}
+                  <div className={styles.content}>
+                    <h3 className={styles.title}>{project.title}</h3>
+                    <p className={styles.desc}>{project.description}</p>
+                    <div className={styles.tags}>
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className={`badge badge--outline ${styles.tagBadge}`}
                         >
-                          🌐 Live Demo
-                        </a>
-                      )}
-                      {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{
-                            fontSize: "0.875rem",
-                            fontWeight: 700,
-                            color: "#2b3674",
-                            textDecoration: "none",
-                          }}
-                        >
-                          💻 GitHub
-                        </a>
-                      )}
+                          {tag}
+                        </span>
+                      ))}
                     </div>
-                  )}
-                </div>
-              </article>
+                    {(project.liveUrl || project.githubUrl) && (
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "16px",
+                          marginTop: "20px",
+                        }}
+                      >
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              fontSize: "0.875rem",
+                              fontWeight: 700,
+                              color: "#4318ff",
+                              textDecoration: "none",
+                            }}
+                          >
+                            🌐 Live Demo
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              fontSize: "0.875rem",
+                              fontWeight: 700,
+                              color: "#2b3674",
+                              textDecoration: "none",
+                            }}
+                          >
+                            💻 GitHub
+                          </a>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </article>
+              </div>
             ))}
           </div>
         </div>
