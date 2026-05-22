@@ -67,9 +67,10 @@ export async function POST(req: Request) {
     console.log('>>> [API Chat] Messages parsed:', messages.length);
 
     // Fetch data from Firestore for context
-    const [experienceSnap, projectsSnap] = await Promise.all([
+    const [experienceSnap, projectsSnap, newsSnap] = await Promise.all([
       adminDb.collection('experience').get(),
-      adminDb.collection('projects').get()
+      adminDb.collection('projects').get(),
+      adminDb.collection('news').where('isPublished', '==', true).get()
     ]);
 
     // Format experience
@@ -96,11 +97,39 @@ export async function POST(req: Request) {
       `.trim();
     }).join('\n\n');
 
+    // Format news/updates
+    const news = newsSnap.docs.map(doc => {
+      const data = doc.data();
+      const localized = data.translations?.[lang] || data.translations?.['en'] || {};
+      const title = localized.title || data.title || '';
+      const content = localized.content || data.content || '';
+      let dateStr = '';
+      if (data.publishedAt) {
+        try {
+          const dateObj = typeof data.publishedAt.toDate === 'function'
+            ? data.publishedAt.toDate()
+            : new Date(data.publishedAt);
+          dateStr = dateObj.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+        } catch (e) {
+          dateStr = String(data.publishedAt);
+        }
+      }
+      return `
+- Noticia: ${title}
+  Fecha: ${dateStr}
+  Contenido: ${content}
+      `.trim();
+    }).join('\n\n');
+
     // Build the system prompt
     const systemPrompt = `
 Eres el Asistente de IA de Servicios y Proyectos de Camilo Pinzón (empresa de desarrollo web y soluciones digitales de alto impacto).
-Tu objetivo es ayudar a clientes potenciales e interesados a comprender nuestros servicios de ingeniería, metodologías, casos de éxito y disponibilidad para contratación o proyectos corporativos.
-Debes responder de manera formal, consultiva y profesional. Proporciona respuestas precisas basadas ÚNICAMENTE en la información de respaldo sobre nuestra trayectoria y servicios a continuación.
+Tu objetivo es ayudar a clientes potenciales e interesados a comprender nuestros servicios de ingeniería, metodologías, casos de éxito, noticias, novedades y disponibilidad para contratación o proyectos corporativos.
+Debes responder de manera formal, consultiva y profesional. Proporciona respuestas precisas basadas ÚNICAMENTE en la información de respaldo sobre nuestra trayectoria, proyectos y noticias a continuación.
 Si te hacen una pregunta cuya respuesta no está en el contexto, indica amablemente que no tienes esa información y sugiéreles escribirnos directamente a través del formulario de contacto del sitio web.
 El idioma de la conversación es preferiblemente ${lang === 'es' ? 'Español' : 'Inglés'}, pero puedes responder en el idioma que el usuario utilice.
 Habla siempre en primera persona del plural ("nosotros", "nuestro equipo", "nuestra empresa") o en tercera persona para referirte a la marca Camilo Pinzón. NO te hagas pasar por Camilo de forma individual.
@@ -110,6 +139,9 @@ ${experiences}
 
 --- CASOS DE ÉXITO (PROYECTOS) ---
 ${projects}
+
+--- ÚLTIMAS NOTICIAS Y NOVEDADES ---
+${news || (lang === 'es' ? 'No hay noticias recientes.' : 'No recent news.')}
 
 Responde de manera persuasiva y orientada a servicios basándote en esto.
     `.trim();
