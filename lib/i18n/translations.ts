@@ -7,6 +7,7 @@ const translations = {
       experience: "Experience",
       services: "Services",
       portfolio: "Success Stories",
+      news: "Updates",
       blog: "Blog",
       contact: "Contact",
     },
@@ -48,6 +49,12 @@ const translations = {
       readTime: "{time} read",
       readArticle: "Read full article",
       featuredBadge: "⭐ Featured",
+    },
+    news: {
+      sectionLabel: "Announcements & Updates",
+      sectionTitle: "Latest",
+      sectionTitleEm: "News",
+      emptyState: "No news announcements posted yet",
     },
     experience: {
       pageTitle: "Our Corporate Track Record",
@@ -199,6 +206,7 @@ const translations = {
       experience: "Trayectoria",
       services: "Servicios",
       portfolio: "Casos de Éxito",
+      news: "Novedades",
       blog: "Blogs",
       contact: "Contacto",
     },
@@ -240,6 +248,12 @@ const translations = {
       readTime: "{time} lectura",
       readArticle: "Leer artículo completo",
       featuredBadge: "⭐ Destacado",
+    },
+    news: {
+      sectionLabel: "Anuncios & Novedades",
+      sectionTitle: "Últimas",
+      sectionTitleEm: "Noticias",
+      emptyState: "No hay noticias publicadas aún",
     },
     experience: {
       pageTitle: "Nuestra Trayectoria Corporativa",

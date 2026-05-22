@@ -13,6 +13,7 @@ export default function Footer({ lang = "en" }: { lang?: string }) {
     { label: t.nav.home, href: `/${lang}/#inicio` },
     { label: t.nav.experience, href: `/${lang}/experience` },
     { label: t.nav.services, href: `/${lang}/#servicios` },
+    { label: t.nav.news, href: `/${lang}/#novedades` },
     { label: t.nav.blog, href: `/${lang}/#blogs` },
     { label: t.nav.contact, href: `/${lang}/#contacto` },
   ];

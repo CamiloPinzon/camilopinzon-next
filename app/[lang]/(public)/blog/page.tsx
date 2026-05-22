@@ -1,4 +1,4 @@
-import { getRecentPosts } from "@/lib/firebase/queries";
+import { getRecentPosts } from "@/lib/firebase/server-queries";
 import BlogCard from "@/components/blog-highlights/blog-card/blog-card";
 import { getTranslations } from "@/lib/i18n/translations";
 

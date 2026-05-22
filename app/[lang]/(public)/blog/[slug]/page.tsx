@@ -1,4 +1,4 @@
-import { getPostBySlug } from "@/lib/firebase/queries";
+import { getPostBySlug } from "@/lib/firebase/server-queries";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";

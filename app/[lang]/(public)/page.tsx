@@ -3,9 +3,10 @@ import MainHero from "@/components/main-hero/main-hero";
 import TechStack from "@/components/tech-stack/tech-stack";
 import BlogHighlights from "@/components/blog-highlights/blog-highlights";
 import Brands from "@/components/brands/brands";
-import { getRecentPosts } from "@/lib/firebase/queries";
+import { getRecentPosts, getRecentNews } from "@/lib/firebase/server-queries";
 import Services from "@/components/services/services";
 import Portfolio from "@/components/portfolio/portfolio";
+import News from "@/components/news/news";
 import Contact from "@/components/contact/contact";
 
 import { getTranslations } from "@/lib/i18n/translations";
@@ -64,6 +65,7 @@ export default async function Home({
 }) {
   const { lang } = await params;
   const posts = await getRecentPosts(lang, 7);
+  const newsList = await getRecentNews(lang, 3);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -119,6 +121,7 @@ export default async function Home({
         <Services lang={lang} />
       </div>
       <Portfolio lang={lang} />
+      <News newsList={newsList} lang={lang} />
       <div className="theme-dark">
         <TechStack lang={lang} />
         <BlogHighlights posts={posts} lang={lang} />

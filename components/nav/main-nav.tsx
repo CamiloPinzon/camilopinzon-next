@@ -30,6 +30,7 @@ export default function MainNav() {
     { label: t.nav.home, href: `/${currentLang}/#inicio` },
     { label: t.nav.services, href: `/${currentLang}/#servicios` },
     { label: t.nav.portfolio, href: `/${currentLang}/#portafolio` },
+    { label: t.nav.news, href: `/${currentLang}/#novedades` },
     { label: t.nav.blog, href: `/${currentLang}/#blogs` },
   ];
 

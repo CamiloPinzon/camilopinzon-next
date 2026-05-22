@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getTranslations } from "@/lib/i18n/translations";
 import styles from "./portfolio.module.scss";
-import { getProjects } from "@/lib/firebase/queries";
+import { getProjects } from "@/lib/firebase/server-queries";
 import PortfolioReveal from "./portfolio-reveal";
 
 // Imágenes predeterminadas asociadas al fallback estático en caso de que la BD esté vacía

@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { getRecentPosts } from "@/lib/firebase/queries";
+import { getRecentPosts } from "@/lib/firebase/server-queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://camilopinzon.com";

@@ -147,6 +147,79 @@ export default function CollectionList() {
     }
   };
 
+  const handleSeedNews = async () => {
+    if (!confirm("¿Deseas inicializar la base de datos de noticias con 3 ejemplos?")) return;
+    setLoading(true);
+    try {
+      const initialNews = [
+        {
+          id: "news-google-wallet",
+          image: "/portfolio/google-pay.png",
+          publishedAt: "2026-05-20",
+          isPublished: true,
+          translations: {
+            en: {
+              title: "Strategic Alliance with Google Wallet",
+              content: "We are excited to announce our strategic partnership with Google Wallet to optimize their global Next.js user interface components and accessibility controls.",
+            },
+            es: {
+              title: "Alianza Estratégica con Google Wallet",
+              content: "Nos complace anunciar nuestra alianza de desarrollo frontend con el equipo global de Google Wallet para optimizar sus flujos de interfaz y accesibilidad en Next.js.",
+            }
+          }
+        },
+        {
+          id: "news-ai-recruiter",
+          image: "/social/og-image.png",
+          publishedAt: "2026-05-15",
+          isPublished: true,
+          translations: {
+            en: {
+              title: "AI Business Agent Launched in Production",
+              content: "Our personal AI assistant powered by Google Gemini 1.5 Flash is officially live, handling real-time customer project inquiries and live quoting.",
+            },
+            es: {
+              title: "Asistente de Negocios IA en Producción",
+              content: "Lanzamos oficialmente nuestro agente virtual autónomo impulsado por Google Gemini 1.5 Flash para responder consultas de proyectos y cotizaciones en tiempo real.",
+            }
+          }
+        },
+        {
+          id: "news-disney-cruise-migration",
+          image: "/portfolio/disney-cruise.png",
+          publishedAt: "2026-05-10",
+          isPublished: true,
+          translations: {
+            en: {
+              title: "React 19 & Compiler Modernization",
+              content: "Completed our technical migration for key enterprise clients, incorporating React Server Components and React Compiler logic for enhanced performance.",
+            },
+            es: {
+              title: "Modernización Técnica a React 19",
+              content: "Culminamos con éxito la migración frontend para nuestros clientes principales, adoptando React Server Components y el nuevo compilador para optimizar velocidad.",
+            }
+          }
+        }
+      ];
+
+      for (const item of initialNews) {
+        const { id, ...data } = item;
+        await setDoc(doc(db, "news", id), data);
+      }
+
+      const querySnapshot = await getDocs(collection(db, "news"));
+      const docsData = querySnapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      setDocuments(docsData);
+      alert("¡Noticias inicializadas con éxito!");
+    } catch (err) {
+      console.error(err);
+      alert("Error al inicializar noticias.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return (
     <div>
       <div
@@ -223,6 +296,24 @@ export default function CollectionList() {
                 ✨ Inicializar BD con tus 4 Proyectos Estándar
               </button>
             )}
+            {schema.id === "news" && (
+              <button
+                onClick={handleSeedNews}
+                style={{
+                  backgroundColor: "#34c759",
+                  color: "white",
+                  border: "none",
+                  padding: "10px 20px",
+                  borderRadius: "8px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  fontSize: "0.875rem",
+                }}
+              >
+                ✨ Inicializar BD con 3 Novedades de Prueba
+              </button>
+            )}
+
           </div>
         ) : (
           <table style={{ width: "100%", borderCollapse: "collapse" }}>

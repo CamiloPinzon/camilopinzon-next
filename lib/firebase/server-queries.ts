@@ -1,5 +1,5 @@
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "./config";
+import "server-only";
+import { adminDb } from "./admin";
 
 export interface FAQItem {
   question: string;
@@ -22,25 +22,57 @@ export interface BlogPost {
   faqs?: FAQItem[];
 }
 
+export interface ExperienceItem {
+  id: string;
+  company: string;
+  jobTitle: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  tags: string[];
+  website?: string;
+  order: number;
+}
+
+export interface ProjectItem {
+  id: string;
+  title: string;
+  client?: string;
+  description: string;
+  tags: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  coverImage?: string;
+  coverImageAlt?: string;
+  order: number;
+}
+
+export interface NewsItem {
+  id: string;
+  title: string;
+  content: string;
+  image: string;
+  publishedAt: string;
+  isPublished: boolean;
+}
+
 export async function getRecentPosts(
   lang: string = "en",
   maxLimit: number = 6,
 ): Promise<BlogPost[]> {
   try {
-    const snapshot = await getDocs(collection(db, "posts"));
+    const snapshot = await adminDb.collection("posts").get();
 
     let posts = snapshot.docs.map((docSnap) => {
       const data = docSnap.data();
       const localized =
         data.translations?.[lang] || data.translations?.["en"] || {};
 
-      // Ensure dates are strictly serialized to strings for Next.js Server Components
       let pubDate = data.publishedAt || new Date().toISOString();
       if (pubDate && typeof pubDate.toDate === "function") {
         pubDate = pubDate.toDate().toISOString();
       }
 
-      // We map the database fields to our frontend BlogPost interface
       return {
         id: docSnap.id,
         slug: data.slug || docSnap.id,
@@ -54,26 +86,23 @@ export async function getRecentPosts(
             : new Date(pubDate).toISOString(),
         isPublished: !!data.isPublished,
         author: data.author || { name: "Camilo Pinzon" },
-        tag: data.tag || "Desarrollo", // Default tag if missing
-        color: data.color || "#61DAFB", // Default color if missing
+        tag: data.tag || "Desarrollo",
+        color: data.color || "#61DAFB",
         readTime: data.readTime || "5 min",
         faqs: localized.faqs || data.faqs || [],
       };
     });
 
-    // Filter out unpublished posts
     posts = posts.filter((p) => p.isPublished);
 
-    // Sort by date descending
     posts.sort(
       (a, b) =>
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
     );
 
-    // Limit to the max limit
     return posts.slice(0, maxLimit);
   } catch (error) {
-    console.error("Error fetching recent posts:", error);
+    console.error("Error fetching recent posts via Admin SDK:", error);
     return [];
   }
 }
@@ -83,10 +112,7 @@ export async function getPostBySlug(
   lang: string = "en",
 ): Promise<BlogPost | null> {
   try {
-    // In our migration, we used the old document ID as the new document ID.
-    // And slug is currently often identical to the ID.
-    // For a highly robust system, we should query by 'slug', but querying all and finding it is safer if we don't have an index.
-    const snapshot = await getDocs(collection(db, "posts"));
+    const snapshot = await adminDb.collection("posts").get();
     const docSnap = snapshot.docs.find(
       (d) => (d.data().slug === slug || d.id === slug) && d.data().isPublished,
     );
@@ -119,34 +145,22 @@ export async function getPostBySlug(
       faqs: localized.faqs || data.faqs || [],
     };
   } catch (error) {
-    console.error("Error fetching post:", error);
+    console.error("Error fetching post via Admin SDK:", error);
     return null;
   }
-}
-export interface ExperienceItem {
-  id: string;
-  company: string;
-  jobTitle: string;
-  startDate: string;
-  endDate: string;
-  description: string;
-  tags: string[];
-  website?: string;
-  order: number;
 }
 
 export async function getExperience(
   lang: string = "en",
 ): Promise<ExperienceItem[]> {
   try {
-    const snapshot = await getDocs(collection(db, "experience"));
+    const snapshot = await adminDb.collection("experience").get();
 
     const items = snapshot.docs.map((docSnap) => {
       const data = docSnap.data();
       const localized =
         data.translations?.[lang] || data.translations?.["en"] || {};
 
-      // Parse tags if they are a comma-separated string or already an array
       let tags: string[] = [];
       if (Array.isArray(data.tags)) {
         tags = data.tags;
@@ -170,30 +184,16 @@ export async function getExperience(
       };
     });
 
-    // Sort by order descending (higher order first)
     return items.sort((a, b) => b.order - a.order);
   } catch (error) {
-    console.error("Error fetching experience:", error);
+    console.error("Error fetching experience via Admin SDK:", error);
     return [];
   }
 }
 
-export interface ProjectItem {
-  id: string;
-  title: string;
-  client?: string;
-  description: string;
-  tags: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-  coverImage?: string;
-  coverImageAlt?: string;
-  order: number;
-}
-
 export async function getProjects(lang: string = "en"): Promise<ProjectItem[]> {
   try {
-    const snapshot = await getDocs(collection(db, "projects"));
+    const snapshot = await adminDb.collection("projects").get();
 
     const items = snapshot.docs.map((docSnap) => {
       const data = docSnap.data();
@@ -224,21 +224,11 @@ export async function getProjects(lang: string = "en"): Promise<ProjectItem[]> {
       };
     });
 
-    // Sort by order descending (higher order first)
     return items.sort((a, b) => b.order - a.order);
   } catch (error) {
-    console.error("Error fetching projects:", error);
+    console.error("Error fetching projects via Admin SDK:", error);
     return [];
   }
-}
-
-export interface NewsItem {
-  id: string;
-  title: string;
-  content: string;
-  image: string;
-  publishedAt: string;
-  isPublished: boolean;
 }
 
 export async function getRecentNews(
@@ -246,7 +236,7 @@ export async function getRecentNews(
   maxLimit: number = 3,
 ): Promise<NewsItem[]> {
   try {
-    const snapshot = await getDocs(collection(db, "news"));
+    const snapshot = await adminDb.collection("news").get();
 
     let news = snapshot.docs.map((docSnap) => {
       const data = docSnap.data();
@@ -273,7 +263,6 @@ export async function getRecentNews(
 
     news = news.filter((item) => item.isPublished);
 
-    // Sort by date descending
     news.sort(
       (a, b) =>
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
@@ -281,7 +270,7 @@ export async function getRecentNews(
 
     return news.slice(0, maxLimit);
   } catch (error) {
-    console.error("Error fetching recent news:", error);
+    console.error("Error fetching recent news via Admin SDK:", error);
     return [];
   }
 }

@@ -70,6 +70,19 @@ export const cmsConfig: CMSConfig = {
       ],
     },
     {
+      id: 'news',
+      name: 'Latest News & Updates',
+      singularName: 'News Item',
+      description: 'Manage short news announcements (new clients, projects, updates).',
+      fields: [
+        { name: 'title', label: 'Title', type: 'string', required: true, localized: true },
+        { name: 'content', label: 'Short Description', type: 'text', required: true, localized: true },
+        { name: 'image', label: 'News Image', type: 'image', required: true },
+        { name: 'publishedAt', label: 'Publish Date', type: 'date', required: true },
+        { name: 'isPublished', label: 'Published?', type: 'boolean' }
+      ],
+    },
+    {
       id: 'services',
       name: 'Services',
       singularName: 'Service',

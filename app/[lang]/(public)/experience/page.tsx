@@ -1,4 +1,4 @@
-import { getExperience } from "@/lib/firebase/queries";
+import { getExperience } from "@/lib/firebase/server-queries";
 import Experience from "@/components/experience/experience";
 import { Metadata } from "next";
 import { getTranslations } from "@/lib/i18n/translations";
