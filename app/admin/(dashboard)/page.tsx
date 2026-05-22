@@ -1,20 +1,19 @@
 import React from 'react';
-import { collection, getCountFromServer } from 'firebase/firestore';
-import { db } from '@/lib/firebase/config';
+import { adminDb } from '@/lib/firebase/admin';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboard() {
-  // Fetch actual counts from Firestore using client SDK
+  // Fetch actual counts from Firestore using Admin SDK
   let postsCount = 0;
   let projectsCount = 0;
   let newsCount = 0;
 
   try {
     const [postsSnapshot, projectsSnapshot, newsSnapshot] = await Promise.all([
-      getCountFromServer(collection(db, 'posts')),
-      getCountFromServer(collection(db, 'projects')),
-      getCountFromServer(collection(db, 'news'))
+      adminDb.collection('posts').count().get(),
+      adminDb.collection('projects').count().get(),
+      adminDb.collection('news').count().get()
     ]);
     
     postsCount = postsSnapshot.data().count;

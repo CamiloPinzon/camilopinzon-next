@@ -2,11 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/lib/firebase/config";
 import { cmsConfig } from "@/lib/cms/config";
 import Link from "next/link";
-import { deleteCmsDocumentAction, seedProjectsAction, seedNewsAction } from "@/app/actions/cms";
+import { deleteCmsDocumentAction, seedProjectsAction, seedNewsAction, getCmsDocumentsAction } from "@/app/actions/cms";
 
 interface DocumentItem {
   id: string;
@@ -28,12 +26,12 @@ export default function CollectionList() {
 
     const fetchDocs = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, schema.id));
-        const docsData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setDocuments(docsData);
+        const res = await getCmsDocumentsAction(schema.id);
+        if (res.success && res.data) {
+          setDocuments(res.data);
+        } else {
+          console.error("Error fetching documents:", res.error);
+        }
       } catch (error) {
         console.error("Error fetching documents:", error);
       } finally {
@@ -67,9 +65,10 @@ export default function CollectionList() {
       const res = await seedProjectsAction();
       if (!res.success) throw new Error(res.error);
 
-      const querySnapshot = await getDocs(collection(db, "projects"));
-      const docsData = querySnapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-      setDocuments(docsData);
+      const fetchRes = await getCmsDocumentsAction("projects");
+      if (fetchRes.success && fetchRes.data) {
+        setDocuments(fetchRes.data);
+      }
       alert("¡Proyectos inicializados con éxito!");
     } catch (err) {
       console.error(err);
@@ -86,9 +85,10 @@ export default function CollectionList() {
       const res = await seedNewsAction();
       if (!res.success) throw new Error(res.error);
 
-      const querySnapshot = await getDocs(collection(db, "news"));
-      const docsData = querySnapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-      setDocuments(docsData);
+      const fetchRes = await getCmsDocumentsAction("news");
+      if (fetchRes.success && fetchRes.data) {
+        setDocuments(fetchRes.data);
+      }
       alert("¡Noticias inicializadas con éxito!");
     } catch (err) {
       console.error(err);

@@ -182,3 +182,67 @@ export async function deleteCmsDocumentAction(collectionId: string, docId: strin
     return { success: false, error: String(error) };
   }
 }
+
+function serializeFirestoreData(data: any): any {
+  if (data === null || data === undefined) return data;
+  
+  // Handle Firestore Timestamp
+  if (typeof data.toDate === "function") {
+    return data.toDate().toISOString();
+  }
+  
+  // Handle JS Date
+  if (data instanceof Date) {
+    return data.toISOString();
+  }
+  
+  // Handle Array
+  if (Array.isArray(data)) {
+    return data.map(serializeFirestoreData);
+  }
+  
+  // Handle Object
+  if (typeof data === "object") {
+    const serialized: any = {};
+    for (const key of Object.keys(data)) {
+      serialized[key] = serializeFirestoreData(data[key]);
+    }
+    return serialized;
+  }
+  
+  return data;
+}
+
+export async function getCmsDocumentsAction(collectionId: string) {
+  try {
+    const snapshot = await adminDb.collection(collectionId).get();
+    const docsData = snapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...serializeFirestoreData(docSnap.data()),
+    }));
+    return { success: true, data: docsData };
+  } catch (error) {
+    console.error("Error fetching documents via server action:", error);
+    return { success: false, error: String(error) };
+  }
+}
+
+export async function getCmsDocumentAction(collectionId: string, docId: string) {
+  try {
+    const docSnap = await adminDb.collection(collectionId).doc(docId).get();
+    if (!docSnap.exists) {
+      return { success: false, error: "Document not found" };
+    }
+    return {
+      success: true,
+      data: {
+        id: docSnap.id,
+        ...serializeFirestoreData(docSnap.data()),
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching document via server action:", error);
+    return { success: false, error: String(error) };
+  }
+}
+

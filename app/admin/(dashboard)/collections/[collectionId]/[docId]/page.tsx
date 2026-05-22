@@ -2,9 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase/config';
-import { saveCmsDocumentAction } from '@/app/actions/cms';
+import { saveCmsDocumentAction, getCmsDocumentAction } from '@/app/actions/cms';
 import { cmsConfig } from '@/lib/cms/config';
 import Link from 'next/link';
 import { uploadImageToCloudinary } from '@/lib/actions/uploadImage';
@@ -99,13 +97,13 @@ export default function DocumentEditor() {
     
     const fetchDoc = async () => {
       try {
-        const docSnap = await getDoc(doc(db, schema.id, docId));
-        if (docSnap.exists()) {
-          const data = docSnap.data() as DocumentData;
+        const res = await getCmsDocumentAction(schema.id, docId);
+        if (res.success && res.data) {
+          const data = res.data as DocumentData;
           if (!data.translations) data.translations = {};
           setFormData(data);
         } else {
-          alert('Document not found');
+          alert(res.error || 'Document not found');
           router.push(`/admin/collections/${schema.id}`);
         }
       } catch (error) {
