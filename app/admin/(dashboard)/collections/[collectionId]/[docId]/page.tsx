@@ -2,8 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { doc, getDoc, setDoc, addDoc, collection } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase/config';
+import { saveCmsDocumentAction } from '@/app/actions/cms';
 import { cmsConfig } from '@/lib/cms/config';
 import Link from 'next/link';
 import { uploadImageToCloudinary } from '@/lib/actions/uploadImage';
@@ -143,18 +144,20 @@ export default function DocumentEditor() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      if (isNew) {
-        await addDoc(collection(db, schema.id), formData);
-        if (schema.id === 'posts' && formData.isPublished) {
-          await notifySubscribersAboutNewPostAction(formData);
-        }
-      } else {
-        await setDoc(doc(db, schema.id, docId), formData, { merge: true });
+      const res = await saveCmsDocumentAction(schema.id, isNew ? null : docId, isNew, formData);
+      if (!res.success) {
+        throw new Error(res.error);
       }
+
+      if (isNew && schema.id === 'posts' && formData.isPublished) {
+        const fullPostData = { ...formData, id: res.id, slug: (formData.slug as string) || res.id };
+        await notifySubscribersAboutNewPostAction(fullPostData as any);
+      }
+
       router.push(`/admin/collections/${schema.id}`);
     } catch (error) {
       console.error("Error saving document:", error);
-      alert('Failed to save document');
+      alert('Failed to save document: ' + error);
     } finally {
       setSaving(false);
     }
