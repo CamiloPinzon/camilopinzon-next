@@ -77,7 +77,18 @@ export default function MainNav() {
         <Link
           href={`/${currentLang}/`}
           className={styles.logo}
-          onClick={() => setMenuOpen(false)}
+          onClick={(e) => {
+            setMenuOpen(false);
+            // If already on the home page, just scroll to top smoothly
+            const isHome =
+              pathname === `/${currentLang}` ||
+              pathname === `/${currentLang}/` ||
+              pathname === "/";
+            if (isHome) {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
         >
           Camilo Pinzón
         </Link>
