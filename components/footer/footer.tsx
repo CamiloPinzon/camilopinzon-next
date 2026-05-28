@@ -3,19 +3,19 @@ import SocialLinks from "../social-links/social-links";
 import FooterNewsletterForm from "./footer-newsletter-form";
 import styles from "./footer.module.scss";
 import { getTranslations } from "@/lib/i18n/translations";
+import { NAV_LINKS, CONTACT_HASH } from "@/lib/config/nav-links";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Footer({ lang = "en" }: { lang?: string }) {
   const t = getTranslations(lang);
 
-  const FOOTER_LINKS = [
-    { label: t.nav.home, href: `/${lang}/#inicio` },
-    { label: t.nav.experience, href: `/${lang}/experience` },
-    { label: t.nav.services, href: `/${lang}/#servicios` },
-    { label: t.nav.news, href: `/${lang}/#novedades` },
-    { label: t.nav.blog, href: `/${lang}/#blogs` },
-    { label: t.nav.contact, href: `/${lang}/#contacto` },
+  const footerLinks = [
+    ...NAV_LINKS.map((link) => ({
+      label: t.nav[link.labelKey],
+      href: `/${lang}/#${link.hash}`,
+    })),
+    { label: t.nav.contact, href: `/${lang}/#${CONTACT_HASH}` },
   ];
 
   return (
@@ -29,7 +29,7 @@ export default function Footer({ lang = "en" }: { lang?: string }) {
       </div>
       <nav aria-label={t.footer.navLabel}>
         <ul className={styles.nav}>
-          {FOOTER_LINKS.map((link) => (
+          {footerLinks.map((link) => (
             <li key={link.label}>
               <Link href={link.href}>{link.label}</Link>
             </li>

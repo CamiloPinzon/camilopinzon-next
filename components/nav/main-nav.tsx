@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { getTranslations } from "@/lib/i18n/translations";
+import { NAV_LINKS, CONTACT_HASH } from "@/lib/config/nav-links";
 
 import LanguageSwitcher from "./language-switcher";
 import HamburgerIcon from "../hamburger-icon/hamburger-icon";
@@ -26,21 +27,15 @@ export default function MainNav() {
   const currentLang = pathname.split("/")[1] || "en";
   const t = getTranslations(currentLang);
 
-  const NAV_LINKS = [
-    { label: t.nav.home, href: `/${currentLang}/#inicio` },
-    { label: t.nav.services, href: `/${currentLang}/#servicios` },
-    { label: t.nav.portfolio, href: `/${currentLang}/#portafolio` },
-    { label: t.nav.news, href: `/${currentLang}/#novedades` },
-    { label: t.nav.blog, href: `/${currentLang}/#blogs` },
-  ];
+  const navLinks = NAV_LINKS.map((link) => ({
+    label: t.nav[link.labelKey],
+    href: `/${currentLang}/#${link.hash}`,
+  }));
 
   useEffect(() => {
-    const sections = NAV_LINKS.map((link) => {
-      const hashIndex = link.href.indexOf("#");
-      return hashIndex !== -1 ? link.href.substring(hashIndex + 1) : null;
-    })
-      .concat("contacto")
-      .map((id) => (id ? document.getElementById(id) : null))
+    const sections = NAV_LINKS.map((link) => link.hash)
+      .concat(CONTACT_HASH)
+      .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[];
 
     const observer = new IntersectionObserver(
@@ -88,7 +83,7 @@ export default function MainNav() {
         </Link>
 
         <ul className={styles.links}>
-          {NAV_LINKS.map((link) => {
+          {navLinks.map((link) => {
             const hashIndex = link.href.indexOf("#");
             const isAnchor = hashIndex !== -1;
             const sectionId = isAnchor
@@ -122,7 +117,7 @@ export default function MainNav() {
           </li>
           <li>
             <Link
-              href={`/${currentLang}/#contacto`}
+              href={`/${currentLang}/#${CONTACT_HASH}`}
               className={styles.cta}
               onClick={(e) => handleAnchorClick(e, "contacto")}
             >
@@ -152,7 +147,7 @@ export default function MainNav() {
         aria-modal="true"
         aria-label="Menú de navegación"
       >
-        {NAV_LINKS.map((link, i) => {
+        {navLinks.map((link, i) => {
           const hashIndex = link.href.indexOf("#");
           const isAnchor = hashIndex !== -1;
           const sectionId = isAnchor
@@ -190,7 +185,7 @@ export default function MainNav() {
           <LanguageSwitcher />
         </div>
         <Link
-          href={`/${currentLang}/#contacto`}
+          href={`/${currentLang}/#${CONTACT_HASH}`}
           className={styles.drawerCta}
           onClick={(e) => handleAnchorClick(e, "contacto")}
         >
