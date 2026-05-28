@@ -43,11 +43,14 @@ export const cmsConfig: CMSConfig = {
       description: 'Manage your blog articles and publications.',
       fields: [
         { name: 'title', label: 'Title', type: 'string', required: true, localized: true },
-        { name: 'slug', label: 'URL Slug', type: 'string', required: true }, // Not localized so URLs remain consistent if you want, or you can localize it.
+        { name: 'slug', label: 'URL Slug', type: 'string', required: true },
         { name: 'coverImage', label: 'Cover Image', type: 'image' },
         { name: 'coverImageAlt', label: 'Cover Image Alt Text (Accessibility)', type: 'string', localized: true },
         { name: 'excerpt', label: 'Short Excerpt (TL;DR)', type: 'text', localized: true },
         { name: 'content', label: 'Content', type: 'richtext', localized: true },
+        { name: 'tag', label: 'Category / Tag (e.g. React, UX Design, Backend)', type: 'string' },
+        { name: 'color', label: 'Tag Accent Color (hex, e.g. #61DAFB)', type: 'string' },
+        { name: 'readTime', label: 'Read Time (e.g. 5 min)', type: 'string' },
         { name: 'publishedAt', label: 'Publish Date', type: 'date' },
         { name: 'isPublished', label: 'Published?', type: 'boolean' }
       ],
