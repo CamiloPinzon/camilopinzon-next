@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { uploadImageToCloudinary } from '@/lib/actions/uploadImage';
 import Image from 'next/image';
 import { notifySubscribersAboutNewPostAction } from '@/app/actions/newsletter';
+import { publishToLinkedInAction } from '@/app/actions/linkedin';
 
 interface DocumentData {
   translations?: Record<string, Record<string, unknown>>;
@@ -149,7 +150,12 @@ export default function DocumentEditor() {
 
       if (isNew && schema.id === 'posts' && formData.isPublished) {
         const fullPostData = { ...formData, id: res.id, slug: (formData.slug as string) || res.id };
+        
+        // 1. Notify email subscribers
         await notifySubscribersAboutNewPostAction(fullPostData as any);
+        
+        // 2. Publish to LinkedIn
+        await publishToLinkedInAction(fullPostData as any);
       }
 
       router.push(`/admin/collections/${schema.id}`);

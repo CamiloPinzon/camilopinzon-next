@@ -1,6 +1,7 @@
 "use server";
 
 import { adminDb } from "@/lib/firebase/admin";
+import { publishToLinkedInAction } from "./linkedin";
 
 export async function seedNewsAction() {
   try {
@@ -156,11 +157,20 @@ export async function saveCmsDocumentAction(
   collectionId: string,
   docId: string | null,
   isNew: boolean,
-  data: any
+  data: Record<string, unknown>
 ) {
   try {
     if (isNew) {
       const docRef = await adminDb.collection(collectionId).add(data);
+      
+      // Automatización LinkedIn: Publicar cuando se crea un nuevo post
+      if (collectionId === "posts") {
+        // En Vercel (Serverless), las promesas sin 'await' pueden ser canceladas 
+        // cuando la función principal retorna. Por seguridad y confiabilidad, 
+        // hacemos un await (la API de LinkedIn responde en < 1s).
+        await publishToLinkedInAction({ id: docRef.id, ...data });
+      }
+
       return { success: true, id: docRef.id };
     } else {
       if (!docId) throw new Error("Document ID is required for editing");
@@ -183,12 +193,12 @@ export async function deleteCmsDocumentAction(collectionId: string, docId: strin
   }
 }
 
-function serializeFirestoreData(data: any): any {
+function serializeFirestoreData(data: unknown): unknown {
   if (data === null || data === undefined) return data;
   
   // Handle Firestore Timestamp
-  if (typeof data.toDate === "function") {
-    return data.toDate().toISOString();
+  if (typeof data === "object" && data !== null && "toDate" in data && typeof (data as Record<string, unknown>).toDate === "function") {
+    return ((data as Record<string, unknown>).toDate as () => Date)().toISOString();
   }
   
   // Handle JS Date
@@ -202,10 +212,10 @@ function serializeFirestoreData(data: any): any {
   }
   
   // Handle Object
-  if (typeof data === "object") {
-    const serialized: any = {};
+  if (typeof data === "object" && data !== null) {
+    const serialized: Record<string, unknown> = {};
     for (const key of Object.keys(data)) {
-      serialized[key] = serializeFirestoreData(data[key]);
+      serialized[key] = serializeFirestoreData((data as Record<string, unknown>)[key]);
     }
     return serialized;
   }
@@ -218,7 +228,7 @@ export async function getCmsDocumentsAction(collectionId: string) {
     const snapshot = await adminDb.collection(collectionId).get();
     const docsData = snapshot.docs.map((docSnap) => ({
       id: docSnap.id,
-      ...serializeFirestoreData(docSnap.data()),
+      ...(serializeFirestoreData(docSnap.data()) as Record<string, unknown>),
     }));
     return { success: true, data: docsData };
   } catch (error) {
@@ -237,7 +247,7 @@ export async function getCmsDocumentAction(collectionId: string, docId: string) 
       success: true,
       data: {
         id: docSnap.id,
-        ...serializeFirestoreData(docSnap.data()),
+        ...(serializeFirestoreData(docSnap.data()) as Record<string, unknown>),
       },
     };
   } catch (error) {
