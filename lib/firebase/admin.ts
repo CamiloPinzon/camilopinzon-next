@@ -2,6 +2,7 @@ import "server-only";
 import { initializeApp, getApps, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 import { getAuth } from "firebase-admin/auth";
+import { cookies } from "next/headers";
 
 // Parse the service account JSON string from the environment variable
 const getServiceAccount = () => {
@@ -32,3 +33,19 @@ export const adminApp =
 
 export const adminDb = getFirestore(adminApp);
 export const adminAuth = getAuth(adminApp);
+
+export async function verifyAdminSession() {
+  const cookieStore = await cookies();
+  const sessionCookie = cookieStore.get("session")?.value;
+
+  if (!sessionCookie) {
+    throw new Error("Unauthorized: No session cookie found");
+  }
+
+  try {
+    const decodedClaims = await adminAuth.verifySessionCookie(sessionCookie, true);
+    return decodedClaims;
+  } catch (error) {
+    throw new Error("Unauthorized: Invalid session cookie");
+  }
+}

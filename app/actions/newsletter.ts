@@ -1,6 +1,6 @@
 "use server";
 
-import { adminDb } from "@/lib/firebase/admin";
+import { adminDb, verifyAdminSession } from "@/lib/firebase/admin";
 import { Resend } from "resend";
 import { newsletterSchema } from "@/lib/validation/schemas";
 import { getTranslations } from "@/lib/i18n/translations";
@@ -95,6 +95,7 @@ interface PostFormData {
 
 export async function notifySubscribersAboutNewPostAction(formData: PostFormData) {
   try {
+    await verifyAdminSession();
     const subscribersRef = adminDb.collection("subscribers");
     const snapshot = await subscribersRef.where("status", "==", "active").get();
     

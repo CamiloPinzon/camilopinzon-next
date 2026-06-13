@@ -1,10 +1,11 @@
 "use server";
 
-import { adminDb } from "@/lib/firebase/admin";
+import { adminDb, verifyAdminSession } from "@/lib/firebase/admin";
 import { publishToLinkedInAction } from "./linkedin";
 
 export async function seedNewsAction() {
   try {
+    await verifyAdminSession();
     const initialNews = [
       {
         id: "news-google-wallet",
@@ -70,6 +71,7 @@ export async function seedNewsAction() {
 
 export async function seedProjectsAction() {
   try {
+    await verifyAdminSession();
     const initialProjects = [
       {
         id: "portfolio-ia",
@@ -160,6 +162,7 @@ export async function saveCmsDocumentAction(
   data: Record<string, unknown>
 ) {
   try {
+    await verifyAdminSession();
     if (isNew) {
       const docRef = await adminDb.collection(collectionId).add(data);
       
@@ -185,6 +188,7 @@ export async function saveCmsDocumentAction(
 
 export async function deleteCmsDocumentAction(collectionId: string, docId: string) {
   try {
+    await verifyAdminSession();
     await adminDb.collection(collectionId).doc(docId).delete();
     return { success: true };
   } catch (error) {
@@ -225,6 +229,7 @@ function serializeFirestoreData(data: unknown): unknown {
 
 export async function getCmsDocumentsAction(collectionId: string) {
   try {
+    await verifyAdminSession();
     const snapshot = await adminDb.collection(collectionId).get();
     const docsData = snapshot.docs.map((docSnap) => ({
       id: docSnap.id,
@@ -239,6 +244,7 @@ export async function getCmsDocumentsAction(collectionId: string) {
 
 export async function getCmsDocumentAction(collectionId: string, docId: string) {
   try {
+    await verifyAdminSession();
     const docSnap = await adminDb.collection(collectionId).doc(docId).get();
     if (!docSnap.exists) {
       return { success: false, error: "Document not found" };

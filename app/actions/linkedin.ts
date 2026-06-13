@@ -1,5 +1,7 @@
 'use server';
 
+import { verifyAdminSession } from "@/lib/firebase/admin";
+
 export interface BlogPostPayload {
   id?: string;
   slug?: string;
@@ -20,6 +22,7 @@ export interface BlogPostPayload {
 
 export async function publishToLinkedInAction(post: BlogPostPayload) {
   try {
+    await verifyAdminSession();
     const accessToken = process.env.LINKEDIN_ACCESS_TOKEN;
     const authorUrn = process.env.LINKEDIN_AUTHOR_URN; // e.g., urn:li:person:123456789
 

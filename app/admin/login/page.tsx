@@ -16,7 +16,19 @@ export default function AdminLogin() {
 
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const userCredential = await signInWithPopup(auth, provider);
+      
+      const idToken = await userCredential.user.getIdToken();
+      const res = await fetch("/api/auth/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken }),
+      });
+      
+      if (!res.ok) {
+        throw new Error("Failed to create secure session");
+      }
+      
       router.push("/admin"); // Redirect to dashboard
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
