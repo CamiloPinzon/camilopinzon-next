@@ -7,7 +7,7 @@ Este archivo contiene el contexto dinámico y reciente del proyecto. Su propósi
 ---
 
 ## 📅 Última Actualización
-- **Fecha:** 23 de Junio de 2026
+- **Fecha:** 24 de Junio de 2026
 
 ## 🚀 Estado Actual del Proyecto
 - Next.js 16 (App Router) en TypeScript con Firebase (Admin y Cliente), Vercel AI SDK, y Tailwind v4.
@@ -17,9 +17,10 @@ Este archivo contiene el contexto dinámico y reciente del proyecto. Su propósi
 - **Importante (HARD CONSTRAINT):** Se ha establecido una regla inviolable donde la IA **tiene prohibido** ejecutar comandos o modificar archivos a menos que el usuario incluya la palabra exacta **"AUTHORIZE"** (o "AUTORIZO") en su prompt. La IA debe detenerse siempre y pedir permiso explícito tarea por tarea.
 
 > **SESIÓN CERRADA:** El progreso se ha pausado.
-> **CONTEXTO DE CONTINUACIÓN (IMPORTANTE PARA LA PRÓXIMA SESIÓN):** El usuario finalizó la sesión tras completar la implementación completa del sistema de temas (incluyendo `ThemeProvider` y `ThemeSelector` en `main-nav.tsx`). El objetivo inicial de retomar el trabajo en `app/admin/(dashboard)/collections/[collectionId]/[docId]/page.tsx` para refactorizar el CMS sigue pendiente y debe ser la primera prioridad al reiniciar.
+> **CONTEXTO DE CONTINUACIÓN (IMPORTANTE PARA LA PRÓXIMA SESIÓN):** El usuario reportó problemas visuales derivados de estilos "fuera de contexto". Se completó una extensa limpieza y refactorización ("Clean up Legacy Classes y Hardcoded Colors") eliminando variables obsoletas y colores duros en toda la interfaz y el admin, alineando todo el proyecto al sistema de diseño Augen Pro. El objetivo de retomar el trabajo en `app/admin/(dashboard)/collections/[collectionId]/[docId]/page.tsx` para refactorizar el CMS sigue pendiente y debe ser la primera prioridad al reiniciar.
 
 ## ✅ Tareas Completadas Recientemente
+- [x] **Refactorización de Diseño ("Clean up Legacy Classes"):** Limpieza exhaustiva de clases CSS obsoletas (`glass-panel`, `surface-card`) y reemplazo total de colores hexadecimales duros y `rgba` estáticos en favor de las variables dinámicas (`var(--color-...)`) del sistema Augen Pro. Se corrigió la visibilidad de la navegación y todo el panel de administración (`admin.scss`, `login/page.tsx`, etc) para que soporten perfectamente la transición entre temas claro y oscuro.
 - [x] **Resolución de Errores Estrictos:** Se corrigieron advertencias y errores bloqueantes de ESLint (`react-hooks/set-state-in-effect` y variables sin uso en `admin.ts`) para garantizar que la compilación y validación sean 100% exitosas.
 - [x] **ThemeProvider y Selector (UI):** Creado el `ThemeProvider` con soporte para 3 estados (`light`, `dark`, `dynamic`), sincronizado con `localStorage` e inyección de `--theme-progress`. Se integró un `ThemeSelector` (3-way toggle) visualmente consistente (estilo pill) en la barra de navegación principal (`main-nav.tsx`).
 - [x] **Sistema de Temas Dinámicos:** Implementada la transición fluida de temas (Light/Dark/Dynamic) usando `color-mix` en CSS (`globals.css`) y un inyector de variables (`theme-script.tsx`) para prevenir destellos de renderizado (FOUC). Inyección en `app/layout.tsx`.
