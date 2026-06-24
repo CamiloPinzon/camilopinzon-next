@@ -117,15 +117,11 @@ export default async function Home({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <MainHero lang={lang} />
-      <div className="theme-dark">
-        <Services lang={lang} />
-      </div>
+      <Services lang={lang} />
       <Portfolio lang={lang} />
       <News newsList={newsList} lang={lang} />
-      <div className="theme-dark">
-        <TechStack lang={lang} />
-        <BlogHighlights posts={posts} lang={lang} />
-      </div>
+      <TechStack lang={lang} />
+      <BlogHighlights posts={posts} lang={lang} />
       <Contact lang={lang} />
       <Brands lang={lang} />
     </main>
