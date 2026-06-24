@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { calculateThemeProgress } from "@/lib/theme/calculate-progress";
 
 export type ThemeMode = "light" | "dark" | "dynamic";
 
@@ -28,13 +29,8 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const calculateProgress = (mode: ThemeMode) => {
     if (mode === "dark") return 1;
     if (mode === "light") return 0;
-    
-    // Dynamic mode: Calculate based on time
     const now = new Date();
-    const hours = now.getHours() + now.getMinutes() / 60;
-    
-    // Using a cosine wave where 12 PM (noon) is 0 (pure light) and 12 AM (midnight) is 1 (pure dark).
-    return (Math.cos((hours / 24) * 2 * Math.PI) + 1) / 2;
+    return calculateThemeProgress(now.getHours() + now.getMinutes() / 60);
   };
 
   useEffect(() => {

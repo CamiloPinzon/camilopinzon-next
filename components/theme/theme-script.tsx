@@ -6,20 +6,31 @@ export const ThemeScript = () => {
       try {
         var mode = localStorage.getItem('theme-mode') || 'dynamic';
         var progress = 0;
-        
+
         if (mode === 'dark') {
           progress = 1;
         } else if (mode === 'light') {
           progress = 0;
         } else {
-          // Dynamic mode: Calculate based on time
           var now = new Date();
-          var hours = now.getHours() + now.getMinutes() / 60;
-          
-          // Using a cosine wave where 12 PM (noon) is 0 (pure light) and 12 AM (midnight) is 1 (pure dark).
-          progress = (Math.cos((hours / 24) * 2 * Math.PI) + 1) / 2;
+          var h = now.getHours() + now.getMinutes() / 60;
+
+          // 1.5-hour windows: worst-case midpoint falls between whole hours,
+          // keeping WCAG AA contrast (≥4.5:1) at all practical times.
+          // Day 07:30–19:00 → light. Night 20:30–06:00 → dark.
+          function smoothstep(x) { return x * x * (3 - 2 * x); }
+
+          if (h >= 7.5 && h < 19) {
+            progress = 0;
+          } else if (h >= 20.5 || h < 6) {
+            progress = 1;
+          } else if (h >= 6 && h < 7.5) {
+            progress = 1 - smoothstep((h - 6) / 1.5);
+          } else {
+            progress = smoothstep((h - 19) / 1.5);
+          }
         }
-        
+
         document.documentElement.style.setProperty('--theme-progress', progress);
       } catch (e) {}
     })();
