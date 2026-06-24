@@ -18,13 +18,13 @@
     background 0.2s;
 
   &:hover {
-    border-color: var(--color-accent);
-    color: var(--color-text);
+    border-color: var(--color-future-blue);
+    color: var(--color-midnight-ink);
   }
 
   &.pillActive {
-    background: var(--color-accent);
-    border-color: var(--color-accent);
+    background: var(--color-future-blue);
+    border-color: var(--color-future-blue);
     color: #0d1117;
     font-weight: 700;
 
@@ -33,3 +33,4 @@
     }
   }
 }
+

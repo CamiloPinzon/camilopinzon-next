@@ -63,7 +63,7 @@ export default async function Portfolio({ lang = "en" }: { lang?: string }) {
                   } as React.CSSProperties
                 }
               >
-                <article className={`surface-card ${styles.card}`}>
+                <article className={styles.card}>
                   <div className={styles.imageWrapper}>
                     <Image
                       src={project.image}

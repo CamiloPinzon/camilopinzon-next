@@ -14,7 +14,7 @@
 
   &.scrolled,
   &.open {
-    background: rgba(253, 253, 253, 0.95); /* Canvas with opacity */
+    background: color-mix(in srgb, var(--color-canvas) 95%, transparent);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
   }
@@ -26,7 +26,7 @@
   font-size: 1.05rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--color-text);
+  color: var(--color-midnight-ink);
   text-decoration: none;
   position: relative;
   z-index: 201;
@@ -51,18 +51,18 @@
     transition: all 0.2s;
 
     &:hover {
-      background: rgba(12, 13, 15, 0.05);
+      background: color-mix(in srgb, var(--color-midnight-ink) 5%, transparent);
     }
   }
 }
 
 .linkActive {
-  background: rgba(117, 117, 117, 0.1) !important;
+  background: color-mix(in srgb, var(--color-midnight-ink) 10%, transparent) !important;
   color: var(--color-midnight-ink) !important;
 }
 
 .cta {
-  background: var(--color-accent) !important;
+  background: var(--color-future-blue) !important;
   color: #0d1117 !important;
   padding: 0.45rem 1.1rem !important;
   border-radius: 100px !important;
@@ -89,8 +89,8 @@
   height: 40px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  background: var(--color-surface);
-  color: var(--color-text);
+  background: var(--color-canvas);
+  color: var(--color-midnight-ink);
   cursor: pointer;
   position: relative;
   z-index: 201;
@@ -99,8 +99,8 @@
     background 0.2s;
 
   &:hover {
-    border-color: var(--color-accent);
-    background: var(--color-surface-2);
+    border-color: var(--color-future-blue);
+    background: var(--color-canvas-2);
   }
 }
 
@@ -114,7 +114,7 @@
   justify-content: center;
   align-items: center;
   gap: var(--space-md);
-  background: rgba(253, 253, 253, 0.98); /* Canvas light */
+  background: color-mix(in srgb, var(--color-canvas) 98%, transparent);
   backdrop-filter: blur(24px);
   opacity: 0;
   transform: translateY(-8px);
@@ -136,19 +136,19 @@
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--color-slate-comment);
   text-decoration: none;
   transition:
     color 0.2s,
     letter-spacing 0.25s;
 
   &:hover {
-    color: var(--color-text);
+    color: var(--color-midnight-ink);
     letter-spacing: 0.18em;
   }
 
   &.drawerLinkActive {
-    color: var(--color-accent) !important;
+    color: var(--color-future-blue) !important;
   }
 }
 
@@ -164,7 +164,7 @@
   padding: 0.8rem 2.5rem;
   border: none;
   border-radius: 100px;
-  background: var(--color-accent);
+  background: var(--color-future-blue);
   color: #0d1117;
   font-family: var(--font-primary);
   font-weight: 700;
@@ -187,3 +187,4 @@
     display: flex;
   }
 }
+

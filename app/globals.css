@@ -7,24 +7,35 @@
 }
 
 :root {
-  /* Augen Pro Colors */
-  --color-midnight-ink: #0f1012;
-  --color-ghost-white: #f2f2f4;
-  --color-canvas: #fdfdfd;
+  /* Dynamic Theme Variables */
+  --theme-progress: 0;
+  --progress-percent: calc(var(--theme-progress, 0) * 100%);
+
+  /* Light Theme Base Colors */
+  --color-midnight-ink-light: #0f1012;
+  --color-ghost-white-light: #f2f2f4;
+  --color-canvas-light: #fdfdfd;
+  --color-slate-comment-light: #8f8f8f;
+  --color-border-light: rgba(15, 16, 18, 0.08);
+
+  /* Dark Theme Base Colors */
+  --color-midnight-ink-dark: #fdfdfd;
+  --color-ghost-white-dark: #0a0a0b;
+  --color-canvas-dark: #0f1012;
+  --color-slate-comment-dark: #868788;
+  --color-border-dark: rgba(255, 255, 255, 0.08);
+
+  /* Shared/Static Colors */
   --color-skyline-gray: #868788;
-  --color-slate-comment: #8f8f8f;
   --color-deep-graphite: #020201;
   --color-future-blue: #0071e3;
 
-  /* Legacy mapping for existing components */
-  --color-bg: var(--color-ghost-white);
-  --color-surface: var(--color-canvas);
-  --color-border: rgba(15, 16, 18, 0.08);
-  /* Subtle dark border */
-  --color-text: var(--color-midnight-ink);
-  --color-text-muted: var(--color-slate-comment);
-  --color-muted: var(--color-slate-comment);
-  --color-accent: var(--color-future-blue);
+  /* Computed Dynamic Colors */
+  --color-midnight-ink: color-mix(in srgb, var(--color-midnight-ink-dark) var(--progress-percent), var(--color-midnight-ink-light));
+  --color-ghost-white: color-mix(in srgb, var(--color-ghost-white-dark) var(--progress-percent), var(--color-ghost-white-light));
+  --color-canvas: color-mix(in srgb, var(--color-canvas-dark) var(--progress-percent), var(--color-canvas-light));
+  --color-slate-comment: color-mix(in srgb, var(--color-slate-comment-dark) var(--progress-percent), var(--color-slate-comment-light));
+  --color-border: color-mix(in srgb, var(--color-border-dark) var(--progress-percent), var(--color-border-light));
 
   /* Typography — fuentes inyectadas por next/font en layout.tsx */
   --font-primary: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -48,26 +59,15 @@
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.theme-dark {
-  --color-midnight-ink: #fdfdfd;
-  --color-ghost-white: #0a0a0b;
-  --color-canvas: #0f1012;
-  --color-slate-comment: #868788;
-  --color-border: rgba(255, 255, 255, 0.08);
-
-  background-color: var(--color-canvas);
-  color: var(--color-midnight-ink);
-}
-
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  background-color: var(--color-bg);
+  background-color: var(--color-ghost-white);
 }
 
 body {
   background: transparent;
-  color: var(--color-text);
+  color: var(--color-midnight-ink);
   font-family: var(--font-secondary);
   font-size: 16px;
   line-height: 1.2;
@@ -139,37 +139,6 @@ body {
 
 /* ════════ GLOBAL UTILITIES ════════ */
 
-.glass-panel {
-  /* Augen Pro requests no heavy shadows/glassmorphism, using flat Canvas instead */
-  background: var(--color-canvas);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-}
-
-.text-gradient {
-  /* Design strictly prohibits visual noise, solid Future Blue or Ink */
-  color: var(--color-midnight-ink);
-  background: none;
-  -webkit-text-fill-color: initial;
-}
-
-.surface-card {
-  position: relative;
-  background: var(--color-canvas);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-
-.surface-card::after {
-  content: none;
-  /* Remove legacy gradient borders */
-}
-
-.surface-card:hover {
-  border-color: rgba(15, 16, 18, 0.15);
-}
-
 .badge {
   display: inline-flex;
   align-items: center;
@@ -190,15 +159,15 @@ body {
 }
 
 .badge--accent {
-  color: var(--color-accent);
-  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+  color: var(--color-future-blue);
+  background: color-mix(in srgb, var(--color-future-blue) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-future-blue) 20%, transparent);
 }
 
 .badge--filled {
-  background: var(--color-surface);
+  background: var(--color-canvas);
   border: 1px solid var(--color-border);
-  color: var(--color-muted);
+  color: var(--color-slate-comment);
 }
 
 /* ════════ GLOBAL KEYFRAMES ════════ */

@@ -25,6 +25,10 @@
 .card {
   display: flex;
   flex-direction: column;
+  background: var(--color-canvas);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
   transition:
     transform 0.3s var(--ease),
     border-color 0.3s var(--ease);
@@ -64,14 +68,14 @@
   font-family: var(--font-primary);
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--color-text);
+  color: var(--color-midnight-ink);
   margin: 0 0 16px 0;
   line-height: 1.3;
 }
 
 .desc {
   font-size: 1rem;
-  color: var(--color-text-muted);
+  color: var(--color-slate-comment);
   line-height: 1.6;
   margin: 0 0 24px 0;
   flex-grow: 1;

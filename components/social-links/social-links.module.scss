@@ -9,8 +9,8 @@
   height: 34px;
   border-radius: 8px;
   border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  color: var(--color-muted);
+  background: var(--color-canvas);
+  color: var(--color-slate-comment);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,8 +23,9 @@
   text-decoration: none;
 
   &:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
+    border-color: var(--color-future-blue);
+    color: var(--color-future-blue);
     transform: translateY(-2px);
   }
 }
+

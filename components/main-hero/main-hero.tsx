@@ -85,7 +85,7 @@ export default function MainHero({ lang }: { lang: string }) {
             return (
               <span key={`hem-${idx}`} className={styles.wordContainer}>
                 <span className={styles.wordMask}>
-                  <span className={`${styles.word} text-gradient`} style={{ "--word-index": delay } as React.CSSProperties}>
+                  <span className={styles.word} style={{ "--word-index": delay } as React.CSSProperties}>
                     {word}
                   </span>
                 </span>

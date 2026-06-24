@@ -34,7 +34,7 @@ export default function Experience({
               
               <div className={styles.contentSide}>
                 <div className={styles.dot} />
-                <div className={`glass-panel surface-card ${styles.card}`}>
+                <div className={styles.card}>
                   <h3 className={styles.jobTitle}>{item.jobTitle}</h3>
                   <a 
                     href={item.website || "#"} 

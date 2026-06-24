@@ -14,8 +14,7 @@ const getServiceAccount = () => {
     if (!parsed.project_id) return null;
     
     return parsed;
-  } catch (error) {
-    console.error("Error parsing FIREBASE_SERVICE_ACCOUNT_KEY:", error);
+  } catch {
     return null;
   }
 };
@@ -45,7 +44,7 @@ export async function verifyAdminSession() {
   try {
     const decodedClaims = await adminAuth.verifySessionCookie(sessionCookie, true);
     return decodedClaims;
-  } catch (error) {
+  } catch {
     throw new Error("Unauthorized: Invalid session cookie");
   }
 }

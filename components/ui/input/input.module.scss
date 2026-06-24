@@ -2,8 +2,8 @@
   padding: 0.65rem 1rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
-  background: var(--color-surface-2);
-  color: var(--color-text);
+  background: var(--color-canvas-2);
+  color: var(--color-midnight-ink);
   font-family: var(--font-secondary);
   font-size: 0.82rem;
   outline: none;
@@ -13,11 +13,11 @@
     box-shadow 0.2s;
 
   &::placeholder {
-    color: var(--color-muted);
+    color: var(--color-slate-comment);
   }
 
   &:focus {
-    border-color: var(--color-accent);
+    border-color: var(--color-future-blue);
     box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
   }
 
@@ -26,3 +26,4 @@
     cursor: not-allowed;
   }
 }
+

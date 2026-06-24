@@ -76,7 +76,7 @@ export default function BlogCard({
 
   return (
     <article
-      className={`surface-card ${styles.card}`}
+      className={styles.card}
       style={
         {
           "--accent": post.color,

@@ -57,7 +57,7 @@ export default function FooterNewsletterForm({
 
   if (status === "success") {
     return (
-      <p style={{ fontSize: "0.82rem", color: "var(--color-accent)" }}>
+      <p style={{ fontSize: "0.82rem", color: "var(--color-future-blue)" }}>
         {successMsg}
       </p>
     );

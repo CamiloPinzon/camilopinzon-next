@@ -152,10 +152,14 @@ export default function DocumentEditor() {
         const fullPostData = { ...formData, id: res.id, slug: (formData.slug as string) || res.id };
         
         // 1. Notify email subscribers
-        await notifySubscribersAboutNewPostAction(fullPostData as any);
+        await notifySubscribersAboutNewPostAction(
+          fullPostData as Parameters<typeof notifySubscribersAboutNewPostAction>[0]
+        );
         
         // 2. Publish to LinkedIn
-        await publishToLinkedInAction(fullPostData as any);
+        await publishToLinkedInAction(
+          fullPostData as Parameters<typeof publishToLinkedInAction>[0]
+        );
       }
 
       router.push(`/admin/collections/${schema.id}`);

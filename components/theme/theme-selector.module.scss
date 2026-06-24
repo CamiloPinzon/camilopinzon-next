@@ -1,0 +1,48 @@
+.pillSwitcher {
+  display: flex;
+  gap: var(--element-gap, 4px);
+  padding: 4px;
+}
+
+.pillItem {
+  /* Pill Tag Button Styling */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(117, 117, 117, 0.08);
+  color: var(--color-slate-comment);
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.25s var(--ease, ease);
+
+  &:hover {
+    background: rgba(117, 117, 117, 0.12);
+    color: var(--color-midnight-ink);
+  }
+
+  &.active {
+    background: var(--color-midnight-ink);
+    color: var(--color-ghost-white);
+    pointer-events: none;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 860px) {
+  .pillItem {
+    padding: 10px 14px;
+    border-radius: 12px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

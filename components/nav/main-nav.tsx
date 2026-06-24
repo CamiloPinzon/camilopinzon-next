@@ -8,6 +8,7 @@ import { getTranslations } from "@/lib/i18n/translations";
 import { NAV_LINKS, CONTACT_HASH } from "@/lib/config/nav-links";
 
 import LanguageSwitcher from "./language-switcher";
+import ThemeSelector from "../theme/theme-selector";
 import HamburgerIcon from "../hamburger-icon/hamburger-icon";
 import styles from "./main-nav.module.scss";
 
@@ -48,7 +49,6 @@ export default function MainNav() {
 
     sections.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, currentLang]);
 
   /** Smooth scroll a un anchor — usa scrollIntoView + scroll-margin-top del CSS */
@@ -66,7 +66,7 @@ export default function MainNav() {
       <nav
         className={[
           styles.nav,
-          scrolled || menuOpen ? "glass-panel" : "",
+          "",
           scrolled ? styles.scrolled : "",
           menuOpen ? styles.open : "",
         ]
@@ -125,6 +125,9 @@ export default function MainNav() {
           })}
           <li>
             <LanguageSwitcher />
+          </li>
+          <li>
+            <ThemeSelector />
           </li>
           <li>
             <Link
@@ -192,8 +195,9 @@ export default function MainNav() {
           );
         })}
         <div className={styles.drawerDivider} />
-        <div style={{ marginBottom: '10px' }}>
+        <div style={{ marginBottom: '10px', display: 'flex', gap: '10px', flexDirection: 'column' }}>
           <LanguageSwitcher />
+          <ThemeSelector />
         </div>
         <Link
           href={`/${currentLang}/#${CONTACT_HASH}`}

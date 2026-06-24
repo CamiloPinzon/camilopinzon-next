@@ -75,7 +75,7 @@ export default function News({ newsList, lang = "en" }: NewsProps) {
                 data-reveal
                 style={{ "--reveal-delay": `${i * 0.12}s` } as React.CSSProperties}
               >
-                <article className={`surface-card ${styles.card}`}>
+                <article className={styles.card}>
                   <div className={styles.imageWrapper}>
                     {item.image ? (
                       <Image

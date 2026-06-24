@@ -68,7 +68,7 @@ function ContactFormInner({
   };
 
   return (
-    <div className={`glass-panel ${styles.card}`}>
+    <div className={styles.card}>
       <header className="section-header" style={{ marginBottom: "24px" }}>
         <span className="section-label">{t.contact.sectionLabel}</span>
         <h2 className="section-title">{t.contact.title}</h2>
@@ -84,7 +84,7 @@ function ContactFormInner({
             background: "rgba(0, 200, 100, 0.1)",
             borderRadius: "8px",
             border: "1px solid rgba(0, 200, 100, 0.2)",
-            color: "var(--color-text)",
+            color: "var(--color-midnight-ink)",
             textAlign: "center",
             marginTop: "20px",
           }}

@@ -30,10 +30,10 @@ export default function AdminLogin() {
       }
       
       router.push("/admin"); // Redirect to dashboard
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      console.error("Firebase Login Error:", err);
+    } catch (error: unknown) {
+      console.error("Firebase Login Error:", error);
 
+      const err = error as { message?: string; code?: string };
       let errorMessage = err.message || "Failed to login with Google";
 
       if (err.code === "auth/internal-error") {
