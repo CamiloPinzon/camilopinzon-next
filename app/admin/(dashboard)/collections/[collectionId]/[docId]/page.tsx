@@ -46,7 +46,7 @@ function CloudinaryUploader({ value, onChange }: { value: string; onChange: (url
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
       {value ? (
-        <div style={{ position: 'relative', width: '200px', height: '120px', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e0e5f2' }}>
+        <div style={{ position: 'relative', width: '200px', height: '120px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
           <Image src={value} alt="Uploaded" fill style={{ objectFit: 'cover' }} />
           <button
             onClick={() => onChange('')}
@@ -56,8 +56,8 @@ function CloudinaryUploader({ value, onChange }: { value: string; onChange: (url
           </button>
         </div>
       ) : (
-        <div style={{ width: '100%', padding: '24px', border: '2px dashed #e0e5f2', borderRadius: '12px', textAlign: 'center', backgroundColor: '#f4f7fe', position: 'relative' }}>
-          <p style={{ margin: 0, color: '#a3aed1', fontWeight: 500 }}>
+        <div style={{ width: '100%', padding: '24px', border: '2px dashed var(--color-border)', borderRadius: '12px', textAlign: 'center', backgroundColor: 'var(--color-ghost-white)', position: 'relative' }}>
+          <p style={{ margin: 0, color: 'var(--color-slate-comment)', fontWeight: 500 }}>
             {uploading ? 'Uploading...' : 'Click to select or drag an image here'}
           </p>
           <input
@@ -74,7 +74,7 @@ function CloudinaryUploader({ value, onChange }: { value: string; onChange: (url
         placeholder="Or paste an image URL directly"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #e0e5f2', outline: 'none', boxSizing: 'border-box' }}
+        style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', boxSizing: 'border-box' }}
       />
     </div>
   );
@@ -177,10 +177,10 @@ export default function DocumentEditor() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div>
-          <Link href={`/admin/collections/${schema.id}`} style={{ color: '#a3aed1', textDecoration: 'none', fontSize: '0.875rem' }}>
+          <Link href={`/admin/collections/${schema.id}`} style={{ color: 'var(--color-slate-comment)', textDecoration: 'none', fontSize: '0.875rem' }}>
             ← Back to {schema.name}
           </Link>
-          <h1 style={{ fontSize: '2rem', fontWeight: 700, color: '#2b3674', margin: '8px 0 0 0' }}>
+          <h1 style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--color-midnight-ink)', margin: '8px 0 0 0' }}>
             {isNew ? `Create New ${schema.singularName}` : `Edit ${schema.singularName}`}
           </h1>
         </div>
@@ -188,7 +188,7 @@ export default function DocumentEditor() {
           onClick={handleSave}
           disabled={saving}
           style={{
-            backgroundColor: '#4318ff',
+            backgroundColor: 'var(--color-future-blue)',
             color: 'white',
             border: 'none',
             padding: '12px 32px',
@@ -212,9 +212,9 @@ export default function DocumentEditor() {
             style={{
               padding: '8px 16px',
               borderRadius: '8px',
-              border: activeLang === lang.code ? '2px solid #4318ff' : '1px solid #e0e5f2',
+              border: activeLang === lang.code ? '2px solid var(--color-future-blue)' : '1px solid var(--color-border)',
               backgroundColor: activeLang === lang.code ? '#eef2ff' : 'white',
-              color: activeLang === lang.code ? '#4318ff' : '#a3aed1',
+              color: activeLang === lang.code ? 'var(--color-future-blue)' : 'var(--color-slate-comment)',
               fontWeight: 600,
               cursor: 'pointer'
             }}
@@ -231,9 +231,9 @@ export default function DocumentEditor() {
             
             return (
               <div key={field.name}>
-                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: '#2b3674', marginBottom: '8px' }}>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-midnight-ink)', marginBottom: '8px' }}>
                   {field.label} {field.required && <span style={{ color: '#ff3b30' }}>*</span>}
-                  {field.localized && <span style={{ marginLeft: '8px', fontSize: '0.75rem', color: '#a3aed1', fontWeight: 400 }}>[{activeLang.toUpperCase()}]</span>}
+                  {field.localized && <span style={{ marginLeft: '8px', fontSize: '0.75rem', color: 'var(--color-slate-comment)', fontWeight: 400 }}>[{activeLang.toUpperCase()}]</span>}
                 </label>
                 
                 {field.type === 'image' ? (
@@ -249,7 +249,7 @@ export default function DocumentEditor() {
                       width: '100%',
                       padding: '16px',
                       borderRadius: '12px',
-                      border: '1px solid #e0e5f2',
+                      border: '1px solid var(--color-border)',
                       outline: 'none',
                       boxSizing: 'border-box',
                       minHeight: '150px',
@@ -272,7 +272,7 @@ export default function DocumentEditor() {
                       width: '100%',
                       padding: '16px',
                       borderRadius: '12px',
-                      border: '1px solid #e0e5f2',
+                      border: '1px solid var(--color-border)',
                       outline: 'none',
                       boxSizing: 'border-box',
                       fontFamily: 'inherit'

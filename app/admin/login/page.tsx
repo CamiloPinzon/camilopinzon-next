@@ -61,7 +61,7 @@ export default function AdminLogin() {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "100vh",
-        backgroundColor: "#f4f7fe",
+        backgroundColor: "var(--color-ghost-white)",
         fontFamily: "system-ui, sans-serif",
       }}
     >
@@ -80,13 +80,13 @@ export default function AdminLogin() {
           style={{
             fontSize: "1.5rem",
             fontWeight: 700,
-            color: "#2b3674",
+            color: "var(--color-midnight-ink)",
             marginBottom: "8px",
           }}
         >
           Admin Portal
         </h1>
-        <p style={{ color: "#a3aed1", marginBottom: "32px" }}>
+        <p style={{ color: "var(--color-slate-comment)", marginBottom: "32px" }}>
           Please sign in to access the CMS
         </p>
 
@@ -116,8 +116,8 @@ export default function AdminLogin() {
             gap: "12px",
             width: "100%",
             backgroundColor: "#ffffff",
-            color: "#2b3674",
-            border: "1px solid #e0e5f2",
+            color: "var(--color-midnight-ink)",
+            border: "1px solid var(--color-border)",
             borderRadius: "16px",
             padding: "16px",
             fontWeight: 700,
@@ -128,7 +128,7 @@ export default function AdminLogin() {
             boxShadow: "0 2px 8px rgba(0,0,0,0.02)",
           }}
           onMouseOver={(e) =>
-            (e.currentTarget.style.backgroundColor = "#f4f7fe")
+            (e.currentTarget.style.backgroundColor = "var(--color-ghost-white)")
           }
           onMouseOut={(e) =>
             (e.currentTarget.style.backgroundColor = "#ffffff")
@@ -168,7 +168,7 @@ export default function AdminLogin() {
           )}
         </button>
 
-        <p style={{ color: "#a3aed1", fontSize: "0.75rem", marginTop: "24px" }}>
+        <p style={{ color: "var(--color-slate-comment)", fontSize: "0.75rem", marginTop: "24px" }}>
           Make sure your Google account is authorized as an administrator.
         </p>
       </div>

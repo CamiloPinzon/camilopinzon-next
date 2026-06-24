@@ -36,10 +36,10 @@ export async function GET(request: Request) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Suscripción cancelada</title>
         <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f4f7fe; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; color: #2b3674; text-align: center; }
+          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--color-ghost-white); display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; color: var(--color-midnight-ink); text-align: center; }
           .container { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 24px rgba(112, 144, 176, 0.08); max-width: 400px; width: 90%; }
           h1 { margin-top: 0; font-size: 24px; font-weight: 700; color: #0071e3; }
-          p { color: #a3aed1; line-height: 1.5; margin-bottom: 24px; }
+          p { color: var(--color-slate-comment); line-height: 1.5; margin-bottom: 24px; }
           a { display: inline-block; background: #0071e3; color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; }
         </style>
       </head>

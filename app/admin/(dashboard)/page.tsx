@@ -32,16 +32,16 @@ export default async function AdminDashboard() {
       
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px', marginTop: '32px' }}>
         <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '16px', boxShadow: '0 4px 24px rgba(112, 144, 176, 0.08)' }}>
-          <h3 style={{ color: '#a3aed1', fontSize: '0.875rem', textTransform: 'uppercase' }}>Total Posts</h3>
-          <p style={{ fontSize: '2rem', fontWeight: 700, color: '#2b3674', marginTop: '8px' }}>{postsCount}</p>
+          <h3 style={{ color: 'var(--color-slate-comment)', fontSize: '0.875rem', textTransform: 'uppercase' }}>Total Posts</h3>
+          <p style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--color-midnight-ink)', marginTop: '8px' }}>{postsCount}</p>
         </div>
         <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '16px', boxShadow: '0 4px 24px rgba(112, 144, 176, 0.08)' }}>
-          <h3 style={{ color: '#a3aed1', fontSize: '0.875rem', textTransform: 'uppercase' }}>Total Projects</h3>
-          <p style={{ fontSize: '2rem', fontWeight: 700, color: '#2b3674', marginTop: '8px' }}>{projectsCount}</p>
+          <h3 style={{ color: 'var(--color-slate-comment)', fontSize: '0.875rem', textTransform: 'uppercase' }}>Total Projects</h3>
+          <p style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--color-midnight-ink)', marginTop: '8px' }}>{projectsCount}</p>
         </div>
         <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '16px', boxShadow: '0 4px 24px rgba(112, 144, 176, 0.08)' }}>
-          <h3 style={{ color: '#a3aed1', fontSize: '0.875rem', textTransform: 'uppercase' }}>Total News</h3>
-          <p style={{ fontSize: '2rem', fontWeight: 700, color: '#2b3674', marginTop: '8px' }}>{newsCount}</p>
+          <h3 style={{ color: 'var(--color-slate-comment)', fontSize: '0.875rem', textTransform: 'uppercase' }}>Total News</h3>
+          <p style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--color-midnight-ink)', marginTop: '8px' }}>{newsCount}</p>
         </div>
       </div>
     </div>

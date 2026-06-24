@@ -76,7 +76,7 @@
   
   &:hover {
     transform: translateX(8px);
-    border-color: rgba(15, 16, 18, 0.15);
+    border-color: color-mix(in srgb, var(--color-midnight-ink) 15%, transparent);
   }
 }
 
@@ -127,7 +127,7 @@
   font-size: 11px;
   letter-spacing: -0.02em;
   padding: 4px 10px;
-  background: rgba(117, 117, 117, 0.1);
+  background: color-mix(in srgb, var(--color-slate-comment) 10%, transparent);
   color: var(--color-slate-comment);
   border-radius: var(--radius-sm);
 }

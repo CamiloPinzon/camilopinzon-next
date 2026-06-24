@@ -114,20 +114,20 @@ export default function CollectionList() {
             style={{
               fontSize: "2rem",
               fontWeight: 700,
-              color: "#2b3674",
+              color: "var(--color-midnight-ink)",
               margin: 0,
             }}
           >
             {schema.name}
           </h1>
-          <p style={{ color: "#a3aed1", margin: "4px 0 0 0" }}>
+          <p style={{ color: "var(--color-slate-comment)", margin: "4px 0 0 0" }}>
             {schema.description}
           </p>
         </div>
         <Link
           href={`/admin/collections/${schema.id}/new`}
           style={{
-            backgroundColor: "#4318ff",
+            backgroundColor: "var(--color-future-blue)",
             color: "white",
             padding: "12px 24px",
             borderRadius: "12px",
@@ -149,10 +149,10 @@ export default function CollectionList() {
         }}
       >
         {loading ? (
-          <p style={{ color: "#a3aed1" }}>Loading...</p>
+          <p style={{ color: "var(--color-slate-comment)" }}>Loading...</p>
         ) : documents.length === 0 ? (
           <div
-            style={{ textAlign: "center", padding: "48px 0", color: "#a3aed1" }}
+            style={{ textAlign: "center", padding: "48px 0", color: "var(--color-slate-comment)" }}
           >
             <p style={{ marginBottom: "16px" }}>
               No {schema.name.toLowerCase()} found. Click the button above to
@@ -197,12 +197,12 @@ export default function CollectionList() {
         ) : (
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
-              <tr style={{ borderBottom: "1px solid #e0e5f2" }}>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
                 <th
                   style={{
                     textAlign: "left",
                     padding: "16px 8px",
-                    color: "#a3aed1",
+                    color: "var(--color-slate-comment)",
                     fontSize: "0.75rem",
                     textTransform: "uppercase",
                     letterSpacing: "0.5px",
@@ -214,7 +214,7 @@ export default function CollectionList() {
                   style={{
                     textAlign: "right",
                     padding: "16px 8px",
-                    color: "#a3aed1",
+                    color: "var(--color-slate-comment)",
                     fontSize: "0.75rem",
                     textTransform: "uppercase",
                     letterSpacing: "0.5px",
@@ -237,12 +237,12 @@ export default function CollectionList() {
                 return (
                   <tr
                     key={doc.id}
-                    style={{ borderBottom: "1px solid #f4f7fe" }}
+                    style={{ borderBottom: "1px solid var(--color-ghost-white)" }}
                   >
                     <td
                       style={{
                         padding: "16px 8px",
-                        color: "#2b3674",
+                        color: "var(--color-midnight-ink)",
                         fontWeight: 600,
                       }}
                     >
@@ -252,7 +252,7 @@ export default function CollectionList() {
                       <Link
                         href={`/admin/collections/${schema.id}/${doc.id}`}
                         style={{
-                          color: "#4318ff",
+                          color: "var(--color-future-blue)",
                           textDecoration: "none",
                           fontWeight: 600,
                           marginRight: "16px",

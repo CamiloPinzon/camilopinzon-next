@@ -24,7 +24,7 @@ const renderTextWithLinks = (text: string) => {
           href={part}
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: "var(--color-future-blue, #4318ff)", textDecoration: "underline", wordBreak: "break-all" }}
+          style={{ color: "var(--color-future-blue, var(--color-future-blue))", textDecoration: "underline", wordBreak: "break-all" }}
         >
           {part}
         </a>

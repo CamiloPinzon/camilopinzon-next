@@ -124,21 +124,21 @@ export default function MergeToolPage() {
 
   return (
     <div style={{ padding: '32px', backgroundColor: 'white', borderRadius: '16px' }}>
-      <h1 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '16px', color: '#2b3674' }}>Bilingual Post Merge Tool</h1>
-      <p style={{ color: '#a3aed1', marginBottom: '32px' }}>
+      <h1 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '16px', color: 'var(--color-midnight-ink)' }}>Bilingual Post Merge Tool</h1>
+      <p style={{ color: 'var(--color-slate-comment)', marginBottom: '32px' }}>
         Select two posts to combine. The content from the <strong>Secondary Post</strong> will be moved into the <strong>Base Post</strong> under the selected language tag. The Secondary Post will then be permanently deleted.
       </p>
 
       <div style={{ display: 'flex', gap: '32px', marginBottom: '32px' }}>
         {/* BASE POST */}
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontWeight: 600, color: '#2b3674', marginBottom: '8px' }}>
+          <label style={{ display: 'block', fontWeight: 600, color: 'var(--color-midnight-ink)', marginBottom: '8px' }}>
             1. Select Base Post (Keep this one)
           </label>
           <select 
             value={basePostId} 
             onChange={(e) => setBasePostId(e.target.value)}
-            style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #e0e5f2' }}
+            style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border)' }}
           >
             <option value="">-- Select Post --</option>
             {posts.map(p => <option key={p.id} value={p.id}>{p.title}</option>)}
@@ -147,13 +147,13 @@ export default function MergeToolPage() {
 
         {/* SECONDARY POST */}
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontWeight: 600, color: '#2b3674', marginBottom: '8px' }}>
+          <label style={{ display: 'block', fontWeight: 600, color: 'var(--color-midnight-ink)', marginBottom: '8px' }}>
             2. Select Secondary Post (Will be deleted)
           </label>
           <select 
             value={secondaryPostId} 
             onChange={(e) => setSecondaryPostId(e.target.value)}
-            style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #e0e5f2' }}
+            style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border)' }}
           >
             <option value="">-- Select Post --</option>
             {posts.map(p => <option key={p.id} value={p.id}>{p.title}</option>)}
@@ -162,13 +162,13 @@ export default function MergeToolPage() {
       </div>
 
       <div style={{ marginBottom: '32px' }}>
-        <label style={{ display: 'block', fontWeight: 600, color: '#2b3674', marginBottom: '8px' }}>
+        <label style={{ display: 'block', fontWeight: 600, color: 'var(--color-midnight-ink)', marginBottom: '8px' }}>
           3. What language is the Secondary Post written in?
         </label>
         <select 
           value={targetLanguage} 
           onChange={(e) => setTargetLanguage(e.target.value)}
-          style={{ width: '200px', padding: '12px', borderRadius: '8px', border: '1px solid #e0e5f2' }}
+          style={{ width: '200px', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border)' }}
         >
           <option value="es">Spanish (es)</option>
           <option value="en">English (en)</option>
@@ -193,9 +193,9 @@ export default function MergeToolPage() {
       </button>
 
       {logs.length > 0 && (
-        <div style={{ marginTop: '32px', backgroundColor: '#f4f7fe', padding: '16px', borderRadius: '12px', fontFamily: 'monospace', fontSize: '0.875rem', maxHeight: '400px', overflowY: 'auto' }}>
+        <div style={{ marginTop: '32px', backgroundColor: 'var(--color-ghost-white)', padding: '16px', borderRadius: '12px', fontFamily: 'monospace', fontSize: '0.875rem', maxHeight: '400px', overflowY: 'auto' }}>
           {logs.map((msg, i) => (
-            <div key={i} style={{ marginBottom: '8px', color: msg.includes('❌') ? '#ff3b30' : msg.includes('✅') ? '#34c759' : '#2b3674' }}>
+            <div key={i} style={{ marginBottom: '8px', color: msg.includes('❌') ? '#ff3b30' : msg.includes('✅') ? '#34c759' : 'var(--color-midnight-ink)' }}>
               {msg}
             </div>
           ))}

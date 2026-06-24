@@ -70,7 +70,7 @@ export default function MigratePage() {
   return (
     <div style={{ padding: '32px', backgroundColor: 'white', borderRadius: '16px' }}>
       <h1 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '16px' }}>Data Migration Tool</h1>
-      <p style={{ color: '#a3aed1', marginBottom: '24px' }}>
+      <p style={{ color: 'var(--color-slate-comment)', marginBottom: '24px' }}>
         This script copies all articles from the legacy <strong>`blogs`</strong> collection and reformats them 
         into the new multilingual <strong>`posts`</strong> collection schema.
       </p>
@@ -79,7 +79,7 @@ export default function MigratePage() {
         onClick={handleMigration}
         disabled={loading}
         style={{
-          backgroundColor: '#4318ff',
+          backgroundColor: 'var(--color-future-blue)',
           color: 'white',
           padding: '12px 24px',
           borderRadius: '12px',
@@ -93,9 +93,9 @@ export default function MigratePage() {
       </button>
 
       {logs.length > 0 && (
-        <div style={{ marginTop: '32px', backgroundColor: '#f4f7fe', padding: '16px', borderRadius: '12px', fontFamily: 'monospace', fontSize: '0.875rem', maxHeight: '400px', overflowY: 'auto' }}>
+        <div style={{ marginTop: '32px', backgroundColor: 'var(--color-ghost-white)', padding: '16px', borderRadius: '12px', fontFamily: 'monospace', fontSize: '0.875rem', maxHeight: '400px', overflowY: 'auto' }}>
           {logs.map((msg, i) => (
-            <div key={i} style={{ marginBottom: '8px', color: msg.includes('❌') ? '#ff3b30' : msg.includes('✅') ? '#34c759' : '#2b3674' }}>
+            <div key={i} style={{ marginBottom: '8px', color: msg.includes('❌') ? '#ff3b30' : msg.includes('✅') ? '#34c759' : 'var(--color-midnight-ink)' }}>
               {msg}
             </div>
           ))}

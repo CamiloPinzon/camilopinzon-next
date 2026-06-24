@@ -31,8 +31,8 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f4f7fe' }}>
-        <p style={{ color: '#2b3674', fontWeight: 600 }}>Checking authentication...</p>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: 'var(--color-ghost-white)' }}>
+        <p style={{ color: 'var(--color-midnight-ink)', fontWeight: 600 }}>Checking authentication...</p>
       </div>
     );
   }

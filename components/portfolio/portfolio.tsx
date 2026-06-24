@@ -103,7 +103,7 @@ export default async function Portfolio({ lang = "en" }: { lang?: string }) {
                             style={{
                               fontSize: "0.875rem",
                               fontWeight: 700,
-                              color: "#4318ff",
+                              color: "var(--color-future-blue)",
                               textDecoration: "none",
                             }}
                           >
@@ -118,7 +118,7 @@ export default async function Portfolio({ lang = "en" }: { lang?: string }) {
                             style={{
                               fontSize: "0.875rem",
                               fontWeight: 700,
-                              color: "#2b3674",
+                              color: "var(--color-midnight-ink)",
                               textDecoration: "none",
                             }}
                           >
