@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { BRANDS } from "@/lib/constants";
 import { getTranslations } from "@/lib/i18n/translations";
 
@@ -23,18 +25,34 @@ export default function Brands({ lang = "en" }: { lang?: string }) {
       {/* Marquee Container (Full Width) */}
       <div className={styles.marqueeContainer} aria-label={t.brands.ariaLabel}>
         <div className={styles.marqueeTrack}>
-          {marqueeItems.map((brand, i) => (
-            <a
-              key={i}
-              href={brand.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.brandLogo}
-              title={brand.name}
-            >
-              <span className={styles.logoText}>{brand.name}</span>
-            </a>
-          ))}
+          {marqueeItems.map((brand, i) => {
+            // Solo el primer set es accesible; los duplicados del marquee
+            // se ocultan a lectores de pantalla y al teclado para evitar
+            // que el mismo enlace se anuncie varias veces.
+            const isDuplicate = i >= BRANDS.length;
+
+            return (
+              <a
+                key={i}
+                href={brand.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.brandLogo}
+                title={brand.name}
+                aria-hidden={isDuplicate || undefined}
+                tabIndex={isDuplicate ? -1 : undefined}
+              >
+                <Image
+                  src={brand.logo}
+                  alt={brand.name}
+                  width={160}
+                  height={64}
+                  className={styles.logoImage}
+                  sizes="160px"
+                />
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
