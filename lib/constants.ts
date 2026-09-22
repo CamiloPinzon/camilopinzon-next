@@ -27,4 +27,9 @@ export const BRANDS: Brand[] = [
     url: "https://divinagranola.com.co/",
     logo: "/brands/divina-granola.png",
   },
+  {
+    name: "DELASIERRA",
+    url: "https://delasierra.vercel.app/",
+    logo: "/brands/delasierra.webp",
+  },
 ];
