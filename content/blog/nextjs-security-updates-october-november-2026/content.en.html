@@ -1,0 +1,35 @@
+<h2>What happened</h2>
+<p>On October 14, 2026, the Next.js team published three security advisories on GitHub. Two are rated critical and one is rated high. The fixes shipped in version 16.4.1 and, for anyone still on the previous release line, in 15.5.28.</p>
+<p>Almost two weeks later, on October 27, the team announced on its official blog another security release for November 3, with seven fixes rated medium. The details of those seven fixes come out together with the release.</p>
+
+<h2>What it means</h2>
+<p>Next.js is the tool behind a lot of modern websites and web apps. If your site were a building, Next.js would be the foundation and the frame: you don't see them, but everything else rests on them.</p>
+<p>A vulnerability is a weak spot in that frame. What changes from one to the next is how serious it is:</p>
+<ul>
+  <li><strong>Critical</strong> means an outsider, with no username or password, could run code on the server that hosts your site. In practice, that's like handing them the keys to the building.</li>
+  <li><strong>High</strong> means the damage is serious but narrower, such as taking the site offline.</li>
+  <li><strong>Medium</strong> means the risk is real, but certain conditions usually have to line up before someone can exploit it.</li>
+</ul>
+<p>These are the three October advisories:</p>
+<ol>
+  <li><strong>SVG images (critical).</strong> A component Next.js uses to optimize images had a flaw that, on Linux servers, could let someone run code remotely. It affects versions 10 through 15.5.27 and 16 through 16.4.0.</li>
+  <li><strong>The <code>use cache</code> function (critical).</strong> In apps that use <code>use cache</code>, a newer Next.js caching function, in a particular way, someone could run code on the server. The only fix is to upgrade. It affects 16.0.0 through 16.4.0.</li>
+  <li><strong>Server Actions (high).</strong> With specially crafted requests, someone could overload the server until the site stopped responding. It affects 13 through 15.5.27 and 16 through 16.4.0, in apps that use the App Router and Server Actions.</li>
+</ol>
+
+<h2>How it affects you</h2>
+<p><strong>The good.</strong> The flaws are already fixed, and the fix is the same for all three: upgrade Next.js. The Next.js team also announced the November release ahead of time, which gives teams room to plan for it.</p>
+<p><strong>The bad.</strong> The advisories are public. Since October 14, anyone can read which versions are vulnerable and go looking for sites that haven't been updated. A site that has gone months without maintenance is probably in the affected range.</p>
+<p><strong>If you don't use Next.js</strong>, none of this affects you. If you're not sure what your site is built with, ask whoever built it.</p>
+
+<h2>What you can do</h2>
+<ol>
+  <li><strong>Find out whether your site uses Next.js, and which version.</strong> Your technical team can check in a minute.</li>
+  <li><strong>If it's older than 16.4.1 (or 15.5.28, on the 15 line), ask for the upgrade this week.</strong> Those are the minimum versions that fix the October flaws.</li>
+  <li><strong>Plan for the November release too.</strong> Once it's out, ask to move to the version that includes the seven new fixes. If your team updates regularly, it will be a small step.</li>
+  <li><strong>Ask them to test before going live.</strong> Security updates rarely break anything, but it's worth checking the main pages and forms.</li>
+  <li><strong>Ask whether they have a maintenance plan.</strong> There were two rounds of fixes in under three weeks. A site that gets updated every month reaches each patch with a small jump.</li>
+</ol>
+
+<h2>Source</h2>
+<p>This post is based on official sources from the Next.js team: the <a href="https://github.com/vercel/next.js/security/advisories" target="_blank" rel="noopener noreferrer">Next.js security advisories on GitHub</a>, from October 14, 2026, and the announcement <a href="https://nextjs.org/blog/upcoming-nextjs-security-release-november-2026" target="_blank" rel="noopener noreferrer">Upcoming Next.js November Security Release</a>, published on the Next.js blog on October 27, 2026.</p>

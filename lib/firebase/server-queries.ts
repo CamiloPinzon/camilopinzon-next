@@ -13,6 +13,8 @@ export interface BlogPost {
   excerpt: string;
   content: string;
   coverImage: string;
+  coverImageMobile?: string;
+  coverImageAlt?: string;
   publishedAt: string;
   isPublished: boolean;
   author?: { name: string; id?: string };
@@ -135,6 +137,8 @@ export async function getPostBySlug(
       excerpt: localized.excerpt || "",
       content: localized.content || "",
       coverImage: data.coverImage || "",
+      coverImageMobile: data.coverImageMobile || "",
+      coverImageAlt: localized.coverImageAlt || data.coverImageAlt || "",
       publishedAt:
         typeof pubDate === "string" ? pubDate : new Date(pubDate).toISOString(),
       isPublished: !!data.isPublished,

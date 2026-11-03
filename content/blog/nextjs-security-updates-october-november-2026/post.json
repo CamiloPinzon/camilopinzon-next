@@ -1,0 +1,62 @@
+{
+  "slug": "nextjs-security-updates-october-november-2026",
+  "tag": "Next.js",
+  "readTime": "5 min",
+  "publishedAt": "2026-11-03",
+  "source": {
+    "name": "Next.js security advisories (GitHub)",
+    "url": "https://github.com/vercel/next.js/security/advisories"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "Next.js corrigió en octubre dos fallos críticos que permitían ejecutar código en el servidor sin iniciar sesión, y anunció siete correcciones más para noviembre. Si tu sitio usa una versión anterior a la 16.4.1, está en el rango afectado. Te explicamos qué pasó y qué pedirle a tu equipo técnico."
+  },
+  "translations": {
+    "en": {
+      "title": "Next.js patches two critical flaws and readies another release: what to do about your site",
+      "excerpt": "In October, Next.js fixed two critical flaws that let attackers take over a server without logging in, and announced seven more fixes for November. If your site runs a Next.js version older than 16.4.1, it's time to upgrade. Here's what happened and what to ask your team.",
+      "coverImageAlt": "Next.js version 16.4.1+ in large type, with squares marking the October 14 and November 3 security advisories",
+      "faqs": [
+        {
+          "question": "Is my site at risk right now?",
+          "answer": "If your site runs Next.js older than 16.4.1 (or 15.5.28), it has known, public flaws. That doesn't mean it has been attacked, but it does mean you should upgrade soon."
+        },
+        {
+          "question": "Could upgrading break my site?",
+          "answer": "It's unlikely with a security update, because it doesn't change how the site works. Your team should still test it before going live."
+        },
+        {
+          "question": "How long does the upgrade take?",
+          "answer": "It depends on the project. If the site is kept up to date, the jump is small. If it has gone months without updates, there are more accumulated changes to review."
+        },
+        {
+          "question": "How do I know whether my site has been updated?",
+          "answer": "Ask for the installed Next.js version number and compare it with 16.4.1 (or 15.5.28). Once the November release is out, compare it with the version listed in the official advisory."
+        }
+      ]
+    },
+    "es": {
+      "title": "Next.js corrige dos fallos críticos y prepara otro parche: qué hacer con tu sitio",
+      "excerpt": "En octubre, Next.js corrigió dos fallos críticos que permitían tomar el control del servidor sin iniciar sesión, y anunció siete correcciones más para noviembre. Si tu sitio usa Next.js con una versión anterior a la 16.4.1, toca actualizar. Te explicamos qué pasó y qué pedirle a tu equipo.",
+      "coverImageAlt": "Versión 16.4.1+ de Next.js en grande, con cuadros que marcan los avisos de seguridad del 14 de octubre y del 3 de noviembre",
+      "faqs": [
+        {
+          "question": "¿Mi sitio está en peligro en este momento?",
+          "answer": "Si tu sitio usa Next.js en una versión anterior a la 16.4.1 (o a la 15.5.28), tiene fallos conocidos y públicos. Eso no significa que lo hayan atacado, pero sí que conviene actualizarlo pronto."
+        },
+        {
+          "question": "¿Puede dejar de funcionar mi sitio si lo actualizo?",
+          "answer": "Es poco probable con una actualización de seguridad, porque no cambia cómo funciona el sitio. Aun así, tu equipo debe probarla antes de publicarla."
+        },
+        {
+          "question": "¿Cuánto tarda la actualización?",
+          "answer": "Depende del proyecto. Si el sitio se mantiene al día, el salto es pequeño. Si lleva meses sin actualizarse, hay más cambios acumulados que revisar."
+        },
+        {
+          "question": "¿Cómo sé si ya actualizaron mi sitio?",
+          "answer": "Pide el número de la versión de Next.js instalada y compáralo con la 16.4.1 (o la 15.5.28). Cuando salga el parche de noviembre, compáralo con la versión que indique el aviso oficial."
+        }
+      ]
+    }
+  }
+}

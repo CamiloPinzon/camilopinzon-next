@@ -1,0 +1,38 @@
+{
+  "slug": "example-news-post",
+  "tag": "Next.js",
+  "readTime": "4 min",
+  "publishedAt": "2026-11-04",
+  "source": {
+    "name": "Next.js Blog",
+    "url": "https://nextjs.org/blog"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "Texto del post de LinkedIn en la voz de la marca: qué pasó y por qué le importa al lector, en 2-4 frases. El enlace al artículo se agrega solo al final."
+  },
+  "translations": {
+    "en": {
+      "title": "Example title in English",
+      "excerpt": "One or two sentences that sum up the news and why it matters to the reader.",
+      "coverImageAlt": "Short description of what the cover shows",
+      "faqs": [
+        {
+          "question": "Example question?",
+          "answer": "Short answer."
+        }
+      ]
+    },
+    "es": {
+      "title": "Título de ejemplo en español",
+      "excerpt": "Una o dos frases que resumen la noticia y por qué le importa al lector.",
+      "coverImageAlt": "Descripción corta de lo que muestra la portada",
+      "faqs": [
+        {
+          "question": "¿Pregunta de ejemplo?",
+          "answer": "Respuesta corta."
+        }
+      ]
+    }
+  }
+}

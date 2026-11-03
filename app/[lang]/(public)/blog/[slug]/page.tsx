@@ -1,6 +1,6 @@
 import { getPostBySlug } from "@/lib/firebase/server-queries";
 import { notFound } from "next/navigation";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { getTranslations } from "@/lib/i18n/translations";
 import { Metadata } from "next";
@@ -33,12 +33,55 @@ export async function generateMetadata({
       type: "article",
       url: `https://camilopinzon.dev/${lang}/blog/${slug}`,
       images: post.coverImage
-        ? [{ url: post.coverImage, width: 1200, height: 630, alt: post.title }]
+        ? [{ url: post.coverImage, width: 1200, height: 630, alt: post.coverImageAlt || post.title }]
         : [],
       publishedTime: post.publishedAt,
       authors: [post.author?.name || "Camilo Pinzón"],
     },
   };
+}
+
+// Posts published through the blog pipeline carry a 4:5 mobile cover; older posts keep the single-image layout.
+function ArtDirectedCover({
+  desktopSrc,
+  mobileSrc,
+  alt,
+}: {
+  desktopSrc: string;
+  mobileSrc: string;
+  alt: string;
+}) {
+  const {
+    props: { srcSet: desktopSrcSet },
+  } = getImageProps({
+    src: desktopSrc,
+    alt,
+    width: 1600,
+    height: 900,
+    sizes: "(max-width: 840px) 100vw, 800px",
+  });
+  const {
+    props: { srcSet: mobileSrcSet, ...imgProps },
+  } = getImageProps({
+    src: mobileSrc,
+    alt,
+    width: 1080,
+    height: 1350,
+    sizes: "100vw",
+  });
+
+  return (
+    <div className="post-cover">
+      <picture>
+        <source
+          media="(min-width: 640px)"
+          srcSet={desktopSrcSet}
+          sizes="(max-width: 840px) 100vw, 800px"
+        />
+        <img {...imgProps} srcSet={mobileSrcSet} alt={alt} fetchPriority="high" loading="eager" />
+      </picture>
+    </div>
+  );
 }
 
 export default async function BlogPostPage({
@@ -213,7 +256,15 @@ export default async function BlogPostPage({
         </div>
       </header>
 
-      {post.coverImage && (
+      {post.coverImage && post.coverImageMobile && (
+        <ArtDirectedCover
+          desktopSrc={post.coverImage}
+          mobileSrc={post.coverImageMobile}
+          alt={post.coverImageAlt || post.title}
+        />
+      )}
+
+      {post.coverImage && !post.coverImageMobile && (
         <div
           style={{
             position: "relative",
@@ -227,7 +278,7 @@ export default async function BlogPostPage({
         >
           <Image
             src={post.coverImage}
-            alt={post.title}
+            alt={post.coverImageAlt || post.title}
             fill
             sizes="(max-width: 768px) 100vw, 800px"
             style={{ objectFit: "cover" }}

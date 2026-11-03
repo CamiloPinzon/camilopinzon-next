@@ -44,7 +44,8 @@ export const cmsConfig: CMSConfig = {
       fields: [
         { name: 'title', label: 'Title', type: 'string', required: true, localized: true },
         { name: 'slug', label: 'URL Slug', type: 'string', required: true },
-        { name: 'coverImage', label: 'Cover Image', type: 'image' },
+        { name: 'coverImage', label: 'Cover Image (1600x900)', type: 'image' },
+        { name: 'coverImageMobile', label: 'Mobile Cover Image (1080x1350, optional)', type: 'image' },
         { name: 'coverImageAlt', label: 'Cover Image Alt Text (Accessibility)', type: 'string', localized: true },
         { name: 'excerpt', label: 'Short Excerpt (TL;DR)', type: 'text', localized: true },
         { name: 'content', label: 'Content', type: 'richtext', localized: true },

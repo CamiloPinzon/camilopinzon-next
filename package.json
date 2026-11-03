@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "blog:publish": "node --env-file=.env.local scripts/publish-post.mts"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.73",
