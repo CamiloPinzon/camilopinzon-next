@@ -21,18 +21,21 @@ export default function MergeToolPage() {
 
   const log = (msg: string) => setLogs(prev => [...prev, msg]);
 
+  const loadPosts = async (): Promise<BasicPost[]> => {
+    const snapshot = await getDocs(collection(db, 'posts'));
+    const fetchedPosts = snapshot.docs.map(d => {
+      const data = d.data();
+      // Since the migration script put everything in 'en', we read from there for the title
+      const title = data.translations?.en?.title || 'Untitled';
+      return { id: d.id, title };
+    });
+    // Sort alphabetically for easier finding
+    return fetchedPosts.sort((a, b) => a.title.localeCompare(b.title));
+  };
+
   const fetchPosts = async () => {
     try {
-      const snapshot = await getDocs(collection(db, 'posts'));
-      const fetchedPosts = snapshot.docs.map(d => {
-        const data = d.data();
-        // Since the migration script put everything in 'en', we read from there for the title
-        const title = data.translations?.en?.title || 'Untitled';
-        return { id: d.id, title };
-      });
-      // Sort alphabetically for easier finding
-      fetchedPosts.sort((a, b) => a.title.localeCompare(b.title));
-      setPosts(fetchedPosts);
+      setPosts(await loadPosts());
     } catch (error) {
       console.error("Error fetching posts:", error);
     } finally {
@@ -41,7 +44,11 @@ export default function MergeToolPage() {
   };
 
   useEffect(() => {
-    fetchPosts();
+    // State is only set inside promise callbacks, never synchronously in the effect body
+    loadPosts()
+      .then(setPosts)
+      .catch(error => console.error("Error fetching posts:", error))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleMerge = async () => {
