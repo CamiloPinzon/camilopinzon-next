@@ -1,0 +1,11 @@
+{
+  "name": "minimatch",
+  "version": "11.0.4-v3compat.0",
+  "private": true,
+  "description": "minimatch@11 exposed with the minimatch@3 CommonJS API, for ESLint plugins that still require minimatch@3 (GHSA: minimatch <11.0.1 ReDoS).",
+  "main": "index.js",
+  "license": "ISC",
+  "dependencies": {
+    "minimatch-v11": "npm:minimatch@^11.0.4"
+  }
+}
