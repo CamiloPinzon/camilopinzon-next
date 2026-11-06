@@ -1,6 +1,6 @@
 ---
 name: blog-pipeline
-description: Flujo recurrente para mantener actualizado el blog de camilopinzon.dev - revisión de noticias de fuentes oficiales (lunes y miércoles), borrador para aprobación, versión final en/es, imágenes en Claude Design con alt en/es, y publicación bilingüe en Firestore más LinkedIn. Úsala cuando el usuario pida noticias para el blog, elija una noticia, apruebe un borrador o imágenes, o pida publicar una entrada.
+description: Flujo recurrente para mantener actualizado el blog de camilopinzon.dev - revisión de noticias de fuentes oficiales (lunes, miércoles y viernes), borrador para aprobación, versión final en/es, imágenes en Claude Design con alt en/es, y publicación bilingüe en Firestore más LinkedIn. Úsala cuando el usuario pida noticias para el blog, elija una noticia, apruebe un borrador o imágenes, o pida publicar una entrada.
 ---
 
 # blog-pipeline — mantener el blog actualizado
@@ -18,9 +18,9 @@ adelantar el paso siguiente sin él. Cada respuesta indica en qué paso está el
 | 6. Publicación | Blog en/es + LinkedIn con `npm run blog:publish -- ... --commit` | **Aprobación 3**: "publica" |
 | 7. Verificación | Revisar /en, /es y el post de LinkedIn | Post visible en ambos idiomas y en LinkedIn |
 
-## 1. Revisión de noticias (lunes y miércoles)
+## 1. Revisión de noticias (lunes, miércoles y viernes)
 
-La tarea programada `camilopinzon-blog-news-review` la corre lunes y miércoles a las 8:00. También
+La tarea programada `camilopinzon-blog-news-review` la corre lunes, miércoles y viernes a las 8:00. También
 se puede pedir a mano.
 
 - **Solo fuentes oficiales**: el blog, changelog, documentación o avisos de seguridad de quien hace
@@ -30,7 +30,7 @@ se puede pedir a mano.
   Nada de medios de terceros, agregadores ni rumores.
 - Temas de la marca: aplicaciones web/SaaS, Next.js y React, WordPress, frontend/UI, rendimiento y
   SEO técnico, IA aplicada a productos web, pagos y formularios (Google Wallet/Pay).
-- Ventana: el lunes cubre jueves-domingo; el miércoles, lunes-martes.
+- Ventana: el lunes cubre viernes-domingo; el miércoles, lunes-martes; el viernes, miércoles-jueves.
 - Abrir cada página antes de incluirla para verificar la fecha y el contenido.
 - Entregar por noticia: título, fecha, fuente (nombre + enlace), resumen en 2 frases, a quién
   afecta y por qué sería un buen post. Ordenar por impacto para dueños de negocio y equipos no
