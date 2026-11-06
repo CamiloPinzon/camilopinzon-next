@@ -1,0 +1,31 @@
+<h2>What happened</h2>
+<p>On November 5, 2026, the WordPress team published a technical note about something new in version 7.2: a new address, <code>/random/</code>. Anyone who visits <code>yoursite.com/random/</code> lands on a published post picked at random. It's on by default, and the final release is scheduled for December 8.</p>
+<p>A second note that day covers the icons in the admin dashboard, which are changing too. We explain who that affects further down.</p>
+<p>WordPress 7.2 is still in testing, so some details could change before release.</p>
+
+<h2>What it means</h2>
+<p>Picture a bookshop with a "surprise me" button: you walk in and someone hands you whatever book comes off the shelf. <code>/random/</code> does the same thing with your posts.</p>
+<p>It also works by section. <code>/random/category/news/</code> sends people to a random post in that category, and tags and authors work the same way. Pages like "Contact" or "About us" are left out. Other content types, such as a custom-built catalog, can be included if they meet certain technical conditions. Your team can exclude them.</p>
+
+<h2>How it affects you</h2>
+<p><strong>The good.</strong> If you run a blog with a lot of posts, readers get another way to find older pieces that still hold up, and you don't have to install anything. Aaron Jorbin, who wrote the note, thinks most people will find it useful because most people want their content discovered.</p>
+<p><strong>The bad.</strong> Any published post can come up, including the ones you forgot about: an expired promotion, or a piece that no longer reflects your business. They were already public, but now they're easier to stumble on.</p>
+<p>Not everyone is sold on having it on by default. In the comments on the note, Joost de Valk and other developers asked for it to start switched off. Ryan McCue also warned that the method for picking a random post can be slow on large sites, especially if a lot of bots hit it. Another comment says that query has already been tested and improved, and McCue asked whether that fixes the problem on sites with many posts. As of November 6, the note didn't reflect any change.</p>
+<p>Our take: on a small site, this is no cause for alarm. If your site has thousands of posts or a lot of bot traffic, it's worth measuring before you upgrade.</p>
+<p><strong>The dashboard icons.</strong> This one stays behind the scenes: your visitors won't see any change on your site because of it. The note says most plugins and themes need no changes. Dashboards with custom colors or icons are where things can go wrong, and they may not look the way they used to.</p>
+
+<h2>What you can do</h2>
+<p>If your site runs on WordPress, ask whoever maintains it to do the following:</p>
+<ol>
+  <li><strong>Test WordPress 7.2 on a copy of the site, never the live one.</strong> WordPress asks people not to install test versions on production sites.</li>
+  <li><strong>Visit <code>/random/</code> on that copy.</strong> Check what comes up, especially if you already have a page at that address: the note doesn't explain what happens in that case.</li>
+  <li><strong>Clean up old posts.</strong> Move anything you no longer want to show back to draft.</li>
+  <li><strong>Decide whether to keep it on.</strong> To turn it off, your team can add this line to a small plugin that WordPress always loads (a "mu-plugin"):
+    <pre><code>add_filter( 'wp_enable_random_content_redirect', '__return_false' );</code></pre>
+  </li>
+  <li><strong>Open the admin dashboard</strong> and check that colors, menus and icons look right.</li>
+</ol>
+<p>If you do nothing, your site won't break: once you upgrade, <code>/random/</code> will simply be there.</p>
+
+<h2>Source</h2>
+<p>This article is based on official WordPress posts: <a href="https://make.wordpress.org/core/2026/11/05/your-content-is-going-to-get-more-random/" target="_blank" rel="noopener noreferrer">Your Content Is Going To Get More Random!</a> and <a href="https://make.wordpress.org/core/2026/11/05/svg-icons-in-the-admin-bar-and-menu-in-wordpress-7-2/" target="_blank" rel="noopener noreferrer">SVG icons in the admin bar and menu in WordPress 7.2</a>, both on Make WordPress Core, dated November 5, 2026, and <a href="https://wordpress.org/news/2026/11/wordpress-7-2-beta-4/" target="_blank" rel="noopener noreferrer">WordPress 7.2 Beta 4</a>, on WordPress News, dated November 3, 2026.</p>

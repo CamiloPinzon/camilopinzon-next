@@ -1,0 +1,31 @@
+<h2>Qué pasó</h2>
+<p>El 5 de noviembre de 2026, el equipo de WordPress publicó una nota técnica sobre una novedad de la versión 7.2: una dirección nueva, <code>/random/</code>. Si alguien entra a <code>tusitio.com/random/</code>, WordPress lo lleva a una entrada publicada elegida al azar. Viene activada por defecto y la versión final está programada para el 8 de diciembre.</p>
+<p>Ese mismo día salió otra nota sobre los iconos del panel de administración, que también cambian. Más abajo te contamos a quién afecta.</p>
+<p>WordPress 7.2 todavía está en pruebas, así que algunos detalles pueden cambiar antes del lanzamiento.</p>
+
+<h2>Qué significa</h2>
+<p>Piensa en el botón de "sorpréndeme" de una librería: entras y te entregan un libro cualquiera de los estantes. <code>/random/</code> hace lo mismo con tus entradas.</p>
+<p>También funciona por secciones. <code>/random/category/noticias/</code> lleva a una entrada al azar de esa categoría, y lo mismo pasa con etiquetas y autores. Las páginas, como "Contacto" o "Quiénes somos", quedan por fuera. Otros tipos de contenido, como un catálogo creado a medida, pueden entrar si cumplen ciertas condiciones técnicas. Tu equipo puede excluirlos.</p>
+
+<h2>Cómo te afecta</h2>
+<p><strong>Lo bueno.</strong> Si tienes un blog con muchas entradas, tus lectores tienen otra forma de encontrar textos viejos que siguen siendo útiles, sin instalar nada. Aaron Jorbin, autor de la nota, cree que a la mayoría le servirá porque casi todos quieren que se descubra su contenido.</p>
+<p><strong>Lo malo.</strong> Cualquier entrada publicada puede salir, incluidas las que olvidaste: una promoción vencida o un texto que ya no representa a tu negocio. Eso no es nuevo, porque ya estaban publicadas, pero ahora es más fácil caer en ellas.</p>
+<p>La decisión de activarla por defecto no convenció a todos. En los comentarios de la nota, Joost de Valk y otros desarrolladores pidieron dejarla apagada de entrada. Ryan McCue advirtió además que el método para elegir la entrada al azar puede ser lento en sitios grandes, sobre todo si muchos bots la visitan. Otro comentario señala que esa consulta ya se probó y se mejoró, y McCue preguntó si eso resuelve el problema en sitios con muchas entradas. Hasta el 6 de noviembre, la nota no recogía ningún cambio.</p>
+<p>Nuestra lectura: para un sitio pequeño, no es motivo de alarma. Si tu sitio tiene miles de entradas o mucho tráfico de bots, sí vale la pena medirlo antes de actualizar.</p>
+<p><strong>Los iconos del panel.</strong> Solo se notan por dentro: tus visitantes no verán cambios en tu sitio por esto. La nota dice que la mayoría de plugins y temas no necesita ajustes. Pueden fallar los paneles con colores o iconos personalizados, que quizá no se vean como antes.</p>
+
+<h2>Qué puedes hacer</h2>
+<p>Si tu sitio usa WordPress, pídele esto a quien lo mantiene:</p>
+<ol>
+  <li><strong>Prueba WordPress 7.2 en una copia del sitio, nunca en el sitio real.</strong> WordPress pide no instalar las versiones de prueba en sitios en producción.</li>
+  <li><strong>Entra a <code>/random/</code> en esa copia.</strong> Revisa qué aparece, sobre todo si ya tienes una página con esa dirección: la nota no explica qué pasa en ese caso.</li>
+  <li><strong>Limpia las entradas viejas.</strong> Pasa a borrador las que ya no quieras mostrar.</li>
+  <li><strong>Decide si la dejas activa.</strong> Para apagarla, tu equipo puede agregar esta línea en un pequeño complemento que WordPress carga siempre (un "mu-plugin"):
+    <pre><code>add_filter( 'wp_enable_random_content_redirect', '__return_false' );</code></pre>
+  </li>
+  <li><strong>Abre el panel de administración</strong> y revisa que colores, menús e iconos se vean bien.</li>
+</ol>
+<p>Si no haces nada, tu sitio no se daña: cuando actualices, <code>/random/</code> quedará disponible y ya.</p>
+
+<h2>Fuente</h2>
+<p>Esta nota se basa en publicaciones oficiales de WordPress: <a href="https://make.wordpress.org/core/2026/11/05/your-content-is-going-to-get-more-random/" target="_blank" rel="noopener noreferrer">Your Content Is Going To Get More Random!</a> y <a href="https://make.wordpress.org/core/2026/11/05/svg-icons-in-the-admin-bar-and-menu-in-wordpress-7-2/" target="_blank" rel="noopener noreferrer">SVG icons in the admin bar and menu in WordPress 7.2</a>, ambas en Make WordPress Core, del 5 de noviembre de 2026, y <a href="https://wordpress.org/news/2026/11/wordpress-7-2-beta-4/" target="_blank" rel="noopener noreferrer">WordPress 7.2 Beta 4</a>, en WordPress News, del 3 de noviembre de 2026.</p>

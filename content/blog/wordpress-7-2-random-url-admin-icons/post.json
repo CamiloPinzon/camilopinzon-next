@@ -1,0 +1,62 @@
+{
+  "slug": "wordpress-7-2-random-url-admin-icons",
+  "tag": "WordPress",
+  "readTime": "3 min",
+  "publishedAt": "2026-11-06",
+  "source": {
+    "name": "Make WordPress Core",
+    "url": "https://make.wordpress.org/core/2026/11/05/your-content-is-going-to-get-more-random/"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "WordPress 7.2 trae /random/, una dirección que lleva a una entrada publicada al azar y que viene activada por defecto. En un sitio pequeño no es motivo de alarma, pero conviene decidir antes del 8 de diciembre si la quieres. Publicamos qué cambia, a quién afecta y qué pedirle a tu equipo."
+  },
+  "translations": {
+    "en": {
+      "title": "WordPress 7.2 will open a new address on your site: what to check before December 8",
+      "excerpt": "WordPress 7.2 adds /random/, an address that sends visitors to a random post, and it's on by default. It won't hurt most sites, but it's worth deciding whether you want it before December 8.",
+      "coverImageAlt": "WordPress 7.2 and /random/ in large type, above a grid of gray squares with one picked out in blue",
+      "faqs": [
+        {
+          "question": "Can /random/ show my drafts?",
+          "answer": "The note only talks about published posts, so a draft shouldn't come up. Test it on the copy if you handle sensitive content."
+        },
+        {
+          "question": "Do I have to turn it off?",
+          "answer": "No, that's your call. If your site is small and your posts are up to date, you can leave it on."
+        },
+        {
+          "question": "Can my contact or services pages come up?",
+          "answer": "No. The note says pages and attachments are left out."
+        },
+        {
+          "question": "When should I upgrade?",
+          "answer": "The final release is scheduled for December 8. The sensible move is to test it on a copy first and upgrade the live site once that test goes well."
+        }
+      ]
+    },
+    "es": {
+      "title": "WordPress 7.2 abrirá una dirección nueva en tu sitio: qué revisar antes del 8 de diciembre",
+      "excerpt": "WordPress 7.2 trae /random/, una dirección que lleva a una entrada al azar y que viene activada. A la mayoría de los sitios no les hace daño, pero conviene decidir antes del 8 de diciembre si la quieres.",
+      "coverImageAlt": "WordPress 7.2 y /random/ en letras grandes, sobre una cuadrícula de cuadros grises con uno destacado en azul",
+      "faqs": [
+        {
+          "question": "¿/random/ puede mostrar mis borradores?",
+          "answer": "La nota habla solo de entradas publicadas, así que un borrador no debería aparecer. Pruébalo en la copia si manejas contenido sensible."
+        },
+        {
+          "question": "¿Tengo que apagarla?",
+          "answer": "No. Es una decisión tuya. Si tu sitio es pequeño y tus entradas están al día, puedes dejarla activa."
+        },
+        {
+          "question": "¿Mis páginas de contacto o de servicios pueden aparecer?",
+          "answer": "No. La nota indica que las páginas y los archivos adjuntos quedan por fuera."
+        },
+        {
+          "question": "¿Cuándo debo actualizar?",
+          "answer": "La versión final está programada para el 8 de diciembre. Lo prudente es probarla antes en una copia y actualizar el sitio real cuando esa prueba salga bien."
+        }
+      ]
+    }
+  }
+}
