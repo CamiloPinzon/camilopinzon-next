@@ -152,6 +152,30 @@ algo de fondo, volver a pedir la aprobación 1.
    incluir otros cambios pendientes. Antes del push, avisar si hay otros commits sin subir, porque
    un push a `main` despliega producción.
 
+### Instagram (@camilopinzon_developer)
+
+Por ahora es un paso aparte, con su propia aprobación: el "publica" del blog no lo cubre.
+
+- **Piezas:** `content/blog/<slug>/instagram/` con `01.png`, `02.png`... (2 a 10 láminas de
+  1080×1350) y `caption.txt`. Se escriben con `copy-camilopinzon` y luego `humanizer`, máximo 5
+  hashtags. Diseño en Claude Design, en un canvas con una lámina por artboard.
+- **Enlaces:** en el caption no son clicables. El post dice "enlace en el perfil" y muestra
+  `camilopinzon.dev/es/blog` como texto. El enlace del perfil debe apuntar a esa dirección.
+- **Publicar:** `npm run instagram:publish -- content/blog/<slug>` valida sin escribir nada. Tras
+  un "publica en Instagram" explícito, repetir con `--commit`. Guarda `instagramPostId` en el post
+  y no vuelve a publicar si ya lo tiene.
+- **Conexión, una sola vez y a cargo del usuario:**
+  1. La cuenta debe ser profesional (Business o Creator). No hace falta página de Facebook.
+  2. En developers.facebook.com, usar una app de Meta con el caso "Manage messaging & content on
+     Instagram" y agregar `instagram_business_basic` e `instagram_business_content_publish`.
+  3. En App roles, invitar a `@camilopinzon_developer` como "Instagram Tester" y aceptar en
+     instagram.com, en Apps and websites → Tester Invites.
+  4. En "API setup with Instagram login": Add account y Generate token.
+  5. Guardar `IG_ACCESS_TOKEN="..."` en `.env.local`, nunca en el chat. Correr
+     `npm run instagram:publish -- whoami` y guardar también el `IG_USER_ID` que imprime.
+- **Mantenimiento:** el token vence a los 60 días. Renovar con
+  `npm run instagram:publish -- refresh-token` cada ~30 días.
+
 ## 7. Verificación
 
 - Las páginas usan `revalidate = 3600`: el post puede tardar hasta una hora en aparecer.

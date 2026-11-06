@@ -1,0 +1,7 @@
+WordPress 7.2 trae /random/, una dirección que lleva a una entrada publicada al azar. Viene activada por defecto, y la versión final está programada para el 8 de diciembre.
+
+En un sitio pequeño no es motivo de alarma, pero conviene decidir si la quieres. En el carrusel te contamos qué pedirle a tu equipo.
+
+La explicación completa está en nuestro blog: enlace en el perfil o camilopinzon.dev/es/blog
+
+#WordPress #DesarrolloWeb
