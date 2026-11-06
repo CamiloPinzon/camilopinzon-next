@@ -1,6 +1,6 @@
 ---
 name: blog-pipeline
-description: Flujo recurrente para mantener actualizado el blog de camilopinzon.dev - revisión de noticias de fuentes oficiales (lunes, miércoles y viernes), borrador para aprobación, versión final en/es, imágenes en Claude Design con alt en/es, y publicación bilingüe en Firestore más LinkedIn. Úsala cuando el usuario pida noticias para el blog, elija una noticia, apruebe un borrador o imágenes, o pida publicar una entrada.
+description: Flujo recurrente para mantener actualizado el blog de camilopinzon.dev - revisión de noticias de fuentes oficiales (lunes, miércoles y viernes), borrador para aprobación, versión final en/es, imágenes en Claude Design con alt en/es, y publicación bilingüe en Firestore más LinkedIn y newsletter. Úsala cuando el usuario pida noticias para el blog, elija una noticia, apruebe un borrador o imágenes, o pida publicar una entrada.
 ---
 
 # blog-pipeline — mantener el blog actualizado
@@ -15,8 +15,8 @@ adelantar el paso siguiente sin él. Cada respuesta indica en qué paso está el
 | 3. Versión final | `content.es.html` + `content.en.html` + `post.json` | — |
 | 4. Imágenes | Portada en Claude Design | — |
 | 5. Alt en/es | Alt de cada imagen | **Aprobación 2** de imágenes + alt |
-| 6. Publicación | Blog en/es + LinkedIn con `npm run blog:publish -- ... --commit` | **Aprobación 3**: "publica" |
-| 7. Verificación | Revisar /en, /es y el post de LinkedIn | Post visible en ambos idiomas y en LinkedIn |
+| 6. Publicación | Blog en/es + LinkedIn + newsletter con `npm run blog:publish -- ... --commit`, luego commit y push | **Aprobación 3**: "publica" |
+| 7. Verificación | Revisar /en, /es, LinkedIn y el envío del newsletter | Post visible en ambos idiomas y en LinkedIn, newsletter enviado |
 
 ## 1. Revisión de noticias (lunes, miércoles y viernes)
 
@@ -31,12 +31,32 @@ se puede pedir a mano.
 - Temas de la marca: aplicaciones web/SaaS, Next.js y React, WordPress, frontend/UI, rendimiento y
   SEO técnico, IA aplicada a productos web, pagos y formularios (Google Wallet/Pay).
 - Ventana: el lunes cubre viernes-domingo; el miércoles, lunes-martes; el viernes, miércoles-jueves.
+- Antes de armar la lista, revisar `articulos-del-mes.md` y `https://camilopinzon.dev/es/blog`, y
+  descartar lo que ya se cubrió (ver "Lista mensual de artículos"). Si se descarta algo, decirlo en
+  una línea al final de la entrega.
 - Abrir cada página antes de incluirla para verificar la fecha y el contenido.
 - Entregar por noticia: título, fecha, fuente (nombre + enlace), resumen en 2 frases, a quién
   afecta y por qué sería un buen post. Ordenar por impacto para dueños de negocio y equipos no
   técnicos. Cerrar con una recomendación y pedir que elija.
 - Si una noticia anuncia algo que todavía no salió (por ejemplo, un parche programado), decirlo y
   marcar en el borrador los datos que faltan con `[CONFIRMAR]`.
+
+### Lista mensual de artículos
+
+`articulos-del-mes.md`, en esta misma carpeta, evita proponer dos veces el mismo tema.
+
+- **Qué cuenta como cruce:** el mismo anuncio o hecho que ya cubrió un artículo, aunque venga de
+  otra fuente o con otro título. Un hecho nuevo de fondo sobre el mismo producto no es cruce; se
+  puede proponer, diciendo qué artículo existe y qué añade la noticia.
+- **Cuándo se agrega una línea:** al publicar (paso 6) y cuando el usuario diga que un tema ya se
+  hizo, indicando eso en el estado. Los posts creados desde `/admin` no pasan por el script: si la
+  revisión encuentra uno en el blog que no está en la lista, tratarlo como cubierto y avisar al
+  usuario.
+- **Limpieza mensual:** al agregar una línea, crear la sección del mes si no existe y borrar las
+  secciones anteriores al mes pasado. El mes pasado se conserva para detectar cruces en el cambio
+  de mes.
+- **Revisión programada:** solo lee la lista y no la modifica. Ignora las secciones anteriores al
+  mes pasado si todavía no se han borrado.
 
 ## 2. Borrador para aprobación (español)
 
@@ -104,9 +124,11 @@ algo de fondo, volver a pedir la aprobación 1.
 
 1. Validar sin escribir nada:
    `npm run blog:publish -- content/blog/<slug>`
-   Muestra títulos y alt en/es, y el texto exacto del post de LinkedIn con su enlace.
+   Muestra títulos y alt en/es, el texto exacto del post de LinkedIn con su enlace, y los
+   suscriptores activos y el asunto del newsletter por idioma.
 2. Mostrar ese resumen al usuario y pedir la **aprobación 3**: un "publica" explícito. Esa
-   aprobación cubre el blog en los dos idiomas y el post de LinkedIn; no hace falta pedir otra.
+   aprobación cubre el blog en los dos idiomas, el post de LinkedIn, el newsletter y el commit y
+   push de la nota; no hace falta pedir otra.
 3. Publicar:
    `npm run blog:publish -- content/blog/<slug> --commit`
    El script, en orden:
@@ -115,14 +137,20 @@ algo de fondo, volver a pedir la aprobación 1.
    - crea `posts/<slug>` en Firestore con `isPublished: true` y las dos traducciones (si el slug ya
      existe, se niega salvo con `--overwrite`);
    - comparte el artículo en LinkedIn (mismo formato que el CMS) y guarda `linkedinPostId` en el
-     documento. Si ya tiene `linkedinPostId`, no vuelve a compartir.
-4. Si LinkedIn falla, el post del blog ya quedó publicado: corregir la causa (por ejemplo, el token
-   `LINKEDIN_ACCESS_TOKEN` vencido) y reintentar solo LinkedIn con
-   `npm run blog:publish -- content/blog/<slug> --commit --linkedin-only`.
-   `--skip-linkedin` publica solo en el blog, únicamente si el usuario lo pide.
-5. El script no envía el email a suscriptores del newsletter (el CMS sí lo hace al crear un post
-   desde `/admin`).
-6. Hacer commit de `content/blog/<slug>/` solo si el usuario lo pide.
+     documento. Si ya tiene `linkedinPostId`, no vuelve a compartir;
+   - envía el newsletter a los suscriptores activos, cada uno en su idioma (mismo correo que el
+     CMS), y guarda `newsletterSentAt`. Si ya lo tiene, no vuelve a enviar. Con `--overwrite` nunca
+     envía, para no anunciar como nuevo un post corregido.
+4. Si LinkedIn o el newsletter fallan, el post del blog ya quedó publicado y el otro canal sigue su
+   curso. Corregir la causa (por ejemplo, el token `LINKEDIN_ACCESS_TOKEN` vencido) y reintentar
+   solo ese canal con `--commit --linkedin-only` o `--commit --newsletter-only`. Un reintento del
+   newsletter dentro de las 24 horas no repite el correo a quien ya lo recibió; pasado ese plazo,
+   revisar en Resend a quién le llegó antes de reintentar.
+5. `--skip-linkedin` y `--skip-newsletter` omiten ese canal, únicamente si el usuario lo pide.
+6. Agregar el artículo a `articulos-del-mes.md`, con los temas o hechos que cubre.
+7. **Siempre** hacer commit de `content/blog/<slug>/` y de la lista, y push a `origin/main`, sin
+   incluir otros cambios pendientes. Antes del push, avisar si hay otros commits sin subir, porque
+   un push a `main` despliega producción.
 
 ## 7. Verificación
 
@@ -132,5 +160,7 @@ algo de fondo, volver a pedir la aprobación 1.
 - **Revisar en móvil y en escritorio** con el navegador integrado (`resize_window`) a 320, 375,
   768 y 1440 px de ancho: que la portada correcta se vea completa (4:5 por debajo de 640 px, 16:9
   desde 640) y que no haya scroll horizontal. Volver el viewport a `desktop` al terminar.
-- Confirmar que el post de LinkedIn salió (el script imprime su id).
-- Informar al usuario con los dos enlaces del blog y el id del post de LinkedIn.
+- Confirmar que el post de LinkedIn salió (el script imprime su id) y cuántos correos del
+  newsletter se enviaron (el script lo imprime).
+- Informar al usuario con los dos enlaces del blog, el id del post de LinkedIn, los correos
+  enviados y el commit subido.

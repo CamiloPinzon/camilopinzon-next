@@ -1,9 +1,10 @@
 /**
- * Publishes an approved bilingual blog post (en/es) to Firestore `posts`, then shares it on LinkedIn.
+ * Publishes an approved bilingual blog post (en/es) to Firestore `posts`, shares it on LinkedIn and
+ * emails the newsletter subscribers.
  *
  * Usage:
  *   npm run blog:publish -- content/blog/<slug>            # dry run
- *   npm run blog:publish -- content/blog/<slug> --commit   # publish to the blog + LinkedIn
+ *   npm run blog:publish -- content/blog/<slug> --commit   # publish to the blog + LinkedIn + newsletter
  *
  * Post folder layout (see .claude/skills/blog-pipeline/SKILL.md):
  *   post.json          metadata + per-language title, excerpt, coverImageAlt, faqs + LinkedIn text
@@ -13,20 +14,27 @@
  *   cover-mobile.(png|jpg|webp)  approved mobile cover image, 1080x1350 (4:5)
  *
  * Flags:
- *   --commit         upload the cover, write the Firestore document and share on LinkedIn
- *   --overwrite      allow replacing an existing post with the same slug
- *   --skip-linkedin  publish to the blog only
- *   --linkedin-only  retry the LinkedIn share for a post already on the blog
+ *   --commit           upload the cover, write the Firestore document, share on LinkedIn, send the newsletter
+ *   --overwrite        allow replacing an existing post with the same slug (never emails subscribers)
+ *   --skip-linkedin    do not share on LinkedIn
+ *   --skip-newsletter  do not email subscribers
+ *   --linkedin-only    retry the LinkedIn share for a post already on the blog
+ *   --newsletter-only  retry the newsletter for a post already on the blog
  */
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";
 import { initializeApp, cert } from "firebase-admin/app";
-import { getFirestore, type DocumentReference } from "firebase-admin/firestore";
+import { getFirestore, type DocumentReference, type Firestore } from "firebase-admin/firestore";
 import { v2 as cloudinary } from "cloudinary";
+import { Resend } from "resend";
+import { renderNewPostHtml } from "../lib/emails/templates.ts";
+import { getTranslations } from "../lib/i18n/translations.ts";
 
 const LANGS = ["en", "es"] as const;
 const SITE_URL = "https://camilopinzon.dev";
+// Sends go one at a time; the pause keeps a large list under Resend's rate limit.
+const NEWSLETTER_SEND_DELAY_MS = 600;
 
 const faqSchema = z.object({
   question: z.string().min(1),
@@ -177,6 +185,70 @@ async function shareAndRecord(ref: DocumentReference, meta: PostMeta, coverImage
   console.log(`LinkedIn: shared (${linkedinPostId}).`);
 }
 
+type Lang = (typeof LANGS)[number];
+
+function newsletterSubject(meta: PostMeta, lang: Lang): string {
+  return getTranslations(lang).emails.newPostSubject.replace("{title}", meta.translations[lang].title);
+}
+
+async function getActiveSubscribers(db: Firestore): Promise<{ email: string; lang: Lang }[]> {
+  const snapshot = await db.collection("subscribers").where("status", "==", "active").get();
+  return snapshot.docs.flatMap((doc) => {
+    const { email, lang } = doc.data() as { email?: string; lang?: string };
+    if (!email) return [];
+    return [{ email, lang: lang === "en" ? ("en" as const) : ("es" as const) }];
+  });
+}
+
+// Same email the CMS sends from app/actions/newsletter.ts, in each subscriber's language.
+async function sendNewsletter(db: Firestore, ref: DocumentReference, meta: PostMeta) {
+  if ((await ref.get()).data()?.newsletterSentAt) {
+    console.log("Newsletter: already sent, skipping.");
+    return;
+  }
+  const apiKey = process.env.RESEND_API_KEY;
+  const sender = process.env.RESEND_SENDER_EMAIL;
+  if (!apiKey || !sender) throw new Error("RESEND_API_KEY or RESEND_SENDER_EMAIL is not set");
+
+  const resend = new Resend(apiKey);
+  const subscribers = await getActiveSubscribers(db);
+  const failed: string[] = [];
+
+  for (const [index, { email, lang }] of subscribers.entries()) {
+    if (index > 0) await new Promise((resolve) => setTimeout(resolve, NEWSLETTER_SEND_DELAY_MS));
+    const t = getTranslations(lang).emails;
+    const { error } = await resend.emails.send(
+      {
+        from: `Camilo Pinzón <${sender}>`,
+        to: email,
+        subject: newsletterSubject(meta, lang),
+        html: renderNewPostHtml({
+          greeting: t.newPostGreeting,
+          message: t.newPostMessage.replace("{title}", meta.translations[lang].title),
+          ctaText: t.newPostCta,
+          postUrl: `${SITE_URL}/${lang}/blog/${meta.slug}`,
+          signOff: t.newsletterSignOff,
+          unsubscribeText: t.unsubscribe,
+          unsubscribeUrl: `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`,
+        }),
+      },
+      // A retry within 24 hours does not email anyone who already got this post.
+      { idempotencyKey: `new-post/${meta.slug}/${email}` },
+    );
+    if (error) {
+      failed.push(email);
+      console.error(`Newsletter: failed for ${email}: ${error.message}`);
+    }
+  }
+
+  const sent = subscribers.length - failed.length;
+  if (failed.length > 0) {
+    throw new Error(`Newsletter: sent ${sent}, failed ${failed.length}. Retry with --commit --newsletter-only.`);
+  }
+  await ref.update({ newsletterSentAt: new Date().toISOString(), newsletterSentCount: sent });
+  console.log(`Newsletter: sent to ${sent} subscribers.`);
+}
+
 function getServiceAccount(): Record<string, string> {
   const key = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
   if (!key || key === "{}") throw new Error("FIREBASE_SERVICE_ACCOUNT_KEY is not set");
@@ -190,7 +262,13 @@ async function main() {
   const overwrite = args.includes("--overwrite");
   const skipLinkedIn = args.includes("--skip-linkedin");
   const linkedinOnly = args.includes("--linkedin-only");
-  if (!dir) throw new Error("Usage: scripts/publish-post.mts <post-folder> [--commit] [--overwrite] [--skip-linkedin | --linkedin-only]");
+  const skipNewsletter = args.includes("--skip-newsletter");
+  const newsletterOnly = args.includes("--newsletter-only");
+  if (!dir) {
+    throw new Error(
+      "Usage: scripts/publish-post.mts <post-folder> [--commit] [--overwrite] [--skip-linkedin] [--skip-newsletter] [--linkedin-only | --newsletter-only]",
+    );
+  }
 
   const { meta, content, coverPath, mobileCoverPath } = await loadPost(path.resolve(dir));
   console.log(`Post "${meta.slug}" is valid.`);
@@ -202,18 +280,31 @@ async function main() {
   console.log(`  mobile cover: ${mobileCoverPath}`);
   console.log(skipLinkedIn ? "  LinkedIn: skipped" : `  LinkedIn post:\n${linkedinText(meta).replace(/^/gm, "    | ")}`);
 
+  const db = getFirestore(initializeApp({ credential: cert(getServiceAccount()) }));
+
+  if (skipNewsletter) {
+    console.log("  Newsletter: skipped");
+  } else {
+    const subscribers = await getActiveSubscribers(db);
+    console.log(`  Newsletter: ${subscribers.length} active subscribers`);
+    for (const lang of LANGS) {
+      const count = subscribers.filter((s) => s.lang === lang).length;
+      console.log(`    [${lang}] ${count}: ${newsletterSubject(meta, lang)}`);
+    }
+  }
+
   if (!commit) {
     console.log("\nDry run: nothing uploaded or written. Re-run with --commit to publish.");
     return;
   }
 
-  const db = getFirestore(initializeApp({ credential: cert(getServiceAccount()) }));
   const ref = db.collection("posts").doc(meta.slug);
 
-  if (linkedinOnly) {
+  if (linkedinOnly || newsletterOnly) {
     const coverImage = (await ref.get()).data()?.coverImage as string | undefined;
     if (!coverImage) throw new Error(`Post "${meta.slug}" is not on the blog yet. Publish it first.`);
-    await shareAndRecord(ref, meta, coverImage);
+    if (linkedinOnly) await shareAndRecord(ref, meta, coverImage);
+    if (newsletterOnly) await sendNewsletter(db, ref, meta);
     return;
   }
 
@@ -221,9 +312,12 @@ async function main() {
   if (existing.exists && !overwrite) {
     throw new Error(`A post with slug "${meta.slug}" already exists. Use --overwrite to replace it.`);
   }
-  // Keep the LinkedIn markers on overwrite so the post is never shared twice.
-  const { linkedinPostId, linkedinSharedAt } = existing.data() ?? {};
-  const linkedinMarkers = linkedinPostId ? { linkedinPostId, linkedinSharedAt } : {};
+  // Keep the markers on overwrite so the post is never shared or emailed twice.
+  const { linkedinPostId, linkedinSharedAt, newsletterSentAt, newsletterSentCount } = existing.data() ?? {};
+  const sendMarkers = {
+    ...(linkedinPostId ? { linkedinPostId, linkedinSharedAt } : {}),
+    ...(newsletterSentAt ? { newsletterSentAt, newsletterSentCount } : {}),
+  };
 
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -243,19 +337,33 @@ async function main() {
 
   await ref.set({
     ...buildDocument(meta, content, upload.secure_url, mobileUpload.secure_url),
-    ...linkedinMarkers,
+    ...sendMarkers,
   });
   console.log(`\nPublished: ${SITE_URL}/en/blog/${meta.slug} and ${SITE_URL}/es/blog/${meta.slug}`);
   console.log(`Cover: ${upload.secure_url}`);
   console.log(`Mobile cover: ${mobileUpload.secure_url}`);
 
-  if (skipLinkedIn) return;
-  try {
-    await shareAndRecord(ref, meta, upload.secure_url);
-  } catch (error: unknown) {
-    console.error(`LinkedIn: failed. The blog post is live; retry with --commit --linkedin-only.`);
-    throw error;
+  // One channel failing must not stop the other: the post is already live.
+  const failures: unknown[] = [];
+  if (!skipLinkedIn) {
+    try {
+      await shareAndRecord(ref, meta, upload.secure_url);
+    } catch (error: unknown) {
+      console.error(`LinkedIn: failed. The blog post is live; retry with --commit --linkedin-only.`);
+      failures.push(error);
+    }
   }
+  if (existing.exists) {
+    console.log("Newsletter: skipped, this overwrites an existing post.");
+  } else if (!skipNewsletter) {
+    try {
+      await sendNewsletter(db, ref, meta);
+    } catch (error: unknown) {
+      console.error(`Newsletter: failed. The blog post is live; retry with --commit --newsletter-only.`);
+      failures.push(error);
+    }
+  }
+  if (failures.length > 0) throw failures[0];
 }
 
 main().catch((error: unknown) => {
