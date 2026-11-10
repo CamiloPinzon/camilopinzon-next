@@ -1,0 +1,36 @@
+<h2>What happened</h2>
+<p>On October 29, 2025, the Chrome team published a plan to remove XSLT from the browser. According to its schedule, Chrome 158 ships on November 17, 2026, and from that day XSLT stops working in the stable version for almost everyone. The exceptions are sites enrolled in a Chrome trial (an Origin Trial) and companies with a specific policy. Those exceptions end on August 17, 2027, with Chrome 176.</p>
+
+<h2>What it means</h2>
+<p>XSLT is a language that turns an XML file, which is plain data with no design, into a page you can read. Think of a raw spreadsheet and the template that turns it into a formatted report. When you open an XML file in the browser and it links to an XSLT stylesheet, the browser does that conversion for you. That is what Chrome is about to stop doing.</p>
+<p>Chrome gives two reasons. The first is security: the code that processes XSLT is old and prone to memory bugs, and the page cites two recorded vulnerabilities (CVE-2025-7425 and CVE-2022-22834). The second is that almost nobody uses it, around 0.02% of page loads. Chrome says XML itself isn't going away, and styling with CSS keeps working.</p>
+<p>Firefox and WebKit have also said they plan to remove it, though without dates.</p>
+
+<h2>How it affects you</h2>
+<p><strong>If your site is an ordinary website, nothing probably changes.</strong> A site that doesn't serve XML with XSLT stylesheets won't notice.</p>
+<p>It does affect you if:</p>
+<ul>
+  <li>Your RSS or Atom feed looks like a readable page when opened in the browser, thanks to XSLT. After November 17, Chrome would show the raw XML. Feed readers shouldn't notice, because they read the data, not the presentation.</li>
+  <li>You run a system that generates XML with XSLT to display it in the browser, such as a device's admin screen. Chrome's page mentions this case and says an extension is usually the most realistic option when the device can't be updated.</li>
+  <li>You use XSLT in the browser to format content on your own site.</li>
+</ul>
+<p>As for WordPress: we found no official source saying whether it uses XSLT in its feeds or sitemaps, and no WordPress notice about this change. Chrome's page doesn't mention sitemaps either. We're not assuming it applies, and we're not ruling it out.</p>
+
+<h2>What you can do</h2>
+<ol>
+  <li><strong>Ask whoever maintains your site whether anything uses XSLT.</strong> It takes a minute.</li>
+  <li><strong>Open your feed and any public XML file in Chrome.</strong> If it looks formatted, check whether that formatting comes from an XSLT stylesheet.</li>
+  <li><strong>If you use XSLT, you have four options</strong>, according to Chrome's page:
+    <ul>
+      <li>Generate the HTML on the server, or serve JSON and draw it with JavaScript. This is the long-term fix.</li>
+      <li>Use the XSLT polyfill, a replacement that runs in the browser. For an XML file with a stylesheet, you add one line with the script.</li>
+      <li>Use a library such as Saxon-JS, which runs XSLT in JavaScript.</li>
+      <li>Join Chrome's trial (the Origin Trial) to buy time until August 2027.</li>
+    </ul>
+  </li>
+  <li><strong>Check whether your site still uses it.</strong> Since Chrome 143, the console and Lighthouse show deprecation warnings, and the Reporting API can detect it.</li>
+</ol>
+<p>If you don't use XSLT, there's nothing to do.</p>
+
+<h2>Source</h2>
+<p>Chrome for Developers, <a href="https://developer.chrome.com/docs/web-platform/deprecating-xslt" target="_blank" rel="noopener noreferrer">Removing XSLT for a more secure browser</a>, published October 29, 2025. The plan is confirmed on the <a href="https://chromestatus.com/feature/4709671889534976" target="_blank" rel="noopener noreferrer">Chrome Platform Status</a> entry, updated November 4, 2026.</p>

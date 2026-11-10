@@ -1,0 +1,62 @@
+{
+  "slug": "chrome-removes-xslt-november-2026",
+  "tag": "Rendimiento y SEO técnico",
+  "readTime": "4 min",
+  "publishedAt": "2026-11-09",
+  "source": {
+    "name": "Chrome for Developers",
+    "url": "https://developer.chrome.com/docs/web-platform/deprecating-xslt"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "El 17 de noviembre Chrome 158 deja de ejecutar XSLT, una tecnología antigua que algunos sitios usan para mostrar feeds RSS o XML con formato legible. A la mayoría de los sitios no les afecta, pero si el tuyo lo usa, conviene comprobarlo esta semana. Publicamos qué cambia, a quién toca y qué pedirle a tu equipo."
+  },
+  "translations": {
+    "en": {
+      "title": "Chrome turns off XSLT on November 17: what to check if your site shows styled feeds or XML",
+      "excerpt": "On November 17, Chrome 158 stops running XSLT, an old technology some sites use to display XML in a readable way. Most sites won't notice, but if your RSS feed or XML looks formatted in the browser, check it this week.",
+      "coverImageAlt": "XSLT in large type with \"Chrome 158 · 17 nov\" above it, over a grid of gray squares with one picked out in blue",
+      "faqs": [
+        {
+          "question": "Will my site break on November 17?",
+          "answer": "Almost certainly not. It only affects sites that display XML with an XSLT stylesheet in the browser. Chrome puts that at around 0.02% of page loads."
+        },
+        {
+          "question": "Is XML being removed too?",
+          "answer": "No. Chrome says XML stays and styling with CSS keeps working. What goes away is the conversion with XSLT."
+        },
+        {
+          "question": "Will my RSS feed stop working?",
+          "answer": "Feed readers keep reading the data. What changes is that if you open the feed directly in Chrome, you'll see it unformatted."
+        },
+        {
+          "question": "Can I buy more time?",
+          "answer": "Yes. Chrome's trial (the Origin Trial) and the enterprise policy let you keep using it until August 17, 2027."
+        }
+      ]
+    },
+    "es": {
+      "title": "Chrome apaga XSLT el 17 de noviembre: qué revisar si tu sitio muestra feeds o XML con estilo",
+      "excerpt": "El 17 de noviembre Chrome 158 deja de ejecutar XSLT, una tecnología antigua que algunos sitios usan para mostrar XML de forma legible. A la mayoría no le afecta, pero si tu feed RSS o tu XML se ve con formato en el navegador, conviene comprobarlo esta semana.",
+      "coverImageAlt": "XSLT en letras grandes con \"Chrome 158 · 17 nov\" encima, sobre una cuadrícula de cuadros grises con uno destacado en azul",
+      "faqs": [
+        {
+          "question": "¿Mi sitio se rompe el 17 de noviembre?",
+          "answer": "Casi seguro que no. Solo afecta a quien muestra XML con una hoja XSLT en el navegador. Chrome calcula que es alrededor del 0,02 % de las cargas de página."
+        },
+        {
+          "question": "¿Se retira XML también?",
+          "answer": "No. Chrome dice que XML se queda y que el estilo con CSS sigue funcionando. Lo que se va es la conversión con XSLT."
+        },
+        {
+          "question": "¿Mi feed RSS deja de funcionar?",
+          "answer": "Los lectores de feeds siguen leyendo los datos. Lo que cambia es que, si abres el feed directamente en Chrome, lo verás sin formato."
+        },
+        {
+          "question": "¿Puedo ganar tiempo?",
+          "answer": "Sí. La prueba de Chrome (Origin Trial) y la política empresarial permiten seguir usándolo hasta el 17 de agosto de 2027."
+        }
+      ]
+    }
+  }
+}
