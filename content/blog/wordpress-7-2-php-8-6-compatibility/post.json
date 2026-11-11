@@ -1,0 +1,62 @@
+{
+  "slug": "wordpress-7-2-php-8-6-compatibility",
+  "tag": "WordPress",
+  "readTime": "4 min",
+  "publishedAt": "2026-11-11",
+  "source": {
+    "name": "WordPress News",
+    "url": "https://wordpress.org/news/2026/11/wordpress-7-2-beta-5/"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "La Beta 5 de WordPress 7.2 dice que ya resolvió los problemas conocidos con PHP 8.6, que sale el 19 de noviembre. WordPress no es el riesgo: lo son tus plugins y tu tema. Publicamos qué revisar antes de actualizar el servidor y por qué quien siga en PHP 8.2 tiene una fecha límite el 31 de diciembre."
+  },
+  "translations": {
+    "en": {
+      "title": "WordPress 7.2 is ready for PHP 8.6: what to check before you upgrade your server",
+      "excerpt": "WordPress 7.2 Beta 5 says it has resolved the known issues with PHP 8.6, due on November 19. WordPress isn't the risk: your plugins and theme are, so check them before you change anything.",
+      "coverImageAlt": "PHP 8.6 in large type with \"WordPress 7.2\" above it, over a row of PHP versions with 8.6 picked out in blue",
+      "faqs": [
+        {
+          "question": "Do I have to upgrade PHP on November 19?",
+          "answer": "No. According to php.net, versions 8.2 through 8.5 are still supported. But security support for 8.2 ends on December 31, 2026. The sensible move is to test on a copy first."
+        },
+        {
+          "question": "Does WordPress 7.2 work with PHP 8.6?",
+          "answer": "WordPress says it aims for full support and that all known compatibility issues are resolved. It still asks you to verify your plugins and theme before upgrading."
+        },
+        {
+          "question": "How do I know which PHP version I'm using?",
+          "answer": "Ask your host or check its control panel. In WordPress, Tools > Site Health warns you if your PHP version is out of date."
+        },
+        {
+          "question": "Can I install Beta 5 on my site?",
+          "answer": "Not on a live one. It's for testing only, and WordPress asks you to use a test or local site."
+        }
+      ]
+    },
+    "es": {
+      "title": "WordPress 7.2 llega listo para PHP 8.6: qué revisar antes de actualizar tu servidor",
+      "excerpt": "La Beta 5 de WordPress 7.2 dice que ya resolvió los problemas conocidos con PHP 8.6, que sale el 19 de noviembre. WordPress no es el riesgo: lo son tus plugins y tu tema, así que conviene revisarlos antes de cambiar nada.",
+      "coverImageAlt": "PHP 8.6 en letras grandes con \"WordPress 7.2\" encima, sobre una fila de versiones de PHP con la 8.6 destacada en azul",
+      "faqs": [
+        {
+          "question": "¿Tengo que actualizar PHP el 19 de noviembre?",
+          "answer": "No. Según php.net, las versiones 8.2 a 8.5 siguen soportadas. Eso sí: el soporte de seguridad de 8.2 termina el 31 de diciembre de 2026. Lo prudente es probar primero en una copia."
+        },
+        {
+          "question": "¿WordPress 7.2 funciona con PHP 8.6?",
+          "answer": "WordPress dice que busca soporte completo y que se resolvieron todos los problemas de compatibilidad conocidos. Aun así, pide verificar tus plugins y tu tema antes de actualizar."
+        },
+        {
+          "question": "¿Cómo sé qué versión de PHP uso?",
+          "answer": "Pregúntaselo a tu hosting o míralo en su panel. En WordPress, Herramientas > Salud del sitio avisa si tu versión de PHP está desactualizada."
+        },
+        {
+          "question": "¿Puedo instalar la Beta 5 en mi sitio?",
+          "answer": "No en uno real. Es solo para pruebas y WordPress pide usar un sitio de pruebas o local."
+        }
+      ]
+    }
+  }
+}

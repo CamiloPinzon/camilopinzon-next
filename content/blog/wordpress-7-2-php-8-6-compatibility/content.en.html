@@ -1,0 +1,29 @@
+<h2>What happened</h2>
+<p>On November 10, 2026, the WordPress team published Beta 5 of WordPress 7.2. One of the changes is a section on PHP 8.6, the next version of PHP, due on November 19. WordPress says 7.2 "aims to fully support PHP 8.6" and that all known compatibility issues have been resolved.</p>
+<p>The final release of WordPress 7.2 is scheduled for December 8. Beta 5 is for testing only.</p>
+
+<h2>What it means</h2>
+<p>PHP is the language WordPress is written in, and it runs on your server. Think of a car engine: WordPress is the car and PHP is the engine. A new engine comes out every year, and not every part of the car works well with it right away.</p>
+<p>What the post says is that WordPress, the car, is ready for the new engine. What it can't promise is that your plugins and theme are, because other people write those. That's why the post asks you to check that they are before you upgrade, and recommends using the latest PHP versions in general.</p>
+
+<h2>How it affects you</h2>
+<p><strong>The good.</strong> If your site uses plugins and a theme that are kept up to date, the jump to PHP 8.6 will probably go smoothly once your host offers it. And you don't have to do it on day one: according to php.net, versions 8.2 through 8.5 are still supported today. WordPress recommends PHP 8.3 or higher.</p>
+<p><strong>What can go wrong.</strong> An abandoned plugin or a custom theme built years ago can stop working on a newer PHP version. We don't know which plugins you run, so we can't tell you whether that's you. Check before you change anything.</p>
+<p><strong>One date that does matter.</strong> According to php.net, security support for PHP 8.2 ends on December 31, 2026. If your site still runs on 8.2, you need to move before then, even if it's not to 8.6.</p>
+<p><strong>Other Beta 5 changes.</strong> WordPress will send an email when someone creates an application password on your site, which is a key that lets other programs connect to it. Permissions for reactions in Notes change, keyboard navigation in the admin toolbar improves, and there are accessibility fixes. The post doesn't give more detail on these.</p>
+<p>Our take: if your site is simple and up to date, there's no rush. If you depend on an old plugin nobody updates, now is a good time to find out.</p>
+
+<h2>What you can do</h2>
+<p>If your site runs on WordPress, ask whoever maintains it to do the following:</p>
+<ol>
+  <li><strong>Find out which PHP version your site runs today.</strong> Ask your host or check its control panel. In WordPress, the Tools &gt; Site Health screen also warns you if your PHP is out of date.</li>
+  <li><strong>List your plugins and theme, and check when each was last updated.</strong> A plugin with no changes in over a year deserves a second look.</li>
+  <li><strong>Test on a copy of the site, never the live one.</strong> Switch the copy to PHP 8.6 once your host offers it, and click through the pages that matter: home, forms, shop.</li>
+  <li><strong>Don't upgrade PHP on the live site until that test goes well.</strong> And take a backup first.</li>
+  <li><strong>If you want to try WordPress 7.2 Beta 5,</strong> do it only on a test or local site. WordPress asks people not to install beta versions on production sites.</li>
+</ol>
+<p>If you do nothing, your site keeps working as it does today.</p>
+
+<h2>Source</h2>
+<p>WordPress News, <a href="https://wordpress.org/news/2026/11/wordpress-7-2-beta-5/" target="_blank" rel="noopener noreferrer">WordPress 7.2 Beta 5</a>, published November 10, 2026. The PHP 8.6 date and the supported versions come from <a href="https://www.php.net/supported-versions.php" target="_blank" rel="noopener noreferrer">php.net</a> and its <a href="https://wiki.php.net/todo/php86" target="_blank" rel="noopener noreferrer">release schedule</a>. The PHP 8.3 or higher recommendation comes from the <a href="https://wordpress.org/about/requirements/" target="_blank" rel="noopener noreferrer">WordPress requirements</a>.</p>
+<p>We also wrote about other changes in this release: <a href="/en/blog/wordpress-7-2-random-url-admin-icons">WordPress 7.2 will open a new address on your site</a>.</p>
