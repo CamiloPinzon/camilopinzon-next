@@ -318,12 +318,6 @@ const translations = {
       viewProject: "Ver Caso de Éxito",
       items: [
         {
-          title: "Plataforma IA & CMS",
-          description:
-            "Diseño y desarrollo de esta plataforma web de alto rendimiento con Next.js, React 19 y TypeScript. Integración de un asistente virtual autónomo basado en Google Gemini Flash y contexto RAG para atención y cotizaciones.",
-          tags: ["Next.js", "React 19", "Gemini AI", "TypeScript", "SCSS"],
-        },
-        {
           title: "Google Wallet / Pay Forms",
           description:
             "Maquetación de formularios frontend y administración en CMS propio para la plataforma global de Google Wallet. Resolución de retos complejos de accesibilidad y diseño como el soporte integral para layouts RTL y LTR.",

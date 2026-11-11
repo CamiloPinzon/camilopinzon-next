@@ -199,7 +199,9 @@ export async function getProjects(lang: string = "en"): Promise<ProjectItem[]> {
   try {
     const snapshot = await adminDb.collection("projects").get();
 
-    const items = snapshot.docs.map((docSnap) => {
+    const items = snapshot.docs
+      .filter((docSnap) => docSnap.data().isPublished !== false)
+      .map((docSnap) => {
       const data = docSnap.data();
       const localized =
         data.translations?.[lang] || data.translations?.["en"] || {};

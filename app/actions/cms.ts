@@ -24,22 +24,6 @@ export async function seedNewsAction() {
         }
       },
       {
-        id: "news-ai-recruiter",
-        image: "/social/og-image.png",
-        publishedAt: "2026-05-15",
-        isPublished: true,
-        translations: {
-          en: {
-            title: "AI Business Agent Launched in Production",
-            content: "Our personal AI assistant powered by Google Gemini 1.5 Flash is officially live, handling real-time customer project inquiries and live quoting.",
-          },
-          es: {
-            title: "Asistente de Negocios IA en Producción",
-            content: "Lanzamos oficialmente nuestro agente virtual autónomo impulsado por Google Gemini 1.5 Flash para responder consultas de proyectos y cotizaciones en tiempo real.",
-          }
-        }
-      },
-      {
         id: "news-disney-cruise-migration",
         image: "/portfolio/disney-cruise.png",
         publishedAt: "2026-05-10",
@@ -73,23 +57,6 @@ export async function seedProjectsAction() {
   try {
     await verifyAdminSession();
     const initialProjects = [
-      {
-        id: "portfolio-ia",
-        title: "AI-Powered Portfolio & CMS",
-        techStack: "Next.js, React 19, Gemini AI, TypeScript, SCSS",
-        coverImage: "/social/og-image.png",
-        order: 40,
-        translations: {
-          en: {
-            title: "AI-Powered Portfolio & CMS",
-            description: "Designed and engineered a high-performance personal web application using Next.js, React 19, and TypeScript. Implemented an autonomous recruitment assistant powered by Google Gemini Flash and live RAG context.",
-          },
-          es: {
-            title: "Portafolio Personal & Asistente IA",
-            description: "Diseño y desarrollo full-stack de esta plataforma web personal de alto rendimiento con Next.js, React 19 y TypeScript. Integración de un asistente virtual autónomo de reclutamiento basado en Google Gemini Flash y contexto RAG.",
-          }
-        }
-      },
       {
         id: "google-wallet",
         title: "Google Wallet / Pay",

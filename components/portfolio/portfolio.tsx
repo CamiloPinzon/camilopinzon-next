@@ -6,7 +6,6 @@ import PortfolioReveal from "./portfolio-reveal";
 
 // Imágenes predeterminadas asociadas al fallback estático en caso de que la BD esté vacía
 const FALLBACK_IMAGES = [
-  "/social/og-image.png", // Pantallazo real / OG Preview del proyecto (Portafolio IA)
   "/portfolio/google-pay.png", // Interfaz de formulario / Stickers Google Pay
   "/portfolio/disney-cruise.png", // Plataforma web / Itinerarios Disney Cruise Line
   "/portfolio/chocolates-jet.png", // Portada gráfica oficial del álbum Chocolates Jet
