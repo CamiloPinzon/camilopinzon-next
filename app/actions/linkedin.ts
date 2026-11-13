@@ -1,6 +1,7 @@
 'use server';
 
 import { verifyAdminSession } from "@/lib/firebase/admin";
+import { resolveAuthorUrn, shareArticleOnLinkedIn } from "@/lib/linkedin";
 
 export interface BlogPostPayload {
   id?: string;
@@ -24,12 +25,15 @@ export async function publishToLinkedInAction(post: BlogPostPayload) {
   try {
     await verifyAdminSession();
     const accessToken = process.env.LINKEDIN_ACCESS_TOKEN;
-    const authorUrn = process.env.LINKEDIN_AUTHOR_URN; // e.g., urn:li:person:123456789
 
-    if (!accessToken || !authorUrn) {
+    if (!accessToken) {
       console.warn("LinkedIn API credentials are missing. Skipping LinkedIn post.");
       return { success: false, error: "Missing LinkedIn credentials" };
     }
+
+    // LINKEDIN_AUTHOR_URN is optional: urn:li:person:<userinfo sub>. When it is missing or holds the
+    // numeric member ID, the author is resolved from the token (see lib/linkedin.ts).
+    const authorUrn = await resolveAuthorUrn(accessToken, process.env.LINKEDIN_AUTHOR_URN);
 
     // Prioridad a la versión en Español ('es') para la automatización
     const title = post.translations?.es?.title || post.title || 'Nuevo artículo en el blog';
@@ -41,59 +45,16 @@ export async function publishToLinkedInAction(post: BlogPostPayload) {
 
     const textContent = `He publicado un nuevo artículo: ${title}\n\n${excerpt}\n\nLee el artículo completo aquí: ${postUrl}`;
 
-    // Standard LinkedIn API v2/ugcPosts payload
-    const payload = {
-      author: authorUrn,
-      lifecycleState: "PUBLISHED",
-      specificContent: {
-        "com.linkedin.ugc.ShareContent": {
-          shareCommentary: {
-            text: textContent
-          },
-          shareMediaCategory: coverImage ? "ARTICLE" : "NONE",
-          media: coverImage ? [
-            {
-              status: "READY",
-              description: {
-                text: excerpt || title
-              },
-              originalUrl: postUrl,
-              thumbnails: [
-                {
-                  url: coverImage
-                }
-              ],
-              title: {
-                text: title
-              }
-            }
-          ] : []
-        }
-      },
-      visibility: {
-        "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
-      }
-    };
-
-    const response = await fetch('https://api.linkedin.com/v2/ugcPosts', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-        'X-Restli-Protocol-Version': '2.0.0'
-      },
-      body: JSON.stringify(payload)
+    const id = await shareArticleOnLinkedIn(accessToken, authorUrn, {
+      text: textContent,
+      url: postUrl,
+      title,
+      description: excerpt || title,
+      thumbnailUrl: coverImage,
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("LinkedIn API error:", response.status, errorText);
-      return { success: false, error: `LinkedIn API returned ${response.status}: ${errorText}` };
-    }
-
-    const data = await response.json();
-    console.log("Successfully posted to LinkedIn:", data.id);
-    return { success: true, data };
+    console.log("Successfully posted to LinkedIn:", id);
+    return { success: true, data: { id } };
   } catch (error: unknown) {
     console.error("Error publishing to LinkedIn:", error);
     return { success: false, error: error instanceof Error ? error.message : String(error) };
