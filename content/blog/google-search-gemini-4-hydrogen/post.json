@@ -1,0 +1,62 @@
+{
+  "slug": "google-search-gemini-4-hydrogen",
+  "tag": "Rendimiento y SEO técnico",
+  "readTime": "4 min",
+  "publishedAt": "2026-11-13",
+  "source": {
+    "name": "Google Blog",
+    "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "El 12 de noviembre Google cambió el modelo de IA de su buscador por Gemini 4 Hydrogen, y lo llama su mayor cambio hasta ahora. Google no dio cifras sobre clics, así que nadie sabe todavía si tu sitio va a ganar o perder visitas. Publicamos qué cambia y cuatro pasos para medir bien tu tráfico desde Google antes de tocar nada."
+  },
+  "translations": {
+    "en": {
+      "title": "Google changes the AI behind its search engine: what to watch in your traffic from now on",
+      "excerpt": "On November 12, Google rolled out Gemini 4 Hydrogen in Search worldwide and called it its biggest model upgrade yet. Nobody knows yet how it will move your traffic, so the useful thing is to start measuring it properly now.",
+      "coverImageAlt": "Gemini 4 Hydrogen in large type next to a dot that branches into lines toward gray squares and one blue square",
+      "faqs": [
+        {
+          "question": "Do I need to change anything on my site because of this?",
+          "answer": "Not right away. Google didn't ask for any technical change. The first step is to make sure you're measuring visits from Google properly."
+        },
+        {
+          "question": "Am I going to lose visitors?",
+          "answer": "We don't know yet. Google says Search now links to more sites, but it also gives fuller answers that can save people the click. Google hasn't shared click numbers."
+        },
+        {
+          "question": "Why don't Google Analytics and Search Console show the same number?",
+          "answer": "They measure different things. Search Console counts the click on Google; your analytics only counts the visit once the page loads and the tracking code runs. Ad blockers and declined cookies widen the gap."
+        },
+        {
+          "question": "Can I see what the visitor searched for on Google?",
+          "answer": "Not in your analytics: the browser signal only says they came from Google. You'll find the searches in Search Console's Performance report."
+        }
+      ]
+    },
+    "es": {
+      "title": "Google cambia la IA de su buscador: qué mirar en tus visitas desde ahora",
+      "excerpt": "El 12 de noviembre Google puso Gemini 4 Hydrogen en su buscador para todo el mundo y lo llama su mayor cambio de modelo hasta ahora. Nadie sabe todavía cómo moverá tu tráfico, así que lo útil es medirlo bien desde ya.",
+      "coverImageAlt": "Gemini 4 Hydrogen en letras grandes junto a un punto del que salen líneas hacia cuadros grises y uno azul",
+      "faqs": [
+        {
+          "question": "¿Tengo que cambiar algo en mi web por este anuncio?",
+          "answer": "No de inmediato. Google no pidió ningún cambio técnico. Lo primero es comprobar que mides bien las visitas que llegan desde Google."
+        },
+        {
+          "question": "¿Voy a perder visitas?",
+          "answer": "Todavía no se sabe. Google dice que el buscador ahora enlaza a más sitios, pero también da respuestas más completas que pueden evitar el clic. Google no publicó cifras sobre clics."
+        },
+        {
+          "question": "¿Por qué Google Analytics y Search Console no dan el mismo número?",
+          "answer": "Porque miden cosas distintas. Search Console cuenta el clic en Google; tu analítica cuenta la visita solo cuando la página carga y el código de seguimiento funciona. Los bloqueadores y el rechazo de cookies agrandan la diferencia."
+        },
+        {
+          "question": "¿Puedo ver qué buscó la persona que llegó desde Google?",
+          "answer": "No en tu analítica: el aviso del navegador solo dice que venía de Google. Las búsquedas las ves en el informe de Rendimiento de Search Console."
+        }
+      ]
+    }
+  }
+}
