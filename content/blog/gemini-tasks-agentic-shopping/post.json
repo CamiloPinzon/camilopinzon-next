@@ -1,0 +1,62 @@
+{
+  "slug": "gemini-tasks-agentic-shopping",
+  "tag": "IA y pagos",
+  "readTime": "5 min",
+  "publishedAt": "2026-11-18",
+  "source": {
+    "name": "Google",
+    "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "El 17 de noviembre Google le dio a Gemini un modo para hacer tareas: llama a negocios para pedir citas y compra con Google Pay en nombre de la persona. Llega gratis a seis países, aunque las llamadas por ahora solo funcionan en Estados Unidos. Google admite que en algunas tiendas el asistente no logra terminar la compra porque el sitio lo trata como un bot. Explicamos qué revisar en tu teléfono y en tu checkout para no perder esos clientes."
+  },
+  "translations": {
+    "en": {
+      "title": "Gemini can now call your business and buy from your store: what to check",
+      "excerpt": "On November 17, Google gave Gemini the ability to make calls and purchases on someone's behalf, free in six countries. Your next customer may be an AI assistant, so it's worth making sure your phone line and your online store are ready for it.",
+      "coverImageAlt": "Dark cover with the title Gemini Tasks, a voice waveform, and four steps that end in a blue click",
+      "faqs": [
+        {
+          "question": "Can Gemini buy from my store without me installing anything?",
+          "answer": "Google says Gemini browses sites and pays with Google Pay, and it hasn't asked stores to do anything. On some sites it can't finish and asks the shopper to make the final click. Google says it will add another shopping protocol (UCP) later to make it faster."
+        },
+        {
+          "question": "How do I know an AI is calling me?",
+          "answer": "Gemini starts every call by saying it's an AI assistant from Google, that the line is recorded, and who it's calling for. It can't pay or share card details over the phone."
+        },
+        {
+          "question": "Can I stop getting these calls?",
+          "answer": "Yes. Google has a page to block calls from Gemini at g.co/gemini/calling-opt-out. You sign in or verify your phone number, and you can opt back in anytime."
+        },
+        {
+          "question": "Does it work outside the US?",
+          "answer": "Task mode is rolling out in the US, Japan, Korea, Canada, Australia, and India. Calls only work in the US for now, and Google hasn't said which countries get purchases."
+        }
+      ]
+    },
+    "es": {
+      "title": "Gemini ya puede llamar a tu negocio y comprar en tu tienda: qué revisar",
+      "excerpt": "El 17 de noviembre Google le dio a Gemini la capacidad de hacer llamadas y compras en nombre de una persona, gratis en seis países. Tu próximo cliente puede ser un asistente de IA, y conviene que tu teléfono y tu tienda online estén listos para atenderlo.",
+      "coverImageAlt": "Portada oscura con el título Gemini Tasks, una onda de voz y cuatro pasos que terminan en un clic azul",
+      "faqs": [
+        {
+          "question": "¿Gemini puede comprar en mi tienda sin que yo instale nada?",
+          "answer": "Google dice que Gemini navega los sitios y paga con Google Pay, y no pide ningún paso a las tiendas. En algunos sitios no logra terminar y le pide al usuario el último clic. Google anuncia que más adelante sumará otro protocolo de compra (UCP) para que sea más rápido."
+        },
+        {
+          "question": "¿Cómo sé si me está llamando una IA?",
+          "answer": "Gemini empieza cada llamada diciendo que es un asistente de IA de Google, que la llamada se graba y en nombre de quién llama. Por teléfono no puede pagar ni dar datos de tarjetas."
+        },
+        {
+          "question": "¿Puedo dejar de recibir estas llamadas?",
+          "answer": "Sí. Google tiene una página para bloquear las llamadas de Gemini en g.co/gemini/calling-opt-out. Entras con tu cuenta o verificas tu número, y puedes volver a activarlas cuando quieras."
+        },
+        {
+          "question": "¿Funciona en Latinoamérica o en España?",
+          "answer": "Todavía no. El modo de tareas llega a Estados Unidos, Japón, Corea, Canadá, Australia e India. Las llamadas, por ahora, solo funcionan en Estados Unidos, y Google no dijo en qué países funcionan las compras."
+        }
+      ]
+    }
+  }
+}
