@@ -1,0 +1,7 @@
+El 17 de noviembre Google le dio a Gemini un modo para hacer tareas: llama a negocios para pedir citas y compra con Google Pay en nombre de la persona. Llega gratis a seis países, aunque las llamadas por ahora solo funcionan en Estados Unidos.
+
+Google admite que en algunas tiendas el asistente no logra terminar la compra porque el sitio lo trata como un bot. En el carrusel te contamos qué revisar para no perder esos clientes.
+
+La explicación completa está en nuestro blog: enlace en el perfil o camilopinzon.dev/es/blog
+
+#IA #GooglePay #Ecommerce #DesarrolloWeb
