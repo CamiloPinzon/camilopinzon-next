@@ -1,0 +1,32 @@
+<h2>Qué pasó</h2>
+<p>El 18 de noviembre de 2026 WordPress publicó la versión 7.1.5. Es una versión de seguridad: no trae funciones nuevas, solo corrige fallos, y el anuncio oficial recomienda actualizar los sitios de inmediato.</p>
+<p>La lista tiene 20 correcciones. Dos son ajustes preventivos y las demás tapan fallos concretos. Ese mismo día salió la segunda versión candidata de WordPress 7.2 (RC2) con las mismas correcciones. La 7.2 final sigue prevista para el 8 de diciembre.</p>
+
+<h2>Qué significa</h2>
+<p>Un fallo de seguridad es una puerta que quedó mal cerrada. La mayoría de las de esta lista solo las puede abrir alguien que ya tiene una cuenta en tu sitio, por ejemplo un colaborador que escribe entradas o un suscriptor. Cuatro se pueden abrir desde fuera, sin cuenta:</p>
+<ul>
+  <li>Uno permite a un desconocido darse más permisos de los que debería y, según el anuncio, puede terminar en que ejecute código en tu servidor. Es como si alguien entrara por la recepción y saliera con la llave maestra del edificio.</li>
+  <li>Otro permite esconder código dañino en un comentario. Cuando alguien abre la página, su navegador lo ejecuta sin darse cuenta.</li>
+  <li>Otro deja ver categorías o etiquetas que habías marcado como privadas.</li>
+  <li>El último permite tumbar el sitio con una avalancha de <em>pingbacks</em>, los avisos automáticos que un sitio le manda a otro cuando lo enlaza, hasta que deja de responder.</li>
+</ul>
+<p>El resto incluye fallos para colar órdenes en la base de datos (lo que se llama inyección SQL), fallos que exponen los correos de tus usuarios a quien tenga una cuenta de autor, y uno que, en instalaciones multisitio, deja que el administrador de un sitio se quede con la cuenta del superadministrador de toda la red.</p>
+<p>Dos de los fallos los reportó Anthropic, la empresa que hace Claude.</p>
+
+<h2>Cómo te afecta</h2>
+<p><strong>Lo bueno.</strong> Si tu sitio tiene activadas las actualizaciones automáticas en segundo plano, el anuncio dice que la actualización empieza sola. Y el anuncio no dice que estos fallos se estén usando ya en ataques.</p>
+<p><strong>Lo malo.</strong> Ahora que la lista es pública, cualquiera puede leer qué se corrigió y buscar sitios que sigan sin actualizar. Cuanto más tarde actualices, más tiempo queda abierta la puerta.</p>
+<p><strong>Si tu sitio usa una versión antigua.</strong> WordPress está llevando las correcciones a todas las ramas que todavía reciben parches de seguridad, hasta la 4.7, pero dice que esas versiones saldrán a medida que estén listas. También recuerda que solo la versión más reciente tiene soporte activo. Si tu sitio va varias versiones atrás, puede que la corrección todavía no te haya llegado.</p>
+<p><strong>Si tienes una red multisitio</strong> con administradores de sitio en los que no confías del todo, el fallo de la cuenta del superadministrador te afecta directamente.</p>
+
+<h2>Qué puedes hacer</h2>
+<ol>
+  <li><strong>Comprueba tu versión hoy.</strong> En el panel de WordPress, entra en Escritorio → Actualizaciones. Si ves "Tienes la última versión de WordPress" y la versión es 7.1.5, ya está.</li>
+  <li><strong>Si no está, actualiza.</strong> Desde esa misma pantalla, con "Actualizar ahora". Si tu sitio es una tienda o recibe pagos, haz un respaldo antes y, después de actualizar, prueba una compra o un formulario para confirmar que todo sigue funcionando.</li>
+  <li><strong>No te fíes solo de las actualizaciones automáticas.</strong> Aunque las tengas activadas, entra a comprobarlo. A veces el hosting las bloquea o fallan sin avisar.</li>
+  <li><strong>Si estás en una versión vieja, planea el salto.</strong> Las correcciones para ramas antiguas van llegando poco a poco. Pídele a tu equipo o a tu hosting una fecha para pasar a la versión actual.</li>
+  <li><strong>Si alguien te mantiene el sitio, pregúntale.</strong> Basta un mensaje: "¿Ya está en WordPress 7.1.5?".</li>
+</ol>
+
+<h2>Fuente</h2>
+<p>WordPress.org News, <a href="https://wordpress.org/news/2026/11/wordpress-7-1-5-release/" target="_blank" rel="noopener noreferrer">WordPress 7.1.5 Release</a>, 18 de noviembre de 2026.</p>

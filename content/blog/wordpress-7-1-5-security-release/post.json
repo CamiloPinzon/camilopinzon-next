@@ -1,0 +1,62 @@
+{
+  "slug": "wordpress-7-1-5-security-release",
+  "tag": "WordPress",
+  "readTime": "4 min",
+  "publishedAt": "2026-11-20",
+  "source": {
+    "name": "WordPress.org News",
+    "url": "https://wordpress.org/news/2026/11/wordpress-7-1-5-release/"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "WordPress 7.1.5 salió el 18 de noviembre con 20 correcciones de seguridad, y cuatro de esos fallos los puede aprovechar alguien sin cuenta en tu sitio. WordPress pide actualizar de inmediato. Explicamos qué se corrigió en palabras simples y cómo comprobar si tu sitio ya está al día."
+  },
+  "translations": {
+    "en": {
+      "title": "WordPress 7.1.5 fixes 20 security flaws: how to check your site is up to date",
+      "excerpt": "On November 18, WordPress released version 7.1.5, which fixes 20 security flaws, four of them usable by someone with no account on your site. WordPress says to update right away, and checking whether you already have is quick.",
+      "coverImageAlt": "WordPress 7.1.5 in large type next to a grid of 20 gray tiles, four of them in blue",
+      "faqs": [
+        {
+          "question": "Do I need to do anything if my site updates itself?",
+          "answer": "Just check. Go to Dashboard → Updates and confirm it says 7.1.5."
+        },
+        {
+          "question": "Can updating break my site?",
+          "answer": "This release only contains security fixes, so the risk is low. Still, if your site takes payments or forms, back it up first and check that everything works afterward."
+        },
+        {
+          "question": "My site runs an older version of WordPress. Am I protected?",
+          "answer": "Not necessarily yet. WordPress is bringing the fixes to older versions, back to 4.7, but they ship as they're ready. The safest move is to update to the current version."
+        },
+        {
+          "question": "Are these flaws already being used in attacks?",
+          "answer": "The official announcement doesn't say so. But the list is public now, so it's worth updating before someone puts it to use."
+        }
+      ]
+    },
+    "es": {
+      "title": "WordPress 7.1.5 corrige 20 fallos de seguridad: cómo comprobar que tu sitio ya está al día",
+      "excerpt": "El 18 de noviembre WordPress publicó la versión 7.1.5, que corrige 20 fallos de seguridad, cuatro de ellos aprovechables por alguien sin cuenta en tu sitio. WordPress pide actualizar de inmediato, y comprobar si ya lo hiciste es rápido.",
+      "coverImageAlt": "WordPress 7.1.5 en letras grandes junto a una cuadrícula de 20 fichas grises, cuatro de ellas en azul",
+      "faqs": [
+        {
+          "question": "¿Tengo que hacer algo si mi sitio se actualiza solo?",
+          "answer": "Solo comprobarlo. Entra en Escritorio → Actualizaciones y confirma que dice 7.1.5."
+        },
+        {
+          "question": "¿Actualizar puede romper mi sitio?",
+          "answer": "Esta versión solo trae correcciones de seguridad, así que el riesgo es bajo. Aun así, si tu sitio cobra o recibe formularios, haz un respaldo antes y prueba que todo funcione después."
+        },
+        {
+          "question": "Mi sitio usa una versión antigua de WordPress. ¿Estoy protegido?",
+          "answer": "Todavía no necesariamente. WordPress está llevando las correcciones a versiones antiguas, hasta la 4.7, pero salen a medida que están listas. Lo más seguro es pasar a la versión actual."
+        },
+        {
+          "question": "¿Están atacando ya estos fallos?",
+          "answer": "El anuncio oficial no lo dice. Pero la lista ya es pública, así que conviene actualizar antes de que alguien la use."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<h2>What happened</h2>
+<p>On November 18, 2026, WordPress released version 7.1.5. It's a security release: no new features, just fixes, and the official announcement recommends updating your sites right away.</p>
+<p>The list has 20 fixes. Two are hardening changes, and the rest close specific holes. The same day, WordPress shipped the second release candidate of 7.2 (RC2) with the same fixes. The final 7.2 release is still planned for December 8.</p>
+
+<h2>What it means</h2>
+<p>A security flaw is a door that wasn't locked properly. Most of the doors on this list can only be opened by someone who already has an account on your site, like a contributor who writes posts or a subscriber. Four can be opened from the outside, with no account at all:</p>
+<ul>
+  <li>One lets a stranger give themselves more permissions than they should have, and the announcement says it could lead to them running code on your server. Think of someone walking in through the lobby and leaving with the master key to the building.</li>
+  <li>Another lets someone hide harmful code in a comment. When a visitor opens the page, their browser runs it without them noticing.</li>
+  <li>Another exposes categories or tags you had marked as private.</li>
+  <li>The last one lets someone knock your site offline with a flood of <em>pingbacks</em>, the automatic notices one site sends another when it links to it.</li>
+</ul>
+<p>The rest include ways to slip commands into your database (known as SQL injection), flaws that show your users' email addresses to anyone with an author account, and one that, on multisite networks, lets a single site's administrator take over the Super Admin account for the whole network.</p>
+<p>Two of the flaws were reported by Anthropic, the company that makes Claude.</p>
+
+<h2>How it affects you</h2>
+<p><strong>The good news.</strong> If your site has automatic background updates turned on, the announcement says the update starts on its own. And the announcement doesn't say any of these flaws are being used in attacks yet.</p>
+<p><strong>The bad news.</strong> Now that the list is public, anyone can read what was fixed and go looking for sites that haven't updated. The longer you wait, the longer the door stays open.</p>
+<p><strong>If your site runs an older version.</strong> WordPress is bringing the fixes to every branch that still gets security patches, all the way back to 4.7, but says those releases will ship as they're ready. It also reminds everyone that only the latest version is actively supported. If your site is several versions behind, the fix may not have reached you yet.</p>
+<p><strong>If you run a multisite network</strong> with site administrators you don't fully trust, the Super Admin takeover flaw applies directly to you.</p>
+
+<h2>What you can do</h2>
+<ol>
+  <li><strong>Check your version today.</strong> In your WordPress admin, go to Dashboard → Updates. If it says "You have the latest version of WordPress" and the version is 7.1.5, you're set.</li>
+  <li><strong>If it isn't, update.</strong> From that same screen, click "Update Now". If your site is a store or takes payments, back it up first, and after the update, place a test order or send a form to make sure everything still works.</li>
+  <li><strong>Don't rely on automatic updates alone.</strong> Even if they're on, log in and check. Sometimes the host blocks them, or they fail without telling anyone.</li>
+  <li><strong>If you're on an old version, plan the move.</strong> Fixes for older branches are arriving bit by bit. Ask your team or your host for a date to move to the current version.</li>
+  <li><strong>If someone else maintains your site, ask them.</strong> One message is enough: "Are we on WordPress 7.1.5 yet?"</li>
+</ol>
+
+<h2>Source</h2>
+<p>WordPress.org News, <a href="https://wordpress.org/news/2026/11/wordpress-7-1-5-release/" target="_blank" rel="noopener noreferrer">WordPress 7.1.5 Release</a>, November 18, 2026.</p>
