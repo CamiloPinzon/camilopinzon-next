@@ -1,0 +1,7 @@
+El 18 de noviembre WordPress publicó la versión 7.1.5, que corrige 20 fallos de seguridad. Cuatro de ellos los puede aprovechar alguien sin cuenta en tu sitio, y WordPress pide actualizar de inmediato.
+
+En el carrusel te contamos dónde mirar en tu panel para saber si tu sitio ya está al día.
+
+La explicación completa está en nuestro blog: enlace en el perfil o camilopinzon.dev/es/blog
+
+#WordPress #Seguridad #DesarrolloWeb #SitiosWeb
