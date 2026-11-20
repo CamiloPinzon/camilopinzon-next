@@ -30,6 +30,7 @@ import { v2 as cloudinary } from "cloudinary";
 import { Resend } from "resend";
 import { renderNewPostHtml } from "../lib/emails/templates.ts";
 import { getTranslations } from "../lib/i18n/translations.ts";
+import { resolveAuthorUrn, shareArticleOnLinkedIn, validAuthorUrn } from "../lib/linkedin.ts";
 
 const LANGS = ["en", "es"] as const;
 const SITE_URL = "https://camilopinzon.dev";
@@ -130,48 +131,24 @@ function linkedinText(meta: PostMeta): string {
   return `${meta.linkedin.text}\n\n${postUrl(meta)}`;
 }
 
-// Same ugcPosts payload the CMS sends from app/actions/linkedin.ts.
-async function shareOnLinkedIn(meta: PostMeta, coverImage: string): Promise<string> {
+function linkedinAccessToken(): string {
   const accessToken = process.env.LINKEDIN_ACCESS_TOKEN;
-  const authorUrn = process.env.LINKEDIN_AUTHOR_URN;
-  if (!accessToken || !authorUrn) throw new Error("LINKEDIN_ACCESS_TOKEN or LINKEDIN_AUTHOR_URN is not set");
+  if (!accessToken) throw new Error("LINKEDIN_ACCESS_TOKEN is not set");
+  return accessToken;
+}
 
+// Same ugcPosts share the CMS sends from app/actions/linkedin.ts (both use lib/linkedin.ts).
+async function shareOnLinkedIn(meta: PostMeta, coverImage: string): Promise<string> {
+  const accessToken = linkedinAccessToken();
+  const authorUrn = await resolveAuthorUrn(accessToken, process.env.LINKEDIN_AUTHOR_URN);
   const localized = meta.translations[meta.linkedin.lang];
-  const payload = {
-    author: authorUrn,
-    lifecycleState: "PUBLISHED",
-    specificContent: {
-      "com.linkedin.ugc.ShareContent": {
-        shareCommentary: { text: linkedinText(meta) },
-        shareMediaCategory: "ARTICLE",
-        media: [
-          {
-            status: "READY",
-            description: { text: localized.excerpt },
-            originalUrl: postUrl(meta),
-            thumbnails: [{ url: coverImage }],
-            title: { text: localized.title },
-          },
-        ],
-      },
-    },
-    visibility: { "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC" },
-  };
-
-  const response = await fetch("https://api.linkedin.com/v2/ugcPosts", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-      "X-Restli-Protocol-Version": "2.0.0",
-    },
-    body: JSON.stringify(payload),
+  return shareArticleOnLinkedIn(accessToken, authorUrn, {
+    text: linkedinText(meta),
+    url: postUrl(meta),
+    title: localized.title,
+    description: localized.excerpt,
+    thumbnailUrl: coverImage,
   });
-  if (!response.ok) {
-    throw new Error(`LinkedIn API returned ${response.status}: ${await response.text()}`);
-  }
-  const data = (await response.json()) as { id?: string };
-  return data.id ?? "";
 }
 
 async function shareAndRecord(ref: DocumentReference, meta: PostMeta, coverImage: string) {
@@ -279,6 +256,17 @@ async function main() {
   console.log(`  cover: ${coverPath}`);
   console.log(`  mobile cover: ${mobileCoverPath}`);
   console.log(skipLinkedIn ? "  LinkedIn: skipped" : `  LinkedIn post:\n${linkedinText(meta).replace(/^/gm, "    | ")}`);
+  if (!skipLinkedIn && !newsletterOnly) {
+    // Read-only check (GET /v2/userinfo at most) so a bad author URN shows up before --commit.
+    const configured = process.env.LINKEDIN_AUTHOR_URN;
+    try {
+      const authorUrn = await resolveAuthorUrn(linkedinAccessToken(), configured);
+      const note = validAuthorUrn(configured) ? "from LINKEDIN_AUTHOR_URN" : "resolved from the token via /v2/userinfo";
+      console.log(`  LinkedIn author: ${authorUrn} (${note})`);
+    } catch (error: unknown) {
+      console.warn(`  LinkedIn author: NOT VALID, the share will fail. ${error instanceof Error ? error.message : error}`);
+    }
+  }
 
   const db = getFirestore(initializeApp({ credential: cert(getServiceAccount()) }));
 
