@@ -1,0 +1,62 @@
+{
+  "slug": "wordpress-7-2-secrets-api",
+  "tag": "WordPress",
+  "readTime": "4 min",
+  "publishedAt": "2026-11-16",
+  "source": {
+    "name": "Make WordPress Core",
+    "url": "https://make.wordpress.org/core/2026/11/11/the-secrets-api-in-wordpress-7-2/"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "WordPress 7.2, que sale el 8 de diciembre, trae una caja fuerte para las claves que usan tus plugins de pagos, correo o CRM. Solo funciona si tu sitio tiene una llave que casi todos los sitios existentes tendrán que agregar, y si esa llave se pierde, las claves guardadas dejan de leerse. Explicamos qué cambia y qué revisar después de actualizar."
+  },
+  "translations": {
+    "en": {
+      "title": "WordPress 7.2 drops the safe for your plugins' keys: what it means for your site",
+      "excerpt": "On November 17, WordPress announced that the Secrets API, the way to store your plugins' keys encrypted, won't ship in 7.2. Most sites have nothing to do; if you ran the betas, there are leftovers worth checking.",
+      "coverImageAlt": "WordPress 7.2 Secrets API in large type next to a safe with gray tiles and a blue keyhole",
+      "faqs": [
+        {
+          "question": "Do I need to add WP_SECRETS_KEY now?",
+          "answer": "No. The Secrets API isn't in 7.2, so WordPress won't ask you for that key."
+        },
+        {
+          "question": "Will updating to 7.2 break my site because of this?",
+          "answer": "No. WordPress didn't use the Secrets API for anything of its own."
+        },
+        {
+          "question": "When will it come back?",
+          "answer": "There's no official date. Before the decision, the note's author wrote about wanting to target at least 7.3, but that isn't an announcement."
+        },
+        {
+          "question": "I tested the betas. What should I do?",
+          "answer": "Ask your developer to review what stays behind: stored keys, the manage_secrets permission, the WP_SECRETS_KEY constant and, if you updated from the dashboard, the files. The hosting team's note describes them."
+        }
+      ]
+    },
+    "es": {
+      "title": "WordPress 7.2 ya no trae la caja fuerte para las claves de tus plugins: qué significa para tu sitio",
+      "excerpt": "WordPress anunció el 17 de noviembre que la Secrets API, la forma de guardar cifradas las claves de tus plugins, no saldrá en la 7.2. La mayoría de sitios no tiene nada que hacer; si probaste las versiones beta, quedan restos que conviene revisar.",
+      "coverImageAlt": "WordPress 7.2 Secrets API en letras grandes junto a una caja fuerte con fichas grises y una cerradura azul",
+      "faqs": [
+        {
+          "question": "¿Tengo que agregar WP_SECRETS_KEY ahora?",
+          "answer": "No. La Secrets API no está en la 7.2, así que WordPress no te va a pedir esa llave."
+        },
+        {
+          "question": "¿Mi sitio se va a romper al actualizar a la 7.2 por esto?",
+          "answer": "No. WordPress no usaba la Secrets API para nada propio."
+        },
+        {
+          "question": "¿Cuándo vuelve?",
+          "answer": "No hay fecha oficial. Antes de la decisión, el autor de la nota escribió que le gustaría apuntar al menos a la 7.3, pero eso no es un anuncio."
+        },
+        {
+          "question": "Probé las versiones beta. ¿Qué hago?",
+          "answer": "Pídele a tu equipo que revise lo que queda: claves guardadas, el permiso manage_secrets, la constante WP_SECRETS_KEY y, si actualizaste desde el panel, los archivos. La nota del equipo de hosting los describe."
+        }
+      ]
+    }
+  }
+}

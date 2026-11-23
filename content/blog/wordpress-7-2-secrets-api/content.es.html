@@ -1,0 +1,24 @@
+<h2>Qué pasó</h2>
+<p>El 17 de noviembre de 2026, el equipo de WordPress anunció que la Secrets API ya no saldrá con WordPress 7.2. Lo dijo en una actualización de la nota técnica que la presentaba, y el equipo de hosting lo repitió en su propia nota: el código se retiró de la 7.2. La versión 7.2 sigue prevista para el 8 de diciembre, sin esta función.</p>
+<p>Publicamos este artículo el 16 de noviembre, cuando la Secrets API todavía estaba en la 7.2 y había un pedido abierto para sacarla. Lo actualizamos para contar la decisión y lo que significa para tu sitio.</p>
+
+<h2>Qué era la Secrets API</h2>
+<p>Muchos plugins necesitan una clave para hablar con otro servicio: la pasarela de pagos, el servicio de correo, tu CRM. Hoy esas claves suelen quedar guardadas en la base de datos tal cual, como una contraseña escrita en un papel dentro de un cajón.</p>
+<p>La Secrets API iba a ser una caja fuerte para esas claves. Las guardaba cifradas, y para abrirlas hacía falta una llave en otro archivo, <code>wp-config.php</code>, llamada <code>WP_SECRETS_KEY</code>. Los sitios ya existentes tenían que agregar esa llave a mano, y si se perdía o cambiaba, las claves guardadas dejaban de leerse. Ese fue el centro de la discusión: en los comentarios de la nota alguien pidió sacarla de la 7.2, y su autor quería ver antes una integración real con un proveedor de hosting.</p>
+
+<h2>Cómo te afecta</h2>
+<p><strong>Para la mayoría de sitios, nada.</strong> WordPress no usaba la caja fuerte para nada propio, así que actualizar a la 7.2 sigue siendo igual que antes. Ya no hace falta agregar <code>WP_SECRETS_KEY</code>, y Site Health no te va a pedir esa llave.</p>
+<p><strong>Si tu sitio probó las versiones beta de la 7.2.</strong> Según el equipo de hosting, retirar el código no borra los datos. En esos sitios se quedan las claves que se hayan guardado, un permiso nuevo del administrador (<code>manage_secrets</code>) y la constante <code>WP_SECRETS_KEY</code> en <code>wp-config.php</code>. Si se actualiza desde el panel de WordPress, los archivos de la Secrets API también se quedan en el servidor. Si se actualiza con WP-CLI, la herramienta de línea de comandos, se borran.</p>
+<p><strong>Si un plugin ya la estaba usando en pruebas,</strong> en la 7.2 no la va a encontrar.</p>
+<p><strong>Sobre el futuro.</strong> No hay una fecha oficial para que vuelva. Antes de la decisión, el autor de la nota escribió que le gustaría apuntar al menos a la 7.3, pero eso no es un anuncio.</p>
+
+<h2>Qué puedes hacer</h2>
+<ol>
+  <li><strong>Si tu sitio no usó versiones beta, nada.</strong> Actualiza a la 7.2 cuando salga, como siempre: respaldo antes y una prueba rápida después.</li>
+  <li><strong>Si ya agregaste <code>WP_SECRETS_KEY</code>, no la borres a la ligera.</strong> No estorba. Si la quitas, guarda una copia: las claves que se hayan guardado en pruebas solo se pueden leer con ella.</li>
+  <li><strong>Si tienes una copia de pruebas que usó las betas,</strong> pídele a tu equipo que revise los restos que describe la nota del equipo de hosting y decida si los limpia.</li>
+  <li><strong>Si un plugin te pidió configurar la Secrets API,</strong> pregúntale a su autor qué va a hacer ahora que no sale en la 7.2.</li>
+</ol>
+
+<h2>Fuente</h2>
+<p>WordPress Core, <a href="https://make.wordpress.org/core/2026/11/11/the-secrets-api-in-wordpress-7-2/" target="_blank" rel="noopener noreferrer">The Secrets API in WordPress 7.2</a>, 11 de noviembre de 2026, actualizada el 17 de noviembre. WordPress Hosting Team, <a href="https://make.wordpress.org/hosting/2026/11/12/call-to-test-wordpress-7-2-secrets-api/" target="_blank" rel="noopener noreferrer">Call to test: WordPress 7.2's Secrets API, upgrades and /random/ on your hosting platform by November 17</a>, 12 de noviembre de 2026, actualizada el 18 de noviembre.</p>
