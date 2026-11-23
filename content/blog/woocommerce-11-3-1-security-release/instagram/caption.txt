@@ -1,0 +1,7 @@
+El 19 de noviembre WooCommerce publicó la versión 11.3.1, un parche de seguridad que toca el pago, los cupones y las cuentas de tus clientes. Pide actualizar pronto y probar el carrito después.
+
+En el carrusel te contamos qué cambia, qué puede fallar si tu tienda es headless y qué hacer hoy.
+
+La explicación completa está en nuestro blog: enlace en el perfil o camilopinzon.dev/es/blog
+
+#WooCommerce #WordPress #Seguridad #TiendaOnline #Ecommerce
