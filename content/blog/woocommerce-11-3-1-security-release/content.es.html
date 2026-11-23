@@ -1,0 +1,39 @@
+<h2>Qué pasó</h2>
+<p>El 19 de noviembre de 2026, el equipo de WooCommerce publicó la versión 11.3.1. WooCommerce es el plugin con el que muchas tiendas hechas en WordPress venden en línea. El anuncio la presenta como una versión centrada en seguridad y pide actualizar las tiendas pronto. También trae un cambio en la base de datos de la tienda.</p>
+<p>Es la segunda versión de seguridad del mes: la 11.2.2 salió el 4 de noviembre.</p>
+
+<h2>Qué significa</h2>
+<p>Piensa en un parche como cambiar cerraduras sin mover los muebles. La tienda se ve igual, pero varias puertas cierran mejor. Según el anuncio, los cambios tocan estas partes:</p>
+<ul>
+  <li>El pago: se revisan con más cuidado la dirección del cliente y los países a los que vendes, el cálculo de envío e impuestos, el stock que queda apartado durante una compra y los pedidos que llegan al mismo tiempo.</li>
+  <li>Los cupones: los límites de uso, el límite por cliente y los cupones restringidos a ciertos correos se aplican de forma más consistente. Si alguien quita un cupón, el total del carrito se vuelve a calcular.</li>
+  <li>Las cuentas de tus clientes: mejora la verificación del correo y el manejo de contraseñas. Los enlaces de pedidos y las páginas de seguimiento muestran menos datos a quien no debería verlos.</li>
+  <li>Los permisos: hay controles más estrictos sobre quién puede hacer qué a través de las API de la tienda (las conexiones por las que otros programas hablan con WooCommerce) y en algunos ajustes del panel.</li>
+  <li>Los datos de productos: los productos sin publicar quedan mejor protegidos, las importaciones por CSV se manejan con más cuidado y las exportaciones y los registros de errores esconden mejor la información sensible.</li>
+</ul>
+<p>Hay cosas que el anuncio no dice, y no vamos a suponerlas. No da números de vulnerabilidad (los CVE), no dice qué tan graves eran los fallos, ni qué versiones anteriores estaban expuestas, ni si alguno se podía aprovechar sin tener cuenta en la tienda.</p>
+<p>Un poco de contexto. El 6 de noviembre, WooCommerce contó que ahora busca fallos por su cuenta, con ayuda de herramientas de IA, en lugar de esperar a que alguien los reporte. Las correcciones que salen de esa búsqueda llegan en versiones como la 11.2.2 y esta 11.3.1.</p>
+
+<h2>Cómo te afecta</h2>
+<p><strong>Lo bueno.</strong> Tu tienda queda más difícil de manipular en cupones, totales y datos de clientes, sin que tengas que cambiar nada de cómo vendes.</p>
+<p><strong>Lo que puede fallar al actualizar.</strong></p>
+<ul>
+  <li>Tiendas "headless". Así se llama una tienda donde lo que ve el cliente es una aplicación aparte (por ejemplo, hecha en Next.js, en otro dominio) que habla con WooCommerce por detrás. Si esa aplicación envía las cookies de inicio de sesión del cliente a WooCommerce desde otro dominio, después de actualizar esas peticiones pueden fallar con errores CORS. En palabras simples: el navegador bloquea la conexión, y el carrito o el inicio de sesión pueden dejar de funcionar.</li>
+  <li>Roles hechos a medida para gestionar pedidos. Una conexión antigua del panel de WooCommerce ahora exige el permiso de administrar la tienda (<code>manage_woocommerce</code>). Si alguna integración usa un rol personalizado solo para pedidos, puede quedarse sin acceso.</li>
+  <li>Temas que personalizan "Mi cuenta". Hay una plantilla nueva para confirmar el correo del cliente. Si tu tema modifica esa zona, vale la pena revisarla.</li>
+</ul>
+<p>Si tu tienda es un WordPress con su tema normal y sin aplicación aparte, lo más probable es que solo tengas que actualizar y probar.</p>
+
+<h2>Qué puedes hacer</h2>
+<ol>
+  <li><strong>Haz un respaldo</strong> de la tienda antes de tocar nada. Esta versión cambia la base de datos, así que el respaldo es tu forma de volver atrás.</li>
+  <li><strong>Revisa qué versión tienes.</strong> En el panel de WordPress entra en Plugins y busca WooCommerce. Si dice 11.3.1, ya estás al día. El anuncio no dice si la actualización se instala sola, así que no lo des por hecho.</li>
+  <li><strong>Actualiza</strong> siguiendo la <a href="https://woocommerce.com/document/how-to-update-woocommerce/" target="_blank" rel="noopener noreferrer">guía oficial de WooCommerce</a>.</li>
+  <li><strong>Haz una compra de prueba:</strong> agrega un producto, aplica un cupón y quítalo, paga y revisa que llegue el correo de confirmación. WooCommerce pide expresamente probar el carrito y el pago después de actualizar.</li>
+  <li><strong>Si tu tienda es headless,</strong> pídele a tu equipo que revise si el front envía cookies a WooCommerce desde otro dominio. El anuncio da dos salidas: agregar ese dominio a la lista de orígenes permitidos de WordPress (el filtro <code>allowed_http_origins</code>) o, si solo usan el token del carrito, dejar de enviar cookies en esas peticiones (<code>credentials: 'omit'</code>).</li>
+  <li><strong>Si tienes una copia de pruebas</strong> de la tienda (staging), actualízala también, y avisa a quien mantenga tu tema o tus integraciones de los dos cambios para desarrolladores de arriba.</li>
+</ol>
+
+<h2>Fuente</h2>
+<p>WooCommerce Developer Blog, <a href="https://developer.woocommerce.com/2026/11/19/woocommerce-11-3-1/" target="_blank" rel="noopener noreferrer">WooCommerce 11.3.1: Release Notes</a>, 19 de noviembre de 2026.</p>
+<p>Contexto: WooCommerce Developer Blog, <a href="https://developer.woocommerce.com/2026/11/06/woo-latest-security/" target="_blank" rel="noopener noreferrer">We went looking: what Woo has done about security since June</a>, 6 de noviembre de 2026.</p>

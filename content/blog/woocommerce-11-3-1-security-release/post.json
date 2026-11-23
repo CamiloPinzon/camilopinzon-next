@@ -1,0 +1,62 @@
+{
+  "slug": "woocommerce-11-3-1-security-release",
+  "tag": "WordPress",
+  "readTime": "4 min",
+  "publishedAt": "2026-11-23",
+  "source": {
+    "name": "WooCommerce Developer Blog",
+    "url": "https://developer.woocommerce.com/2026/11/19/woocommerce-11-3-1/"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "El 19 de noviembre WooCommerce publicó la versión 11.3.1, un parche de seguridad que toca el pago, los cupones y las cuentas de tus clientes, y pide actualizar pronto. Explicamos qué cambia en palabras simples, qué puede fallar al actualizar, sobre todo en tiendas headless, y cómo comprobar que tu tienda sigue cobrando bien."
+  },
+  "translations": {
+    "en": {
+      "title": "WooCommerce 11.3.1 tightens your store's security: what to check when you update",
+      "excerpt": "On November 19, WooCommerce released version 11.3.1, a security patch that touches checkout, coupons and your customers' accounts. It asks stores to update promptly, and a test order afterward is a good idea.",
+      "coverImageAlt": "WooCommerce 11.3.1 in large type next to five dark bars, each with a blue padlock",
+      "faqs": [
+        {
+          "question": "Was my store attacked?",
+          "answer": "The announcement doesn't mention any attacks or say how serious the issues were. The sensible move is to update rather than wait to find out."
+        },
+        {
+          "question": "Can updating break anything?",
+          "answer": "For a typical store the risk is low. The likely trouble spots are headless stores, integrations that use custom roles, and themes that customize \"My Account\". So back up first and place a test order afterward."
+        },
+        {
+          "question": "How do I know if my store is headless?",
+          "answer": "If your store is a WordPress site with its own theme and you manage everything from there, it isn't. If someone built you a separate app that shows your products and connects to WooCommerce, it is. In that case, ask whoever maintains it."
+        },
+        {
+          "question": "Why are there so many security releases lately?",
+          "answer": "On November 6, WooCommerce said it now actively hunts for flaws with help from AI tools. It finds more of them, and the fixes ship in releases like this one."
+        }
+      ]
+    },
+    "es": {
+      "title": "WooCommerce 11.3.1 refuerza la seguridad de tu tienda: qué revisar al actualizar",
+      "excerpt": "El 19 de noviembre WooCommerce publicó la versión 11.3.1, un parche de seguridad que toca el pago, los cupones y las cuentas de tus clientes. Pide actualizar pronto, y después conviene hacer una compra de prueba.",
+      "coverImageAlt": "WooCommerce 11.3.1 en letras grandes junto a cinco barras oscuras, cada una con un candado azul",
+      "faqs": [
+        {
+          "question": "¿Atacaron mi tienda?",
+          "answer": "El anuncio no habla de ataques ni dice qué tan graves eran los fallos. Lo prudente es actualizar y no esperar a saberlo."
+        },
+        {
+          "question": "¿Actualizar puede romper algo?",
+          "answer": "En una tienda normal el riesgo es bajo. Donde más puede fallar es en tiendas headless, en integraciones con roles hechos a medida y en temas que modifican \"Mi cuenta\". Por eso, respaldo antes y compra de prueba después."
+        },
+        {
+          "question": "No sé si mi tienda es headless. ¿Cómo lo sé?",
+          "answer": "Si tu tienda es un sitio WordPress con su tema y todo se gestiona desde ahí, no lo es. Si alguien te construyó una aplicación aparte que muestra los productos y se conecta a WooCommerce, sí. En ese caso, pregúntale a quien la mantiene."
+        },
+        {
+          "question": "¿Por qué salen tantas versiones de seguridad seguidas?",
+          "answer": "WooCommerce explicó el 6 de noviembre que ahora busca fallos de forma activa, con ayuda de herramientas de IA. Encuentra más, y las correcciones salen en versiones como esta."
+        }
+      ]
+    }
+  }
+}

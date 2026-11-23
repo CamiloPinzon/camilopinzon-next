@@ -1,0 +1,39 @@
+<h2>What happened</h2>
+<p>On November 19, 2026, the WooCommerce team released version 11.3.1. WooCommerce is the plugin that a lot of WordPress stores use to sell online. The announcement describes it as a security-focused release and asks store owners to update promptly. It also includes a database update.</p>
+<p>It's the second security release this month. Version 11.2.2 came out on November 4.</p>
+
+<h2>What it means</h2>
+<p>Think of a patch as changing the locks without moving the furniture. Your store looks the same, but several doors close more tightly. According to the announcement, the changes cover these areas:</p>
+<ul>
+  <li>Checkout: stricter checks on the customer's address and the countries you sell to, on shipping and tax calculations, on stock held during a purchase, and on orders that arrive at the same time.</li>
+  <li>Coupons: usage limits, per-customer limits and coupons restricted to certain email addresses are enforced more consistently. When someone removes a coupon, the cart total is recalculated.</li>
+  <li>Customer accounts: email verification and password handling are stronger. Order links and tracking pages show less information to people who shouldn't see it.</li>
+  <li>Permissions: tighter checks on who can do what through the store's APIs (the connections other software uses to talk to WooCommerce) and in some admin settings.</li>
+  <li>Product data: unpublished products are better protected, CSV imports are handled more safely, and exports and error logs do a better job of hiding sensitive information.</li>
+</ul>
+<p>Some things the announcement doesn't say, and we won't guess. It gives no vulnerability IDs (CVEs), no severity ratings, no list of affected versions, and it doesn't say whether any of these issues could be exploited by someone without an account on your store.</p>
+<p>A bit of background. On November 6, WooCommerce explained that it now hunts for security flaws itself, with help from AI tools, instead of waiting for someone to report them. The fixes that come out of that work ship in releases like 11.2.2 and this one.</p>
+
+<h2>How it affects you</h2>
+<p><strong>The good part.</strong> Your store gets harder to tamper with when it comes to coupons, totals and customer data, and you don't have to change anything about how you sell.</p>
+<p><strong>What could break when you update.</strong></p>
+<ul>
+  <li>Headless stores. That's a store where what the customer sees is a separate app (built with Next.js, for example, on a different domain) that talks to WooCommerce behind the scenes. If that app sends the customer's login cookies to WooCommerce from another domain, those requests may start failing with CORS errors after the update. Put simply, the browser blocks the connection, and the cart or the login can stop working.</li>
+  <li>Custom roles for managing orders. An older connection in the WooCommerce admin now requires the store management permission (<code>manage_woocommerce</code>). If an integration relies on a custom orders-only role, it may lose access.</li>
+  <li>Themes that customize "My Account". There's a new template for confirming the customer's email. If your theme changes that area, have someone take a look.</li>
+</ul>
+<p>If your store is a regular WordPress site with a standard theme and no separate app, you most likely just need to update and test.</p>
+
+<h2>What you can do</h2>
+<ol>
+  <li><strong>Back up your store</strong> before you touch anything. This release changes the database, so a backup is your way back.</li>
+  <li><strong>Check your version.</strong> In your WordPress dashboard, go to Plugins and find WooCommerce. If it says 11.3.1, you're up to date. The announcement doesn't say whether the update installs itself, so don't assume it did.</li>
+  <li><strong>Update</strong> by following <a href="https://woocommerce.com/document/how-to-update-woocommerce/" target="_blank" rel="noopener noreferrer">WooCommerce's official guide</a>.</li>
+  <li><strong>Place a test order:</strong> add a product, apply a coupon and remove it, pay, and make sure the confirmation email arrives. WooCommerce specifically asks you to test the cart and checkout after updating.</li>
+  <li><strong>If your store is headless,</strong> ask your team to check whether the front end sends cookies to WooCommerce from another domain. The announcement offers two fixes: add that domain to WordPress's list of allowed origins (the <code>allowed_http_origins</code> filter), or, if you only use the cart token, stop sending cookies on those requests (<code>credentials: 'omit'</code>).</li>
+  <li><strong>If you have a staging copy</strong> of your store, update it too, and let whoever maintains your theme or integrations know about the two developer changes above.</li>
+</ol>
+
+<h2>Source</h2>
+<p>WooCommerce Developer Blog, <a href="https://developer.woocommerce.com/2026/11/19/woocommerce-11-3-1/" target="_blank" rel="noopener noreferrer">WooCommerce 11.3.1: Release Notes</a>, November 19, 2026.</p>
+<p>Background: WooCommerce Developer Blog, <a href="https://developer.woocommerce.com/2026/11/06/woo-latest-security/" target="_blank" rel="noopener noreferrer">We went looking: what Woo has done about security since June</a>, November 6, 2026.</p>
