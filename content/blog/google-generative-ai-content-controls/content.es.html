@@ -1,0 +1,40 @@
+<h2>Qué pasó</h2>
+<p>El 24 de noviembre de 2026 Google publicó dos páginas nuevas en Search Central, su documentación oficial para dueños de sitios web. La primera reúne en un solo lugar las opciones que tienes para decidir cómo usa Google tu contenido en sus funciones de inteligencia artificial. La segunda explica cómo eligen y enlazan sus fuentes las respuestas con IA del buscador: AI Overviews (los resúmenes que salen arriba de los resultados) y AI Mode.</p>
+<p>Las opciones no son nuevas. Lo nuevo es que por fin están juntas, explicadas y con una tabla que dice qué configurar según lo que quieras.</p>
+
+<h2>Qué significa</h2>
+<p>Google explica que puede usar lo que publica tu sitio de dos formas:</p>
+<ul>
+  <li><strong>Entrenamiento.</strong> Tu contenido ayuda a "enseñar" a sus modelos de IA, como Gemini, antes de que salgan al público. Es parecido a los libros que lee un estudiante durante la carrera: aprende de ellos, pero después no los cita.</li>
+  <li><strong>Consulta en el momento</strong> (Google lo llama "grounding"). Cuando alguien pregunta algo, la IA busca información fresca en el índice de Google y arma la respuesta con ella. Aquí sí te cita: es lo que hace que aparezca un enlace a tu sitio dentro de una respuesta con IA.</li>
+</ul>
+<p>Puedes controlar cada uso por separado. Las herramientas son estas:</p>
+<ol>
+  <li><strong>Un ajuste en Search Console</strong> (la herramienta gratuita de Google para ver cómo te encuentra la gente). Decide si tu sitio aparece en AI Overviews, AI Mode y las funciones con IA de Discover. Según Google, no cambia nada del entrenamiento y no afecta tu posición en el resto del buscador.</li>
+  <li><strong>Google-Extended</strong>, una línea en el archivo robots.txt. Ese archivo es como el letrero de la puerta de tu sitio: les dice a los robots de Google dónde pueden entrar. Con Google-Extended limitas el uso de tu contenido para entrenar modelos y para responder en otros productos de IA, como la app de Gemini. Google dice que tampoco afecta tu posición en el buscador.</li>
+  <li><strong>GoogleOther</strong>, otra línea en el mismo robots.txt. Es el robot genérico que Google usa para tareas que no son del buscador, como rastreos puntuales de investigación y desarrollo. Bloquearlo no afecta tu presencia en Google.</li>
+  <li><strong>Etiquetas como nosnippet, max-snippet o data-nosnippet.</strong> Sirven para limitar qué texto de una página puede mostrarse, o para excluir un párrafo concreto, también en las respuestas con IA.</li>
+  <li><strong>noindex.</strong> Saca la página de Google por completo, con o sin IA.</li>
+</ol>
+<p>Google también dice que a principios de 2027 piensa admitir una señal compartida para indicar si permites o no el entrenamiento de IA.</p>
+
+<h2>Cómo te afecta</h2>
+<p><strong>Lo bueno.</strong> Si nunca tocaste nada, tu sitio ya está en todo: buscador normal, respuestas con IA y entrenamiento. Y si quieres poner límites, ahora sabes qué hace cada opción. La aclaración más útil es que bloquear el entrenamiento con Google-Extended no te baja en los resultados normales.</p>
+<p><strong>El riesgo.</strong> Salir de las respuestas con IA del buscador significa que tus enlaces dejan de aparecer ahí. Google no da cifras de cuántas visitas llegan desde esas respuestas, así que nadie puede decirte con datos cuánto ganas o pierdes al salirte. El otro riesgo es usar la herramienta equivocada: con noindex no te sales solo de la IA, desapareces de Google.</p>
+<p><strong>A quién le importa más.</strong> A medios, blogs y sitios cuyo valor es el contenido mismo (guías, recetas, análisis), que quizá no quieran que una IA lo resuma. A una tienda o a un negocio de servicios normalmente le conviene más estar visible en todas partes.</p>
+<p>Nuestra opinión: si tu negocio vive de que te encuentren, no te salgas de nada por miedo. Primero revisa qué tienes activado y mide.</p>
+
+<h2>Qué puedes hacer</h2>
+<ol>
+  <li><strong>Decide qué quieres.</strong> Pregúntate una cosa: ¿te molesta que Google use tu contenido para entrenar su IA, o que lo resuma en sus respuestas? Son dos decisiones distintas.</li>
+  <li><strong>Revisa tu robots.txt.</strong> Pide a tu equipo que te confirme si aparecen Google-Extended o GoogleOther. A veces un plugin o una plantilla los agrega sin que nadie lo haya decidido.</li>
+  <li><strong>Mira el ajuste en Search Console.</strong> Confirma si tu sitio está incluido o excluido de las funciones con IA del buscador. Google aclara que, para que te citen, tu sitio tiene que estar incluido ahí.</li>
+  <li><strong>Abre el informe de rendimiento de IA generativa</strong> en Search Console. Te da una idea de cómo te encuentra la gente a través de las respuestas con IA.</li>
+  <li><strong>Busca tus propios temas.</strong> Haz en Google las preguntas que responde tu sitio y mira cómo te citan. Si atribuyen mal tu contenido, usa el enlace "Comentarios" que aparece debajo de la respuesta.</li>
+  <li><strong>Mantén tu contenido al día.</strong> Google recomienda corregir errores y actualizar las páginas cuando cambia la información, y no cambiar la fecha de una página si el contenido no cambió de verdad.</li>
+</ol>
+<p>Si una respuesta con IA muestra algo incorrecto de tu página, corrige la página: Google lo toma en cuenta la próxima vez que la visite, y puedes pedirle que la revise antes. Si es urgente, la herramienta de Retirada de Search Console la oculta unos seis meses, pero ojo: la oculta de todo Google, no solo de la IA.</p>
+<p>Y si la duda es cómo medir el tráfico que llega desde Google, lo explicamos en <a href="/es/blog/google-search-gemini-4-hydrogen">Google cambia la IA de su buscador: qué mirar en tus visitas desde ahora</a>.</p>
+
+<h2>Fuente</h2>
+<p>Google Search Central, <a href="https://developers.google.com/search/docs/fundamentals/gen-ai-controls" target="_blank" rel="noopener noreferrer">Control how your content is used for generative AI at Google</a> y <a href="https://developers.google.com/search/docs/fundamentals/gen-ai-attribution-factuality" target="_blank" rel="noopener noreferrer">Attribution and factuality in Search generative AI features</a>, las dos del 24 de noviembre de 2026. Los cambios están anotados en <a href="https://developers.google.com/search/updates" target="_blank" rel="noopener noreferrer">Latest documentation updates</a>.</p>

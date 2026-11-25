@@ -1,0 +1,40 @@
+<h2>What happened</h2>
+<p>On November 24, 2026, Google published two new pages on Search Central, its official documentation for site owners. The first one puts every option you have for controlling how Google uses your content in its AI features in one place. The second explains how Google's AI answers in Search pick and link their sources. That covers AI Overviews (the summaries at the top of the results) and AI Mode.</p>
+<p>None of these options are new. What's new is that they're finally together, explained, and paired with a table that tells you what to set depending on what you want.</p>
+
+<h2>What it means</h2>
+<p>Google says it can use what your site publishes in two ways:</p>
+<ul>
+  <li><strong>Training.</strong> Your content helps "teach" its AI models, like Gemini, before they're released. Think of the books a student reads in college: they learn from them, but they don't cite them later.</li>
+  <li><strong>Looking things up on the spot</strong> (Google calls it "grounding"). When someone asks a question, the AI pulls fresh information from Google's index and builds the answer from it. This is where you get credit: it's what puts a link to your site inside an AI answer.</li>
+</ul>
+<p>You can control each use separately. These are the tools:</p>
+<ol>
+  <li><strong>A setting in Search Console</strong> (Google's free tool for seeing how people find you). It decides whether your site shows up in AI Overviews, AI Mode, and the AI features in Discover. According to Google, it doesn't touch training and doesn't affect where you rank in the rest of Search.</li>
+  <li><strong>Google-Extended</strong>, a line in your robots.txt file. That file works like a sign on your front door: it tells Google's crawlers where they're allowed in. With Google-Extended you limit how your content is used to train models and to answer questions in other AI products, like the Gemini app. Google says this doesn't affect your ranking either.</li>
+  <li><strong>GoogleOther</strong>, another line in the same robots.txt. It's the generic crawler Google uses for jobs outside Search, like one-off research and development crawls. Blocking it doesn't affect your presence in Search.</li>
+  <li><strong>Tags like nosnippet, max-snippet, or data-nosnippet.</strong> They limit how much text from a page can be shown, or keep a specific passage out, including in AI answers.</li>
+  <li><strong>noindex.</strong> It takes the page out of Google entirely, AI or not.</li>
+</ol>
+<p>Google also says it plans to support a shared signal in early 2027 for saying whether you allow AI training.</p>
+
+<h2>How it affects you</h2>
+<p><strong>The good part.</strong> If you never changed anything, your site is already included everywhere: regular Search, AI answers, and training. And if you want to set limits, you now know what each option does. The most useful clarification is that blocking training with Google-Extended doesn't hurt your regular rankings.</p>
+<p><strong>The risk.</strong> Opting out of AI answers in Search means your links stop showing up there. Google doesn't share how many visits come from those answers, so nobody can tell you with real data how much you'd gain or lose by leaving. The other risk is picking the wrong tool: noindex doesn't just take you out of AI, it takes you out of Google.</p>
+<p><strong>Who should care most.</strong> Publishers, blogs, and sites whose value is the content itself (guides, recipes, analysis), which may not want an AI summarizing it. A store or a service business is usually better off staying visible everywhere.</p>
+<p>Our take: if your business depends on being found, don't opt out of anything out of fear. Check what you have turned on first, then measure.</p>
+
+<h2>What you can do</h2>
+<ol>
+  <li><strong>Decide what you want.</strong> Ask yourself one thing: are you bothered by Google training its AI on your content, or by it summarizing your content in its answers? Those are two separate decisions.</li>
+  <li><strong>Check your robots.txt.</strong> Ask your team whether Google-Extended or GoogleOther shows up there. Sometimes a plugin or a theme adds them without anyone deciding to.</li>
+  <li><strong>Look at the setting in Search Console.</strong> Confirm whether your site is included in or excluded from AI features in Search. Google notes that your site has to be included there to be cited.</li>
+  <li><strong>Open the generative AI performance report</strong> in Search Console. It gives you a sense of how people find you through AI answers.</li>
+  <li><strong>Search your own topics.</strong> Ask Google the questions your site answers and see how you're cited. If your content is credited to the wrong site, use the "Feedback" link under the answer.</li>
+  <li><strong>Keep your content current.</strong> Google recommends fixing errors and updating pages when information changes, and not changing a page's date unless the content really changed.</li>
+</ol>
+<p>If an AI answer shows something wrong from your page, fix the page. Google picks up the change the next time it crawls it, and you can ask it to recrawl sooner. If it's urgent, the Removals tool in Search Console hides the page for about six months. Keep in mind it hides it from all of Google, not just AI.</p>
+<p>And if your question is how to measure the traffic you get from Google, we covered that in <a href="/en/blog/google-search-gemini-4-hydrogen">Google changes the AI behind its search engine: what to watch in your traffic from now on</a>.</p>
+
+<h2>Source</h2>
+<p>Google Search Central, <a href="https://developers.google.com/search/docs/fundamentals/gen-ai-controls" target="_blank" rel="noopener noreferrer">Control how your content is used for generative AI at Google</a> and <a href="https://developers.google.com/search/docs/fundamentals/gen-ai-attribution-factuality" target="_blank" rel="noopener noreferrer">Attribution and factuality in Search generative AI features</a>, both from November 24, 2026. The changes are logged in <a href="https://developers.google.com/search/updates" target="_blank" rel="noopener noreferrer">Latest documentation updates</a>.</p>

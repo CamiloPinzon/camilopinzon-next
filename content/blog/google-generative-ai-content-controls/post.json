@@ -1,0 +1,62 @@
+{
+  "slug": "google-generative-ai-content-controls",
+  "tag": "Rendimiento y SEO técnico",
+  "readTime": "5 min",
+  "publishedAt": "2026-11-25",
+  "source": {
+    "name": "Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/gen-ai-controls"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "El 24 de noviembre Google juntó en una sola página todas las formas de decidir si tu contenido sirve para entrenar su IA o para aparecer en sus respuestas. Si nunca tocaste nada, tu sitio ya está incluido en todo, y para la mayoría de los negocios lo mejor es dejarlo así. Explicamos qué hace cada opción, cuál te puede sacar de Google sin querer y qué revisar hoy."
+  },
+  "translations": {
+    "en": {
+      "title": "Google explains how to decide whether your site feeds its AI: what to check before you change anything",
+      "excerpt": "On November 24, Google put every way to control whether your content trains its AI or shows up in its answers on one page. For most businesses the best move is to change nothing, but it's worth knowing what you have turned on.",
+      "coverImageAlt": "Google-Extended in large type next to a page with two switches, one blue and on, one gray and off",
+      "faqs": [
+        {
+          "question": "If I block Google-Extended, will I drop in Google's results?",
+          "answer": "No. Google says Google-Extended isn't used for ranking and doesn't affect whether your site appears in Search."
+        },
+        {
+          "question": "Can I stay in Google but stay out of AI Overviews?",
+          "answer": "Yes. Use the generative AI setting in Search Console. It keeps your site in regular results and excludes it from AI Overviews and AI Mode."
+        },
+        {
+          "question": "Do I need to do anything if I don't mind Google using my content?",
+          "answer": "No. If you never set anything up, your site is already included everywhere. It's still worth checking your robots.txt in case someone blocked something by accident."
+        },
+        {
+          "question": "What do I do if an AI answer gets something wrong about my page?",
+          "answer": "Fix the page and ask Google to recrawl it. If your content is credited to the wrong site, use the Feedback link under the answer."
+        }
+      ]
+    },
+    "es": {
+      "title": "Google explica cómo decidir si tu sitio alimenta su IA: qué revisar antes de tocar nada",
+      "excerpt": "El 24 de noviembre Google publicó en una sola página todas las formas de decidir si tu contenido sirve para entrenar su IA o para aparecer en sus respuestas. Para la mayoría de los negocios lo mejor es no cambiar nada, pero conviene saber qué tienes activado.",
+      "coverImageAlt": "Google-Extended en letras grandes junto a una página con dos interruptores, uno azul encendido y otro gris apagado",
+      "faqs": [
+        {
+          "question": "¿Si bloqueo Google-Extended, bajo en los resultados de Google?",
+          "answer": "No. Google dice que Google-Extended no se usa para ordenar los resultados ni afecta que tu sitio aparezca en el buscador."
+        },
+        {
+          "question": "¿Puedo seguir en Google pero no salir en AI Overviews?",
+          "answer": "Sí. Se hace con el ajuste de IA generativa en Search Console, que deja tu sitio en los resultados normales y lo excluye de AI Overviews y AI Mode."
+        },
+        {
+          "question": "¿Tengo que hacer algo si no me importa que Google use mi contenido?",
+          "answer": "No. Si nunca configuraste nada, tu sitio ya está incluido en todo. Vale la pena revisar el robots.txt por si alguien bloqueó algo sin decidirlo."
+        },
+        {
+          "question": "¿Qué hago si una respuesta con IA dice algo incorrecto sobre mi página?",
+          "answer": "Corrige la página y pide a Google que la vuelva a revisar. Si la atribución es errónea, usa el enlace \"Comentarios\" debajo de la respuesta."
+        }
+      ]
+    }
+  }
+}
