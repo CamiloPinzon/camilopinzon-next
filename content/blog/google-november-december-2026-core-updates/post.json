@@ -1,0 +1,54 @@
+{
+  "slug": "google-november-december-2026-core-updates",
+  "tag": "Rendimiento y SEO técnico",
+  "readTime": "4 min",
+  "publishedAt": "2026-11-27",
+  "source": {
+    "name": "Google Search Status Dashboard",
+    "url": "https://status.search.google.com/incidents/WLxcJyC6jMWMfryxsKMc"
+  },
+  "linkedin": {
+    "lang": "es",
+    "text": "El 24 de noviembre Google terminó su actualización central de noviembre y anunció otra para diciembre. Si tu negocio recibe clientes desde el buscador, desde el 2 de diciembre ya puedes medir cómo te fue. Explicamos qué semanas comparar, cuándo preocuparte y qué no cambiar a las carreras."
+  },
+  "translations": {
+    "en": {
+      "title": "Google finished one search update and announced another: how to check your traffic",
+      "excerpt": "On November 24, Google finished its November core update and announced another for December. From December 2 you can measure how you did, and it's worth doing that before you change anything on your site.",
+      "coverImageAlt": "Core update in large type next to two result lists that change order, with one row moving to the top in blue",
+      "faqs": [
+        {
+          "question": "Does a drop mean Google penalized my site?",
+          "answer": "Not necessarily. Core updates are broad changes that don't target specific sites. A page can slip because others now answer better."
+        },
+        {
+          "question": "When does the December update start?",
+          "answer": "Google has only said it will be released in December. You can follow the date on its Search Status Dashboard."
+        },
+        {
+          "question": "If I improve my content, do I have to wait for the next update?",
+          "answer": "Not always. Google also makes smaller changes it doesn't announce. Even so, some improvements can take months to show, and results aren't guaranteed."
+        }
+      ]
+    },
+    "es": {
+      "title": "Google terminó un cambio en su buscador y ya anunció otro: cómo revisar tus visitas",
+      "excerpt": "El 24 de noviembre Google terminó su actualización central de noviembre y anunció otra para diciembre. Desde el 2 de diciembre puedes medir cómo te fue, y conviene hacerlo antes de cambiar nada en tu sitio.",
+      "coverImageAlt": "Core update en letras grandes junto a dos listas de resultados que cambian de orden; una fila azul sube al primer puesto",
+      "faqs": [
+        {
+          "question": "¿Una caída significa que Google penalizó mi sitio?",
+          "answer": "No necesariamente. Las actualizaciones centrales son cambios generales y no van dirigidas a sitios concretos. Una página puede bajar porque otras ahora responden mejor."
+        },
+        {
+          "question": "¿Cuándo empieza la actualización de diciembre?",
+          "answer": "Google solo ha dicho que saldrá en diciembre. La fecha se puede seguir en su panel de estado de la búsqueda."
+        },
+        {
+          "question": "Si mejoro mi contenido, ¿tengo que esperar a la próxima actualización?",
+          "answer": "No siempre. Google también hace cambios más pequeños que no anuncia. Aun así, algunas mejoras pueden tardar meses en notarse y no hay garantía de resultado."
+        }
+      ]
+    }
+  }
+}
